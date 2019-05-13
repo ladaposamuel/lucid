@@ -1,8 +1,16 @@
 composer.phar
 /vendor/
-composer.lock
+/storage/
+/src/config/settings.json
+/src/config/auth.json
+/src/config/app.json
+/src/config/
+/storage/rss/rss.xml
 composer.dev.*
 node_modules/
+build/
+/storage
+.idea
 storage/
 
 # Commit your application's lock file https://getcomposer.org/doc/01-basic-usage.md#commit-your-composer-lock-file-to-version-control
