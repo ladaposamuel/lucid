@@ -24,6 +24,10 @@
     margin-top: 0;
 }
 
+.width-100px {
+    width: 100px;
+}
+
 .banner-text-container {
     margin-top: 12rem;
 }
@@ -123,6 +127,7 @@
     border-radius: 50%;
     margin-bottom: 15px;
     max-width: 140px;
+    object-fit: cover;
 }
 
 .testimonial {
