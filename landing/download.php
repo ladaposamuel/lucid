@@ -203,8 +203,8 @@ We built Lucid on the premise that ownership and privacy is about respect and th
                 <!-- </div> -->
                 <div class="col-12 col-sm-12 col-md-6 d-flex footer-form">
                     <div>
-                        <form action="" method="post" class="d-flex">
-                            <input class="form-control footer-input"type="email" name="" id="" placeholder="Sign up for our newsletter" required>
+                        <form action="subscribe.php" method="post" class="d-flex">
+                            <input class="form-control footer-input"type="email" name="email" id="email" placeholder="Sign up for our newsletter" required>
                             <button type="submit" class="btn footer-button">SIGN UP</button>
                         </form>
                     </div>
