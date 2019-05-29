@@ -1,8 +1,8 @@
 <?php
 
 //API Details
-$apiKey = 'd0d470a9858a50e13090d00661954264-us20';
-$listId = '0067aa8fe7';
+$apiKey = '8ab8d82e751f0b8547bec1cdc328336e-us20';
+$listId = '939e86e434';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
@@ -47,5 +47,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    header('location:mail.html');
+    header('location:mail.php');
 }
