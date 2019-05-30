@@ -16,9 +16,6 @@
     font-weight: 600;
 }
 
-.navbar-nav > li {
-    margin-top: 1.5rem;
-}
 
 .navbar-nav > li:last-of-type {
     margin-top: 0;

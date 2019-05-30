@@ -62,6 +62,11 @@ We built Lucid on the premise that ownership and privacy is about respect and th
                             <a class="nav-link" href="#">Documentation</a>
                         </li> -->
                         <li class="nav-item">
+                            <a class="nav-link" href="/get-started.html">
+                                <button class="btn link button-link">Get Started</button>
+                            </a>
+                        </li> 
+                        <li class="nav-item">
                             <a class="nav-link" href="https://demo.getlucid.app">
                                 <button class="btn link button-link">Demo Lucid For Free</button>
                             </a>
