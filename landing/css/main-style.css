@@ -68,6 +68,7 @@ a.navbar-btn.btn.btn-primary {
 	.hero-section {
 		padding: 5em 0px 3.5em 0px;
 	}
+
 	.hero-section h1 {
 		font-size: 2.45em;
 		padding-bottom: 30px;
@@ -77,11 +78,9 @@ a.navbar-btn.btn.btn-primary {
 
 .preview-section {
 	background: rgb(255, 255, 255);
-	background: linear-gradient(
-		180deg,
-		rgba(255, 255, 255, 1) 50%,
-		rgba(145, 121, 239, 1) 50%
-	);
+	background: linear-gradient(180deg,
+			rgba(255, 255, 255, 1) 50%,
+			rgba(145, 121, 239, 1) 50%);
 }
 
 .lucid-laptop {
@@ -99,24 +98,29 @@ a.navbar-btn.btn.btn-primary {
 		-webkit-transform: translateY(0);
 		transform: translateY(0);
 	}
+
 	50% {
 		-webkit-transform: translateY(25px);
 		transform: translateY(25px);
 	}
+
 	to {
 		-webkit-transform: translateY(0);
 		transform: translateY(0);
 	}
 }
+
 @keyframes a {
 	0% {
 		-webkit-transform: translateY(0);
 		transform: translateY(0);
 	}
+
 	50% {
 		-webkit-transform: translateY(25px);
 		transform: translateY(25px);
 	}
+
 	to {
 		-webkit-transform: translateY(0);
 		transform: translateY(0);
@@ -235,4 +239,38 @@ ul.footer-links li a {
 .newsletter-btn {
 	padding: 13px 23px;
 	border-radius: 0px 5px 5px 0px;
+}
+
+.page-content {
+	padding: 70px 0px;
+}
+
+#myBtn {
+	border-radius: 100%;
+	z-index: 999;
+	position: fixed;
+	display: none;
+	right: 20px;
+	bottom: 20px;
+	width: 40px;
+	height: 40px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	background-color: #684ead;
+}
+
+#myBtn:hover {
+	border-radius: 100%;
+	z-index: 999;
+	position: fixed;
+	display: none;
+	right: 20px;
+	bottom: 20px;
+	width: 40px;
+	height: 40px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	background-color: #000000;
 }
