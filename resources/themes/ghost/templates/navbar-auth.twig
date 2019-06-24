@@ -1,0 +1,37 @@
+<ul class="nav justify-content-end">
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <button type="button" id="sidebarCollapse" class="btn btn-info top-toggle">
+                <i class="fas fa-align-left"></i>
+            </button>
+        </a>
+    </li>
+
+    {% if user.role == 'admin' %}
+    <li class="nav-item ml-auto">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+            aria-expanded="false">
+            <span class="dotted">...</span>
+        </a>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="./settings">SETTINGS</a>
+            <a class="dropdown-item" href="./logout">LOGOUT</a>
+        </div>
+    </li>
+    {% elseif user.role == 'guest' %}
+    <li class="nav-item ml-auto">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+            aria-expanded="false">
+            <span class="dotted">...</span>
+        </a>
+        <div class="dropdown-menu">
+            <span class="dropdown-item">You are logged in as guest</span>
+            <a class="dropdown-item" href="./logout">LOGOUT</a>
+        </div>
+    </li>
+    {% else %}
+    <li class="nav-item ml-auto">
+        <span class="nav-item" data-toggle="modal" data-target="#modalLoginForm">LOGIN</span>
+    </li>
+    {% endif %}
+</ul>
