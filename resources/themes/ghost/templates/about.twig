@@ -1,0 +1,107 @@
+{% set title = "About"%} {% extends 'layout' %} {% block page_content %}
+<div class="container-fluid px-5" id="content">
+    {% include "navbar-auth" %}
+    <div class="row d-block">
+        {% if user.role == 'admin' %}
+        <div class="mb-4">
+            <h3 class="">About <button type="button" style="outline:none;" class="btn" data-toggle="modal" data-target="#aboutModal">
+                    <i class="fas fa-edit fa-lg"></i>
+                </button></h3>
+            <!-- Button trigger modal -->
+
+            <!-- Modal -->
+            <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="aboutModalLabel">Edit About</h5>
+                            <button type="button" class="close" style="outline:none;" data-dismiss="modal"
+                                aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" class="edit-about" id="aboutFormField">
+                                <div class="form-group">
+                                    <textarea type="text" class="form-control " name="aboutMe" id="aboutMe" aria-describedby="aboutMe"
+                                    placeholder="About Me"  rows="5" style="outline:none;">{{ about | raw }}</textarea>
+                                </div>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary" name="editAbout">Save changes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% elseif about %}
+        <div class="mb-4">
+            <h3 class="about__heading">About</h3>
+        </div>
+        {% endif %}
+        <div class="w-100">
+            <p class="text-justify about-text">{{ about | raw }}</p>
+        </div>
+    </div>
+    <div class="row d-block">
+        <div class="mt-5">
+            <h3 class="about__heading">Contact</h3>
+        </div>
+        <div class="row justify-content-lg-start justify-content-md-start justify-content-sm-center">
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                
+                {% if message.ownerEmailNotProvided %}
+                <div class="alert alert-info" id="msgContainer" style="margin-top:20px;">
+                    <div class="row">
+                        <div class="col-11">Oops,Sorry you can't send your feedback yet!</div>
+                        <div class="col-1 text-right"><a id="closebtn" href="javascript:void(0)"
+                                style="text-decoration:none;color:#111;">&times;</a></div>
+                    </div>
+                </div>
+                {% endif %}
+                <form class="contact-us-form mt-5 contact-form" id="contactFormFields" method="POST">
+                    <div class="form-group">
+                        <input type="text" name="guestName" id="guestName" placeholder="Name" value=""
+                            class="form-control">
+                        
+                        <span class="text-danger" id="nameError" style="display:none;"></span>
+                        
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="guestEmail" id="guestEmail" placeholder="Email" value=""
+                            class="form-control">
+                            <span class="text-danger" id="emailError" style="display:none;"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="guestSubject" id="guestSubject" placeholder="Subject" value=""
+                            class="form-control">
+                            <span class="text-danger" id="SubjectError" style="display:none;"></span>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="Message" name="guestMsg" rows="5"
+                            cols="10"></textarea>
+                            <span class="text-danger" id="msgError" style="display:none;"></span>
+                    </div>
+                    <div class="form-group text-right">
+                        <button type="submit" class="btn btn-primary" name="sendMail" {% if message.ownerEmailNotProvided %} disabled
+                            style="cursor:not-allowed;" {% endif %} >Submit</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        let closeBtn = document.getElementById('closebtn');
+        closeBtn.addEventListener('click', function () {
+            document.getElementById('msgContainer').style.display = 'none';
+        });
+    </script>
+</div>
+</div>
+</div>
+</div>
+{% endblock page_content %}
