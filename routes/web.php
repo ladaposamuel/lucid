@@ -15,7 +15,7 @@
   //  return view('welcome');
 //});
 
-$directory = "./storage/contents/";
+$directory = "../storage/contents/";
 $ziki = new App\Core\Document($directory);
 $posts = $ziki->get();
 if (empty($posts)) {
@@ -26,7 +26,7 @@ $user = json_decode($user, true);
 $username = str_replace(' ', '', $user['name']);
 $GLOBALS['username'] = $username;
 Route::get('/', function () {
-  $directory = "./storage";
+  $directory = "../storage";
         $ziki = new App\Core\Document($directory);
         $feed = $ziki->fetchRss();
         $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
@@ -48,7 +48,7 @@ foreach ($posts as $post) {
     if (empty($post['post_title'])) {
         Route::get('/post/{post_id}', function ($request, $post_id) {
 
-            $directory = "./storage/contents/";
+            $directory = "../storage/contents/";
             $ziki = new App\Core\Document($directory);
             $setting = new App\Core\Setting();
             $settings = $setting->getSetting();
@@ -83,7 +83,7 @@ foreach ($posts as $post) {
     } else {
         Route::get('/post/{post_id}/{post_title}', function ($request, $post_id) {
 
-            $directory = "./storage/contents/";
+            $directory = "../storage/contents/";
             $ziki = new App\Core\Document($directory);
             $setting = new App\Core\Setting();
             $settings = $setting->getSetting();
@@ -123,7 +123,7 @@ Route::post('/edit-post', function ($request) {
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
     }
-    $directory = "./storage/contents/";
+    $directory = "../storage/contents/";
     $request = $request->getBody();
     $title = isset($request['title']) ? $request['title'] : '';
     $body = $request['postVal'];
@@ -181,7 +181,7 @@ Route::get('/tags/{id}', function ($request, $id) {
     $count = new App\Core\Subscribe();
     $fcount = $count->fcount();
     $count = $count->count();
-    $directory = "./storage/contents/";
+    $directory = "../storage/contents/";
     $ziki = new App\Core\Document($directory);
     $result = $ziki->tagPosts($id);
     $twig_vars = ['posts' => $result, 'tag' => $id];
@@ -194,7 +194,7 @@ Route::post('/publish', function () {
         return $user->redirect('/');
     }
 
-    $directory = "./storage/contents/";
+    $directory = "../storage/contents/";
     $data = $request->getBody();
     $title = isset($data['title']) ? $data['title'] : '';
     $body = $data['postVal'];
@@ -278,7 +278,7 @@ Route::get('/deletepost/{postId}', function ($request, $postId) {
     }
     $postid = explode('-', $postId);
     $post = end($postid);
-    $directory = "./storage/contents/";
+    $directory = "../storage/contents/";
     $ziki = new App\Core\Document($directory);
     $ziki->deletePost($post);
     return $user->redirect('/published-posts');
@@ -290,7 +290,7 @@ Route::get('/deletedraft/{postId}', function ($request, $postId) {
     }
     $postid = explode('-', $postId);
     $post = end($postid);
-    $directory = "./storage/drafts/";
+    $directory = "../storage/drafts/";
     $ziki = new App\Core\Document($directory);
     $ziki->deletePost($post);
     return $user->redirect('/drafts');
@@ -301,7 +301,7 @@ Route::get('delete/{id}', function ($request, $id) {
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return new RedirectResponse("/");
     }
-    $directory = "./storage/contents/";
+    $directory = "../storage/contents/";
     $ziki = new App\Core\Document($directory);
     $result = $ziki->delete($id);
     return View::make('timeline', ['delete' => $result]);
@@ -338,7 +338,7 @@ Route::post('/newportfolio', function ($request) {
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
     }
-    $directory = "./storage/portfolio/";
+    $directory = "../storage/portfolio/";
     $data = $request->getBody();
     $title = $data['title'];
     $body = $data['postVal'];
@@ -368,7 +368,7 @@ Route::get('/portfolio', function ($request) {
     $count = new App\Core\Subscribe();
     $fcount = $count->fcount();
     $count = $count->count();
-    $directory = "./storage/portfolio/";
+    $directory = "../storage/portfolio/";
     $portfolio = new App\Core\Portfolio($directory);
     $portfolio = $portfolio->getportfolio();
     return View::make('portfolio', ['portf' => $portfolio]);
@@ -377,7 +377,7 @@ Route::get('/portfolio', function ($request) {
 // get portfolio expanded details
 Route::get('/portfolio/{post_id}', function ($request, $port_id) {
 
-    $directory = "./storage/portfolio/";
+    $directory = "../storage/portfolio/";
     $portfolio = new App\Core\Portfolio($directory);
 
     //echo $data;
@@ -409,7 +409,7 @@ Route::get('/deleteportfolio/{portfolioId}', function ($request, $portfolioId) {
     }
     $portfolioId = explode('-', $portfolioId);
     $portf = end($portfolioId);
-    $directory = "./storage/portfolio/";
+    $directory = "../storage/portfolio/";
     $portfolio = new App\Core\Portfolio($directory);
     $portfolio->deletePortfolio($portf);
     return $user->redirect('/portfolio');
@@ -420,7 +420,7 @@ Route::get('delete/{id}', function ($request, $id) {
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return new RedirectResponse("/");
     }
-    $directory = "./storage/portfolio/";
+    $directory = "../storage/portfolio/";
     $portfolio = new App\Core\Portfolio($directory);
     $result = $portfolio->delete($id);
     return View::make('portfolio', ['delete' => $result]);
@@ -526,7 +526,7 @@ Route::get('/following', function ($request) {
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
     }
-    $directory = "./storage/contents/";
+    $directory = "../storage/contents/";
     $ziki = new App\Core\Document($directory);
     $list = $ziki->subscription();
     $count = new App\Core\Subscribe();
@@ -558,7 +558,7 @@ Route::post('/subscriptions', function ($request) {
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
     }
-    $directory = "./storage/contents/";
+    $directory = "../storage/contents/";
     $ziki = new App\Core\Document($directory);
     $list = $ziki->subscription();
 
@@ -576,7 +576,7 @@ Route::get('/subscribers', function ($request) {
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
     }
-    $directory = "./storage/contents/";
+    $directory = "../storage/contents/";
     $ziki = new App\Core\Document($directory);
     $list = $ziki->subscriber();
     $count = new App\Core\Subscribe();
@@ -606,7 +606,7 @@ foreach ($posts as $post) {
             if (!$user->is_logged_in() || !$user->is_admin()) {
                 return $user->redirect('/');
             }
-            $directory = "./storage/contents/";
+            $directory = "../storage/contents/";
             $ziki = new App\Core\Document($directory);
             $post_details = $ziki->getPost($post_id);
             return View::make('editor', ['post' => $post_details]);
@@ -617,7 +617,7 @@ foreach ($posts as $post) {
             if (!$user->is_logged_in() || !$user->is_admin()) {
                 return $user->redirect('/');
             }
-            $directory = "./storage/contents/";
+            $directory = "../storage/contents/";
             $ziki = new App\Core\Document($directory);
             $getId = explode(',', $post_id);
             $post_details = $ziki->getPost($getId[0]);
@@ -666,7 +666,7 @@ Route::get('/following', function ($request) {
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
     }
-    $directory = "./storage/contents/";
+    $directory = "../storage/contents/";
     $ziki = new App\Core\Document($directory);
     $list = $ziki->subscription();
     $count = new App\Core\Subscribe();
@@ -684,7 +684,7 @@ Route::post('/saveDraft', function ($request) {
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
     }
-    $directory = "./storage/drafts/";
+    $directory = "../storage/drafts/";
     $data = $request->getBody();
     $title = isset($data['title']) ? $data['title'] : '';
     $body = $data['postVal'];
@@ -714,7 +714,7 @@ Route::get('/drafts', function ($request) {
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
     }
-    $directory = "./storage/drafts/";
+    $directory = "../storage/drafts/";
     $ziki = new App\Core\Document($directory);
     $draft = $ziki->get();
     $count = new App\Core\Subscribe();
@@ -726,7 +726,7 @@ Route::get('/drafts', function ($request) {
 //videos page
 Route::get('/videos', function ($request) {
 
-    $directory = "./storage/videos/";
+    $directory = "../storage/videos/";
     $ziki = new App\Core\Document($directory);
     $Videos = $ziki->getVideo();
     //print_r($Videos);
