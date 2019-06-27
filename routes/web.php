@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Http\Request; 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +15,7 @@
   //  return view('welcome');
 //});
 
-$directory = "./storage/contents/";
+$directory = "../storage/contents/";
 $ziki = new App\Core\Document($directory);
 $posts = $ziki->get();
 if (empty($posts)) {
@@ -26,7 +26,7 @@ $user = json_decode($user, true);
 $username = str_replace(' ', '', $user['name']);
 $GLOBALS['username'] = $username;
 Route::get('/', function () {
-  $directory = "./storage";
+  $directory = "../storage";
         $ziki = new App\Core\Document($directory);
         $feed = $ziki->fetchRss();
         $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
@@ -46,9 +46,9 @@ Route::get('/', function () {
 
 foreach ($posts as $post) {
     if (empty($post['post_title'])) {
-        Route::get('/post/{post_id}', function ($request, $post_id) {
+        Route::get('/post/{post_id}', function (Request $request, $post_id) {
 
-            $directory = "./storage/contents/";
+            $directory = "../storage/contents/";
             $ziki = new App\Core\Document($directory);
             $setting = new App\Core\Setting();
             $settings = $setting->getSetting();
@@ -81,9 +81,9 @@ foreach ($posts as $post) {
             return View::make('blog-details', ['result' => $result, 'count' => $count, 'fcount' => $fcount, 'post' => $post_details, 'relatedPosts' => $relatedPosts, 'siteUrl' => $siteUrl]);
         });
     } else {
-        Route::get('/post/{post_id}/{post_title}', function ($request, $post_id) {
+        Route::get('/post/{post_id}/{post_title}', function (Request $request, $post_id) {
 
-            $directory = "./storage/contents/";
+            $directory = "../storage/contents/";
             $ziki = new App\Core\Document($directory);
             $setting = new App\Core\Setting();
             $settings = $setting->getSetting();
@@ -118,12 +118,12 @@ foreach ($posts as $post) {
     }
 }
 
-Route::post('/edit-post', function ($request) {
+Route::post('/edit-post', function (Request $request) {
     $user = new App\Core\Auth();
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
     }
-    $directory = "./storage/contents/";
+    $directory = "../storage/contents/";
     $request = $request->getBody();
     $title = isset($request['title']) ? $request['title'] : '';
     $body = $request['postVal'];
@@ -166,14 +166,14 @@ Route::get('/timeline', function () {
     return View::make('timeline', ['posts' => $post, 'count' => $count, 'host' => $host, 'fcount' => $fcount]);
 });
 
-Route::get($username, function ($request) {
+Route::get($username, function (Request $request) {
 
   header('Content-Type: application/xml');
-    include './storage/rss/rss.xml';
+    include '../storage/rss/rss.xml';
 
 });
 
-Route::get('/tags/{id}', function ($request, $id) {
+Route::get('/tags/{id}', function (Request $request, $id) {
     $user = new App\Core\Auth();
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
@@ -181,7 +181,7 @@ Route::get('/tags/{id}', function ($request, $id) {
     $count = new App\Core\Subscribe();
     $fcount = $count->fcount();
     $count = $count->count();
-    $directory = "./storage/contents/";
+    $directory = "../storage/contents/";
     $ziki = new App\Core\Document($directory);
     $result = $ziki->tagPosts($id);
     $twig_vars = ['posts' => $result, 'tag' => $id];
@@ -194,7 +194,7 @@ Route::post('/publish', function () {
         return $user->redirect('/');
     }
 
-    $directory = "./storage/contents/";
+    $directory = "../storage/contents/";
     $data = $request->getBody();
     $title = isset($data['title']) ? $data['title'] : '';
     $body = $data['postVal'];
@@ -218,8 +218,8 @@ Route::post('/publish', function () {
 });
 //this are some stupid working code written by porh please don't edit
 //without notifying me
-Route::get('/about', function ($request) {
-    include ZIKI_BASE_PATH . "/src/core/SendMail.php";
+Route::get('/about', function () {
+    include "../app/core/SendMail.php";
     $checkifOwnersMailIsprovided = new  SendContactMail();
     $checkifOwnersMailIsprovided->getOwnerEmail();
     $aboutContent = $checkifOwnersMailIsprovided->getPage();
@@ -236,8 +236,8 @@ Route::get('/about', function ($request) {
     $count = $count->count();
     return View::make('about', ['message' => $message, 'about' => $aboutContent, 'count' => $count, 'fcount' => $fcount]);
 });
-Route::post('/send', function ($request) {
-    include ZIKI_BASE_PATH . "/src/core/SendMail.php";
+Route::post('/send', function (Request $request) {
+    include "../app/core/SendMail.php";
     $request = $request->getBody();
     $SendMail = new SendContactMail();
     $SendMail->mailBody = View::make('mail-template', ['guestName' => $request['guestName'], 'guestEmail' => $request['guestEmail'], 'guestMsg' => $request['guestMsg']]);
@@ -245,19 +245,19 @@ Route::post('/send', function ($request) {
 
     return json_encode($response);
 });
-Route::post('/setcontactemail', function ($request) {
+Route::post('/setcontactemail', function (Request $request) {
     $user = new App\Core\Auth();
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
     }
-    include ZIKI_BASE_PATH . "/src/core/SendMail.php";
+    include "../app/core/SendMail.php";
     $request = $request->getBody();
     $SetContactEmail = new SendContactMail();
     $SetContactEmail->setContactEmail($request);
     $SetContactEmail->clientMessage();
     return $SetContactEmail->redirect('/profile');
 });
-Route::post('/updateabout', function ($request) {
+Route::post('/updateabout', function (Request $request) {
     $user = new App\Core\Auth();
     $update = new App\Core\Profile();
     $request = $request->getBody();
@@ -265,43 +265,43 @@ Route::post('/updateabout', function ($request) {
     $_SESSION['alert']=$profile;
     return $user->redirect('/profile');
 });
-Route::post('/edit-about', function ($request) {
+Route::post('/edit-about', function (Request $request) {
     $request = $request->getBody();
     $page = new App\Core\Page();
     $response = $page->setAboutPage($request);
     return json_encode($response);
 });
-Route::get('/deletepost/{postId}', function ($request, $postId) {
+Route::get('/deletepost/{postId}', function (Request $request, $postId) {
     $user = new App\Core\Auth();
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
     }
     $postid = explode('-', $postId);
     $post = end($postid);
-    $directory = "./storage/contents/";
+    $directory = "../storage/contents/";
     $ziki = new App\Core\Document($directory);
     $ziki->deletePost($post);
     return $user->redirect('/published-posts');
 });
-Route::get('/deletedraft/{postId}', function ($request, $postId) {
+Route::get('/deletedraft/{postId}', function (Request $request, $postId) {
     $user = new App\Core\Auth();
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
     }
     $postid = explode('-', $postId);
     $post = end($postid);
-    $directory = "./storage/drafts/";
+    $directory = "../storage/drafts/";
     $ziki = new App\Core\Document($directory);
     $ziki->deletePost($post);
     return $user->redirect('/drafts');
 });
 //the stupid codes ends here
-Route::get('delete/{id}', function ($request, $id) {
+Route::get('delete/{id}', function (Request $request, $id) {
     $user = new App\Core\Auth();
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return new RedirectResponse("/");
     }
-    $directory = "./storage/contents/";
+    $directory = "../storage/contents/";
     $ziki = new App\Core\Document($directory);
     $result = $ziki->delete($id);
     return View::make('timeline', ['delete' => $result]);
@@ -311,7 +311,7 @@ Route::get('/published-posts', function ($request) {
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
     }
-    $directory = "./storage/contents/";
+    $directory = "../storage/contents/";
     $ziki = new App\Core\Document($directory);
     $posts = $ziki->get();
     return View::make('published-posts', ['posts' => $posts]);
@@ -320,7 +320,7 @@ Route::get('/published-posts', function ($request) {
 // Kuforiji' codes start here
 
 // Start- Portfolio_expanded page
-Route::get('/portfolio-expanded', function ($request) {
+Route::get('/portfolio-expanded', function (Request $request) {
     $user = new App\Core\Auth();
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
@@ -333,12 +333,12 @@ Route::get('/portfolio-expanded', function ($request) {
 // End- Portfolio_expanded
 
 // logic for creating a new portfolio
-Route::post('/newportfolio', function ($request) {
+Route::post('/newportfolio', function (Request $request) {
     $user = new App\Core\Auth();
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
     }
-    $directory = "./storage/portfolio/";
+    $directory = "../storage/portfolio/";
     $data = $request->getBody();
     $title = $data['title'];
     $body = $data['postVal'];
@@ -360,7 +360,7 @@ Route::post('/newportfolio', function ($request) {
 });
 
 // route to create-portfolio page
-Route::get('/portfolio', function ($request) {
+Route::get('/portfolio', function (Request $request) {
     $user = new App\Core\Auth();
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
@@ -368,16 +368,16 @@ Route::get('/portfolio', function ($request) {
     $count = new App\Core\Subscribe();
     $fcount = $count->fcount();
     $count = $count->count();
-    $directory = "./storage/portfolio/";
+    $directory = "../storage/portfolio/";
     $portfolio = new App\Core\Portfolio($directory);
     $portfolio = $portfolio->getportfolio();
     return View::make('portfolio', ['portf' => $portfolio]);
 });
 
 // get portfolio expanded details
-Route::get('/portfolio/{post_id}', function ($request, $port_id) {
+Route::get('/portfolio/{post_id}', function (Request $request, $port_id) {
 
-    $directory = "./storage/portfolio/";
+    $directory = "../storage/portfolio/";
     $portfolio = new App\Core\Portfolio($directory);
 
     //echo $data;
@@ -402,14 +402,14 @@ Route::get('/portfolio/{post_id}', function ($request, $port_id) {
     return View::make('portfolio-expanded', ['result' => $result, 'count' => $count, 'fcount' => $fcount, 'post' => $portfolio_details]);
 });
 
-Route::get('/deleteportfolio/{portfolioId}', function ($request, $portfolioId) {
+Route::get('/deleteportfolio/{portfolioId}', function (Request $request, $portfolioId) {
     $user = new App\Core\Auth();
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
     }
     $portfolioId = explode('-', $portfolioId);
     $portf = end($portfolioId);
-    $directory = "./storage/portfolio/";
+    $directory = "../storage/portfolio/";
     $portfolio = new App\Core\Portfolio($directory);
     $portfolio->deletePortfolio($portf);
     return $user->redirect('/portfolio');
@@ -420,7 +420,7 @@ Route::get('delete/{id}', function ($request, $id) {
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return new RedirectResponse("/");
     }
-    $directory = "./storage/portfolio/";
+    $directory = "../storage/portfolio/";
     $portfolio = new App\Core\Portfolio($directory);
     $result = $portfolio->delete($id);
     return View::make('portfolio', ['delete' => $result]);
@@ -430,7 +430,7 @@ Route::get('delete/{id}', function ($request, $id) {
 
 
 // ahmzyjazzy add this (^_^) : setting page
-Route::get('/settings', function ($request) {
+Route::get('/settings', function (Request $request) {
     $user = new App\Core\Auth();
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
@@ -442,7 +442,7 @@ Route::get('/settings', function ($request) {
 });
 
 // ahmzyjazzy add this (^_^) : setting api
-Route::post('/appsetting', function ($request) {
+Route::post('/appsetting', function (Request $request) {
 
     $data = $request->getBody();
     $field = $data['field']; //field to update in  app.json
@@ -468,8 +468,8 @@ Route::post('/appsetting', function ($request) {
 
 
 //profile fullname and short bio update
-Route::post('/sidebar ', function ($request) {
-    include ZIKI_BASE_PATH . "/src/core/profile.php";
+Route::post('/sidebar ', function (Request $request) {
+    include "../app/core/profile.php";
     $user = new App\Core\Auth();
     $instantiateClass = new App\Core\profileUpdate();
     $getUserInfo = $instantiateClass->getPage();
@@ -495,9 +495,9 @@ Route::post('/sidebar ', function ($request) {
 });
 
 // profile page
-Route::get('/profile', function ($request) {
+Route::get('/profile', function (Request $request) {
     ///please don't remove or change the included path
-    include ZIKI_BASE_PATH . "/src/core/SendMail.php";
+    include "../app/core/SendMail.php";
     //please don't rename the variables
     //$userSiteDetails = new  SendContactMail();
     //this  gets the owners email address
@@ -521,12 +521,12 @@ Route::get('/profile', function ($request) {
 });
 
 // following page
-Route::get('/following', function ($request) {
+Route::get('/following', function (Request $request) {
     $user = new App\Core\Auth();
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
     }
-    $directory = "./storage/contents/";
+    $directory = "../storage/contents/";
     $ziki = new App\Core\Document($directory);
     $list = $ziki->subscription();
     $count = new App\Core\Subscribe();
@@ -537,7 +537,7 @@ Route::get('/following', function ($request) {
 });
 
 // followers page
-Route::get('/followers', function ($request) {
+Route::get('/followers', function (Request $request) {
     $user = new App\Core\Auth();
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
@@ -553,12 +553,12 @@ Route::get('/followers', function ($request) {
 });
 
 // Subscription page
-Route::post('/subscriptions', function ($request) {
+Route::post('/subscriptions', function (Request $request) {
     $user = new App\Core\Auth();
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
     }
-    $directory = "./storage/contents/";
+    $directory = "../storage/contents/";
     $ziki = new App\Core\Document($directory);
     $list = $ziki->subscription();
 
@@ -571,12 +571,12 @@ Route::post('/subscriptions', function ($request) {
 });
 
 // Subscribers page
-Route::get('/subscribers', function ($request) {
+Route::get('/subscribers', function (Request $request) {
     $user = new App\Core\Auth();
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
     }
-    $directory = "./storage/contents/";
+    $directory = "../storage/contents/";
     $ziki = new App\Core\Document($directory);
     $list = $ziki->subscriber();
     $count = new App\Core\Subscribe();
@@ -585,7 +585,7 @@ Route::get('/subscribers', function ($request) {
 
     return View::make('subscribers', ['sub' => $list, 'count' => $count, 'fcount' => $fcount]);
 });
-Route::get('/unsubscribe', function ($request) {
+Route::get('/unsubscribe', function (Request $request) {
     $user = new App\Core\Auth();
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
@@ -601,12 +601,12 @@ Route::get('/unsubscribe', function ($request) {
 
 foreach ($posts as $post) {
     if (empty($post['post_title'])) {
-        Route::get('/editor/{post_id}', function ($request, $post_id) {
+        Route::get('/editor/{post_id}', function (Request $request, $post_id) {
             $user = new App\Core\Auth();
             if (!$user->is_logged_in() || !$user->is_admin()) {
                 return $user->redirect('/');
             }
-            $directory = "./storage/contents/";
+            $directory = "../storage/contents/";
             $ziki = new App\Core\Document($directory);
             $post_details = $ziki->getPost($post_id);
             return View::make('editor', ['post' => $post_details]);
@@ -617,7 +617,7 @@ foreach ($posts as $post) {
             if (!$user->is_logged_in() || !$user->is_admin()) {
                 return $user->redirect('/');
             }
-            $directory = "./storage/contents/";
+            $directory = "../storage/contents/";
             $ziki = new App\Core\Document($directory);
             $getId = explode(',', $post_id);
             $post_details = $ziki->getPost($getId[0]);
@@ -629,7 +629,7 @@ foreach ($posts as $post) {
 
 //ends here again;
 // 404 page
-Route::get('/404', function ($request) {
+Route::get('/404', function (Request $request) {
     $count = new App\Core\Subscribe();
     $fcount = $count->fcount();
     $count = $count->count();
@@ -637,7 +637,7 @@ Route::get('/404', function ($request) {
 });
 
 //blog-details
-Route::get('/blog-details', function ($request) {
+Route::get('/blog-details', function (Request $request) {
     $setting = new App\Core\Setting();
     $settings = $setting->getSetting();
     return View::make('blog-details', $settings);
@@ -645,7 +645,7 @@ Route::get('/blog-details', function ($request) {
 
 // Start- followers page
 
-Route::get('/followers', function ($request) {
+Route::get('/followers', function (Request $request) {
 
     $user = new App\Core\Auth();
     if (!$user->is_logged_in() || !$user->is_admin()) {
@@ -660,13 +660,13 @@ Route::get('/followers', function ($request) {
 
 // Start- following page
 
-Route::get('/following', function ($request) {
+Route::get('/following', function (Request $request) {
 
     $user = new App\Core\Auth();
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
     }
-    $directory = "./storage/contents/";
+    $directory = "../storage/contents/";
     $ziki = new App\Core\Document($directory);
     $list = $ziki->subscription();
     $count = new App\Core\Subscribe();
@@ -679,12 +679,12 @@ Route::get('/following', function ($request) {
 
 /* Devmohy working on draft */
 /* Save draft*/
-Route::post('/saveDraft', function ($request) {
+Route::post('/saveDraft', function (Request $request) {
     $user = new App\Core\Auth();
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
     }
-    $directory = "./storage/drafts/";
+    $directory = "../storage/drafts/";
     $data = $request->getBody();
     $title = isset($data['title']) ? $data['title'] : '';
     $body = $data['postVal'];
@@ -709,12 +709,12 @@ Route::post('/saveDraft', function ($request) {
 
 /* Save draft */
 /* Get all saved draft */
-Route::get('/drafts', function ($request) {
+Route::get('/drafts', function (Request $request) {
     $user = new App\Core\Auth();
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
     }
-    $directory = "./storage/drafts/";
+    $directory = "../storage/drafts/";
     $ziki = new App\Core\Document($directory);
     $draft = $ziki->get();
     $count = new App\Core\Subscribe();
@@ -724,9 +724,9 @@ Route::get('/drafts', function ($request) {
 });
 
 //videos page
-Route::get('/videos', function ($request) {
+Route::get('/videos', function (Request $request) {
 
-    $directory = "./storage/videos/";
+    $directory = "../storage/videos/";
     $ziki = new App\Core\Document($directory);
     $Videos = $ziki->getVideo();
     //print_r($Videos);
@@ -735,7 +735,7 @@ Route::get('/videos', function ($request) {
     $count = $count->count();
     return View::make('videos', ['videos' => $Videos, 'count' => $count, 'fcount' => $fcount]);
 });
-Route::get('/microblog', function ($request) {
+Route::get('/microblog', function (Request $request) {
     $user = new App\Core\Auth();
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
@@ -754,11 +754,11 @@ Route::get('/microblog', function ($request) {
 // });
 
 //download page
-Route::get('/download', function ($request) {
+Route::get('/download', function (Request $request) {
     return View::make('download');
 });
 
-Route::get('/auth/{provider}/{token}', function ($request, $token) {
+Route::get('/auth/{provider}/{token}', function (Request $request, $token) {
     $user = new App\Core\Auth();
     $check = $user->validateAuth($token);
     if ($_SESSION['login_user']['role'] == 'guest') {
@@ -768,7 +768,7 @@ Route::get('/auth/{provider}/{token}', function ($request, $token) {
     }
 });
 
-Route::get('/setup/{provider}/{token}', function ($request, $token) {
+Route::get('/setup/{provider}/{token}', function (Request $request, $token) {
     $user = new App\Core\Auth();
     $check = $user->validateAuth($token);
     if ($_SESSION['login_user']['role'] == 'guest') {
@@ -778,7 +778,7 @@ Route::get('/setup/{provider}/{token}', function ($request, $token) {
     }
 });
 
-Route::get('/logout', function ($request) {
+Route::get('/logout', function (Request $request) {
     $user = new App\Core\Auth();
     $user->log_out();
     return $user->redirect('/');
@@ -801,12 +801,12 @@ Route::post('/setup', function ($request) {
     }
 });
 
-Route::post('/setup/email/login/{address}', function ($request) {
+Route::post('/setup/email/login/{address}', function (Request $request) {
     $user = new App\Core\Auth();
     die("good");
 });
 
-Route::get('/install', function ($request) {
+Route::get('/install', function (Request $request) {
     $user = new App\Core\Auth();
     $system = new App\Core\System();
     if ($user::isInstalled() == false) {
@@ -823,7 +823,7 @@ Route::get('/install', function ($request) {
     }
 });
 
-Route::post('/addrss', function ($request) {
+Route::post('/addrss', function (Request $request) {
     $r = new App\Core\Auth();
     $data = $request->getBody();
     $url = $_POST['domain'];
@@ -833,7 +833,7 @@ Route::post('/addrss', function ($request) {
 });
 
 /* Add Video*/
-Route::post('/addvideo', function ($request) {
+Route::post('/addvideo', function (Request $request) {
     $user = new App\Core\Auth();
     if (!$user->is_logged_in() || !$user->is_admin()) {
         return $user->redirect('/');
