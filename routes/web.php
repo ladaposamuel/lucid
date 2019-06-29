@@ -1,5 +1,5 @@
 <?php
-use Illuminate\Http\Request; 
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,14 +14,13 @@ use Illuminate\Http\Request;
 //Route::get('/', function () {
   //  return view('welcome');
 //});
-
-$directory = "../storage/contents/";
+$directory = "./storage/contents/";
 $ziki = new App\Core\Document($directory);
 $posts = $ziki->get();
 if (empty($posts)) {
     $posts = [];
 }
-$user = file_get_contents("../app/config/auth.json");
+$user = file_get_contents(app_path("config/auth.json"));
 $user = json_decode($user, true);
 $username = str_replace(' ', '', $user['name']);
 $GLOBALS['username'] = $username;
