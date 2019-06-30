@@ -4,11 +4,141 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Boiler Plate</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./assets/bootstrap-4.3.1-dist/css/bootstrap.min.css" />
+    <style>
+      /* MOST BASIC UNIVERSAL STYLES ARE IN HERE */
+      /* feel free to add other helper classes to increase code re-use */
+      :root {
+        --light-purple: #871e99;
+        --dark-purple: #280a66;
+        --grey: #7a7a7a;
+        --black: #000000;
+        --white: #ffffff;
+      }
+      body {
+        font-family: 'Lato', 'Roboto', sans-serif;
+      }
+      .light-purple-text {
+        color: var(--light-purple);
+      }
+      .dark-purple-text {
+        color: var(--dark-purple);
+      }
+      .grey-text {
+        color: var(--grey);
+      }
+      .black-text {
+        color: var(--black);
+      }
+      a,
+      a:hover,
+      a:active,
+      a:visited {
+        color: var(--black);
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      /* sidebar styling starts here*/
+
+      .sidebar-links a {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        margin-bottom: 0.5rem;
+        border-radius: 6px;
+        transition: color, background 0.3s;
+      }
+      .sidebar-links a:hover {
+        background: var(--light-purple);
+        color: var(--white);
+      }
+      .follow-button {
+        color: var(--light-purple);
+        border-color: var(--light-purple);
+      }
+      .follow-button:hover {
+        background: var(--light-purple);
+        color: var(--white);
+      }
+      /* sidebar styling ends here */
+    </style>
   </head>
   <body>
-    <script src="https://unpkg.com/popper.js"></script>
-    <script src=""></script>
+    <!-- Navigation bar here -->
+    <nav class="navbar navbar-light shadow-sm">
+      <a href="#" class="navbar-brand">Lucid</a>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdownMenuLink"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <img src="./assets/img/logo_transparent.png" alt="lucid-logo" width="50px" />
+          </a>
+          <div class="dropdown-menu shadow" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Login</a>
+            <a class="dropdown-item" href="#">Report a bug</a>
+            <a class="dropdown-item" href="#">Get Lucid</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+    <section class="container-fluid">
+      <div class="row">
+        <!-- Sidebar starts here -->
+        <aside class="sidebar col-3 flex-column py-4">
+          <img
+            class="d-block mx-auto mb-3"
+            src="https://via.placeholder.com/130/871E99/FFFFFF?text=User+Image"
+            alt="profile-photo"
+            style="border-radius: 50%"
+          />
+          <h2 class="light-purple-text text-center">MARK ESSIEN</h2>
+          <p id="bio" class="mt-2 text-center px-4">Front end developer, ui/ux developer, friend and traveller.</p>
+          <p class="px-2 text-center">
+            <!-- going to be dynamic -->
+            <strong id="following" class="pr-2">45 <span class="light-purple-text">following</span></strong>
+            <strong id="followers" class="">163 <span class="light-purple-text">followers</span></strong>
+          </p>
+          <hr class="mx-2 px-5" />
+          <ul class="nav flex-column text-center sidebar-links">
+            <li class="nav-item">
+              <a href="#" class="nav-link light-purple-text"><strong>POSTS</strong></a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link light-purple-text"><strong>VIDEOS</strong></a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link light-purple-text"><strong>CONTACT</strong></a>
+            </li>
+          </ul>
+          <button type="button" class="d-block mx-auto btn follow-button">FOLLOW ME</button>
+        </aside>
+        <!-- sidebar ends here  -->
+        <main class="col-sm-12 col-md-9 py-4 float-right">
+          <!-- main content here -->
+          <h1 class="text-center">start here</h1>
+        </main>
+      </div>
+    </section>
+    <!-- boostrap JS dependencies -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script src="assets/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
   </body>
 </html>
