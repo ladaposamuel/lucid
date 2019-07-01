@@ -1,250 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Boiler Plate</title>
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./assets/bootstrap-4.3.1-dist/css/bootstrap.min.css" />
-    <style>
-      /* MOST BASIC UNIVERSAL STYLES ARE IN HERE */
-      /* feel free to add other helper classes to increase code re-use */
-      :root {
-        --light-purple: #871e99;
-        --dark-purple: #280a66;
-        --grey: #7a7a7a;
-        --black: #000000;
-        --white: #ffffff;
-      }
-      * {
-        overflow-x: hidden;
-      }
-      body {
-        font-family: 'Lato', 'Roboto', sans-serif;
-        margin-top: 80px;
-      }
-      .light-purple-text {
-        color: var(--light-purple);
-      }
-      .dark-purple-text {
-        color: var(--dark-purple);
-      }
-      .grey-text {
-        color: var(--grey);
-      }
-      .black-text {
-        color: var(--black);
-      }
-      a,
-      a:hover,
-      a:active,
-      a:visited {
-        color: var(--black);
-        cursor: pointer;
-        text-decoration: none;
-      }
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Lucid</title>
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+			crossorigin="anonymous"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css"
+			rel="stylesheet"
+		/>
 
-      /* navbar styling starts here */
-      nav.navbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 2;
-        background: var(--white);
-      }
-      /* navbar styling ends here */
+		<link rel="stylesheet" href="./assets/css/style.css" />
+		<link rel="stylesheet" href="./assets/css/tabletcss.css" />
+	</head>
+	<body>
+		<!-- Beginning of Navbar -->
+		<nav class="navbar navbar-expand-lg navbar-light">
+			<div class="container">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown">
+						<a
+							class="nav-link dropdown-toggle"
+							href="#"
+							id="navbarDropdown"
+							role="button"
+							data-toggle="dropdown"
+							aria-haspopup="true"
+							aria-expanded="false"
+						>
+							<img src="./assets/img/logo.jpg" alt="Lucid" class="img-fluid" />
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#">Login</a>
+							<a class="dropdown-item" href="#">Report A Bug</a>
+							<a class="dropdown-item" href="#">Get Lucid</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<!-- End of Navbar -->
 
-      /* sidebar styling starts here*/
-      aside.sidebar {
-        height: 100vh;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-      }
+		<section id="main-content" class="container">
+			<div class="row">
+				<!-- Beginning of Sidebar -->
+				<div class="col-lg-4 pb-2">
+					<img
+						id="user-avatar"
+						src="./assets/img/ahless.jpg"
+						class="img-fluid"
+					/>
+					<h3 id="user-name">Alexander Garuba</h3>
+					<p id="user-bio">
+						Front-end developer, Back-end Developer, UI/UX developer, Friend and
+						Traveller.
+					</p>
+					<p class="user-stats text-center">
+						<a href="#" class="pr-2">45 <span>following</span></a>
+						<a href="#">165 <span>followers</span></a>
+					</p>
 
-      .sidebar-links a {
-        display: inline-block;
-        padding: 0.5rem 1rem;
-        margin-bottom: 0.5rem;
-        border-radius: 6px;
-        transition: color, background 0.3s;
-      }
-      .sidebar-links a:hover {
-        background: var(--light-purple);
-        color: var(--white);
-      }
-      .follow-button {
-        color: var(--light-purple);
-        border-color: var(--light-purple);
-      }
-      .follow-button:hover {
-        background: var(--light-purple);
-        color: var(--white);
-      }
-      /* sidebar styling ends here */
+					<div class="divider"></div>
+					<div class="sidebar-nav">
+						<ul>
+							<li><a href="#">Posts</a></li>
+							<li><a href="#">Videos</a></li>
+							<li><a href="#">Contact</a></li>
+							<li><a href="#">Thoughts</a></li>
+						</ul>
+					</div>
+					<div class="follow-me text-center">
+						<button class="btn btn-primary">Follow Me</button>
+					</div>
+				</div>
+				<!-- End of Sidebar -->
 
-      /* main content styling starts here */
-      .main-content {
-        /* margin-top: 80px; */
-      }
-      /* main content styling ends here */
+				<!-- Beginning of Post Content -->
+				<div class="col-lg-8 pb-5">
+					<div class="post-content">
+						<div class="post-image d-none d-lg-flex d-xl-flex d-md-flex">
+							<img
+								src="./assets/img/post-1.jpg"
+								class="img-fluid post-img"
+								alt="What I think of Donald Glover’s New Video"
+							/>
+						</div>
+						<div class="post-content-body">
+							<p class="post-date">3rd April, 2019</p>
+							<h3 class="post-title">
+								What I think of Donald Glover’s New Video
+							</h3>
+							<p class="post-body">
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+								eiusmod tempor incididunt ut labore et dolore , Lorem ipsum
+								dolor sit amet, consectetur....
+							</p>
+						</div>
+					</div>
 
-      /* footer styling starts here */
-      footer {
-        background: var(--light-purple);
-        color: var(--white);
-      }
-      /* footer styling ends here */
+					<div class="post-content">
+						<div class="post-image d-none d-lg-flex d-xl-flex d-md-flex">
+							<img
+								src="./assets/img/post-2.jpg"
+								class="img-fluid post-img"
+								alt="Looking For Where To Spend Christmas in the comform of your home"
+							/>
+						</div>
+						<div class="post-content-body">
+							<p class="post-date">2nd April, 2019</p>
+							<h3 class="post-title">
+								Looking For Where To Spend Christmas in the comform of your home
+							</h3>
+							<p class="post-body">
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+								eiusmod tempor incididunt ut labore et dolore , Lorem ipsum
+								dolor sit amet....
+							</p>
+						</div>
+					</div>
 
-      /* media queries */
-      @media screen and (max-width: 576px) {
-        aside.sidebar {
-          display: none;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Navigation bar here -->
-    <nav class="navbar navbar-expand-md navbar-light shadow-sm px-5">
-      <a href="#" class="navbar-brand">Lucid</a>
-      <div class="navbar-nav ml-auto">
-        <ul class="nav-item dropdown m-0">
-          <!-- problem here -->
-          <a href="#" id="navbarDropdown" class="nav-link dropdown-toggle mr-3" data-toggle="dropdown">
-            <img src="./assets/img/logo_transparent.png" alt="lucid logo" width="50px" />
-          </a>
-          <li class="dropdown-menu">
-            <a href="#" class="dropdown-item">Login</a>
-            <a href="#" class="dropdown-item">Report a Bug</a>
-            <a href="#" class="dropdown-item">Get Lucid</a>
-          </li>
-        </ul>
-      </div>
-      <!-- navigation with button for smaller devices -->
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse-md navbar-collapse-content" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a href="#" class="nav-link" style="color: var(--light-purple)"><strong>POSTS</strong></a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link" style="color: var(--light-purple)"><strong>VIDEOS</strong></a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link" style="color: var(--light-purple)"><strong>CONTACT</strong></a>
-          </li>
-        </ul>
-        <button type="button" class="d-block mr-auto btn follow-button">FOLLOW ME</button>
-      </div>
-      <!-- ends here -->
-    </nav>
+					<div class="post-content">
+						<div class="post-content-body">
+							<p class="post-date">1st April, 2019</p>
+							<h3 class="post-title">
+								Looking For Where To Spend Christmas in the comform of your home
+							</h3>
+							<p class="post-body">
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+								eiusmod tempor incididunt ut labore et dolore , Lorem ipsum
+								dolor sit amet....
+							</p>
+						</div>
+					</div>
 
-    <section class="container-fluid position-relative">
-      <div class="row">
-        <!-- Sidebar starts here -->
-        <aside class="sidebar col-3 flex-column py-4">
-          <img
-            class="d-block mx-auto mb-3"
-            src="https://via.placeholder.com/130/871E99/FFFFFF?text=User+Image"
-            alt="profile-photo"
-            style="border-radius: 50%"
-          />
-          <h2 class="light-purple-text text-center">MARK ESSIEN</h2>
-          <p id="bio" class="mt-2 text-center px-4">Front end developer, ui/ux developer, friend and traveller.</p>
-          <p class="px-2 text-center">
-            <!-- going to be dynamic -->
-            <strong id="following" class="pr-2">45 <span class="light-purple-text">following</span></strong>
-            <strong id="followers" class="">163 <span class="light-purple-text">followers</span></strong>
-          </p>
-          <hr class="mx-2 px-5" />
-          <ul class="nav flex-column text-center sidebar-links">
-            <li class="nav-item">
-              <a href="#" class="nav-link light-purple-text"><strong>POSTS</strong></a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link light-purple-text"><strong>VIDEOS</strong></a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link light-purple-text"><strong>CONTACT</strong></a>
-            </li>
-          </ul>
-          <button type="button" class="d-block mx-auto btn follow-button">FOLLOW ME</button>
-        </aside>
-        <!-- sidebar ends here  -->
-        <section>
-          <main class="col-sm-12 col-md-9 py-4 main-content ml-auto">
-            <!-- main content here -->
-            <h1 class="text-center">start here</h1>
-            <h3 class="text-left">all this should be deleted</h3>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Explicabo porro dolore libero aspernatur cumque
-              cupiditate quo sit enim numquam eum reprehenderit deleniti expedita asperiores, et fugiat? Ab nostrum
-              architecto aliquam earum corporis eveniet, quas sapiente in doloremque sunt velit possimus minima beatae
-              aut perferendis inventore dolorem? Illo eum, velit, dolorem saepe in alias tempore suscipit dolorum
-              maiores veniam ducimus atque magni nesciunt dignissimos dolores ipsa sit, nemo explicabo dolor veritatis
-              tenetur. Quasi officiis quas dicta maxime nisi, voluptatibus laboriosam ea. Excepturi assumenda facilis
-              deleniti error possimus doloremque impedit enim temporibus. Nostrum, aliquid. Eveniet totam incidunt
-              molestias reiciendis ab officiis assumenda tempora deleniti commodi minima ad unde, aut sunt expedita
-              aliquid quam vitae explicabo praesentium dolorem! Commodi cupiditate adipisci deserunt, repellendus quia
-              quisquam aliquam provident impedit excepturi nemo nesciunt quae, ea expedita. Optio explicabo quibusdam
-              laboriosam accusamus fugit facilis iusto qui aut? Architecto veritatis corrupti ullam esse a iste, ea
-              reprehenderit nam! Sunt minus a reprehenderit dignissimos non ut ipsam, fugiat expedita iste eveniet,
-              odio, eligendi blanditiis. Harum et molestiae dolor aspernatur labore. Sapiente, aperiam! Blanditiis, est
-              vel magnam explicabo molestias officia fugiat minus pariatur vitae nisi maxime eligendi tenetur magni
-              illum aperiam modi culpa aliquam esse earum at. Accusamus, corporis!
-            </p>
-            <hr />
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae atque sunt dolor laboriosam, numquam
-              molestias. Labore assumenda, ad soluta porro voluptates quos veritatis voluptatibus esse corrupti nostrum
-              odit, nisi, debitis libero ipsam! Dolorum quibusdam nihil eius perferendis nobis quia quisquam vitae sint
-              quos exercitationem modi possimus, cum molestias commodi amet blanditiis iure excepturi similique
-              doloremque ullam facilis optio earum veniam. Obcaecati quo consequuntur fugit dolorum repudiandae
-              recusandae, rerum ipsam voluptatum magni alias incidunt reiciendis dolores hic perspiciatis, numquam
-              consequatur laudantium blanditiis amet. Est praesentium nulla quos iusto voluptatibus sit necessitatibus
-              aut ex doloribus molestiae sapiente dolorum sint aperiam voluptatum quidem, ullam accusamus eos?
-              Perferendis vero eum labore? Et assumenda facere, voluptatibus dolorem saepe iste in quisquam! Totam in
-              architecto nemo reiciendis tenetur ipsa ab corporis enim magnam ullam numquam eveniet ad optio id
-              voluptatibus necessitatibus inventore culpa praesentium, fugit hic quo mollitia dolorum. Dolores
-              molestiae, laboriosam quo repellat velit quis voluptatibus! Fugit, doloribus sint aut dolorem laudantium
-              repellendus reprehenderit ea eveniet, possimus molestias qui nobis ipsa, dolore rem in consequuntur quidem
-              eos provident. Eveniet consequatur magni qui nihil in quibusdam quis, recusandae dicta quod! Doloribus,
-              itaque molestias beatae explicabo non quisquam debitis iste ut hic praesentium laborum sint dolore
-              repellat.
-            </p>
-          </main>
-          <section>
-            <footer class="footer col-md-9 col-sm-12 ml-auto py-3">
-              <h4 class="text-center">Powered by Lucid</h4>
-            </footer>
-          </section>
-        </section>
-      </div>
-    </section>
-    <!-- boostrap JS dependencies -->
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"
-    ></script>
-    <script src="assets/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
-  </body>
+					<div class="post-content">
+						<div class="post-content-body">
+							<p class="post-date">1st April, 2019</p>
+							<h3 class="post-title">
+								Looking For Where To Spend Christmas in the comform of your home
+							</h3>
+							<p class="post-body">
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+								eiusmod tempor incididunt ut labore et dolore , Lorem ipsum
+								dolor sit amet....
+							</p>
+						</div>
+					</div>
+
+					<div class="post-content">
+						<div class="post-image d-none d-lg-flex d-xl-flex d-md-flex">
+							<img
+								src="./assets/img/post-1.jpg"
+								class="img-fluid post-img"
+								alt="What I think of Donald Glover’s New Video"
+							/>
+						</div>
+						<div class="post-content-body">
+							<p class="post-date">3rd April, 2019</p>
+							<h3 class="post-title">
+								What I think of Donald Glover’s New Video
+							</h3>
+							<p class="post-body">
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+								eiusmod tempor incididunt ut labore et dolore , Lorem ipsum
+								dolor sit amet, consectetur....
+							</p>
+						</div>
+					</div>
+
+					<div class="post-content">
+						<div class="post-image d-none d-lg-flex d-xl-flex d-md-flex">
+							<img
+								src="./assets/img/post-2.jpg"
+								class="img-fluid post-img"
+								alt="Looking For Where To Spend Christmas in the comform of your home"
+							/>
+						</div>
+						<div class="post-content-body">
+							<p class="post-date">2nd April, 2019</p>
+							<h3 class="post-title">
+								Looking For Where To Spend Christmas in the comform of your home
+							</h3>
+							<p class="post-body">
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+								eiusmod tempor incididunt ut labore et dolore , Lorem ipsum
+								dolor sit amet....
+							</p>
+						</div>
+					</div>
+
+					<div class="text-center">
+						<button class="btn btn-primary pagination">
+							Previous articles <i class="pl-2 icon ion-ios-arrow-forward"></i>
+						</button>
+					</div>
+				</div>
+
+				<!-- End of Post Content -->
+			</div>
+		</section>
+		<script
+			src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+			crossorigin="anonymous"
+		></script>
+	</body>
 </html>
