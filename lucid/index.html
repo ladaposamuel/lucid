@@ -22,6 +22,7 @@
       }
       body {
         font-family: 'Lato', 'Roboto', sans-serif;
+        margin-top: 80px;
       }
       .light-purple-text {
         color: var(--light-purple);
@@ -61,7 +62,6 @@
         position: fixed;
         z-index: 1;
         left: 0;
-        margin-top: 80px; /*to give space from fixed sidebar*/
       }
 
       .sidebar-links a {
@@ -87,41 +87,71 @@
 
       /* main content styling starts here */
       .main-content {
-        margin-top: 80px;
+        /* margin-top: 80px; */
       }
       /* main content styling ends here */
+
       /* footer styling starts here */
       footer {
         background: var(--light-purple);
         color: var(--white);
       }
+      /* footer styling ends here */
+
+      /* media queries */
+      @media screen and (max-width: 576px) {
+        aside.sidebar {
+          display: none;
+        }
+      }
     </style>
   </head>
   <body>
     <!-- Navigation bar here -->
-    <nav class="navbar navbar-light shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-light shadow-sm px-5">
       <a href="#" class="navbar-brand">Lucid</a>
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            id="navbarDropdownMenuLink"
-            role="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            <img src="./assets/img/logo_transparent.png" alt="lucid-logo" width="50px" />
+      <div class="navbar-nav ml-auto">
+        <ul class="nav-item dropdown m-0">
+          <!-- problem here -->
+          <a href="#" id="navbarDropdown" class="nav-link dropdown-toggle mr-3" data-toggle="dropdown">
+            <img src="./assets/img/logo_transparent.png" alt="lucid logo" width="50px" />
           </a>
-          <div class="dropdown-menu shadow" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Login</a>
-            <a class="dropdown-item" href="#">Report a bug</a>
-            <a class="dropdown-item" href="#">Get Lucid</a>
-          </div>
-        </li>
-      </ul>
+          <li class="dropdown-menu">
+            <a href="#" class="dropdown-item">Login</a>
+            <a href="#" class="dropdown-item">Report a Bug</a>
+            <a href="#" class="dropdown-item">Get Lucid</a>
+          </li>
+        </ul>
+      </div>
+      <!-- navigation with button for smaller devices -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse-md navbar-collapse-content" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a href="#" class="nav-link" style="color: var(--light-purple)"><strong>POSTS</strong></a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link" style="color: var(--light-purple)"><strong>VIDEOS</strong></a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link" style="color: var(--light-purple)"><strong>CONTACT</strong></a>
+          </li>
+        </ul>
+        <button type="button" class="d-block mr-auto btn follow-button">FOLLOW ME</button>
+      </div>
+      <!-- ends here -->
     </nav>
+
     <section class="container-fluid position-relative">
       <div class="row">
         <!-- Sidebar starts here -->
