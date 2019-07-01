@@ -1,8 +1,13 @@
+:root {
+	--main-color:  #871e99;
+}
 html,
 body {
 	font-family: 'Open Sans', sans-serif;
 }
-
+.text-main {
+	color: var(--main-color);
+}
 #user-avatar {
 	border-radius: 50%;
 	width: 140px;
@@ -194,4 +199,9 @@ button.btn.btn-primary.pagination:hover {
 .dropdown-item {
 	padding: 0.75rem 1.5rem;
 	color: #000000;
+}
+.social-icon{
+	border-radius: 50%;
+	border: solid 1px gray;
+	padding: 2px;
 }
