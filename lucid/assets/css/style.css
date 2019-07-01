@@ -29,7 +29,7 @@ body {
 	text-align: center;
 	text-transform: uppercase;
 	padding-top: 40px;
-	color: #871e99;
+	color: var(--main-color);
 }
 
 #user-bio {
@@ -53,7 +53,7 @@ body {
 }
 
 .user-stats span {
-	color: #871e99;
+	color: var(--main-color);
 }
 
 .divider {
@@ -88,7 +88,7 @@ body {
 
 .sidebar-nav ul li a:hover {
 	color: #ffffff;
-	background: #871e99;
+	background: var(--main-color);
 	border-radius: 5px;
 }
 
@@ -99,16 +99,16 @@ body {
 .follow-me button {
 	font-size: 15px;
 	font-weight: 600;
-	color: #871e99;
-	border: 2px solid #871e99;
+	color: var(--main-color);
+	border: 2px solid var(--main-color);
 	background: #fff;
 	text-transform: uppercase;
 }
 
 .follow-me button:hover {
 	color: #fff;
-	border: 2px solid #871e99;
-	background: #871e99;
+	border: 2px solid var(--main-color);
+	background: var(--main-color);
 }
 
 .post-content {
@@ -166,7 +166,7 @@ body {
 }
 
 .post-date {
-	color: #871e99;
+	color: var(--main-color);
 	font-size: 14px;
 	font-weight: 600;
 	margin-bottom: 8px;
@@ -179,17 +179,17 @@ body {
 }
 
 button.btn.btn-primary.pagination {
-	color: #871e99;
+	color: var(--main-color);
 	background: #fff;
 	padding: 10px 15px;
-	border: 2px solid #871e99;
+	border: 2px solid var(--main-color);
 }
 
 button.btn.btn-primary.pagination:hover {
 	color: #fff;
-	background: #871e99;
+	background: var(--main-color);
 	padding: 10px 15px;
-	border: 2px solid #871e99;
+	border: 2px solid var(--main-color);
 }
 
 .dropdown-menu {
