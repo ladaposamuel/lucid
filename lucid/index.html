@@ -17,6 +17,9 @@
         --black: #000000;
         --white: #ffffff;
       }
+      * {
+        overflow-x: hidden;
+      }
       body {
         font-family: 'Lato', 'Roboto', sans-serif;
       }
@@ -41,7 +44,25 @@
         text-decoration: none;
       }
 
+      /* navbar styling starts here */
+      nav.navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 2;
+        background: var(--white);
+      }
+      /* navbar styling ends here */
+
       /* sidebar styling starts here*/
+      aside.sidebar {
+        height: 100vh;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        margin-top: 80px; /*to give space from fixed sidebar*/
+      }
 
       .sidebar-links a {
         display: inline-block;
@@ -63,6 +84,17 @@
         color: var(--white);
       }
       /* sidebar styling ends here */
+
+      /* main content styling starts here */
+      .main-content {
+        margin-top: 80px;
+      }
+      /* main content styling ends here */
+      /* footer styling starts here */
+      footer {
+        background: var(--light-purple);
+        color: var(--white);
+      }
     </style>
   </head>
   <body>
@@ -90,7 +122,7 @@
         </li>
       </ul>
     </nav>
-    <section class="container-fluid">
+    <section class="container-fluid position-relative">
       <div class="row">
         <!-- Sidebar starts here -->
         <aside class="sidebar col-3 flex-column py-4">
@@ -122,10 +154,54 @@
           <button type="button" class="d-block mx-auto btn follow-button">FOLLOW ME</button>
         </aside>
         <!-- sidebar ends here  -->
-        <main class="col-sm-12 col-md-9 py-4 float-right">
-          <!-- main content here -->
-          <h1 class="text-center">start here</h1>
-        </main>
+        <section>
+          <main class="col-sm-12 col-md-9 py-4 main-content ml-auto">
+            <!-- main content here -->
+            <h1 class="text-center">start here</h1>
+            <h3 class="text-left">all this should be deleted</h3>
+            <p>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Explicabo porro dolore libero aspernatur cumque
+              cupiditate quo sit enim numquam eum reprehenderit deleniti expedita asperiores, et fugiat? Ab nostrum
+              architecto aliquam earum corporis eveniet, quas sapiente in doloremque sunt velit possimus minima beatae
+              aut perferendis inventore dolorem? Illo eum, velit, dolorem saepe in alias tempore suscipit dolorum
+              maiores veniam ducimus atque magni nesciunt dignissimos dolores ipsa sit, nemo explicabo dolor veritatis
+              tenetur. Quasi officiis quas dicta maxime nisi, voluptatibus laboriosam ea. Excepturi assumenda facilis
+              deleniti error possimus doloremque impedit enim temporibus. Nostrum, aliquid. Eveniet totam incidunt
+              molestias reiciendis ab officiis assumenda tempora deleniti commodi minima ad unde, aut sunt expedita
+              aliquid quam vitae explicabo praesentium dolorem! Commodi cupiditate adipisci deserunt, repellendus quia
+              quisquam aliquam provident impedit excepturi nemo nesciunt quae, ea expedita. Optio explicabo quibusdam
+              laboriosam accusamus fugit facilis iusto qui aut? Architecto veritatis corrupti ullam esse a iste, ea
+              reprehenderit nam! Sunt minus a reprehenderit dignissimos non ut ipsam, fugiat expedita iste eveniet,
+              odio, eligendi blanditiis. Harum et molestiae dolor aspernatur labore. Sapiente, aperiam! Blanditiis, est
+              vel magnam explicabo molestias officia fugiat minus pariatur vitae nisi maxime eligendi tenetur magni
+              illum aperiam modi culpa aliquam esse earum at. Accusamus, corporis!
+            </p>
+            <hr />
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae atque sunt dolor laboriosam, numquam
+              molestias. Labore assumenda, ad soluta porro voluptates quos veritatis voluptatibus esse corrupti nostrum
+              odit, nisi, debitis libero ipsam! Dolorum quibusdam nihil eius perferendis nobis quia quisquam vitae sint
+              quos exercitationem modi possimus, cum molestias commodi amet blanditiis iure excepturi similique
+              doloremque ullam facilis optio earum veniam. Obcaecati quo consequuntur fugit dolorum repudiandae
+              recusandae, rerum ipsam voluptatum magni alias incidunt reiciendis dolores hic perspiciatis, numquam
+              consequatur laudantium blanditiis amet. Est praesentium nulla quos iusto voluptatibus sit necessitatibus
+              aut ex doloribus molestiae sapiente dolorum sint aperiam voluptatum quidem, ullam accusamus eos?
+              Perferendis vero eum labore? Et assumenda facere, voluptatibus dolorem saepe iste in quisquam! Totam in
+              architecto nemo reiciendis tenetur ipsa ab corporis enim magnam ullam numquam eveniet ad optio id
+              voluptatibus necessitatibus inventore culpa praesentium, fugit hic quo mollitia dolorum. Dolores
+              molestiae, laboriosam quo repellat velit quis voluptatibus! Fugit, doloribus sint aut dolorem laudantium
+              repellendus reprehenderit ea eveniet, possimus molestias qui nobis ipsa, dolore rem in consequuntur quidem
+              eos provident. Eveniet consequatur magni qui nihil in quibusdam quis, recusandae dicta quod! Doloribus,
+              itaque molestias beatae explicabo non quisquam debitis iste ut hic praesentium laborum sint dolore
+              repellat.
+            </p>
+          </main>
+          <section>
+            <footer class="footer col-md-9 col-sm-12 ml-auto py-3">
+              <h4 class="text-center">Powered by Lucid</h4>
+            </footer>
+          </section>
+        </section>
       </div>
     </section>
     <!-- boostrap JS dependencies -->
