@@ -31,6 +31,8 @@ class SocialController extends Controller
             ]);
             $username = preg_split('/ +/', $user->name);
             return redirect("/{$username[0]}/home");
+            // to fix
+            // redirect to a route where the username would be set
          return redirect()->route('home');
         }
     }
