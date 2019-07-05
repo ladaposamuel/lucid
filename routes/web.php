@@ -18,8 +18,7 @@ Route::get('/', function () {
 
 Route::get('login/{provider}', 'SocialController@redirect');
 Route::get('login/{provider}/callback', 'SocialController@Callback');
-Auth::routes();
-Route::get('auth/', function () {
-  return view('auth');
+Route::prefix('{username}')->group(function () {
+    Route::get('/home', 'HomeController@index');
 });
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/logout', "AuthController@logout")->name('logout');
