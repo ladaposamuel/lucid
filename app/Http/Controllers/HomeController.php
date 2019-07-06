@@ -23,7 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $directory = "./storage/contents/";
+            $directory = storage_path('/contents/');
             $ziki = new \App\Core\Document($directory);
             $feed = $ziki->fetchRss();
 
