@@ -23,6 +23,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $directory = "./storage/contents/";
+            $ziki = new \App\Core\Document($directory);
+            $feed = $ziki->fetchRss();
+
+        return view('home', ['posts' => $feed]);
     }
 }
