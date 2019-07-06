@@ -28,5 +28,6 @@ class HomeController extends Controller
             $feed = $ziki->fetchRss();
 
         return view('home', ['posts' => $feed]);
+      
     }
 }

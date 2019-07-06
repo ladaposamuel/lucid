@@ -1,18 +1,15 @@
 <?php
-namespace App\Core;
+namespace App\Facades;
+use Illuminate\Support\Facades\Facade;
+
 /**
  *	A Collection object represents a set of Document objects (matching certain criterias).
  *
  */
-class Collection
+class Collection  extends Facade
 {
-    protected $dir;
-    
-    protected $entries;
-
-    public function __construct($dir, $entries)
-    {
-        $this->dir     = $dir;
-        $this->entries = $entries;
-    }
+  protected static function getFacadeAccessor()
+{
+    return 'Collection';
+}
 }
