@@ -13,7 +13,8 @@
         "laravel/framework": "5.8.*",
         "laravel/socialite": "^4.1",
         "laravel/tinker": "^1.0",
-        "socialiteproviders/google": "^3.0"
+        "socialiteproviders/google": "^3.0",
+        "symfony/finder": "^4.3"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
