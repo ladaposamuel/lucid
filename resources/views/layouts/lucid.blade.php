@@ -26,14 +26,14 @@
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
             @guest
-						<a class="dropdown-item" href="{{ route('login') }}">{{ __('Login') }}</a>
+						<a class="dropdown-item" href="{{ route('/login/google') }}">{{ __('Login') }}</a>
             @else
-            <a class="dropdown-item" href="{{ route('logout') }}"
+            <a class="dropdown-item" href=""
                onclick="event.preventDefault();
                              document.getElementById('logout-form').submit();">
                 {{ __('Logout') }}
             </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            <form id="logout-form" action="" method="POST" style="display: none;">
                 @csrf
             </form>
             @endguest
