@@ -18,7 +18,9 @@ Route::get('/', function () {
 
 Route::get('login/{provider}', 'SocialController@redirect');
 Route::get('login/{provider}/callback', 'SocialController@Callback');
+
 Route::prefix('{username}')->group(function () {
+
     Route::get('/home', 'HomeController@index');
 });
-Route::get('/logout', "AuthController@logout")->name('logout');
+Route::post('/logout', "AuthController@logout")->name('logout');
