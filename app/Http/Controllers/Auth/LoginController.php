@@ -72,6 +72,6 @@ public function findOrCreateUser($user, $provider){
             'provider'      => $provider,
         ]);
 
-
+        return $user;
 }
 }
