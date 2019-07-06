@@ -20,7 +20,7 @@ class SocialController extends Controller
         if($users){
             Auth::login($users);
             $username = preg_split('/ +/', $users->name);
-            return redirect("/{$username[0]}/home");
+            return redirect()->to("/{$username[0]}/home");
         }else{
             $user = User::create([
                 'name'          => $userSocial->getName(),
@@ -30,7 +30,7 @@ class SocialController extends Controller
                 'provider'      => $provider,
             ]);
             $username = preg_split('/ +/', $user->name);
-            return redirect("/{$username[0]}/home");
+            return redirect()->to("/{$username[0]}/home");
             // to fix
             // redirect to a route where the username would be set
          return redirect()->route('home');

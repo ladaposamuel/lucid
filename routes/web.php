@@ -10,17 +10,22 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('login', function () {
+    return view('welcome');
+});
 
-
-Route::get('login/{provider}', 'SocialController@redirect');
-Route::get('login/{provider}/callback', 'SocialController@Callback');
+Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
+Route::post('login', 'LoginController@do')->name('login');
 
 Route::prefix('{username}')->group(function () {
 
+  //Auth::routes();
+    Route::get('/', 'HomeController@index');
     Route::get('/home', 'HomeController@index');
+    Route::get('/timeline', 'HomeController@index');
 });
 Route::post('/logout', "AuthController@logout")->name('logout');
