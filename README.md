@@ -23,8 +23,11 @@ This is the person visiting a `Lucid` site. When on the site, the users can view
 - Ensure `composer` is setup on your development environment
 - Fork your own copy of the repository
 - Clone it
-- Run `composer install --no-dev`
-- Run `php -S localhost:8000`.
+- Move into the directory where you have lucid installed
+- Run `composer install`
+- Setup your DB configuration in the .env file in the app folder
+- Run `php artisan migrate`
+- Ensure you setup your env variables for google auth and facebook auth in your .env file
 - In your browser, go to `localhost:8000` to view the website.
 
 #### The Pull Request Template:
