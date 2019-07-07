@@ -28,6 +28,21 @@ class HomeController extends Controller
             $feed = $ziki->fetchRss();
 
         return view('home', ['posts' => $feed]);
-      
+
+    }
+    public function timeline()
+    {
+            $directory = storage_path('/contents/');
+
+            $ziki = new \App\Core\Document($directory);
+            $post = $ziki->fetchAllRss();
+            //$count = new Ziki\Core\Subscribe();
+            //$fcount = $count->fcount();
+            //$count = $count->count();
+//print_r(
+  //$post
+//);
+        return view('timeline', ['posts' => $post]);
+
     }
 }

@@ -26,6 +26,6 @@ Route::prefix('{username}')->group(function () {
   //Auth::routes();
     Route::get('/', 'HomeController@index');
     Route::get('/home', 'HomeController@index');
-    Route::get('/timeline', 'HomeController@index');
+    Route::get('/timeline', 'HomeController@timeline');
 });
 Route::post('/logout', "AuthController@logout")->name('logout');

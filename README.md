@@ -1,21 +1,21 @@
-# ziki
+# Lucid
 
-ziki is a blogging service like wordpress it runs on your own self-hosted domain. Think of it as a distributed social network.
-It does not run on a url like `medium.com/markessien` or `wordpress.com/markessien`. I can install ziki on my own personal domain and set up my own blog.
+Lucid is a blogging service like wordpress it runs on your own self-hosted domain. Think of it as a distributed social network.
+It does not run on a url like `medium.com/markessien` or `wordpress.com/markessien`. I can install Lucid on my own personal domain and set up my own blog.
 
-I can install ziki on `markessien.com` or on a custom domain of my choosing.
+I can install Lucid on `markessien.com` or on a custom domain of my choosing.
 
-Ziki relies on the use of two terms:
+Lucid relies on the use of two terms:
 
 `Owner` and `Guest`
 
 ## The owner
 
-This is the person that downloaded ziki and installed it on their domain. The owner has permission to view their timeline, write and publish posts and follow other `ziki` users' posts using RSS. The owner only has an additional link called `timeline` which is private. The owner can choose to make their timeline public.
+This is the person that downloaded Lucid and installed it on their domain. The owner has permission to view their timeline, write and publish posts and follow other `Lucid` users' posts using RSS. The owner only has an additional link called `timeline` which is private. The owner can choose to make their timeline public.
 
 ## The Guest
 
-This is the person visiting a `ziki` site. When on the site, the users can view posts by the site [owner](##The-owner). If a guest wants to interact with the posts i.e like or comment they can login to the site to access these privilleges. If the site uses [disqus](https://disqus.com/) for commenting, the guest has no access to native login only the site [owner](##The-owner) does.
+This is the person visiting a `Lucid` site. When on the site, the users can view posts by the site [owner](##The-owner). If a guest wants to interact with the posts i.e like or comment they can login to the site to access these privilleges. If the site uses [disqus](https://disqus.com/) for commenting, the guest has no access to native login only the site [owner](##The-owner) does.
 
 ### Contributing
 
@@ -23,8 +23,11 @@ This is the person visiting a `ziki` site. When on the site, the users can view 
 - Ensure `composer` is setup on your development environment
 - Fork your own copy of the repository
 - Clone it
-- Run `composer install --no-dev`
-- Run `php -S localhost:8000`.
+- Move into the directory where you have lucid installed
+- Run `composer install`
+- Setup your DB configuration in the .env file in the app folder
+- Run `php artisan migrate`
+- Ensure you setup your env variables for google auth and facebook auth in your .env file
 - In your browser, go to `localhost:8000` to view the website.
 
 #### The Pull Request Template:
