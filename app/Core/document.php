@@ -207,17 +207,16 @@ class Document
 
     public function fetchAllRss()
     {
-        $xml = file_get_contents("./storage/rss/rss.xml");
+        $xml = file_get_contents(storage_path("/rss/rss.xml"));
         $feed = [];
         if (strlen($xml != "")) {
             $rss = new \DOMDocument();
-            $user = file_get_contents("./src/config/auth.json");
-            $user = json_decode($user, true);
-            $data = file_get_contents("./storage/rss/subscription.json");
-            $urlArray = json_decode($data, true);
 
+            $data = file_get_contents(storage_path("/rss/subscription.json"));
+            $urlArray = json_decode($data, true);
+            $user = Auth::user();
             $urlArray2 = array(
-                array('name' => $user['name'], 'rss' => 'storage/rss/rss.xml', 'desc' => '', 'link' => '', 'img' => $user['image'], 'time' => ''),
+                array('name' => $user['name'], 'rss' => storage_path('/rss/rss.xml'), 'desc' => '', 'link' => '', 'img' => $user['image'], 'time' => ''),
                 //                array('name' => 'Sample',  'url' => 'rss/rss.xml')
             );
 
