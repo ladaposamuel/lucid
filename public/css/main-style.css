@@ -35,7 +35,7 @@ header {
 .bg-main {
 	background-color: var(--primary-color) !important;
 }
-.bg-secondary {
+.bg-alt {
 	background-color: var(--secondary-color) !important;
 }
 .border-main {
