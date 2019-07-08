@@ -41,7 +41,7 @@
             </form>
             @endguest
 						<a class="dropdown-item" href="#">Report A Bug</a>
-						<a class="dropdown-item" href="#">Get Lucid</a>
+						<a class="dropdown-item" href="/home">Home</a>
 					</div>
 				</li>
 			</ul>
