@@ -8,7 +8,7 @@
 					Revolutionizing Content Sharing With Absolute Ownership and Data
 					Privacy
 				</h1>
-				<a class="btn btn-primary" href="https://download.getlucid.app/lucid.zip" target="_blank">Create Your Website For Free
+				<a class="btn btn-primary" href="/register" target="_blank">Create Your Page For Free
 					<i class="pl-2 icon ion-ios-arrow-round-forward"></i></a>
 			</div>
 		</div>
