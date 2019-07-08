@@ -45,6 +45,9 @@ header {
 	display: inline-block;
 	width: 40%; 
 }
+.single-post:hover {
+	text-decoration: none;
+}
 .nav-link {
 	color: #333333;
 	font-weight: 500;
