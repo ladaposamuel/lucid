@@ -14,12 +14,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('login', function () {
-    return view('login');
+    return view('auth/login');
 });
 Route::get('register', function () {
-    return view('register');
+    return view('auth/register');
 });
-
 
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
