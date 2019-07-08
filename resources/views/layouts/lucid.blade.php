@@ -82,7 +82,7 @@
           <div class="modal-content">
             <div class="modal-body">
               <div>
-                <img src="./assets/img/following-the-idea.png" class="img-fluid" />
+                <img src="{{ asset('img/following-the-idea.png') }}" class="img-fluid" />
                 <h4 class="text-main">FOLLOW ME</h4>
                 <p class="small"><em>Do you have or would love to have Lucid installed on your domain?<br /> Click the button below to follow me</em></p>
                 <button class="btn btn-primary">Follow me on Lucid</button>
