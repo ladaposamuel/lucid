@@ -14,7 +14,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('login', function () {
-    return view('welcome');
+    return view('login');
 });
 
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');

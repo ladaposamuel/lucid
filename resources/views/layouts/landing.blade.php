@@ -52,21 +52,19 @@
             <ul class="navbar-nav ml-auto">
             <li class="nav-item">
                 {{--<a href="http://demo.getlucid.app" target="_blank" class="nav-link mr-4">Demo</a>--}}
-                <a href="{{ url('/login/facebook') }}" class="nav-link mr-4"><i class="fa fa-facebook"></i> Facebook</a>
             </li>
             <li class="nav-item">
                 {{--<a href="#" class="nav-link mr-4">Features</a>--}}
-                <a href="{{ url('/login/google') }}" class="nav-link mr-4"><i class="fa fa-facebook"></i> Google</a>
             </li>
             <li class="nav-item">
                 <a href="get-started.php" class="nav-link mr-4">Get Started</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link mr-4">Support</a>
+                <a href="/login" class="navbar-btn btn btn-primary">Login</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a href="https://download.getlucid.app/lucid.zip" target="_blank" class="navbar-btn btn btn-primary">Download</a>
-            </li>
+            </li> -->
             </ul>
         </div>
         </div>

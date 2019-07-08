@@ -2,6 +2,7 @@
 	--primary-color: #9179ef;
 	--dark-color: #141414;
 	--light-color: #f4f4f4;
+	--secondary-color: #871E99;
 }
 
 body {
@@ -17,7 +18,28 @@ h3 {
 header {
 	padding-top: 20px;
 }
-
+.w-40 {
+	width: 40% !important;
+}
+.text-main {
+	color: var(--primary-color) !important;
+}
+.text-secondary {
+	color: var(--secondary-color) !important;
+}
+.bg-main {
+	background-color: var(--primary-color) !important;
+}
+.bg-secondary {
+	background-color: var(--secondary-color) !important;
+}
+.border-main {
+	border-color: var(--primary-color) !important;
+}
+.login-div {
+	display: inline-block;
+	width: 40%; 
+}
 .nav-link {
 	color: #333333;
 	font-weight: 500;
