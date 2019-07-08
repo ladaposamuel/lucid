@@ -7,7 +7,7 @@
 
 <h5 class="font-weight-bold mb-5">Latest stories</h5>
  <!-- Begin content -->
-<div class="post-content">
+<div class="post-content border-top">
 <img src="{{ asset('img/mb-1.png') }}" class="img-fluid" alt="user" />
   <div class="post-content-body">
       <h5 class="font-weight-bold">Maybe You Don't Need Kubernetes</h5>

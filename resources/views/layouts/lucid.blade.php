@@ -68,7 +68,7 @@
     <div class="divider"></div>
     <div class="sidebar-nav">
       <ul>
-        <li><a href="#">Posts</a></li>
+        <li><a href="/posts">Posts</a></li>
         <li><a href="#">Videos</a></li>
         <li><a href="#">Contact</a></li>
         <li><a href="#">Thoughts</a></li>
