@@ -13,14 +13,14 @@
     </div>
     <div class="col-4 offset-md-1">
       <input type="file" class="custom-file-input" id="customFile">
-      <label class="custom-file-label" for="customFile">Choose file</label>
+      <label class="custom-file-label" for="customFile">Add Image</label>
     </div>
   </div>
   <div class="form-group">
-    <textarea type="text" class="form-control" placeholder="Tell your story"></textarea>
+    <textarea type="text" class="form-control h-25" placeholder="Tell your story"></textarea>
   </div>
   <div class="text-right">
-  <button type="submit" class="btn bg-secondary text-white">Submit</button>
+  <button type="submit" class="btn bg-alt text-white">Submit</button>
   </div>
 </form>
 <!-- End Editor -->

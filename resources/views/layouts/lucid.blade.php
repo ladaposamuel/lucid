@@ -13,6 +13,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap" rel="stylesheet" />
 	<link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet" />
 <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+<link href="{{ asset('css/main-style.css') }}" rel="stylesheet">
 <link href="{{ asset('css/tabletcss.css') }}" rel="stylesheet">
 </head>
 <body>
