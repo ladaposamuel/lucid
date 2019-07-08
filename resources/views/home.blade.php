@@ -11,9 +11,9 @@
     <div class="col-7">
       <input type="text" class="form-control" placeholder="Title">
     </div>
-    <div class="col-4 offset-md-1">
-      <input type="file" class="custom-file-input" id="customFile">
-      <label class="custom-file-label" for="customFile">Add Image</label>
+    <div class="col-4 offset-md-1 border-dark ">
+      <input type="file" class="" id="customFile" style="display:none">
+      <label class="text-muted form-control p-2 w-100" for="customFile"><i class="icon ion-md-add p-1"></i> Add post Image</label>
     </div>
   </div>
   <div class="form-group">
