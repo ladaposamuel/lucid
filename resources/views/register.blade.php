@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet" />
     <link rel="short icon" type="image/png" sizes="16x16" href="{{ asset('img/luci-logo.png') }}">
     <link rel="stylesheet" href="{{ asset('css/main-style.css') }}" />
-    <title>Document</title>
+    <title>Register</title>
 </head>
 
 <body>
