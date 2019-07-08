@@ -22,6 +22,10 @@ Route::get('register', function () {
 Route::get('single-blog-post', function () {
     return view('single-blog-post');
 });
+Route::get('microblog', function () {
+    return view('microblog');
+});
+
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 Route::post('login', 'LoginController@do')->name('login');
