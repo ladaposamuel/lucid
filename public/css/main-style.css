@@ -18,8 +18,13 @@ h3 {
 header {
 	padding-top: 20px;
 }
-.w-40 {
+.w-custom {
 	width: 40% !important;
+}
+@media (max-width: 576px) {
+	.w-custom {
+		width: 80% !important;
+	}
 }
 .text-main {
 	color: var(--primary-color) !important;

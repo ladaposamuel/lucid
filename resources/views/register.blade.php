@@ -22,12 +22,12 @@
             <h4>A Better Way to Share Your Ideas</h4>
             <p class="text-muted my-4">Already signed up? <a href="/login" class="text-secondary font-weight-bold">Log in</a></p>
         </div>
-        <div class="d-inline-block w-40">
+        <div class="d-inline-block w-custom">
             <button class="btn border-main text-main my-3 w-100"><i class="icon ion-logo-google p-1"></i> <a href="{{ url('/login/google') }}">Continue with Google</a></button>
             <p>You can also <a href="" class="text-main">continue with mail</a></p>
         </div>
         <div class="row w-100"></div>
-        <div class="d-inline-block w-50 mt-4">
+        <div class="d-inline-block w-custom mt-4">
             <small class="text-muted">By clicking “Continue with Google/Email” above, you acknowledge that you have read and understood, and agree to Lucid’s <a href="" class="text-main">Terms and Conditons</a> and <a href="" class="text-main">Privacy Policy</a>.</small>
         </div>
     </div>

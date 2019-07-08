@@ -22,7 +22,7 @@
             <h4>Welcome back!</h4>
             <p class="text-muted my-4">New to Lucid? <a href="/register" class="text-secondary font-weight-bold">Sign Up</a></p>
         </div>
-        <div class="d-inline-block w-40">
+        <div class="d-inline-block w-custom">
             <button class="btn border-main text-main my-3 w-100"><i class="icon ion-logo-google p-1"></i> <a href="{{ url('/login/google') }}">Continue with Google</a></button>
             <form>
                 <div class="form-group">
