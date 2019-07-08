@@ -20,10 +20,12 @@
     <textarea type="text" class="form-control h-25" placeholder="Tell your story"></textarea>
   </div>
   <div class="text-right">
-    <button type="submit" class="btn bg-alt text-white">Submit</button>
+    <button type="submit" class="btn bg-alt text-white">Publish</button>
   </div>
 </form>
 <!-- End Editor -->
+
+
 <!-- Beginning of Post Content -->
 <div class="post-content">
   <div class="post-image d-none d-lg-flex d-xl-flex d-md-flex">
