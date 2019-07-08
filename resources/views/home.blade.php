@@ -20,7 +20,7 @@
     <textarea type="text" class="form-control h-25" placeholder="Tell your story"></textarea>
   </div>
   <div class="text-right">
-  <button type="submit" class="btn bg-alt text-white">Submit</button>
+    <button type="submit" class="btn bg-alt text-white">Submit</button>
   </div>
 </form>
 <!-- End Editor -->
@@ -30,15 +30,17 @@
     <img src="{{ asset('img/post-1.jpg') }}" class="img-fluid post-img" alt="What I think of Donald Glover’s New Video" />
   </div>
   <div class="post-content-body">
-    <p class="post-date">3rd April, 2019</p>
-    <h3 class="post-title">
-      What I think of Donald Glover’s New Video
-    </h3>
-    <p class="post-body">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore , Lorem ipsum
-      dolor sit amet, consectetur....
-    </p>
+    <a class="single-post" href="/single-blog-post">
+      <p class="post-date">3rd April, 2019</p>
+      <h3 class="post-title">
+        What I think of Donald Glover’s New Video
+      </h3>
+      <p class="post-body">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore , Lorem ipsum
+        dolor sit amet, consectetur....
+      </p>
+    </a>
   </div>
 </div>
 
@@ -46,79 +48,89 @@
   <div class="post-image d-none d-lg-flex d-xl-flex d-md-flex">
     <img src="{{ asset('img/post-2.jpg') }}" class="img-fluid post-img" alt="Looking For Where To Spend Christmas in the comform of your home" />
   </div>
-  <div class="post-content-body">
-    <p class="post-date">2nd April, 2019</p>
-    <h3 class="post-title">
-      Looking For Where To Spend Christmas in the comform of your home
-    </h3>
-    <p class="post-body">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore , Lorem ipsum
-      dolor sit amet....
-    </p>
-  </div>
+  <a class="single-post" href="/single-blog-post">
+    <div class="post-content-body">
+      <p class="post-date">2nd April, 2019</p>
+      <h3 class="post-title">
+        Looking For Where To Spend Christmas in the comform of your home
+      </h3>
+      <p class="post-body">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore , Lorem ipsum
+        dolor sit amet....
+      </p>
+    </div>
+  </a>
 </div>
 
 <div class="post-content">
-  <div class="post-content-body">
-    <p class="post-date">1st April, 2019</p>
-    <h3 class="post-title">
-      Looking For Where To Spend Christmas in the comform of your home
-    </h3>
-    <p class="post-body">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore , Lorem ipsum
-      dolor sit amet....
-    </p>
-  </div>
+  <a class="single-post" href="/single-blog-post">
+    <div class="post-content-body">
+      <p class="post-date">1st April, 2019</p>
+      <h3 class="post-title">
+        Looking For Where To Spend Christmas in the comform of your home
+      </h3>
+      <p class="post-body">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore , Lorem ipsum
+        dolor sit amet....
+      </p>
+    </div>
+  </a>
 </div>
 
 <div class="post-content">
-  <div class="post-content-body">
-    <p class="post-date">1st April, 2019</p>
-    <h3 class="post-title">
-      Looking For Where To Spend Christmas in the comform of your home
-    </h3>
-    <p class="post-body">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore , Lorem ipsum
-      dolor sit amet....
-    </p>
-  </div>
+  <a class="single-post" href="/single-blog-post">
+    <div class="post-content-body">
+      <p class="post-date">1st April, 2019</p>
+      <h3 class="post-title">
+        Looking For Where To Spend Christmas in the comform of your home
+      </h3>
+      <p class="post-body">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore , Lorem ipsum
+        dolor sit amet....
+      </p>
+    </div>
+  </a>
 </div>
 
 <div class="post-content">
   <div class="post-image d-none d-lg-flex d-xl-flex d-md-flex">
     <img src="{{ asset('img/post-1.jpg') }}" class="img-fluid post-img" alt="What I think of Donald Glover’s New Video" />
   </div>
-  <div class="post-content-body">
-    <p class="post-date">3rd April, 2019</p>
-    <h3 class="post-title">
-      What I think of Donald Glover’s New Video
-    </h3>
-    <p class="post-body">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore , Lorem ipsum
-      dolor sit amet, consectetur....
-    </p>
-  </div>
+  <a class="single-post" href="/single-blog-post">
+    <div class="post-content-body">
+      <p class="post-date">3rd April, 2019</p>
+      <h3 class="post-title">
+        What I think of Donald Glover’s New Video
+      </h3>
+      <p class="post-body">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore , Lorem ipsum
+        dolor sit amet, consectetur....
+      </p>
+    </div>
+  </a>
 </div>
 
 <div class="post-content">
   <div class="post-image d-none d-lg-flex d-xl-flex d-md-flex">
     <img src="{{ asset('img/post-2.jpg') }}" class="img-fluid post-img" alt="Looking For Where To Spend Christmas in the comform of your home" />
   </div>
-  <div class="post-content-body">
-    <p class="post-date">2nd April, 2019</p>
-    <h3 class="post-title">
-      Looking For Where To Spend Christmas in the comform of your home
-    </h3>
-    <p class="post-body">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore , Lorem ipsum
-      dolor sit amet....
-    </p>
-  </div>
+  <a class="single-post" href="/single-blog-post">
+    <div class="post-content-body">
+      <p class="post-date">2nd April, 2019</p>
+      <h3 class="post-title">
+        Looking For Where To Spend Christmas in the comform of your home
+      </h3>
+      <p class="post-body">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore , Lorem ipsum
+        dolor sit amet....
+      </p>
+    </div>
+  </a>
 </div>
 
 <div class="text-center">
