@@ -5,62 +5,40 @@
 @endsection
 @section('content')
 
-<h5 class="font-weight-bold mb-5">Latest stories</h5>
  <!-- Begin content -->
-<div class="post-content border-top">
-<img src="{{ asset('img/mb-1.png') }}" class="img-fluid" alt="user" />
-  <div class="post-content-body">
-      <h5 class="font-weight-bold">Maybe You Don't Need Kubernetes</h5>
+<div class="post-content border-top border-info pt-3 mt-3">
+<img src="{{Auth::user()->image}}" class="img-thumb" alt="user" />
+  <div class="post-content-body ml-3">
+      <h6 class="font-weight-bold">{{Auth::user()->name}} <small class="text-muted">- March 28, 2019 </small></h5>
       <p class="">
-      Kubernetes is the 800-pound gorilla of container orchestration. It powers some of the biggest deployments worldwide, but it comes with a price tag 
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua 
       </p>
-      <p class="">Tyler Elliot -<small class="text-muted">March 28, 2019 </small></p>
+      <span>
+      <i class="icon ion-md-chatboxes p-1"> 3</i>
+</span>
     </div>
 </div>
 
-<div class="post-content">
-<img src="{{ asset('img/mb-2.png') }}" class="img-fluid" alt="user" />
-  <div class="post-content-body">
-      <h5 class="font-weight-bold">What Is Rust Doing Behind the Curtains? </h5>
+<div class="post-content border-top border-info pt-3 mt-3">
+<img src="{{Auth::user()->image}}" class="img-thumb" alt="user" />
+  <div class="post-content-body ml-3">
+      <h6 class="font-weight-bold">{{Auth::user()->name}} <small class="text-muted">- March 28, 2019 </small></h5>
       <p class="">
-      Rust allows for a lot of syntactic sugar, that makes it a pleasure to write. It is sometimes hard, however, to look behind the curtain and see what the compiler is really doing with our code.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua 
       </p>
-      <p class="">Jayne Lee -<small class="text-muted">March 26, 2019 </small></p>
+      <img src="{{ asset('img/my-post.png') }}" alt="" class="">
     </div>
 </div>
 
-<div class="post-content">
-<img src="{{ asset('img/mb-3.png') }}" class="img-fluid" alt="user" />
-  <div class="post-content-body">
-      <h5 class="font-weight-bold">The Unreasonable Effectiveness of Excel Macros</h5>
+<div class="post-content border-top border-info pt-3 mt-3">
+<img src="{{Auth::user()->image}}" class="img-thumb" alt="user" />
+  <div class="post-content-body ml-3">
+      <h6 class="font-weight-bold">{{Auth::user()->name}} <small class="text-muted">- March 28, 2019 </small></h5>
       <p class="">
-      I never was a big fan of internships, partially because all the exciting companies were far away from my little village in Bavaria and partially because I was too shy to apply. Only once I applied for an internship in Ireland as part of a school program. Our teacher assigned the jobs and so my friend got one at Apple and I ended up at a medium-sized IT distributor — let's call them PcGo.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua 
       </p>
-      <p class="">Eric Elliot -<small class="text-muted">March 24, 2019 </small></p>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/VSbUJt7dhNU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 </div>
-
-<div class="post-content">
-<img src="{{ asset('img/mb-1.png') }}" class="img-fluid" alt="user" />
-  <div class="post-content-body">
-      <h5 class="font-weight-bold">Switching from a German to a US Keyboard Layout - Is It Worth It? </h5>
-      <p class="">
-      For the first three decades of my life, I've used a German keyboard layout. A few months ago, I switched to a US layout. This post summarizes my thoughts around the topic. I was looking for a similar article before jumping the gun, but I couldn't find one — so I'll try to fill this gap. Why switch? 
-      </p>
-      <p class="">Tyler Elliot -<small class="text-muted">March 22, 2019 </small></p>
-    </div>
-</div>
-
-<div class="post-content">
-<img src="{{ asset('img/mb-2.png') }}" class="img-fluid" alt="user" />
-  <div class="post-content-body">
-      <h5 class="font-weight-bold">fastcat - A Faster `cat` Implementation Using Splice</h5>
-      <p class="">
-      Lots of people asked me to write another piece about the internals of well-known Unix commands. Well, actually, nobody asked me, but it makes for a good intro. I'm sure you’ve read the previous parts about `yes` and `ls` — they are epic.
-      </p>
-      <p class="">Jaynee Lee -<small class="text-muted">March 20, 2019 </small></p>
-    </div>
-</div>
-
 <!-- End content -->
 @endsection

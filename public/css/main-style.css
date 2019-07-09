@@ -53,12 +53,18 @@ header {
 	font-weight: 500;
 	padding: 0.7rem 1rem;
 }
-
+.img-thumb {
+	border-radius: 50%;
+	padding: 0 !important;
+	width: 55px;
+	height: 55px;
+	object-fit: cover;
+	display: block;
+}
 .nav-link:hover,
 .nav-link.active {
 	color: var(--primary-color);
 }
-
 .btn-primary {
 	color: #fff;
 	background: #9179ef;
