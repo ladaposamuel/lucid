@@ -6,11 +6,9 @@
 @section('content')
 <!-- Editor -->
 
-  {{ Session::get('msg') }}
-
 <p>Write a Post</p>
 
-<form method="POST" action="/save-post" enctype="multipart/form-data" class="mb-3">
+<form method="POST" action="/save-post" class="mb-3">
     @csrf
   <div class="form-row mb-3">
     <div class="col-7">
@@ -33,9 +31,10 @@
 <h5 class="font-weight-bold mb-5">Latest stories</h5>
  <!-- Begin content -->
 
+
 @foreach ($posts as $feeds)
 <div class="post-content">
-<img src="{{$feeds['img']}}" width="100" height="100" class="img-fluid" alt="user" />
+<img src="{{ $feeds['img']}}"  style="border-radius:100%;height:60px; height:60px" class="img-fluidalt="user" />
   <div class="post-content-body">
       <h5 class="font-weight-bold">{{$feeds['title']}}</h5>
       <p class="">
