@@ -7,6 +7,7 @@ use KzykHys\FrontMatter\FrontMatter;
 use Symfony\Component\Finder\Finder;
 use KzykHys\FrontMatter\Document as Doc;
 use Auth;
+use Storage;
 /**
  *	The Document class holds all properties and methods of a single page document.
  *
@@ -32,44 +33,38 @@ class Document
 
     //for creating markdown files
     //kjarts code here
-    public function create($title, $content, $tags, $image, $extra)
+    public function create($title, $content, $image, $extra)
     {
         date_default_timezone_set("Africa/Lagos");
         $time = date(DATE_RSS, time());
         $unix = strtotime($time);
+
         // Write md file
         $document = FrontMatter::parse($content);
         $md = new Parser();
+
         $markdown = $md->parse($document);
 
         $yaml = $markdown->getYAML();
         $html = $markdown->getContent();
-        //$doc = FileSystem::write($this->file, $yaml . "\n" . $html);
+        //$doc = Storage::put($this->file, $yaml . "\n" . $html);
 
         $yamlfile = new Doc();
         if ($title != "") {
             $yamlfile['title'] = $title;
         }
-        if ($tags != "") {
-            $tag = explode(",", $tags);
-            $put = [];
-            foreach ($tag as $value) {
-                array_push($put, $value);
-            }
-            $yamlfile['tags'] = $put;
-        }
+
         if (!empty($image)) {
-            foreach ($image as $key => $value) {
-                $decoded = base64_decode($image[$key]);
-                $url = "./storage/images/" . $key;
-                FileSystem::write($url, $decoded);
-            }
+                $url = $this->file."/images/";
+              $path =  Storage::putFile($url, $image);
+
+              $yamlfile['image'] = $path;
         }
 
         if (!$extra) {
-            $yamlfile['post_dir'] = SITE_URL . "/storage/contents/{$unix}";
+            $yamlfile['post_dir'] =$this->file."/contents/{$unix}";
         } else {
-            $yamlfile['post_dir'] = SITE_URL . "/storage/drafts/{$unix}";
+            $yamlfile['post_dir'] = $this->file."/drafts/{$unix}";
             //$yamlfile['image'] = "./storage/images/" . $key;
         }
 
@@ -83,9 +78,9 @@ class Document
         $yamlfile->setContent($content);
         $yaml = FrontMatter::dump($yamlfile);
         $file = $this->file;
-        $dir = $file . $unix . ".md";
+        $dir = $file .'/content/'. $unix . ".md";
         //return $dir; die();
-        $doc = FileSystem::write($dir, $yaml);
+        $doc = Storage::put($dir, $yaml);
         if (!$extra) {
             if ($doc) {
                 $result = array("error" => false, "action"=>"publish", "message" => "Post published successfully");
@@ -207,7 +202,7 @@ class Document
 
     public function fetchAllRss()
     {
-        $xml = file_get_contents(storage_path("/rss/rss.xml"));
+        $xml = file_get_contents(storage_path('app/'.$this->file."/rss/rss.xml"));
         $feed = [];
         if (strlen($xml != "")) {
             $rss = new \DOMDocument();
@@ -216,7 +211,7 @@ class Document
             $urlArray = json_decode($data, true);
             $user = Auth::user();
             $urlArray2 = array(
-                array('name' => $user['name'], 'rss' => storage_path('/rss/rss.xml'), 'desc' => '', 'link' => '', 'img' => $user['image'], 'time' => ''),
+                array('name' => $user['name'], 'rss' => storage_path('app/'.$this->file."/rss/rss.xml"), 'desc' => '', 'link' => '', 'img' => $user['image'], 'time' => ''),
                 //                array('name' => 'Sample',  'url' => 'rss/rss.xml')
             );
 
@@ -299,14 +294,14 @@ class Document
     //store rss By DMAtrix
     public function createRSS()
     {
-        $user = file_get_contents("./src/config/auth.json");
-        $user = json_decode($user, true);
-
+      //  $user = file_get_contents("./src/config/auth.json");
+        //$user = json_decode($user, true);
+$user = Auth::user();
           date_default_timezone_set("Africa/Lagos");
         $Feed = new RSS2;
         // Setting some basic channel elements. These three elements are mandatory.
         $Feed->setTitle($user['name']);
-        $Feed->setLink(SITE_URL);
+        $Feed->setLink(storage_path().'/'.$this->file.'/');
         $Feed->setDescription("");
 
         // Image title and link must match with the 'title' and 'link' channel elements for RSS 2.0,
@@ -318,7 +313,7 @@ class Document
         $Feed->setChannelElement('pubDate', date(\DATE_RSS, strtotime('2013-04-06')));
 
 
-        $Feed->setSelfLink(SITE_URL . 'storage/rss/rss.xml');
+        $Feed->setSelfLink(storage_path() . 'storage/rss/rss.xml');
         $Feed->setAtomLink('http://pubsubhubbub.appspot.com', 'hub');
 
         $Feed->addNamespace('creativeCommons', 'http://backend.userland.com/creativeCommonsRssModule');
@@ -327,8 +322,8 @@ class Document
         $Feed->addGenerator();
 
         $finder = new Finder();
-        $finder->files()->in($this->file);
-        //print_r($finder->hasResults());
+        $finder->files()->in(storage_path().'/app/'.$this->file.'/content');
+
         if ($finder->hasResults()) {
             foreach ($finder as $file) {
                 $document = $file->getContents();
@@ -346,14 +341,6 @@ class Document
                 $image = preg_replace("/<[^>]+>/", '', $image);
                 $bd = $parsedown->text($body);
 
-                preg_match('/<img[^>]+src="((\/|\w|-)+\.[a-z]+)"[^>]*\>/i', $bd, $matches);
-                $first_img = false;
-                if (isset($matches[1])) {
-                    // there are images
-                    $first_img = $matches[1];
-                    // strip all images from the text
-                    $bd = preg_replace("/<img[^>]+\>/i", "", $bd);
-                }
                 $time = $parsedown->text($yaml['timestamp']);
                 $url = $parsedown->text($yaml['post_dir']);
                 $newItem = $Feed->createNewItem();
@@ -364,15 +351,16 @@ class Document
 
                 $newItem->setAuthor($user['name'], $user['email']);
                 $newItem->setId($url, true);
-                $newItem->addElement('source', $user['name'] . '\'s page', array('url' => SITE_URL));
+                $newItem->addElement('source', $user['name'] . '\'s page');
 
-                $newItem->addElement('image', $first_img);
+                $newItem->addElement('image', $image);
 
                 $Feed->addItem($newItem);
             }
             $myFeed = $Feed->generateFeed();
-            $handle = "./storage/rss/rss.xml";
-            $doc = FileSystem::write($handle, $myFeed);
+
+            $handle = $this->file."/rss/rss.xml";
+            $doc = Storage::put($handle, $myFeed);
             //        fwrite($handle, $myFeed);
             //      fclose($handle);
            // $strxml = $Feed->printFeed();
@@ -685,7 +673,7 @@ class Document
 
         $yaml = $markdown->getYAML();
         $html = $markdown->getContent();
-        //$doc = FileSystem::write($this->file, $yaml . "\n" . $html);
+        //$doc = Storage::put($this->file, $yaml . "\n" . $html);
 
         $yamlfile = new Doc();
         if($title != ""){
@@ -703,7 +691,7 @@ class Document
             foreach ($image as $key => $value) {
                 $decoded = base64_decode($image[$key]);
                 $url = "./storage/images/" . $key;
-                FileSystem::write($url, $decoded);
+                Storage::put($url, $decoded);
             }
         }
 
@@ -863,7 +851,7 @@ class Document
         $document->setContent($content);
         $yamlText = FrontMatter::dump($document);
         // var_dump($yamlText);
-        $doc = FileSystem::write($mdfile, $yamlText);
+        $doc = Storage::put($mdfile, $yamlText);
         if ($doc) {
             $result = array("error" => false, "message" => "Post published successfully");
         } else {
@@ -897,7 +885,7 @@ class Document
 
         $yaml = $markdown->getYAML();
         $html = $markdown->getContent();
-        //$doc = FileSystem::write($this->file, $yaml . "\n" . $html);
+        //$doc = Storage::put($this->file, $yaml . "\n" . $html);
 
         $yamlfile = new Doc();
         $yamlfile['title'] = $title;
@@ -911,7 +899,7 @@ class Document
         $file = $this->file;
         $dir = $file . $unix . ".md";
         //return $dir; die();
-        $doc = FileSystem::write($dir, $yaml);
+        $doc = Storage::put($dir, $yaml);
         if ($doc) {
             return true;
         }

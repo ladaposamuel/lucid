@@ -4,7 +4,7 @@ namespace Lucid\Http\Controllers\Auth;
 
 use Lucid\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use File;
+use Storage;
 use Socialite;
 use Auth;
 use Lucid\User;
@@ -59,7 +59,7 @@ class LoginController extends Controller
           Auth::login($users, true);
           $username = preg_split('/ +/', $users->name);
           $path = storage_path().'/'.$username[0].'/';
-          File::makeDirectory($path);
+          Storage::makeDirectory($path);
 
           $this->store_settings($path, $users->id);
           return redirect()->to("/{$username[0]}/home");

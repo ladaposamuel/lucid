@@ -20,11 +20,12 @@ Route::get('login', function () {
 Route::get('register', function () {
     return view('auth/register');
 });
-
-
-Route::get('microblog', function () {
-    return view('microblog', 'HomeController@microblog');
+Route::get('single-blog-post', function () {
+    return view('single-blog-post');
 });
+Route::get('microblog','HomeController@microblog');
+Route::post('save-post','HomeController@savePost');
+
 Route::get('posts', function () {
     return view('posts');
 });
@@ -45,5 +46,9 @@ Route::prefix('{username}')->group(function () {
     Route::get('/post/{postTitle}','pageController@singlePostPage');
     Route::get('/','pageController@homePage');
     Route::get('/home','pageController@homePage');
+    Route::get('/microblog','HomeController@microblog');
+    Route::post('/save-post','HomeController@savePost');
+
+
 });
 Route::post('/logout', "AuthController@logout")->name('logout');

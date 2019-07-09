@@ -15,7 +15,10 @@
         "laravel/socialite": "^4.1",
         "laravel/tinker": "^1.0",
         "socialiteproviders/google": "^3.0",
-        "symfony/finder": "^4.3"
+        "symfony/finder": "^4.3",
+        "kzykhys/yaml-front-matter": ">=1.0",
+        "erusev/parsedown": "^1.7",
+        "mnapoli/front-yaml": "^1.6"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
