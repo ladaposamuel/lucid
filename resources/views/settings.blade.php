@@ -3,45 +3,85 @@
 @parent
 @endsection
 @section('content')
-<!-- beginning of settings page -->
-<div class="settings">
-  <!-- tab navigation here -->
-  <h2><strong>Settings</strong></h2>
-  <ul class="nav nav-tabs navbar-light" id="settings-tabs" role="tablist">
-    <li class="nav-item">
-      <a href="#profile" class="nav-link tab-link active" id="profile-tab" data-toggle="tab" role="tab" aria-controls="profile" aria-selected="true">
-        <h4>Profile</h4>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="#account" class="nav-link tab-link" id="account-tab" data-toggle="tab" role="tab" aria-controls="account" aria-selected="false">
-        <h4>Account</h4>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="#links" class="nav-link tab-link" id="links-tab" data-toggle="tab" role="tab" aria-controls="links" aria-selected="false">
-        <h4>Links</h4>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="#security" class="nav-link tab-link" id="security-tab" data-toggle="tab" role="tab" aria-controls="links" aria-selected="false">
-        <h4>Security</h4>
-      </a>
-    </li>
-  </ul>
-  <!-- tab content here -->
-  <div class="tab-content" id="settings-tabs-content">
-    <!-- profile settings tab -->
-    <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-      <form action="" class="mt-5">
-        <div class="row">
-          <div class="form-group col-sm-12 col-md-6">
-            <label for="name"><strong>Your Name</strong></label>
-            <input class="form-control" type="text" name="name" id="name" value="" placeholder="Jon Champion" />
-          </div>
-          <div class="form-group col-sm-12 col-md-6">
-            <label for="email"><strong>Your Email Address</strong></label>
-            <input type="email" name="email" id="email" class="form-control" value="" placeholder="example@gmail.com" />
+ <!-- beginning of settings page -->
+  <div class="settings">
+    <!-- tab navigation here -->
+    <h4><strong>Settings</strong></h4>
+    <ul class="nav nav-tabs navbar-light" id="settings-tabs" role="tablist">
+      <li class="nav-item">
+        <a
+          href="#profile"
+          class="nav-link tab-link active"
+          id="profile-tab"
+          data-toggle="tab"
+          role="tab"
+          aria-controls="profile"
+          aria-selected="true"
+        >
+          <h6>Profile</h6>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          href="#account"
+          class="nav-link tab-link"
+          id="account-tab"
+          data-toggle="tab"
+          role="tab"
+          aria-controls="account"
+          aria-selected="false"
+        >
+          <h6>Account</h6>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          href="#links"
+          class="nav-link tab-link"
+          id="links-tab"
+          data-toggle="tab"
+          role="tab"
+          aria-controls="links"
+          aria-selected="false"
+        >
+          <h6>Links</h6>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          href="#security"
+          class="nav-link tab-link"
+          id="security-tab"
+          data-toggle="tab"
+          role="tab"
+          aria-controls="links"
+          aria-selected="false"
+        >
+          <h6>Security</h6>
+        </a>
+      </li>
+    </ul>
+    <!-- tab content here -->
+    <div class="tab-content" id="settings-tabs-content">
+      <!-- profile settings tab -->
+      <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <form action="" class="mt-5">
+          <div class="row">
+            <div class="form-group col-sm-12 col-md-6">
+              <label for="name"><strong>Your Name</strong></label>
+              <input class="form-control" type="text" name="name" id="name" value="" placeholder="Jon Champion" />
+            </div>
+            <div class="form-group col-sm-12 col-md-6">
+              <label for="email"><strong>Your Email Address</strong></label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                class="form-control"
+                value=""
+                placeholder="example@gmail.com"
+              />
+            </div>
           </div>
         </div>
         <div class="row">
