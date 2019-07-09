@@ -23,7 +23,7 @@ Route::get('single-blog-post', function () {
     return view('single-blog-post');
 });
 Route::get('microblog', function () {
-    return view('microblog');
+    return view('microblog', 'HomeController@microblog');
 });
 Route::get('posts', function () {
     return view('posts');

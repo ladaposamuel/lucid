@@ -4,9 +4,12 @@ namespace Lucid\Http\Controllers\Auth;
 
 use Lucid\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use File;
 use Socialite;
 use Auth;
 use Lucid\User;
+use Lucid\user_settings;
+
 class LoginController extends Controller
 {
     /*
@@ -55,6 +58,10 @@ class LoginController extends Controller
 
           Auth::login($users, true);
           $username = preg_split('/ +/', $users->name);
+          $path = storage_path().'/'.$username[0].'/';
+          File::makeDirectory($path);
+
+          $this->store_settings($path, $users->id);
           return redirect()->to("/{$username[0]}/home");
     }
 
@@ -73,5 +80,14 @@ public function findOrCreateUser($user, $provider){
         ]);
 
         return $user;
+}
+
+public function store_settings($path, $user_id)
+{
+    return  user_settings::create([
+        'user_id' => $user_id,
+        'user_path' => $path,
+        'setting_path' =>"",
+    ]);
 }
 }
