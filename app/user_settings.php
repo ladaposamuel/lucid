@@ -11,5 +11,7 @@ class user_settings extends Model
  *
  * @var string
  */
-protected $table = 'user_settings';
+protected $fillable = [
+  'user_id', 'user_path', 'setting_path'
+];
 }
