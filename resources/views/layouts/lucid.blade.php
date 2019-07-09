@@ -42,7 +42,6 @@
             @endguest
                     <a class="dropdown-item" href="/home">Home</a>
                     <a href="/settings" class="dropdown-item">Settings</a>
-                    <a class="dropdown-item" href="/microblog">Microblog</a>
                     <a class="dropdown-item" href="#">Report A Bug</a>
 						
 					</div>
@@ -74,7 +73,7 @@
         <li><a href="/posts">Posts</a></li>
         <li><a href="#">Videos</a></li>
         <li><a href="#">Contact</a></li>
-        <li><a href="#">Thoughts</a></li>
+        <li><a href="/microblog">Thoughts</a></li>
       </ul>
     </div>
     <!-- Follow Modal Trigger -->
