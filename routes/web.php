@@ -22,9 +22,9 @@ Route::get('register', function () {
 Route::get('single-blog-post', function () {
     return view('single-blog-post');
 });
-Route::get('microblog', function () {
-    return view('microblog', 'HomeController@microblog');
-});
+Route::get('microblog','HomeController@microblog');
+Route::post('save-post','HomeController@savePost');
+
 Route::get('posts', function () {
     return view('posts');
 });
@@ -42,5 +42,9 @@ Route::prefix('{username}')->group(function () {
     Route::get('/', 'HomeController@index');
     Route::get('/home', 'HomeController@index');
     Route::get('/timeline', 'HomeController@timeline');
+    Route::get('/microblog','HomeController@microblog');
+    Route::post('/save-post','HomeController@savePost');
+
+
 });
 Route::post('/logout', "AuthController@logout")->name('logout');
