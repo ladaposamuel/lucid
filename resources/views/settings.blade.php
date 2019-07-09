@@ -6,7 +6,7 @@
  <!-- beginning of settings page -->
   <div class="settings">
     <!-- tab navigation here -->
-    <h2><strong>Settings</strong></h2>
+    <h3><strong>Settings</strong></h3>
     <ul class="nav nav-tabs navbar-light" id="settings-tabs" role="tablist">
       <li class="nav-item">
         <a
@@ -18,7 +18,7 @@
           aria-controls="profile"
           aria-selected="true"
         >
-          <h4>Profile</h4>
+          <h5>Profile</h5>
         </a>
       </li>
       <li class="nav-item">
@@ -31,7 +31,7 @@
           aria-controls="account"
           aria-selected="false"
         >
-          <h4>Account</h4>
+          <h5>Account</h5>
         </a>
       </li>
       <li class="nav-item">
@@ -44,7 +44,7 @@
           aria-controls="links"
           aria-selected="false"
         >
-          <h4>Links</h4>
+          <h5>Links</h5>
         </a>
       </li>
       <li class="nav-item">
@@ -57,7 +57,7 @@
           aria-controls="links"
           aria-selected="false"
         >
-          <h4>Security</h4>
+          <h5>Security</h5>
         </a>
       </li>
     </ul>
