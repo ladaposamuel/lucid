@@ -24,9 +24,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-            $directory = storage_path('/contents/');
-            $ziki = new \Lucid\Core\Document($directory);
-            $feed = $ziki->fetchRss();
+      $user = Auth::user();
+      $username = preg_split('/ +/', $user->name);
+      $path = $username[0];
+      $post = new \Lucid\Core\Document($path);
+            $feed = $post->fetchRss();
 
         return view('home', ['posts' => $feed]);
 
