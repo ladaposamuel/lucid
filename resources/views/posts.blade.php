@@ -8,9 +8,11 @@
 <!-- Editor -->
 <form class="mb-3">
   <div class="form-group border border-dark">
-    <textarea type="text" class="form-control posts-editor" placeholder="What's on your mind..."></textarea>
+    <textarea type="text" class="form-control post-editor" placeholder="What's on your mind..."></textarea>
+    <div class="mx-2">
     <a href=""><i class="icon ion-md-image p-1"></i></a>
     <a href=""><i class="icon ion-md-videocam p-1"></i></a>
+    </div>
   </div>
   <div class="text-right">
     <button type="submit" class="btn bg-alt text-white">Publish</button>

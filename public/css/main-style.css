@@ -45,7 +45,18 @@ header {
     display: inline-block;
     width: 40%;
 }
-.single-post:hover {
+.post-editor {
+	height: 4em; 
+	border: none; 
+	outline: none;
+}
+.post-editor:focus {
+	outline: none;
+}
+.no-decoration {
+	text-decoration: none;
+}
+.no-decoration:hover {
     text-decoration: none;
 }
 .nav-link {
