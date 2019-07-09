@@ -40,9 +40,11 @@
                 @csrf
             </form>
             @endguest
-            <a href="/settings" class="dropdown-item">Settings</a>
-						<a class="dropdown-item" href="#">Report A Bug</a>
-						<a class="dropdown-item" href="/home">Home</a>
+                    <a class="dropdown-item" href="/home">Home</a>
+                    <a href="/settings" class="dropdown-item">Settings</a>
+                    <a class="dropdown-item" href="/microblog">Microblog</a>
+                    <a class="dropdown-item" href="#">Report A Bug</a>
+						
 					</div>
 				</li>
 			</ul>
