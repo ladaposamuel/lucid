@@ -1,5 +1,5 @@
 <?php
-namespace App\Core;
+namespace Lucid\Core;
 
 /*
  * Copyright (C) 2012 Michael Bemmerl <mail@mx-server.de>

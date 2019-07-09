@@ -1,5 +1,5 @@
 <?php
-namespace App\Core;
+namespace Lucid\Core;
 /**
  *	A Collection object represents a set of Document objects (matching certain criterias).
  *

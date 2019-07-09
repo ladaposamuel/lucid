@@ -1,7 +1,7 @@
 <?php
-namespace App\Core;
+namespace Lucid\Core;
 
-use App\Core\FileSystem;
+use Lucid\Core\FileSystem;
 use Symfony\Component\Finder\Finder;
 
 class Setting {

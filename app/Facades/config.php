@@ -1,5 +1,5 @@
 <?php
-namespace App\Facades;
+namespace Lucid\Facades;
 use Illuminate\Support\Facades\Facade;
 
 class Config  extends Facade

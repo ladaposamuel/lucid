@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core;
+namespace Lucid\Core;
 
 class System {
     /**

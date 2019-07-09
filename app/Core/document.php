@@ -1,5 +1,5 @@
 <?php
-namespace App\Core;
+namespace Lucid\Core;
 
 use Parsedown;
 use Mni\FrontYAML\Parser;

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Providers;
+namespace Lucid\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Core\Document;
+use Lucid\Core\Document;
 
 class CoreServiceProvider extends ServiceProvider
 {

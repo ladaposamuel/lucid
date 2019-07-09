@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Lucid'),
 
     /*
     |--------------------------------------------------------------------------
@@ -154,12 +154,12 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-        App\Providers\CoreServiceProvider::class,
+        Lucid\Providers\AppServiceProvider::class,
+        Lucid\Providers\AuthServiceProvider::class,
+        // Lucid\Providers\BroadcastServiceProvider::class,
+        Lucid\Providers\EventServiceProvider::class,
+        Lucid\Providers\RouteServiceProvider::class,
+        Lucid\Providers\CoreServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
 
     ],

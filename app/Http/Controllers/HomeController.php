@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Lucid\Http\Controllers;
 
 use Illuminate\Http\Request;
 
@@ -24,7 +24,7 @@ class HomeController extends Controller
     public function index()
     {
             $directory = storage_path('/contents/');
-            $ziki = new \App\Core\Document($directory);
+            $ziki = new \Lucid\Core\Document($directory);
             $feed = $ziki->fetchRss();
 
         return view('home', ['posts' => $feed]);
@@ -34,7 +34,7 @@ class HomeController extends Controller
     {
             $directory = storage_path('/contents/');
 
-            $ziki = new \App\Core\Document($directory);
+            $ziki = new \Lucid\Core\Document($directory);
             $post = $ziki->fetchAllRss();
             //$count = new Ziki\Core\Subscribe();
             //$fcount = $count->fcount();
