@@ -10,8 +10,8 @@
   <div class="form-group border border-dark">
     <textarea type="text" class="form-control post-editor" placeholder="What's on your mind..."></textarea>
     <div class="mx-2">
-    <a href=""><i class="icon ion-md-image p-1"></i></a>
-    <a href=""><i class="icon ion-md-videocam p-1"></i></a>
+    <i class="icon ion-md-image p-1"></i>
+    <i class="icon ion-md-videocam p-1"></i>
     </div>
   </div>
   <div class="text-right">
