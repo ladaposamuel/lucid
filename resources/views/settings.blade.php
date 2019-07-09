@@ -98,7 +98,7 @@
               <div class="d-inline-block ml-3 py-2">
                 <input type="file" name="profileimage" id="profileimage" class="form-control-file" accept=".png,.jpg" style="display:none">
 
-                <label class="text-muted form-control p-2 w-100" for="profileimage">Choose file</label>
+                <label class="text-muted form-control p-2 w-100" for="profileimage" style="cursor:pointer">Choose file</label>
               </div>
           </div>
           </div>
