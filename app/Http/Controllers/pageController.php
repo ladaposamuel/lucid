@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 use DB;
 class pageController extends Controller
 {
-    public function homePage()
+    public function homePage($username)
     {
-            $directory = storage_path('/contents/');
+            $directory = storage_path($username.'/contents');
             $ziki = new \Lucid\Core\Document($directory);
             $feed = $ziki->fetchRss();
-
+            
         return view('home', ['posts' => $feed]);
 
     }
@@ -21,8 +21,13 @@ class pageController extends Controller
         if(!isset($user_exists[0])) {
             return '=====404======';
         }
-        $directory = storage_path('/'.$username.'/');
+        $directory = storage_path('/'.$username.'/contents/');
         $app  = new \Lucid\Core\Document($directory);
-        $app->getPost($postTitle);
+        $post=$app->getPost($postTitle);
+        
+        if(!$post){
+            return redirect('/'.$username.'/home');
+        }
+         return view('single-blog-post',compact('post'));
     }
 }
