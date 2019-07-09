@@ -257,14 +257,14 @@ class Document
     public function fetchRss()
     {
 
-        $xml = file_get_contents("../storage/rss/rss.xml");
-
+      $xml = file_get_contents(storage_path('app/'.$this->file."/rss/rss.xml"));
+      $feed = [];
         if (strlen($xml !== "")) {
             $feed = [];
             $rss = new \DOMDocument();
             $user = Auth::user();
             $urlArray = array(
-                array('name' => $user['name'], 'url' => '../storage/rss/rss.xml', 'img' => $user['image']),
+                array('name' => $user['name'], 'url' => storage_path('app/'.$this->file."/rss/rss.xml"), 'img' => $user['image']),
             );
 
             foreach ($urlArray as $url) {
