@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Lucid\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Socialite;
 use Auth;
-use App\User;
+use Lucid\User;
 
 class SocialController extends Controller
 {

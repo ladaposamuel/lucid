@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Core;
+namespace Lucid\Core;
 
-use App\Core\FileSystem;
+use Lucid\Core\FileSystem;
 use PHPMailer\PHPMailer\PHPMailer;
 class Auth {
     /**

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Facades;
+namespace Lucid\Facades;
 use Illuminate\Support\Facades\Facade;
 
-use App\Core\FileSystem;
+use Lucid\Core\FileSystem;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class Auth  extends Facade

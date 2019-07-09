@@ -1,6 +1,6 @@
 <?php
-namespace App\Core;
-use App\Core\FileSystem;
+namespace Lucid\Core;
+use Lucid\Core\FileSystem;
 
 class Profile {
 
