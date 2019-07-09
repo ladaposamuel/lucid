@@ -32,7 +32,7 @@
     <img src="{{ asset('img/post-1.jpg') }}" class="img-fluid post-img" alt="What I think of Donald Glover’s New Video" />
   </div>
   <div class="post-content-body">
-    <a class="single-post" href="/single-blog-post">
+    <a class="no-decoration" href="/single-blog-post">
       <p class="post-date">3rd April, 2019</p>
       <h3 class="post-title">
         What I think of Donald Glover’s New Video
@@ -50,7 +50,7 @@
   <div class="post-image d-none d-lg-flex d-xl-flex d-md-flex">
     <img src="{{ asset('img/post-2.jpg') }}" class="img-fluid post-img" alt="Looking For Where To Spend Christmas in the comform of your home" />
   </div>
-  <a class="single-post" href="/single-blog-post">
+  <a class="no-decoration" href="/single-blog-post">
     <div class="post-content-body">
       <p class="post-date">2nd April, 2019</p>
       <h3 class="post-title">
@@ -66,7 +66,7 @@
 </div>
 
 <div class="post-content">
-  <a class="single-post" href="/single-blog-post">
+  <a class="no-decoration" href="/single-blog-post">
     <div class="post-content-body">
       <p class="post-date">1st April, 2019</p>
       <h3 class="post-title">
@@ -82,7 +82,7 @@
 </div>
 
 <div class="post-content">
-  <a class="single-post" href="/single-blog-post">
+  <a class="no-decoration" href="/single-blog-post">
     <div class="post-content-body">
       <p class="post-date">1st April, 2019</p>
       <h3 class="post-title">
@@ -101,7 +101,7 @@
   <div class="post-image d-none d-lg-flex d-xl-flex d-md-flex">
     <img src="{{ asset('img/post-1.jpg') }}" class="img-fluid post-img" alt="What I think of Donald Glover’s New Video" />
   </div>
-  <a class="single-post" href="/single-blog-post">
+  <a class="no-decoration" href="/single-blog-post">
     <div class="post-content-body">
       <p class="post-date">3rd April, 2019</p>
       <h3 class="post-title">
@@ -120,7 +120,7 @@
   <div class="post-image d-none d-lg-flex d-xl-flex d-md-flex">
     <img src="{{ asset('img/post-2.jpg') }}" class="img-fluid post-img" alt="Looking For Where To Spend Christmas in the comform of your home" />
   </div>
-  <a class="single-post" href="/single-blog-post">
+  <a class="no-decoration" href="/single-blog-post">
     <div class="post-content-body">
       <p class="post-date">2nd April, 2019</p>
       <h3 class="post-title">
