@@ -2,7 +2,7 @@
 namespace Lucid\Core;
 
 use Parsedown;
-use Mni\FrontYAML\Parser;
+// use Mni\FrontYAML\Parser;
 use KzykHys\FrontMatter\FrontMatter;
 use Symfony\Component\Finder\Finder;
 use KzykHys\FrontMatter\Document as Doc;
