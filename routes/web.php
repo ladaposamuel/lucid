@@ -28,6 +28,9 @@ Route::get('microblog', function () {
 Route::get('posts', function () {
     return view('posts');
 });
+Route::get('settings', function (){
+    return view('settings');
+});
 
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
