@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:creativeCommons="http://backend.userland.com/creativeCommonsRssModule">
+<channel>
+<title>Elijah Okokon</title>
+<link>http://localhost</link>
+<description><![CDATA[]]></description>
+<image><title>Elijah Okokon</title>
+<link></link>
+<url>https://lh4.googleusercontent.com/-Sft-MftI38Q/AAAAAAAAAAI/AAAAAAAADho/4sp40SN0sTc/photo.jpg</url>
+</image>
+<language>en-US</language>
+<lastBuildDate>Wed, 12 Jun 2019 15:35:18 +0100</lastBuildDate>
+<pubDate>Sat, 06 Apr 2013 00:00:00 +0100</pubDate>
+<atom:link href="http://localhoststorage/rss/rss.xml" rel="self" type="application/rss+xml"></atom:link>
+<atom:link href="http://pubsubhubbub.appspot.com" rel="hub"></atom:link>
+<creativeCommons:license>http://www.creativecommons.org/licenses/by/1.0</creativeCommons:license>
+<generator>Ziki</generator>
+<item>
+<title>Welcome to Lucid</title>
+<link></link>
+<description><![CDATA[Welcome to Lucid this is a default post, publish more post and follow lucid users thanks]]></description>
+<pubDate>Wed, 12 Jun 2019 15:35:18 +0100</pubDate>
+<author>okoelijah@gmail.com (Elijah Okokon)</author>
+<guid isPermaLink="true">&lt;p&gt;&lt;a href=&quot;http://localhost/storage/contents/1560350118&quot;&gt;http://localhost/storage/contents/1560350118&lt;/a&gt;&lt;/p&gt;</guid>
+<source url="http://localhost">Elijah Okokon's page</source>
+<image></image>
+</item>
+</channel>
+</rss>
