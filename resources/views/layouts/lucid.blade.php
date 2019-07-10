@@ -29,7 +29,7 @@
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
             @guest
-						<a class="dropdown-item" href="{{ route('/login/google') }}">{{ __('Login') }}</a>
+						<a class="dropdown-item" href="{{ url('/login/google') }}">{{ __('Login') }}</a>
             @else
             <a class="dropdown-item" href="logout">
                 {{ __('Logout') }}

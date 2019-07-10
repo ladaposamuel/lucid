@@ -7,18 +7,17 @@
 <!-- Beginning of Post Content -->
 <div class="post-content">
     <div class="post-content-body">
-        <p class="post-date">Home / Blog / <span class="po post-body">Looking For Where To Spend
-                Christmas</span></p>
+        <p class="post-date">
+        <a href="{{URL::to('/')}}/{{Auth::user()->username}}/home"> Home </a> /
+        <a href="../home"> Blog </a> / <span class="po post-body">{{ $post['title'] }}</span></p>
         <cite class="post-body">
-            Published on 21st of March, 2019
+            Published on {{ $post['date'] }}
         </cite>
         <h3 class="post-title mb-h">
-        @php
-           echo strip_tags($post['title'])
-        @endphp
+         {{ $post['title'] }}
         </h3>
-        @isset($post['preview_img'])
-        <img src="{{ asset('img/') }}{{$post['preview_img']}}" alt="" class="my-4">
+        @isset($post['crawlerImage'])
+        <img src="{{URL::to('/')}}/storage/{{$post['crawlerImage']}}" alt="" style="width:100%"class="my-4">
         @endisset
         <div class="blog-content">
             {{ $post['body'] }}
