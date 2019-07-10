@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -39,9 +40,12 @@ Route::post('login', 'LoginController@do')->name('login');
 Route::prefix('{username}')->group(function () {
 
   //Auth::routes();
-    Route::get('/', 'HomeController@index');
-    Route::get('/home', 'HomeController@index');
+    // Route::get('/', 'HomeController@index');
+    // Route::get('/home', 'HomeController@index');
     Route::get('/timeline', 'HomeController@timeline');
+    Route::get('/post/{postTitle}','pageController@singlePostPage');
+    Route::get('/','pageController@homePage');
+    Route::get('/home','pageController@homePage');
     Route::get('/microblog','HomeController@microblog');
     Route::post('/save-post','HomeController@savePost');
 
