@@ -257,14 +257,14 @@ class Document
     public function fetchRss()
     {
 
-      $xml = file_get_contents(storage_path('app/'.$this->file."/rss/rss.xml"));
+      $xml = file_get_contents($this->file."/rss/rss.xml");
       $feed = [];
         if (strlen($xml !== "")) {
             $feed = [];
             $rss = new \DOMDocument();
             $user = Auth::user();
             $urlArray = array(
-                array('name' => $user['name'], 'url' => storage_path('app/'.$this->file."/rss/rss.xml"), 'img' => $user['image']),
+                array('name' => $user['name'], 'url' => $this->file."/rss/rss.xml", 'img' => $user['image']),
             );
 
             foreach ($urlArray as $url) {
@@ -618,7 +618,7 @@ $user = Auth::user();
         $finder->files()->in($this->file)->name($post . '.md');
         $content = [];
         if (!$finder->hasResults()) {
-            return $this->redirect('/404');
+            return false;
         } else {
             foreach ($finder as $file) {
                 $document = $file->getContents();
