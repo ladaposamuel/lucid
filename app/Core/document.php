@@ -657,7 +657,7 @@ $user = Auth::user();
               //  if (isset($matches[1])) {
                 //    $first_img = $matches[1];
                 //}
-                $image= $parsedown->text($yaml['image']);
+                $image= isset($yaml['image']) ? $parsedown->text($yaml['image']) : "";
                 $time = $parsedown->text($yaml['timestamp']);
                 $url = $parsedown->text($yaml['post_dir']);
               //  $content['tags'] = $tags;

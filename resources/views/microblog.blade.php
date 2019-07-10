@@ -34,9 +34,9 @@
 
 @foreach ($posts as $feeds)
 <div class="post-content">
-<img src="{{ $feeds['img']}}"  style="border-radius:100%;height:60px; height:60px" class="img-fluidalt="user" />
+<img src="{{ $feeds['img']}}"  style="border-radius:100%;height:60px; height:60px" class="img-fluid" alt="user" />
   <div class="post-content-body">
-      <h5 class="font-weight-bold">{{$feeds['title']}}</h5>
+      <a href=".{{$feeds['link']}}"> <h5 class="font-weight-bold">{{$feeds['title']}}</h5></a>
       <p class="">
       {{$feeds['desc']}}
       </p>
