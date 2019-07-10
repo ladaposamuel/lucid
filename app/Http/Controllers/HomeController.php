@@ -37,15 +37,16 @@ class HomeController extends Controller
       $user = Auth::user();
       $username = preg_split('/ +/', $user->name);
       $path = $username[0];
-      $post = new \Lucid\Core\Document($path);
-            $post = $ziki->fetchAllRss();
+      // $ziki = new \Lucid\Core\Document($path);
+      //       $post = $ziki->fetchAllRss();
+      $post=[];
             //$count = new Ziki\Core\Subscribe();
             //$fcount = $count->fcount();
             //$count = $count->count();
 //print_r(
   //$post
 //);
-        return view('timeline', ['posts' => $post]);
+        return view('timeline', ['posts' => $post,'user'=>$user]);
 
     }
     public function userimage($id, $image)
@@ -66,7 +67,7 @@ class HomeController extends Controller
             //$count = $count->count();
 //print_r($post);
 
-       return view('microblog', ['posts' => $post]);
+       return view('microblog', ['posts' => $post,'user'=>$user]);
      }else {
 
        return redirect($user->username.'/microblog');
