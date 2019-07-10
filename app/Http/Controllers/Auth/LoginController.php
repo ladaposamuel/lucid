@@ -57,12 +57,14 @@ class LoginController extends Controller
       $users       =   $this->findOrCreateUser($userSocial, $provider);
 
           Auth::login($users, true);
-          $username = preg_split('/ +/', $users->name);
-          $path = storage_path().'/'.$username[0].'/';
-          Storage::makeDirectory($path);
+          $email = $users->email;
+          $username = strstr($email, '@', true);
+        //  $username = preg_split('/ +/', $username);
+          $path = trim($username).'/';
+          Storage::makeDirectory($username);
 
           $this->store_settings($path, $users->id);
-          return redirect()->to("/{$username[0]}/home");
+          return redirect()->to("/{$username}/home");
     }
 
 
@@ -71,9 +73,13 @@ public function findOrCreateUser($user, $provider){
     if($users){
         return $users;
     }
+    $email = $user->email;
+    $username = strstr($email, '@', true);
+
         return User::create([
             'name'          => $user->name,
             'email'         => $user->email,
+            'username'      => $username,
             'image'         => $user->avatar,
             'provider_id'   => $user->id,
             'provider'      => $provider,

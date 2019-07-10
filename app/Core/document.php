@@ -56,7 +56,7 @@ class Document
 
         if (!empty($image)) {
                 $url = $this->file."/images/";
-              $path =  Storage::putFile($url, $image);
+              $path =  Storage::disk('public')->put($url, $image);
 
               $yamlfile['image'] = $path;
         }
@@ -202,7 +202,15 @@ class Document
 
     public function fetchAllRss()
     {
-        $xml = file_get_contents(storage_path('app/'.$this->file."/rss/rss.xml"));
+      if (file_exists(storage_path('app/'.$this->file."/rss/rss.xml"))) {
+                  $xml = file_get_contents(storage_path('app/'.$this->file."/rss/rss.xml"));
+                  $url = storage_path('app/'.$this->file."/rss/rss.xml");
+          } else {
+          $xml = file_get_contents("../storage/rss/rss.xml");
+          $url = "../storage/rss/rss.xml";
+          }
+
+      //  $xml = file_get_contents(storage_path('app/'.$this->file."/rss/rss.xml"));
         $feed = [];
         if (strlen($xml != "")) {
             $rss = new \DOMDocument();
@@ -211,7 +219,7 @@ class Document
             $urlArray = json_decode($data, true);
             $user = Auth::user();
             $urlArray2 = array(
-                array('name' => $user['name'], 'rss' => storage_path('app/'.$this->file."/rss/rss.xml"), 'desc' => '', 'link' => '', 'img' => $user['image'], 'time' => ''),
+                array('name' => $user['name'], 'rss' => $url, 'desc' => '', 'link' => '', 'img' => $user['image'], 'time' => ''),
                 //                array('name' => 'Sample',  'url' => 'rss/rss.xml')
             );
 
@@ -256,15 +264,20 @@ class Document
     //RSS designed By DMAtrix;
     public function fetchRss()
     {
-
-      $xml = file_get_contents($this->file."/rss/rss.xml");
+      if (file_exists(storage_path('app/'.$this->file."/rss/rss.xml"))) {
+                  $xml = file_get_contents(storage_path('app/'.$this->file."/rss/rss.xml"));
+                  $url = storage_path('app/'.$this->file."/rss/rss.xml");
+          } else {
+          $xml = file_get_contents("../storage/rss/rss.xml");
+          $url = "./storage/rss/rss.xml";
+          }
       $feed = [];
         if (strlen($xml !== "")) {
             $feed = [];
             $rss = new \DOMDocument();
             $user = Auth::user();
             $urlArray = array(
-                array('name' => $user['name'], 'url' => $this->file."/rss/rss.xml", 'img' => $user['image']),
+                array('name' => $user['name'], 'url' => $url, 'img' => $user['image']),
             );
 
             foreach ($urlArray as $url) {
@@ -290,6 +303,7 @@ class Document
         }
         krsort($feed);
         return $feed;
+
     }
     //store rss By DMAtrix
     public function createRSS()
@@ -615,7 +629,7 @@ $user = Auth::user();
     {
         $finder = new Finder();
         // find post in the current directory
-        $finder->files()->in($this->file)->name($post . '.md');
+        $finder->files()->in(storage_path().'/app/'.$this->file.'/content')->name($post . '.md');
         $content = [];
         if (!$finder->hasResults()) {
             return false;
@@ -627,31 +641,32 @@ $user = Auth::user();
                 $yaml = $document->getYAML();
                 $body = $document->getContent();
                 $parsedown  = new Parsedown();
-                $yamlTag = isset($yaml['tags']) ? $yaml['tags'] : [];
-                $tags = [];
-                foreach ($yamlTag as $tag) {
-                    $removeHashTag = explode('#', $tag);
-                    $tags[] = trim(end($removeHashTag));
-                }
+                //$yamlTag = isset($yaml['tags']) ? $yaml['tags'] : [];
+              //  $tags = [];
+              //  foreach ($yamlTag as $tag) {
+                //    $removeHashTag = explode('#', $tag);
+                //    $tags[] = trim(end($removeHashTag));
+                //}
 
                 $slug = $parsedown->text($yaml['slug']);
                 $slug = preg_replace("/<[^>]+>/", '', $slug);
                 $title = isset($yaml['title']) ? $parsedown->text($yaml['title']) : '';
                 $bd = $parsedown->text($body);
-                preg_match('/<img[^>]+src="((\/|\w|-)+\.[a-z]+)"[^>]*\>/i', $bd, $matches);
-                $first_img = '';
-                if (isset($matches[1])) {
-                    $first_img = $matches[1];
-                }
+                //preg_match('/<img[^>]+src="((\/|\w|-)+\.[a-z]+)"[^>]*\>/i', $bd, $matches);
+                //$first_img = '';
+              //  if (isset($matches[1])) {
+                //    $first_img = $matches[1];
+                //}
+                $image= $parsedown->text($yaml['image']);
                 $time = $parsedown->text($yaml['timestamp']);
                 $url = $parsedown->text($yaml['post_dir']);
-                $content['tags'] = $tags;
-                $content['title'] = $title;
-                $content['body'] = $bd;
+              //  $content['tags'] = $tags;
+                $content['title'] = strip_tags($title);
+                $content['body'] = strip_tags($bd);
                 $content['url'] = $url;
                 $content['timestamp'] = $time;
                 $content['date'] = date('d M Y ', $post);
-                $content['crawlerImage'] = $first_img;
+                $content['crawlerImage'] = strip_tags($image);
                 $content['slug'] = $this->clean($slug);
                 $SlugArray = explode('-',$this->clean($slug));
                 $content['post_id']=end($SlugArray);

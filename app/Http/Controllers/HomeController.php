@@ -25,11 +25,10 @@ class HomeController extends Controller
     public function index()
     {
       $user = Auth::user();
-      $username = preg_split('/ +/', $user->name);
-      $path = $username[0];
-      $post = new \Lucid\Core\Document($path);
+      $username = $user['username'];
+      $post = new \Lucid\Core\Document($username);
             $feed = $post->fetchRss();
-
+            print_r($feed);
         return view('home', ['posts' => $feed]);
 
     }
@@ -49,12 +48,18 @@ class HomeController extends Controller
         return view('timeline', ['posts' => $post]);
 
     }
-    public function microblog()
+    public function userimage($id, $image)
+    {
+        return Image::make(storage_path() . '/' . $id . '/images' . $image)->response();
+    }
+    public function microblog($username)
     {
       $user = Auth::user();
-      $username = preg_split('/ +/', $user->name);
-      $path = $username[0];
-      $post = new \Lucid\Core\Document($path);
+      if ($username == $user->username) {
+
+      $username = $user->username;
+      $post = new \Lucid\Core\Document($username);
+
             $post = $post->fetchAllRss();
             //$count = new Ziki\Core\Subscribe();
             //$fcount = $count->fcount();
@@ -62,11 +67,16 @@ class HomeController extends Controller
 //print_r($post);
 
        return view('microblog', ['posts' => $post]);
+     }else {
+
+       return redirect($user->username.'/microblog');
+     }
 
     }
     public function savePost(Request $request)
     {
-    //  dd($request->all());
+      //dd($request->all());
+
 $this->validate($request, [
   'file' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
 ]);
@@ -77,15 +87,12 @@ $this->validate($request, [
 
   $images = $request->file('file');
 
-  //return json_encode([$images]);
   $extra = "";
-  $directory = storage_path('/contents/');
   $user = Auth::user();
-  $username = preg_split('/ +/', $user->name);
-  $path = $username[0];
-  $post = new \Lucid\Core\Document($path);
+  $username = $user->username;
+  $post = new \Lucid\Core\Document($username);
   $result = $post->create($title, $body, $images, $extra);
-return redirect($path.'/microblog')->with('msg', 'Post Published');
+return redirect($username.'/microblog')->with('msg', 'Post Published');
     }
 
 }

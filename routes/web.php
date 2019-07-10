@@ -51,4 +51,5 @@ Route::prefix('{username}')->group(function () {
 
 
 });
+
 Route::post('/logout', "AuthController@logout")->name('logout');
