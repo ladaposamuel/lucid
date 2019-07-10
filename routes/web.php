@@ -47,4 +47,6 @@ Route::prefix('{username}')->group(function () {
 
 
 });
+
+Route::get('/{id}/images/{image}', 'HomeController@userimage');
 Route::post('/logout', "AuthController@logout")->name('logout');

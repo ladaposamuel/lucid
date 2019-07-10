@@ -29,7 +29,7 @@ class HomeController extends Controller
       $path = $username[0];
       $post = new \Lucid\Core\Document($path);
             $feed = $post->fetchRss();
-
+            print_r($feed);
         return view('home', ['posts' => $feed]);
 
     }
@@ -48,6 +48,10 @@ class HomeController extends Controller
 //);
         return view('timeline', ['posts' => $post]);
 
+    }
+    public function userimage($id, $image)
+    {
+        return Image::make(storage_path() . '/' . $id . '/images' . $image)->response();
     }
     public function microblog()
     {
