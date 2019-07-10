@@ -8,10 +8,9 @@ class pageController extends Controller
 {
     public function homePage($username)
     {
-            $directory = storage_path($username.'/contents');
-            $ziki = new \Lucid\Core\Document($directory);
+            $ziki = new \Lucid\Core\Document($username);
             $feed = $ziki->fetchRss();
-            
+
         return view('home', ['posts' => $feed]);
 
     }
@@ -21,13 +20,14 @@ class pageController extends Controller
         if(!isset($user_exists[0])) {
             return '=====404======';
         }
-        $directory = storage_path('/'.$username.'/contents/');
-        $app  = new \Lucid\Core\Document($directory);
+        //$directory = storage_path('/'.$username.'/contents/');
+        $app  = new \Lucid\Core\Document($username);
         $post=$app->getPost($postTitle);
-        
+
         if(!$post){
             return redirect('/'.$username.'/home');
         }
+      //  print_r($post);
          return view('single-blog-post',compact('post'));
     }
 }
