@@ -38,8 +38,9 @@ class HomeController extends Controller
       $user = Auth::user();
       $username = preg_split('/ +/', $user->name);
       $path = $username[0];
-      $post = new \Lucid\Core\Document($path);
-            $post = $ziki->fetchAllRss();
+      // $ziki = new \Lucid\Core\Document($path);
+      //       $post = $ziki->fetchAllRss();
+      $post=[];
             //$count = new Ziki\Core\Subscribe();
             //$fcount = $count->fcount();
             //$count = $count->count();

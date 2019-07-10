@@ -14,6 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/home', function () {
+    return view('welcome');
+});
 Route::get('login', function () {
     return view('auth/login');
 });
@@ -48,7 +52,6 @@ Route::prefix('{username}')->group(function () {
     Route::get('/home','pageController@homePage');
     Route::get('/microblog','HomeController@microblog');
     Route::post('/save-post','HomeController@savePost');
-
-
+    Route::get('/logout', "Auth\LoginController@logout");
 });
-Route::post('/logout', "AuthController@logout")->name('logout');
+
