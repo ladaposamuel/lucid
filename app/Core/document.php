@@ -206,8 +206,8 @@ class Document
                   $xml = file_get_contents(storage_path('app/'.$this->file."/rss/rss.xml"));
                   $url = storage_path('app/'.$this->file."/rss/rss.xml");
           } else {
-          $xml = file_get_contents("../storage/rss/rss.xml");
-          $url = "../storage/rss/rss.xml";
+          $xml = file_get_contents(storage_path("app/public/rss/rss.xml"));
+          $url = storage_path("app/public/rss/rss.xml");
           }
 
       //  $xml = file_get_contents(storage_path('app/'.$this->file."/rss/rss.xml"));
@@ -215,7 +215,7 @@ class Document
         if (strlen($xml != "")) {
             $rss = new \DOMDocument();
 
-            $data = file_get_contents(storage_path("/rss/subscription.json"));
+            $data = file_get_contents(storage_path("app/public/rss/subscription.json"));
             $urlArray = json_decode($data, true);
             $user = Auth::user();
             $urlArray2 = array(
@@ -268,8 +268,8 @@ class Document
                   $xml = file_get_contents(storage_path('app/'.$this->file."/rss/rss.xml"));
                   $url = storage_path('app/'.$this->file."/rss/rss.xml");
           } else {
-          $xml = file_get_contents("../storage/rss/rss.xml");
-          $url = "./storage/rss/rss.xml";
+          $xml = file_get_contents(storage_path("app/public/rss/rss.xml"));
+          $url = storage_path("app/public/rss/rss.xml");
           }
       $feed = [];
         if (strlen($xml !== "")) {
