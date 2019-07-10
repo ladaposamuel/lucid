@@ -90,6 +90,10 @@ public function findOrCreateUser($user, $provider){
 
 public function store_settings($path, $user_id)
 {
+  $setting       =   user_settings::where('user_id', $user_id)->first();
+  if($setting){
+      return $setting;
+  }
     return  user_settings::create([
         'user_id' => $user_id,
         'user_path' => $path,
