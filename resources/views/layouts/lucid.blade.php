@@ -52,8 +52,8 @@
   @section('sidebar')
   	<!-- Beginning of Sidebar -->
   <div class="col-lg-4 pb-2">
-    <img id="user-avatar" src="{{Auth::user()->image}}" class="img-fluid" />
-    <h3 id="user-name">{{Auth::user()->name}}</h3>
+    <img id="user-avatar" src="{{$user->image}}" class="img-fluid" />
+    <h3 id="user-name">{{ $user->username}}</h3>
     <p id="user-bio">
       Front-end developer, Back-end Developer, UI/UX developer, Friend and
       Traveller.

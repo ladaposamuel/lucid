@@ -46,7 +46,7 @@ class HomeController extends Controller
 //print_r(
   //$post
 //);
-        return view('timeline', ['posts' => $post]);
+        return view('timeline', ['posts' => $post,'user'=>$user]);
 
     }
     public function userimage($id, $image)
@@ -67,7 +67,7 @@ class HomeController extends Controller
             //$count = $count->count();
 //print_r($post);
 
-       return view('microblog', ['posts' => $post]);
+       return view('microblog', ['posts' => $post,'user'=>$user]);
      }else {
 
        return redirect($user->username.'/microblog');
