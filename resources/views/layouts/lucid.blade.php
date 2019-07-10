@@ -29,16 +29,12 @@
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
             @guest
-						<a class="dropdown-item" href="{{ route('/login/google') }}">{{ __('Login') }}</a>
+						<a class="dropdown-item" href="{{ url('/login/google') }}">{{ __('Login') }}</a>
             @else
-            <a class="dropdown-item" href=""
-               onclick="event.preventDefault();
-                             document.getElementById('logout-form').submit();">
+            <a class="dropdown-item" href="logout">
                 {{ __('Logout') }}
             </a>
-            <form id="logout-form" action="" method="POST" style="display: none;">
-                @csrf
-            </form>
+            
             @endguest
                     <a class="dropdown-item" href="/home">Home</a>
                     <a href="/settings" class="dropdown-item">Settings</a>
@@ -56,8 +52,8 @@
   @section('sidebar')
   	<!-- Beginning of Sidebar -->
   <div class="col-lg-4 pb-2">
-    <img id="user-avatar" src="{{Auth::user()->image}}" class="img-fluid" />
-    <h3 id="user-name">{{Auth::user()->name}}</h3>
+    <img id="user-avatar" src="{{$user->image}}" class="img-fluid" />
+    <h3 id="user-name">{{ $user->username}}</h3>
     <p id="user-bio">
       Front-end developer, Back-end Developer, UI/UX developer, Friend and
       Traveller.
