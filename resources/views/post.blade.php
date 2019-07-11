@@ -108,7 +108,7 @@
 </div>
 
 <!-- End of Post Content -->
-<!-- @foreach ($posts as $feeds)
+{{--@foreach ($posts as $feeds)
 @if ($feeds['img'] ="")
 <div class="post-content">
   <div class="post-image d-none d-lg-flex d-xl-flex d-md-flex">
@@ -136,7 +136,7 @@
     </p>
   </div>
 </div>
-@endforeach -->
+@endforeach--}}
 
 
 @endsection

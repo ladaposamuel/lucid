@@ -212,6 +212,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Document' => App\Facades\Document::class,
+        'Subscribe' => App\Facades\Subscribe::class,
 
     ],
 

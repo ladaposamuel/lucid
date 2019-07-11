@@ -47,6 +47,6 @@ class pageController extends Controller
 
         $user = $this->user($username);
 
-        return view('posts',compact('user'));
+        return view('post',compact('user'));
     }
 }
