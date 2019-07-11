@@ -7,6 +7,9 @@ use KzykHys\FrontMatter\FrontMatter;
 use Symfony\Component\Finder\Finder;
 use KzykHys\FrontMatter\Document as Doc;
 use Auth;
+use DB;
+use Lucid\ext_rss;
+use Lucid\extfeeds;
 use Storage;
 /**
  *	The Document class holds all properties and methods of a single page document.
@@ -215,52 +218,86 @@ class Document
         if (strlen($xml != "")) {
             $rss = new \DOMDocument();
 
-            $data = file_get_contents(base_path("storage/rss/subscription.json"));
-            $urlArray = json_decode($data, true);
             $user = Auth::user();
-            $urlArray2 = array(
-                array('name' => $user['name'], 'rss' => $url, 'desc' => '', 'link' => '', 'img' => $user['image'], 'time' => ''),
+            $data= ext_rss::where('user_id', $user['id'])->get();
+            //$data=[];
+            $urlArray = json_decode($data, true);
+          //  $urlArray2 = array(
+            //    array('title' => $user['name'], 'url' => $url, 'desc' => '', 'link' => '', 'image' => $user['image'], 'time' => ''),
                 //                array('name' => 'Sample',  'url' => 'rss/rss.xml')
-            );
+            //);
 
-            $result = array_merge($urlArray, $urlArray2);
+          //  $result = array_merge($urlArray, $urlArray2);
             //  print_r($result);
-            foreach ($result as $url) {
-                $rss->load($url['rss']);
+            foreach ($urlArray as $url) {
+              if (extfeeds::where('site', $url["title"])->exists() == 1) {
+                $feeds = DB::table('extfeeds')->where('user_id', $user['id'])->get();
+            //  return $feeds;
+              }
+            if (extfeeds::where('site', $url["title"])->doesntExist() == 1) {
+              //  dd($url['link']);
+              $rss->load($url['url']);
+              $user = Auth::user();
+              foreach ($rss->getElementsByTagName('item') as $node) {
+                  if (!isset($node->getElementsByTagName('image')->item(0)->nodeValue)) {
 
-                foreach ($rss->getElementsByTagName('item') as $node) {
-                    if (!isset($node->getElementsByTagName('image')->item(0)->nodeValue)) {
+                      $item = array(
+                          'user_id'          => $user['id'],
+                          'site'  => $url['title'],
+                          'site_image'  => $url['image'],
+                          'title' => $node->getElementsByTagName('title')->item(0)->nodeValue,
+                          'des'  => isset( $node->getElementsByTagName('description')->item(0)->nodeValue) ?
+                                    $node->getElementsByTagName('description')->item(0)->nodeValue : '',
+                          //'link'  => $node->getElementsByTagName('link')->item(0)->nodeValue . "?d=" . base64_encode(SITE_URL),
+                          'link'  => $node->getElementsByTagName('link')->item(0)->nodeValue,
+                          'date'  => date("F j, Y, g:i a", strtotime(isset($node->getElementsByTagName('pubDate')->item(0)->nodeValue) ?
+                                          $node->getElementsByTagName('pubDate')->item(0)->nodeValue : '')),
+                          'image'  => "",
 
-                        $item = array(
-                            'site'  => $url['name'],
-                            'img'  => $url['img'],
-                            'title' => $node->getElementsByTagName('title')->item(0)->nodeValue,
-                            'desc'  => $node->getElementsByTagName('description')->item(0)->nodeValue,
-                            //'link'  => $node->getElementsByTagName('link')->item(0)->nodeValue . "?d=" . base64_encode(SITE_URL),
-                            'link'  => $node->getElementsByTagName('link')->item(0)->nodeValue,
-                            'date'  => date("F j, Y, g:i a", strtotime($node->getElementsByTagName('pubDate')->item(0)->nodeValue)),
-
-                        );
-                    } else {
-                        $item = array(
-                            'site'  => $url['name'],
-                            'img'  => $url['img'],
-                            'title' => $node->getElementsByTagName('title')->item(0)->nodeValue,
-                            'desc'  => $node->getElementsByTagName('description')->item(0)->nodeValue,
-                            'link'  => $node->getElementsByTagName('link')->item(0)->nodeValue,
-                            'date'  => date("F j, Y, g:i a", strtotime($node->getElementsByTagName('pubDate')->item(0)->nodeValue)),
-                            'image'  => $node->getElementsByTagName('image')->item(0)->nodeValue,
-                        );
-                    }
-                    array_push($feed, $item);
+                      );
+                  } else {
+                      $item = array(
+                        'user_id'          => $user['id'],
+                          'site'  => $url['title'],
+                          'site_image'  => $url['image'],
+                          'title' => $node->getElementsByTagName('title')->item(0)->nodeValue,
+                          'des'  => $node->getElementsByTagName('description')->item(0)->nodeValue,
+                          'link'  => $node->getElementsByTagName('link')->item(0)->nodeValue,
+                          'date'  => date("F j, Y, g:i a", strtotime($node->getElementsByTagName('pubDate')->item(0)->nodeValue)),
+                          'image'  => $node->getElementsByTagName('image')->item(0)->nodeValue,
+                      );
+                  }
+                  array_push($feed, $item);
                 }
-            }
-            krsort($feed);
-            return $feed;
-        } else {
-            return false;
-        }
-    }
+              }
+
+                  krsort($feed);
+                //  print_r($feed);
+                  foreach ($feed as $key => $value) {
+
+                  if (extfeeds::where('title', $value["title"])->orWhere('link',$value['link'])->doesntExist()== 1) {
+                    $feedId[]  = DB::table('extfeeds')->insert([
+                        'user_id'          =>$value['user_id'],
+                        'site'             => $value['site'],
+                        'site_image'       => $value['site_image'],
+                        'title'            => strip_tags($value['title']),
+                        'des'             => strip_tags($value['des']),
+                        'link'             => strip_tags($value['link' ]),
+                        'date'    => date("F j, Y, g:i a", strtotime($value['date'])),
+                        'image'   => $value['image'],
+                      ]);
+                  }
+                  };
+                }
+
+                  $feeds = DB::table('extfeeds')->where('user_id', $user['id'])->get();
+                return $feeds;
+
+              } else {
+                  return false;
+              }
+          }
+
     //RSS designed By DMAtrix;
     public function fetchRss()
     {
@@ -315,7 +352,7 @@ $user = Auth::user();
         $Feed = new RSS2;
         // Setting some basic channel elements. These three elements are mandatory.
         $Feed->setTitle($user['name']);
-        $Feed->setLink(storage_path().'/'.$this->file.'/');
+        $Feed->setLink(storage_path('app/'.$this->file.'./rss/rss.xml'));
         $Feed->setDescription("");
 
         // Image title and link must match with the 'title' and 'link' channel elements for RSS 2.0,

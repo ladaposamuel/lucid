@@ -53,6 +53,8 @@ class HomeController extends Controller
     {
         return Image::make(storage_path() . '/' . $id . '/images' . $image)->response();
     }
+
+
     public function microblog($username)
     {
       $user = Auth::user();
@@ -65,9 +67,9 @@ class HomeController extends Controller
             //$count = new Ziki\Core\Subscribe();
             //$fcount = $count->fcount();
             //$count = $count->count();
-//print_r($post);
+          //  print_r($post);
 
-       return view('microblog', ['posts' => $post,'user'=>$user]);
+     return view('microblog', ['posts' => $post,'user'=>$user]);
      }else {
 
        return redirect($user->username.'/microblog');
@@ -94,6 +96,24 @@ $this->validate($request, [
   $post = new \Lucid\Core\Document($username);
   $result = $post->create($title, $body, $images, $extra);
 return redirect($username.'/microblog')->with('msg', 'Post Published');
+    }
+
+    public function subscribe()
+    {
+      $user = Auth::user();
+      $username = preg_split('/ +/', $user->name);
+      $path = $username[0];
+      // $ziki = new \Lucid\Core\Document($path);
+      //       $post = $ziki->fetchAllRss();
+      $post=[];
+            //$count = new Ziki\Core\Subscribe();
+            //$fcount = $count->fcount();
+            //$count = $count->count();
+//print_r(
+  //$post
+//);
+        return view('subscribe', ['user'=>$user]);
+
     }
 
 }
