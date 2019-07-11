@@ -53,5 +53,5 @@ Route::prefix('{username}')->group(function () {
     Route::get('/microblog','HomeController@microblog');
     Route::post('/save-post','HomeController@savePost');
     Route::get('/logout', "Auth\LoginController@logout");
+    Route::get('/rss','ExtRssController@add');
 });
-

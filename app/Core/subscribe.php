@@ -1,5 +1,8 @@
 <?php
 namespace Lucid\Core;
+use Auth;
+use Storage;
+use Lucid\ext_rss;
 
 /**
  *
@@ -36,18 +39,18 @@ public function extract($url)
 {
   $rss = new \DOMDocument();
 
-//$url = "https://www.feedforall.com//sample-feed.xml";
+
       $rss->load(trim($url));
       foreach ($rss->getElementsByTagName('channel') as $r) {
         $title = $r->getElementsByTagName('title')->item(0)->nodeValue;
         $link = $r->getElementsByTagName('link')->item(0)->nodeValue;
         $description = $r->getElementsByTagName('description')->item(0)->nodeValue;
-        if (is_null($r->getElementsByTagName('image')->item(0)->nodeValue)) {
-        $image ="resources/themes/ghost/assets/img/bubbles.png";
-      }else {
-        $image = $r->getElementsByTagName('url')->item(0)->nodeValue;
 
-      }
+        $image = isset($r->getElementsByTagName('url')->item(0)->nodeValue) ?
+                  $r->getElementsByTagName('url')->item(0)->nodeValue : '';
+
+        $lastbuild = $r->getElementsByTagName('lastBuildDate')->item(0)->nodeValue;
+
 
       }
 
@@ -57,59 +60,39 @@ public function extract($url)
               $this->setSubImg($image);
               $this->setSubLink($link);
 
-              $db = "storage/rss/subscription.json";
+                $this->findOrCreateRss(
+                  $this->name,
+                  $url,
+                  $this->desc,
+                  $this->link,
+                  $this->img,
+                  $lastbuild
 
-              $file = FileSystem::read($db);
-              $data=json_decode($file, true);
-              unset($file);
+                );
 
-              if (count($data) >= 1) {
-
-              foreach ($data as $key => $value) {
-                 if ($value["name"] == $this->name) {
-
-                   $message= "false";
-
-                   break;
-                 }else {
-                   $message= "true";
-
-                 }
-
-
-              }
-              if ($message == "true") {
-
-              //  $db_json = file_get_contents("storage/rss/subscription.json");
-
-                $time = date("Y-m-d h:i:sa");
-                  $img = $this->img;
-                  $sub[] = array('name'=> $this->name, 'rss'=>$this->rss,'desc'=>$this->desc, 'link'=>$this->link, 'img'=> $this->img, 'time' => $time);
-
-                  $json_db = "storage/rss/subscription.json";
-                  $file = file_get_contents($db);
-                  $prev_sub = json_decode($file);
-                  $new =array_merge($sub, $prev_sub);
-                  $new = json_encode($new);
-                  $doc = FileSystem::write($json_db, $new);
-}
-              }else {
-              $time = date("Y-m-d h:i:sa");
-              $img = $this->img;
-              $sub[] = array('name'=> $this->name, 'rss'=>$this->rss,'desc'=>$this->desc, 'link'=>$this->link, 'img'=> $this->img, 'time' => $time);
-
-              $json_db = "storage/rss/subscription.json";
-              $file = file_get_contents($db);
-              $prev_sub = json_decode($file);
-
-              $new = array_merge($sub, $prev_sub);
-              $new = json_encode($new);
-              $doc = FileSystem::write($json_db, $new);
-
-
-          }
-          header("loaction: /subscriptions");
   }
+  public function findOrCreateRss($name, $url, $desc, $link, $img,$lastbuild){
+      $rss       =   ext_rss::where('title', $name)->first();
+      if($rss){
+          return $rss;
+      }
+      $user = Auth::user();
+
+          return ext_rss::create([
+              'user_id'          => $user['id'],
+              'title'            => $name,
+              'url'              => $url,
+              'description'      => $desc,
+              'image'            => $img,
+              'link'             => $link,
+              'lastBuildDate'    => $lastbuild
+          ]);
+
+          return $rss;
+  }
+
+
+
   public function subc($url)
   {
     $rss = new \DOMDocument();

@@ -34,13 +34,13 @@
 
 @foreach ($posts as $feeds)
 <div class="post-content">
-<img src="{{ $feeds['img']}}"  style="border-radius:100%;height:60px; height:60px" class="img-fluid" alt="user" />
+<img src="{{ $feeds->site_image}}"  style="border-radius:100%;height:60px; height:60px" class="img-fluid" alt="user" />
   <div class="post-content-body">
-      <a href=".{{$feeds['link']}}"> <h5 class="font-weight-bold">{{$feeds['title']}}</h5></a>
+      <a href=".{{$feeds->link}}"> <h5 class="font-weight-bold">{{$feeds->title}}</h5></a>
       <p class="">
-      {{$feeds['desc']}}
+      {{$feeds->des}}
       </p>
-      <p class="">{{$feeds['site']}} -<small class="text-muted">{{$feeds['date']}} </small></p>
+      <p class="">{{$feeds->site}} -<small class="text-muted">{{$feeds->date}} </small></p>
     </div>
 </div>
 

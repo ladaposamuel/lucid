@@ -65,7 +65,7 @@ class HomeController extends Controller
             //$count = new Ziki\Core\Subscribe();
             //$fcount = $count->fcount();
             //$count = $count->count();
-//print_r($post);
+          //  print_r($post);
 
        return view('microblog', ['posts' => $post,'user'=>$user]);
      }else {
