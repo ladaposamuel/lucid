@@ -34,9 +34,9 @@ Route::get('microblog','HomeController@microblog');
 Route::post('save-post','HomeController@savePost');
 //Route::post('/addrss','ExtRssController@add');
 
-Route::get('posts', function () {
-    return view('posts');
-});
+// Route::get('posts', function () {
+//     return view('posts');
+// });
 Route::get('settings', function (){
     return view('settings');
 });
@@ -57,6 +57,8 @@ Route::prefix('{username}')->group(function () {
     Route::get('/microblog','HomeController@microblog');
     Route::post('/save-post','HomeController@savePost');
     Route::get('/logout', "Auth\LoginController@logout");
+    Route::get('/posts','pageController@posts');
+
     Route::get('/subscribe','HomeController@subscribe');
     Route::post('/addrss','ExtRssController@addRss');
     Route::post('/extrss','ExtRssController@addExtRss');

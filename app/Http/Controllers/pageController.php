@@ -39,4 +39,16 @@ class pageController extends Controller
         }
         return view('single-blog-post',compact('post','user'));
     }
+
+    public function posts($username){
+        if(!$this->user($username)) {
+            return '========404========';
+        }
+
+        $user = $this->user($username);
+        $app  = new \Lucid\Core\Document($username);
+        $posts=$app->get();
+         
+        return view('post',compact('user','posts'));
+    }
 }

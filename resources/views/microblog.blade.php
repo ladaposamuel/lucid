@@ -8,7 +8,7 @@
 
 <p>Write a Post</p>
 
-<form method="POST" action="/save-post" enctype="multipart/form-data" class="mb-3">
+<form method="POST" action="{{url('/save-post')}}" enctype="multipart/form-data" class="mb-3">
     @csrf
   <div class="form-row mb-3">
     <div class="col-7">

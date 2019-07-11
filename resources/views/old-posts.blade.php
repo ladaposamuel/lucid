@@ -22,9 +22,9 @@
 
 <!-- Begin content -->
 <div class="post-content border-top border-info pt-3 mt-3">
-  <img src="{{Auth::user()->image}}" class="img-thumb" alt="user" />
+  <img src="{{ $user->image }}" class="img-thumb" alt="user" />
   <div class="post-content-body ml-3">
-    <h6 class="font-weight-bold">{{Auth::user()->name}} <small class="text-muted">- March 28, 2019 </small></h5>
+    <h6 class="font-weight-bold">{{ $user->username }} <small class="text-muted">- March 28, 2019 </small></h5>
       <p class="">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
       </p>
@@ -39,9 +39,9 @@
 </div>
 
 <div class="post-content border-top border-info pt-3 mt-3">
-  <img src="{{Auth::user()->image}}" class="img-thumb" alt="user" />
+  <img src="{{ $user->image }}" class="img-thumb" alt="user" />
   <div class="post-content-body ml-3">
-    <h6 class="font-weight-bold">{{Auth::user()->name}} <small class="text-muted">- March 28, 2019 </small></h5>
+    <h6 class="font-weight-bold">{{ $user->username }} <small class="text-muted">- March 28, 2019 </small></h5>
       <p class="">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
       </p>
@@ -57,9 +57,9 @@
 </div>
 
 <div class="post-content border-top border-info pt-3 mt-3">
-  <img src="{{Auth::user()->image}}" class="img-thumb" alt="user" />
+  <img src="{{ $user->image }}" class="img-thumb" alt="user" />
   <div class="post-content-body ml-3">
-    <h6 class="font-weight-bold">{{Auth::user()->name}} <small class="text-muted">- March 28, 2019 </small></h5>
+    <h6 class="font-weight-bold">{{ $user->username }} <small class="text-muted">- March 28, 2019 </small></h5>
       <p class="">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
       </p>
