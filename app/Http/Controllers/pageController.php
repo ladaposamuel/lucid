@@ -39,4 +39,14 @@ class pageController extends Controller
         }
         return view('single-blog-post',compact('post','user'));
     }
+
+    public function posts($username){
+        if(!$this->user($username)) {
+            return '========404========';
+        }
+
+        $user = $this->user($username);
+
+        return view('posts',compact('user'));
+    }
 }
