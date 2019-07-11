@@ -39,8 +39,13 @@ public function extract($url)
 {
   $rss = new \DOMDocument();
 
+  if (!file_exists(storage_path('app/'.$url."/rss/rss.xml"))) {
+      } else {
 
-      $rss->load(trim($url));
+        //$url = storage_path('app/'.$url."/rss/rss.xml");
+
+      $rss->load(trim(storage_path('app/'.$url."/rss/rss.xml")));
+        //dd($rss );
       foreach ($rss->getElementsByTagName('channel') as $r) {
         $title = $r->getElementsByTagName('title')->item(0)->nodeValue;
         $link = $r->getElementsByTagName('link')->item(0)->nodeValue;
@@ -62,7 +67,7 @@ public function extract($url)
 
                 $this->findOrCreateRss(
                   $this->name,
-                  $url,
+                  storage_path('app/'.$url."/rss/rss.xml"),
                   $this->desc,
                   $this->link,
                   $this->img,
@@ -70,7 +75,55 @@ public function extract($url)
 
                 );
 
+              }
   }
+
+  public function extractPub($url)
+  {
+    $rss = new \DOMDocument();
+
+    //if (!$url = file_get_contents($url)) {
+    //  return false;
+      //  } else {
+
+          //$url = storage_path('app/'.$url."/rss/rss.xml");
+
+        echo ($url);
+        $rss->load(trim($url));
+        foreach ($rss->getElementsByTagName('channel') as $r) {
+          $title = $r->getElementsByTagName('title')->item(0)->nodeValue;
+
+          $link = $r->getElementsByTagName('link')->item(0)->nodeValue;
+          $description = $r->getElementsByTagName('description')->item(0)->nodeValue;
+
+          $image = isset($r->getElementsByTagName('url')->item(0)->nodeValue) ?
+                    $r->getElementsByTagName('url')->item(0)->nodeValue : '';
+
+          $lastbuild =isset( $r->getElementsByTagName('lastBuildDate')->item(0)->nodeValue ) ?
+                        $r->getElementsByTagName('lastBuildDate')->item(0)->nodeValue : '';
+
+
+        }
+
+                $this->setSubName($title);
+                $this->setSubRss($url);
+                $this->setSubDesc($description);
+                $this->setSubImg($image);
+                $this->setSubLink($link);
+
+                  $this->findOrCreateRss(
+                    $this->name,
+                    $url,
+                    $this->desc,
+                    $this->link,
+                    $this->img,
+                    $lastbuild
+
+                  );
+
+              //  }
+    }
+
   public function findOrCreateRss($name, $url, $desc, $link, $img,$lastbuild){
       $rss       =   ext_rss::where('title', $name)->first();
       if($rss){

@@ -34,12 +34,12 @@
             <a class="dropdown-item" href="logout">
                 {{ __('Logout') }}
             </a>
-            
+
             @endguest
                     <a class="dropdown-item" href="/home">Home</a>
                     <a href="/settings" class="dropdown-item">Settings</a>
                     <a class="dropdown-item" href="#">Report A Bug</a>
-						
+
 					</div>
 				</li>
 			</ul>
@@ -86,7 +86,11 @@
                 <img src="{{ asset('img/following-the-idea.png') }}" class="img-fluid" />
                 <h4 class="text-main">FOLLOW ME</h4>
                 <p class="small"><em>Do you have or would love to have Lucid installed on your domain?<br /> Click the button below to follow me</em></p>
-                <button class="btn btn-primary">Follow me on Lucid</button>
+								<form method="POST" action="{{URL::to('/')}}/{{Auth::user()->username}}/addrss">
+								    @csrf
+										<input type="hidden" name="rss" value="{{$user->username}}">
+								<button type="submit" class="btn btn-primary">Follow me on Lucid</button>
+								</form>
               </div>
               <div class="mt-5">
                 <span class="font-weight-bold mx-2">Follow Me On</span>

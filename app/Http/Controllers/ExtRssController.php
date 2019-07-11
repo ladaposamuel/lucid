@@ -4,6 +4,7 @@ namespace Lucid\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Lucid\ext_rss;
+use Auth;
 class ExtRssController extends Controller
 {
   /**
@@ -11,22 +12,41 @@ class ExtRssController extends Controller
    *
    * @return void
    */
-
+   public function __construct()
+   {
+       $this->middleware('auth');
+   }
   /**
    * Show the application dashboard.
    *
    * @return \Illuminate\Http\Response
    */
-  public function add()
+  public function addRss(Request $request)
   {
-
-  //  $url = $_POST['domain'];
-  $url = "https://www.feedforall.com//sample-feed.xml";
+    $user = Auth::user();
+    $username = $user->username;
+    $rss = $request->rss;
+  //dd($rss);
+  //$url = "https://www.feedforall.com//sample-feed.xml";
     $data = new \Lucid\Core\Subscribe();
-          $feed = $data->extract($url);
+          $feed = $data->extract($rss);
           print_r($feed);
 
-    //  return view('home', ['posts' => $feed]);
+     return redirect($username.'/microblog')->with('rss', 'You have subscribed to '.$request.' channel' );
+
+  }
+  public function addExtRss(Request $request)
+  {
+    $user = Auth::user();
+    $username = $user->username;
+    $rss = $request->rss;
+  //dd($rss);
+  //$url = "https://www.feedforall.com//sample-feed.xml";
+    $data = new \Lucid\Core\Subscribe();
+          $feed = $data->extractPub($rss);
+          print_r($feed);
+
+     return redirect($username.'/microblog')->with('rss', 'You have subscribed to '.$request.' channel' );
 
   }
 }

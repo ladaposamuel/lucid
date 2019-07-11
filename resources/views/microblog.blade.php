@@ -34,9 +34,13 @@
 
 @foreach ($posts as $feeds)
 <div class="post-content">
+  @if (empty($feeds->site_image))
+<img src="{{ asset('img/logo.jpg') }}"  style="border-radius:100%;height:60px; height:60px" class="img-fluid" alt="user" />
+@else
 <img src="{{ $feeds->site_image}}"  style="border-radius:100%;height:60px; height:60px" class="img-fluid" alt="user" />
+@endif
   <div class="post-content-body">
-      <a href=".{{$feeds->link}}"> <h5 class="font-weight-bold">{{$feeds->title}}</h5></a>
+      <a href="{{$feeds->link}}"> <h5 class="font-weight-bold">{{$feeds->title}}</h5></a>
       <p class="">
       {{$feeds->des}}
       </p>

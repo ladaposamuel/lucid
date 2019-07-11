@@ -15,7 +15,7 @@ class CreateExtRssTable extends Migration
     {
         Schema::create('ext_rsses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id')->unique();
+            $table->integer('user_id');
             $table->string('title');
             $table->string('url');
             $table->string('description');

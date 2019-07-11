@@ -219,24 +219,25 @@ class Document
             $rss = new \DOMDocument();
 
             $user = Auth::user();
-            //$data=[];
             $data= ext_rss::where('user_id', $user['id'])->get();
+            //$data=[];
             $urlArray = json_decode($data, true);
-          //  dd($urlArray[0]);
-            $urlArray2 = array(
-                array('title' => $user['name'], 'url' => $url, 'desc' => '', 'link' => '', 'image' => $user['image'], 'time' => ''),
+          //  $urlArray2 = array(
+            //    array('title' => $user['name'], 'url' => $url, 'desc' => '', 'link' => '', 'image' => $user['image'], 'time' => ''),
                 //                array('name' => 'Sample',  'url' => 'rss/rss.xml')
-            );
+            //);
 
-            $result = array_merge($urlArray, $urlArray2);
+          //  $result = array_merge($urlArray, $urlArray2);
             //  print_r($result);
-            foreach ($result as $url) {
-            if (!($url['url'])) {
-              echo "string";
-            }else {
-
+            foreach ($urlArray as $url) {
+              if (extfeeds::where('site', $url["title"])->exists() == 1) {
+                $feeds = DB::table('extfeeds')->where('user_id', $user['id'])->get();
+            //  return $feeds;
+              }
+            if (extfeeds::where('site', $url["title"])->doesntExist() == 1) {
+              //  dd($url['link']);
               $rss->load($url['url']);
-$user = Auth::user();
+              $user = Auth::user();
               foreach ($rss->getElementsByTagName('item') as $node) {
                   if (!isset($node->getElementsByTagName('image')->item(0)->nodeValue)) {
 
@@ -245,10 +246,12 @@ $user = Auth::user();
                           'site'  => $url['title'],
                           'site_image'  => $url['image'],
                           'title' => $node->getElementsByTagName('title')->item(0)->nodeValue,
-                          'des'  => $node->getElementsByTagName('description')->item(0)->nodeValue,
+                          'des'  => isset( $node->getElementsByTagName('description')->item(0)->nodeValue) ?
+                                    $node->getElementsByTagName('description')->item(0)->nodeValue : '',
                           //'link'  => $node->getElementsByTagName('link')->item(0)->nodeValue . "?d=" . base64_encode(SITE_URL),
                           'link'  => $node->getElementsByTagName('link')->item(0)->nodeValue,
-                          'date'  => date("F j, Y, g:i a", strtotime($node->getElementsByTagName('pubDate')->item(0)->nodeValue)),
+                          'date'  => date("F j, Y, g:i a", strtotime(isset($node->getElementsByTagName('pubDate')->item(0)->nodeValue) ?
+                                          $node->getElementsByTagName('pubDate')->item(0)->nodeValue : '')),
                           'image'  => "",
 
                       );
@@ -265,17 +268,13 @@ $user = Auth::user();
                       );
                   }
                   array_push($feed, $item);
-                }}
+                }
+              }
+
                   krsort($feed);
                 //  print_r($feed);
                   foreach ($feed as $key => $value) {
 
-                    //$rss       =
-                   if (extfeeds::where('title', $value["title"])->orWhere('link',$value['link'])->exists() == 1) {
-
-
-
-                  }
                   if (extfeeds::where('title', $value["title"])->orWhere('link',$value['link'])->doesntExist()== 1) {
                     $feedId[]  = DB::table('extfeeds')->insert([
                         'user_id'          =>$value['user_id'],
@@ -289,8 +288,8 @@ $user = Auth::user();
                       ]);
                   }
                   };
-
                 }
+
                   $feeds = DB::table('extfeeds')->where('user_id', $user['id'])->get();
                 return $feeds;
 
@@ -353,7 +352,7 @@ $user = Auth::user();
         $Feed = new RSS2;
         // Setting some basic channel elements. These three elements are mandatory.
         $Feed->setTitle($user['name']);
-        $Feed->setLink(storage_path().'/'.$this->file.'/');
+        $Feed->setLink(storage_path('app/'.$this->file.'./rss/rss.xml'));
         $Feed->setDescription("");
 
         // Image title and link must match with the 'title' and 'link' channel elements for RSS 2.0,
