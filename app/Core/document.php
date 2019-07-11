@@ -110,7 +110,7 @@ class Document
 
         // find all files in the current directory
 
-        $finder->files()->in($this->file);
+        $finder->files()->in(storage_path('app/'.$this->file.'/content/'));
 
         $posts = [];
         if ($finder->hasResults()) {

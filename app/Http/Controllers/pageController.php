@@ -46,7 +46,9 @@ class pageController extends Controller
         }
 
         $user = $this->user($username);
-
-        return view('post',compact('user'));
+        $app  = new \Lucid\Core\Document($username);
+        $posts=$app->get();
+         
+        return view('post',compact('user','posts'));
     }
 }

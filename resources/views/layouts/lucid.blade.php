@@ -86,7 +86,7 @@
                 <img src="{{ asset('img/following-the-idea.png') }}" class="img-fluid" />
                 <h4 class="text-main">FOLLOW ME</h4>
                 <p class="small"><em>Do you have or would love to have Lucid installed on your domain?<br /> Click the button below to follow me</em></p>
-								<form method="POST" action="{{URL::to('/')}}/{{Auth::user()->username}}/addrss">
+								<form method="POST" action="{{URL::to('/')}}/{{$user->username}}/addrss">
 								    @csrf
 										<input type="hidden" name="rss" value="{{$user->username}}">
 								<button type="submit" class="btn btn-primary">Follow me on Lucid</button>
