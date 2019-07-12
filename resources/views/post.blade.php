@@ -14,7 +14,7 @@
   <div class="post-content-body">
     <p class="post-date">{{ $post['date'] }}</p>
     <h3 class="post-title">
-      {!!$post['title'] !!}
+    <a class="no-decoration text-dark" href="post/{{$post['slug']}}">{!!$post['title'] !!}</a>
     </h3>
     <p class="post-body">
       {!!$post['body'] !!}
@@ -27,7 +27,7 @@
   <div class="post-content-body">
     <p class="post-date">{{ $post['date'] }}</p>
     <h3 class="post-title">
-      {!! $post['title'] !!}
+    <a class="no-decoration text-dark" href="post/{{$post['slug']}}">{!! $post['title'] !!}</a>
     </h3>
     <p class="post-body">
       {!! $post['body'] !!}
