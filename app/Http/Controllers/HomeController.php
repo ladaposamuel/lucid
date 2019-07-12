@@ -28,7 +28,7 @@ class HomeController extends Controller
       $username = $user['username'];
       $post = new \Lucid\Core\Document($username);
             $feed = $post->fetchRss();
-            print_r($feed);
+           // print_r($feed);
         return view('home', ['posts' => $feed]);
 
     }
