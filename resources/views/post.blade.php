@@ -12,7 +12,7 @@
 
 <div class="post-content">
   <div class="post-image d-none d-lg-flex d-xl-flex d-md-flex">
-    <img src="{{URL::to('/')}}/storage/{{$post['image']}}" class="img-fluid post-img" alt="What I think of Donald Glover’s New Video" />
+    <img src="{{asset('storage')}}/{{$post['image']}}" class="img-fluid post-img" alt="What I think of Donald Glover’s New Video" />
   </div>
   <div class="post-content-body">
     <p class="post-date">{{ $post['date'] }}</p>
