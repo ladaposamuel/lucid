@@ -94,7 +94,7 @@
                   @else
                   <a class="dropdown-item" href="/home">Home</a>
                   <a href="/settings" class="dropdown-item">Settings</a>
-                  <a class="dropdown-item" href="{{ $user->username}}/logout">
+                  <a class="dropdown-item" href="/{{ $user->username}}/logout">
                     {{ __('Logout') }}
                   </a>
 

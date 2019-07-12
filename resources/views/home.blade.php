@@ -50,7 +50,7 @@
   <div class="post-image d-none d-lg-flex d-xl-flex d-md-flex">
     <img src="{{URL::to('/')}}/storage/{{$feeds['image']}}" class="img-fluid post-img" alt="Looking For Where To Spend Christmas in the comform of your home" />
   </div>
-  <a class="no-decoration" href="{{$feeds['link']}}">
+  <a class="no-decoration" href="/{{$user->username}}{{$feeds['link']}}">
     <div class="post-content-body">
       <p class="post-date">{{$feeds['date']}}</p>
       <h3 class="post-title">
