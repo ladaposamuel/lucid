@@ -5,8 +5,11 @@
 @endsection
 @section('content')
 <!-- Beginning of Post Content -->
-@foreach($posts as $post)
+@forelse($posts as $post)
+
+
  @if($post['image'] !== '')
+
 <div class="post-content">
   <div class="post-image d-none d-lg-flex d-xl-flex d-md-flex">
     <img src="{{URL::to('/')}}/storage/{{$post['image']}}" class="img-fluid post-img" alt="What I think of Donald Glover’s New Video" />
@@ -21,6 +24,8 @@
     </p>
   </div>
 </div>
+
+
 @else
 
 <div class="post-content">
@@ -34,10 +39,6 @@
     </p>
   </div>
 </div>
-@endif
-@endforeach
-
-
 
 
 <div class="text-center">
@@ -45,6 +46,26 @@
     Previous articles <i class="pl-2 icon ion-ios-arrow-forward"></i>
   </button>
 </div>
+
+
+@endif
+
+
+@empty
+
+
+<div class="post-content">
+  <div class="post-content-body">
+    no posts yet
+  </div>
+</div>
+
+@endforelse
+
+
+
+
+
 
 <!-- End of Post Content -->
 {{--@foreach ($posts as $feeds)

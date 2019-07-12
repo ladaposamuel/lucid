@@ -38,7 +38,7 @@
         <div class="divider"></div>
         <div class="sidebar-nav">
           <ul>
-            <li><a href="/posts">Posts</a></li>
+            <li><a href="/{{ $user->username}}/posts">Posts</a></li>
             <li><a href="/microblog">Thoughts</a></li>
             <li><a href="#">Videos</a></li>
             <li><a href="#">Contact</a></li>
