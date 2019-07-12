@@ -92,15 +92,13 @@
                   @guest
                   <a class="dropdown-item" href="{{ url('/login/google') }}">{{ __('Login') }}</a>
                   @else
+                  <a class="dropdown-item" href="/home">Home</a>
+                  <a href="/settings" class="dropdown-item">Settings</a>
                   <a class="dropdown-item" href="{{ $user->username}}/logout">
                     {{ __('Logout') }}
                   </a>
 
                   @endguest
-                  <a class="dropdown-item" href="/home">Home</a>
-                  <a href="/settings" class="dropdown-item">Settings</a>
-                  <a class="dropdown-item" href="#">Report A Bug</a>
-
                 </div>
               </li>
             </ul>
