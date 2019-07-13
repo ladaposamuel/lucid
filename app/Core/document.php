@@ -25,7 +25,7 @@ class Document
 
     public function __construct($file)
     {
-      //  FileSystem::makeDir($file);
+        //FileSystem::makeDir($file);
         $this->file   = $file;
     }
 
@@ -110,7 +110,9 @@ class Document
 
         // find all files in the current directory
 
-        $finder->files()->in(storage_path('app/'.$this->file.'/content/'));
+        if(file_exists(storage_path('app/'.$this->file.'/content/'))){
+
+            $finder->files()->in(storage_path('app/'.$this->file.'/content/'));
 
         $posts = [];
         if ($finder->hasResults()) {
@@ -166,6 +168,12 @@ class Document
         } else {
             return false;
         }
+
+        }else{
+            return [];
+        }
+
+
     }
 
     //kjarts code for getting and creating markdown files end here

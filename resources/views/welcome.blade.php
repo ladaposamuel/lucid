@@ -8,8 +8,10 @@
 					Revolutionizing Content Sharing With Absolute Ownership and Data
 					Privacy
 				</h1>
+				@guest
 				<a class="btn btn-primary" href="/register" target="_blank">Create Your Page For Free
 					<i class="pl-2 icon ion-ios-arrow-round-forward"></i></a>
+				@endguest
 			</div>
 		</div>
 	</div>

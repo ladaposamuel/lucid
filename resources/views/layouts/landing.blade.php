@@ -59,12 +59,14 @@
             <li class="nav-item">
                 <a href="get-started.php" class="nav-link mr-4">Get Started</a>
             </li>
+            @guest
             <li class="nav-item">
                 <a href="/register" class="nav-link mr-4">Register</a>
             </li>
             <li class="nav-item">
                 <a href="/login" class="navbar-btn btn btn-primary">Login</a>
             </li>
+            @endguest
             <!-- <li class="nav-item">
                 <a href="https://download.getlucid.app/lucid.zip" target="_blank" class="navbar-btn btn btn-primary">Download</a>
             </li> -->

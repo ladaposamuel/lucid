@@ -22,7 +22,8 @@ class pageController extends Controller
             return "=======404=========";
         }
         $user = $this->user($username);
-        return view('home', ['posts' => $feed,'user'=>$user]);
+         return view('home', ['posts' => $feed,'user'=>$user]);
+        
 
     }
 
