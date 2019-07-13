@@ -52,7 +52,7 @@ class HomeController extends Controller
      return view('timeline', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
      }else {
 
-        return view($user->username.'timeline', ['posts' => $post,'user'=>$user]);
+        return view($user->username.'/timeline', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
 
     }
   }
