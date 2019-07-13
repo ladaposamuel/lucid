@@ -31,8 +31,12 @@
           Traveller.
         </p>
         <p class="user-stats text-center">
-          <a href="#" class="pr-2">45 <span>following</span></a>
-          <a href="#">165 <span>followers</span></a>
+          @if (empty($fcount))
+          <a href="#" class="pr-2">0 <span>following</span></a>
+          @else
+          <a href="#" class="pr-2">{{$fcount}} <span>following</span></a>
+          @endif
+          <a href="#">0 <span>followers</span></a>
         </p>
 
         <div class="divider"></div>
