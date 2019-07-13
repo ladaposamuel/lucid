@@ -173,7 +173,7 @@ class Document
             return [];
         }
 
-        
+
     }
 
     //kjarts code for getting and creating markdown files end here
@@ -230,14 +230,14 @@ class Document
             $data= ext_rss::where('user_id', $user['id'])->get();
             //$data=[];
             $urlArray = json_decode($data, true);
-          //  $urlArray2 = array(
-            //    array('title' => $user['name'], 'url' => $url, 'desc' => '', 'link' => '', 'image' => $user['image'], 'time' => ''),
+            $urlArray2 = array(
+                array('title' => $user['name'], 'url' => $url, 'desc' => '', 'link' => '', 'image' => $user['image'], 'time' => ''),
                 //                array('name' => 'Sample',  'url' => 'rss/rss.xml')
-            //);
+            );
 
-          //  $result = array_merge($urlArray, $urlArray2);
+            $result = array_merge($urlArray, $urlArray2);
             //  print_r($result);
-            foreach ($urlArray as $url) {
+            foreach ($result as $url) {
               if (extfeeds::where('site', $url["title"])->exists() == 1) {
                 $feeds = DB::table('extfeeds')->where('user_id', $user['id'])->get();
             //  return $feeds;
@@ -372,7 +372,7 @@ $user = Auth::user();
         $Feed->setChannelElement('pubDate', date(\DATE_RSS, strtotime('2013-04-06')));
 
 
-        $Feed->setSelfLink(storage_path() . 'storage/rss/rss.xml');
+        $Feed->setSelfLink(storage_path('app/'.$this->file."/rss/rss.xml"));
         $Feed->setAtomLink('http://pubsubhubbub.appspot.com', 'hub');
 
         $Feed->addNamespace('creativeCommons', 'http://backend.userland.com/creativeCommonsRssModule');
@@ -404,7 +404,7 @@ $user = Auth::user();
                 $url = $parsedown->text($yaml['post_dir']);
                 $newItem = $Feed->createNewItem();
                 $newItem->setTitle(strip_tags($title));
-                $newItem->setLink("/post/" . strtolower($slug));
+                $newItem->setLink($this->file."/post/" . strtolower($slug));
                 $newItem->setDescription(substr(strip_tags($bd), 0, 100));
                 $newItem->setDate(date(\DateTime::RSS, strtotime($yaml['timestamp'])));
 
@@ -419,6 +419,7 @@ $user = Auth::user();
             $myFeed = $Feed->generateFeed();
 
             $handle = $this->file."/rss/rss.xml";
+          //  dd($handle);
             $doc = Storage::put($handle, $myFeed);
             //        fwrite($handle, $myFeed);
             //      fclose($handle);
