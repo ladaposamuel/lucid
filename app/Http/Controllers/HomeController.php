@@ -29,26 +29,33 @@ class HomeController extends Controller
       $post = new \Lucid\Core\Document($username);
             $feed = $post->fetchRss();
            // print_r($feed);
+           $count = new \Lucid\Core\Subscribe();
+               $fcount = $count->fcount();
+           //    $count = $count->count();
         return view('home', ['posts' => $feed]);
 
     }
-    public function timeline()
+    public function timeline($username)
     {
       $user = Auth::user();
-      $username = preg_split('/ +/', $user->name);
-      $path = $username[0];
-      // $ziki = new \Lucid\Core\Document($path);
-      //       $post = $ziki->fetchAllRss();
-      $post=[];
-            //$count = new Ziki\Core\Subscribe();
-            //$fcount = $count->fcount();
+      if ($username == $user->username) {
+
+      $username = $user->username;
+      $post = new \Lucid\Core\Document($username);
+
+            $post = $post->fetchAllRss();
             //$count = $count->count();
-//print_r(
-  //$post
-//);
-        return view('timeline', ['posts' => $post,'user'=>$user]);
+          //  print_r($post);
+          $count = new \Lucid\Core\Subscribe();
+              $fcount = $count->fcount();
+          //    $count = $count->count();
+     return view('timeline', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
+     }else {
+
+        return view($user->username.'timeline', ['posts' => $post,'user'=>$user]);
 
     }
+  }
     public function userimage($id, $image)
     {
         return Image::make(storage_path() . '/' . $id . '/images' . $image)->response();
@@ -68,14 +75,26 @@ class HomeController extends Controller
             //$fcount = $count->fcount();
             //$count = $count->count();
           //  print_r($post);
-
-     return view('microblog', ['posts' => $post,'user'=>$user]);
+          $count = new \Lucid\Core\Subscribe();
+              $fcount = $count->fcount();
+          //    $count = $count->count();
+     return view('microblog', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
      }else {
 
        return redirect($user->username.'/microblog');
      }
 
     }
+
+/*
+*
+*
+*
+
+*/
+
+
+
     public function savePost(Request $request)
     {
       //dd($request->all());
@@ -95,7 +114,7 @@ $this->validate($request, [
   $username = $user->username;
   $post = new \Lucid\Core\Document($username);
   $result = $post->create($title, $body, $images, $extra);
-return redirect($username.'/microblog')->with('msg', 'Post Published');
+return redirect($username.'/timeline')->with('msg', 'Post Published');
     }
 
     public function subscribe()
@@ -112,6 +131,9 @@ return redirect($username.'/microblog')->with('msg', 'Post Published');
 //print_r(
   //$post
 //);
+$count = new \Lucid\Core\Subscribe();
+    $fcount = $count->fcount();
+//    $count = $count->count();
         return view('subscribe', ['user'=>$user]);
 
     }

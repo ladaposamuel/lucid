@@ -27,7 +27,7 @@
   </div>
 </form>
 <!-- End Editor -->
-
+<br/>
 <h5 class="font-weight-bold mb-5">Latest stories</h5>
  <!-- Begin content -->
 

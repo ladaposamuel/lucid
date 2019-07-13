@@ -240,9 +240,9 @@ public function extract($url)
   }
   public function count()
   {
-    $db = "storage/rss/subscription.json";
+    $user = Auth::user();
+    $file= ext_rss::where('user_id', $user['id'])->get();
 
-    $file = FileSystem::read($db);
     $data=json_decode($file,true);
     if(!empty($data)){
       unset($file);
@@ -251,9 +251,9 @@ public function extract($url)
   }
   public function fcount()
   {
-    $db = "storage/rss/subscriber.json";
+    $user = Auth::user();
+    $file= ext_rss::where('user_id', $user['id'])->get();
 
-    $file = FileSystem::read($db);
     $data=json_decode($file,true);
     if(!empty($data)){
       unset($file);

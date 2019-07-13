@@ -314,39 +314,28 @@
 </div>
 <div class="col-11 col-sm-1"></div>
 
-
-         <!-- Feed listing -->
-      @foreach ($posts as $feeds)
-      @if ($feeds['img'] ="")
-      <div class="post-content">
-        <div class="post-image d-none d-lg-flex d-xl-flex d-md-flex">
-          <img src="{{$feeds['img']}}" class="img-fluid post-img"
-            alt="{{$feeds['title']}}" />
-        </div>
-        <div class="post-content-body">
-          <p class="post-date">{{$feeds['date']}}</p>
-          <h3 class="post-title">
-            {{$feeds['title']}}
-          <p class="post-body">
-          {{$feeds['desc']}}
-          </p>
-        </div>
-      </div>
-      @endif
-      <div class="post-content">
-        <div class="post-content-body">
-          <p class="post-date">{{$feeds['date']}}</p>
-          <h3 class="post-title">
-            {{$feeds['title']}}
-          </h3>
-          <p class="post-body">
-            {{$feeds['desc']}}
-          </p>
-        </div>
-      </div>
-      @endforeach
       <!-- Feed section ends here -->
 </div>
+<h5 class="font-weight-bold mb-5">Latest stories</h5>
+ <!-- Begin content -->
+
+@foreach ($posts as $feeds)
+<div class="post-content">
+  @if (empty($feeds->site_image))
+<img src="{{ asset('img/logo.jpg') }}"  style="border-radius:100%;height:60px; height:60px" class="img-fluid" alt="user" />
+@else
+<img src="{{ $feeds->site_image}}"  style="border-radius:100%;height:60px; height:60px" class="img-fluid" alt="user" />
+@endif
+  <div class="post-content-body">
+      <a href="{{$feeds->link}}"> <h5 class="font-weight-bold">{{$feeds->title}}</h5></a>
+      <p class="">
+      {{$feeds->des}}
+      </p>
+      <p class="">{{$feeds->site}} -<small class="text-muted">{{$feeds->date}} </small></p>
+    </div>
+</div>
+
+@endforeach
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
   integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
