@@ -30,7 +30,7 @@ class HomeController extends Controller
             $feed = $post->fetchRss();
            // print_r($feed);
           // $count = new \Lucid\Core\Subscribe();
-               $fcount = “1”;
+               $fcount = 1;
            //    $count = $count->count();
         return view('home', ['posts' => $feed]);
 
@@ -47,7 +47,7 @@ class HomeController extends Controller
             //$count = $count->count();
           //  print_r($post);
          // $count = new \Lucid\Core\Subscribe();
-              $fcount = “1”;
+              $fcount = 1;
               //$count = $count->count();
      return view('timeline', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
      }else {
@@ -76,7 +76,7 @@ class HomeController extends Controller
             //$count = $count->count();
           //  print_r($post);
         //  $count = new \Lucid\Core\Subscribe();
-              $fcount = “1”;
+              $fcount = 1;
           //    $count = $count->count();
      return view('microblog', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
      }else {
