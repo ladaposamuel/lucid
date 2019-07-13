@@ -5,6 +5,7 @@
 @endsection
 @section('content')
 <!-- Editor -->
+@auth
 <p>Write a Post</p>
 <form method="POST" action="/save-post" enctype="multipart/form-data" class="mb-3">
     @csrf
@@ -24,7 +25,7 @@
     <button type="submit" class="btn bg-alt text-white">Publish</button>
   </div>
 </form>
-
+@endauth
 
 <!-- Beginning of Post Content -->
 

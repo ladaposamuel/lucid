@@ -103,6 +103,6 @@ public function store_settings($path, $user_id)
 
 public function logout($username){
     Auth::logout();
-    return redirect($username.'/home');
+    return redirect($username);
 }
 }
