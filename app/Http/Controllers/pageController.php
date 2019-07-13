@@ -23,7 +23,7 @@ class pageController extends Controller
         }
         $user = $this->user($username);
       //  $count = new \Lucid\Core\Subscribe();
-            $fcount = “1”;
+            $fcount = 1;
         //    $count = $count->count();
          return view('home', ['posts' => $feed,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
 
@@ -42,7 +42,7 @@ class pageController extends Controller
             return redirect('/'.$username.'/home');
         }
       //  $count = new \Lucid\Core\Subscribe();
-            $fcount = “1”;
+            $fcount = 1;
         //    $count = $count->count();
         return view('single-blog-post',compact('post','user'),['fcount'=>$fcount, 'count' => $count ]);
     }
@@ -56,7 +56,7 @@ class pageController extends Controller
         $app  = new \Lucid\Core\Document($username);
         $posts=$app->get();
       //  $count = new \Lucid\Core\Subscribe();
-            $fcount = “1”;
+            $fcount = 1;
           //  dd($fcount);
         //    $count = $count->count();
         return view('post',compact('user','posts'), ['fcount'=>$fcount, 'count' => $count ]);
