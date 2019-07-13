@@ -48,7 +48,7 @@ class HomeController extends Controller
           //  print_r($post);
           $count = new \Lucid\Core\Subscribe();
               $fcount = $count->fcount();
-          //    $count = $count->count();
+              $count = $count->count();
      return view('timeline', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
      }else {
 
