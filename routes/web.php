@@ -38,7 +38,8 @@ Route::post('save-post','HomeController@savePost');
 //     return view('posts');
 // });
 Route::get('settings', function (){
-    return view('settings', 'fcount' => 1, 'count' => 1);
+     $user = Auth::user();
+    return view('settings', ['user'=>$user,'fcount' => 1, 'count' => 1]);
 });
 
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
