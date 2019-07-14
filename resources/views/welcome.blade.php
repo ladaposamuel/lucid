@@ -12,7 +12,7 @@
 				<a class="btn btn-primary" href="/register" target="_blank">Create Your Page For Free
 					<i class="pl-2 icon ion-ios-arrow-round-forward"></i></a>
 				@else
-				<a class="btn btn-primary" href="{{ Auth::user()->username}}" target="_blank">Visit your blog 
+				<a class="btn btn-primary" href="{{ Auth::user()->username}}" target="_blank">Visit your blog
 					<i class="pl-2 icon ion-ios-arrow-round-forward"></i></a>
 				@endguest
 			</div>
@@ -33,13 +33,13 @@
 <section class="feature-section">
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-lg-12 text-center text-white">
+			<div class="col-lg-12 text-center text-white pb-4">
 				<p class="mb-0">Features of Lucid</p>
 				<h2>A Better Way to Share Your Ideas</h2>
 			</div>
 		</div>
-		<div class="row text-white pt-4">
-			<div class="col-md-6">
+		<div class="row text-white">
+			<div class="col-md-6 my-3">
 				<div class="feat-col">
 					<img src="{{ asset('img/14019879701543984325.png') }}" alt="Tell Your Story on Lucid" class="img-fluid pb-4" />
 					<h5>Tell Your Story on Lucid</h5>
@@ -49,7 +49,7 @@
 					</p>
 				</div>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-6 my-3">
 				<div class="feat-col">
 					<img src="{{ asset('img/17101174831552994197.png ') }}" alt="You Are in Safe Hands" class="img-fluid pb-4" />
 					<h5>You Are in Safe Hands</h5>
@@ -60,9 +60,7 @@
 					</p>
 				</div>
 			</div>
-		</div>
-		<div class="row text-white pt-4">
-			<div class="col-md-6">
+			<div class="col-md-6 my-3">
 				<div class="feat-col">
 					<img src="{{ asset('img/16143869721535958154.png') }}" alt="Your Right to Privacy" class="img-fluid pb-4" />
 					<h5>Your Right to Privacy</h5>
@@ -73,7 +71,7 @@
 					</p>
 				</div>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-6 my-3">
 				<div class="feat-col">
 					<img src="{{ asset('img/4804552381535029667.png') }}" alt="In One Simple Set up" class="img-fluid pb-4" />
 					<h5>In One Simple Set up</h5>
@@ -135,11 +133,11 @@
 							<li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
 							<li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
 						</ol>
-						<a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+						<a class="carousel-control-prev d-none d-lg-flex d-xl-flex" href="#carouselExampleCaptions" role="button" data-slide="prev">
 							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 							<span class="sr-only">Previous</span>
 						</a>
-						<a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+						<a class="carousel-control-next d-none d-lg-flex d-xl-flex" href="#carouselExampleCaptions" role="button" data-slide="next">
 							<span class="carousel-control-next-icon" aria-hidden="true"></span>
 							<span class="sr-only">Next</span>
 						</a>

@@ -49,7 +49,7 @@
             <i class="icon ion-md-list ml-2"></i>
         </button>
         <div id="navbarSupportedContent" class="collapse navbar-collapse">
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ml-auto text-right">
             <li class="nav-item">
                 {{--<a href="http://demo.getlucid.app" target="_blank" class="nav-link mr-4">Demo</a>--}}
             </li>
