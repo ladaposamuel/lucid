@@ -35,7 +35,7 @@
         <div class="sidebar-nav pt-2">
           <ul>
             <li><a href="/{{ $user->username}}/posts">Posts</a></li>
-            <li><a href="/{{ $user->username}}/microblog">Thoughts</a></li>
+            <li><a href="/{{ $user->username}}/thoughts">Thoughts</a></li>
             <li><a href="#">Videos</a></li>
             <li><a href="#">Contact</a></li>
           </ul>

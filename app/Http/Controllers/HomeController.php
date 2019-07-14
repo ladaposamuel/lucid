@@ -62,7 +62,7 @@ class HomeController extends Controller
     }
 
 
-    public function microblog($username)
+    public function thoughts($username)
     {
       $user = Auth::user();
       if ($username == $user->username) {
@@ -78,10 +78,10 @@ class HomeController extends Controller
         //  $count = new \Lucid\Core\Subscribe();
               $fcount = 1;
           $count = 1;
-     return view('microblog', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
+     return view('thoughts', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
      }else {
 
-       return redirect($user->username.'/microblog');
+       return redirect($user->username.'/thoughts');
      }
 
     }
