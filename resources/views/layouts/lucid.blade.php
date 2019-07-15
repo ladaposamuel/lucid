@@ -15,6 +15,7 @@
   <link href="{{ asset('css/style.css') }}" rel="stylesheet">
   <link href="{{ asset('css/main-style.css') }}" rel="stylesheet">
   <link href="{{ asset('css/tabletcss.css') }}" rel="stylesheet">
+  <link href="https://cdn.quilljs.com/1.3.4/quill.snow.css" rel="stylesheet"> 
 </head>
 
 <body>

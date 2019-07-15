@@ -20,7 +20,7 @@
         <img src="{{URL::to('/')}}/storage/{{$post['crawlerImage']}}" alt="" style="width:100%"class="my-4">
         @endisset
         <div class="blog-content">
-            {{ $post['body'] }}
+            {!! $post['body'] !!}
         </div>
     </div>
 </div>

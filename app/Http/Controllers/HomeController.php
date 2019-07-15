@@ -113,7 +113,7 @@ $this->validate($request, [
   $user = Auth::user();
   $username = $user->username;
   $post = new \Lucid\Core\Document($username);
-  $result = $post->create($title, $body, $images, $extra);
+  $result = $post->create($title, $body, $tag="", $images, $extra);
 return redirect($username.'/timeline')->with('msg', 'Post Published');
     }
 
@@ -136,6 +136,30 @@ $count = new \Lucid\Core\Subscribe();
 //    $count = $count->count();
         return view('subscribe', ['user'=>$user]);
 
+    }
+
+
+    public function publish(Request $request,$username) {
+
+        $title = isset($request->title) ? $request->title : '';
+        $body = $request->postVal;
+        $tags = $request->tags;
+      
+        
+          $initial_images = array_filter($request->all(), function ($key) {
+            return preg_match('/^img-\w*$/', $key);
+        }, ARRAY_FILTER_USE_KEY);
+        
+        $images = [];
+        foreach ($initial_images as $key => $value) {
+            $newKey = preg_replace('/_/', '.', $key);
+            $images[$newKey] = $value;
+        }
+      
+        $extra = "";
+        $app = new \Lucid\Core\Document($username);
+        $result = $app->create($title, $body, $tags, $images, $extra);
+        return json_encode($result);
     }
 
 }

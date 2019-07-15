@@ -36,8 +36,9 @@ class Document
 
     //for creating markdown files
     //kjarts code here
-    public function create($title, $content, $image, $extra)
+    public function create($title, $content, $tag="", $image, $extra)
     {
+       
         date_default_timezone_set("Africa/Lagos");
         $time = date(DATE_RSS, time());
         $unix = strtotime($time);
@@ -58,7 +59,8 @@ class Document
         }
 
         if (!empty($image)) {
-                $url = $this->file."/images/";
+            
+              $url = $this->file."/images/";
               $path =  Storage::disk('public')->put($url, $image);
 
               $yamlfile['image'] = $path;
@@ -166,7 +168,7 @@ class Document
             $this->array_sort_by_column($posts,'created_at');
             return $posts;
         } else {
-            return false;
+            return [];
         }
 
         }else{
@@ -708,7 +710,7 @@ $user = Auth::user();
                 $url = $parsedown->text($yaml['post_dir']);
               //  $content['tags'] = $tags;
                 $content['title'] = strip_tags($title);
-                $content['body'] = strip_tags($bd);
+                $content['body'] = $bd;
                 $content['url'] = $url;
                 $content['timestamp'] = $time;
                 $content['date'] = date('d M Y ', $post);

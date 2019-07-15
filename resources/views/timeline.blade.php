@@ -226,18 +226,14 @@
     <form method="POST" class="timeline-editor" id="editor-form">
       <div class="micro-blog-enclosure row pt-3 pb-3">
         <div class="col-12">
-          <div class="row">
-            <div class="col-12 text-right">
-              <span id="num_char" class="badge badge-warning">Micro-Blog Mode</span>
-            </div>
-          </div>
+          
           <div class="white-background mt-3 mb-3">
           <div class="row pt-3 pb-2">
             <div class="col-12">
               <div class="row form-group">
                 <div class="col-12" id="titleBox">
                   <label for="new-post-title" class="sr-only">Title</label>
-                  <input type="text" id="new-post-title" class="form-control hide" placeholder="Title"/>
+                  <input type="text" id="new-post-title" class="form-control show" placeholder="Title"/>
                 </div>
                 <div class="col-12">
                   <div id="editor">
@@ -291,9 +287,6 @@
         </div>
         <div class="col-12">
           <div class="row form-row flex-row-reverse">
-            <div class="col-3 col-sm-2 col-md-1">
-              <input type="reset" class="form-control btn-sm btn btn-primary canel-post" value="Cancel">
-            </div>
             <div class="col-3 col-sm-3 col-md-2">
               <input type="button" class="form-control btn-sm btn btn-primary save-draft" value="Save Draft"/>
             </div>
@@ -316,32 +309,44 @@
 
       <!-- Feed section ends here -->
 </div>
-<h5 class="font-weight-bold mb-5">Latest stories</h5>
- <!-- Begin content -->
 
-@foreach ($posts as $feeds)
-<div class="post-content">
-  @if (empty($feeds->site_image))
-<img src="{{ asset('img/logo.jpg') }}"  style="border-radius:100%;height:60px; height:60px" class="img-fluid" alt="user" />
-@else
-<img src="{{ $feeds->site_image}}"  style="border-radius:100%;height:60px; height:60px" class="img-fluid" alt="user" />
-@endif
-  <div class="post-content-body">
-      <a href="{{$feeds->link}}"> <h5 class="font-weight-bold">{{$feeds->title}}</h5></a>
-      <p class="">
-      {{$feeds->des}}
-      </p>
-      <p class="">{{$feeds->site}} -<small class="text-muted">{{$feeds->date}} </small></p>
+ <!-- Begin content -->
+<div class="container" >
+  <div class="row">
+    <div class="col-md-12">
+       <h5 class="font-weight-bold mt-5 w-50" style="border:1px solid red;">Latest stories</h5>
     </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-md-12">
+    @foreach ($posts as $feeds)
+      <div class="post-content">
+        @if (empty($feeds->site_image))
+      <img src="{{ asset('img/logo.jpg') }}"  style="border-radius:100%;height:60px; height:60px" class="img-fluid" alt="user" />
+      @else
+      <img src="{{ $feeds->site_image}}"  style="border-radius:100%;height:60px; height:60px" class="img-fluid" alt="user" />
+      @endif
+        <div class="post-content-body">
+            <a href="{{$feeds->link}}"> <h5 class="font-weight-bold">{{$feeds->title}}</h5></a>
+            <p class="">
+            {{$feeds->des}}
+            </p>
+            <p class="">{{$feeds->site}} -<small class="text-muted">{{$feeds->date}} </small></p>
+          </div>
+      </div>
+@endforeach
+    </div>
+  </div>
 </div>
 
-@endforeach
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
   integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
   integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
   integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://cdn.quilljs.com/1.3.4/quill.js"></script>
   <script language="JavaScript" type="text/javascript">
    function unsubscribe(id,data)
    {
@@ -389,49 +394,15 @@
     },
     placeholder: 'Compose an epic...'
   });
-  $(".ql-toolbar").css("display", "none");
-  var content_id = 'editor';
-
-  max = 50;
+  $(".ql-toolbar").css("display", "block");
+  
   //binding keyup/down events on the contenteditable div
-  $('#'+content_id).keyup(function(e){ check_charcount(content_id, max, e); });
-  $('#'+content_id).keydown(function(e){ check_charcount(content_id, max, e); });
+  // $('#'+content_id).keyup(function(e){ check_charcount(content_id, max, e); });
+  // $('#'+content_id).keydown(function(e){ check_charcount(content_id, max, e); });
 
-  function check_charcount(content_id, max, e)
-  {
-
-    if($('#'+content_id).text().length > max)
-    {
-
-      //$('#new-post-title').addClass('form-control show');
-      document.getElementById('new-post-title').setAttribute('class','form-control show')
-      document.getElementById("num_char").innerHTML = "Full Blog Mode";
-      $(".ql-toolbar").css("display", "block");
-    }else{
-      $(".ql-toolbar").css("display", "none");
-      //$('#new-post-title').removeClass('form-control show');
-      document.getElementById('new-post-title').classList.remove("form-control show");
-      document.getElementById("num_char").innerHTML = "Micro-blog Mode";
-
-    }
-  }
+  
 
   // code for editormode switching ends here..
-  // and starts here again by problemSolved
-  window.onload = function()
-  {
-    let currentPage = window.localStorage.getItem('page');
-    let issetTitle=window.localStorage.getItem('title');
-    if(currentPage == 'Published Posts')
-    {
-      if(issetTitle)
-      {
-        //$('#new-post-title').addClass('form-control show');
-        document.getElementById('new-post-title').setAttribute('class','form-control show')
-      }
-
-    }
-  }
 
   // to toggle between active and inactive sidebar nav links -----------------------
   /*NB this is not want we wnat but after delebration, we will get a solution for it..
@@ -439,82 +410,23 @@
   The best way i think is to detect the current URL*/
 
   // Get the container element
-  var navLinks = document.getElementById("myNavLinks");
+  // var navLinks = document.getElementById("myNavLinks");
 
-  // Get all buttons with class="btn" inside the container
-  var navLinks = navLinks.getElementsByClassName("navLink");
+  // // Get all buttons with class="btn" inside the container
+  // var navLinks = navLinks.getElementsByClassName("navLink");
 
-  // Loop through the buttons and add the active class to the current/clicked button
-  for (var i = 0; i < navLinks.length; i++) {
-    navLinks[i].addEventListener("click", function() {
-      var currentNavItem = document.getElementsByClassName("active");
-      currentNavItem[0].className = currentNavItem[0].className.replace(" active", "");
-      this.className += " active";
-    });
-  }
+  // // Loop through the buttons and add the active class to the current/clicked button
+  // for (var i = 0; i < navLinks.length; i++) {
+  //   navLinks[i].addEventListener("click", function() {
+  //     var currentNavItem = document.getElementsByClassName("active");
+  //     currentNavItem[0].className = currentNavItem[0].className.replace(" active", "");
+  //     this.className += " active";
+  //   });
+  // }
   // Nav item state change ends here --------------------------------------------------
 </script>
 
-<!--Email login modal (uncomment this code for modal to work, but then, the side war won't work-->
-<script>
-  const $$ = document.querySelector.bind(document)
-  let congrat = $$('.login-mail-sent')
-  let form_l = $$('.login-form')
-  let message = $$('.magic-msg')
 
-  // new scripts start here
-  let loader_container = $$('#loader-container');
-  let loader_content = $$('#loader-content')
-  let mail_sent = $$('.mail-sent');
-  let mail_error = $$('.mail-error');
-
-  // new scripts end here
-  congrat.style.display = 'none';
-  let sendEmail = () => {
-
-    loader_container.style.display = 'initial'; // new script
-
-    let param = $$('.email-input').value;
-    let host = $$('.host').value;
-    let url = `https://auth.techteel.com/api/login/email?address=${param}&domain=${host}`;
-    fetch(url)
-      .then((res) => { return res.json() })
-      .then((data) => {
-        console.log(data)
-        if (data.error === false) {
-          // changing from confirmation modal to full page
-
-          //form_l.style.display = 'none';
-          //congrat.style.display = 'block';
-          //message.innerHTML = "Magic link sent successfully, check your email.";
-          loader_content.style.display = 'none';
-          mail_sent.style.display = 'block';
-
-        }
-        else {
-          // form_l.style.display = 'none';
-          // congrat.style.display = 'block';
-          // message.innerHTML = data.message;
-          loader_content.style.display = 'none';
-          mail_error.style.display = 'block';
-        }
-
-      })
-      .catch((e) => {
-        console.log(e)
-      })
-  };
-  let closeModal = () => {
-    loader_container.style.display = 'none'
-  }
-  $$('.email-login-button').addEventListener('click', sendEmail);
-  // for close button on loader
-  document.addEventListener('click', function(event){
-    if(event.target.classList.contains('loader-close-button')){
-      closeModal();
-    }
-  }, false)
-</script>
 
 <!-- Convert to markdown script -->
 <script src="https://unpkg.com/turndown/dist/turndown.js"></script>
@@ -573,11 +485,14 @@
           return acc;
         }, []);
 
+        
+
         imageURIs.forEach(imageURI => {
           const [, fullURI, ext, uriData] = imageURI.match(/\!\[\]\((data:image\/(\w+);base64,([^)]*))\)/);
           const id = Math.random().toString(36).substr(2, 10);
           const newImgName = `img-${id}.${ext}`;
 
+           
           // replace the image URI everywhere it occurs in the markdown
           let stillMatching = true;
           while (stillMatching) {
@@ -591,10 +506,12 @@
           // add this info to the form data being sent to the backend
           formData.set(newImgName, uriData);
         });
+        
       }
 
 
     formData.set('postVal', markdown);
+    
 
     // get tags
     const selected = document.querySelectorAll('.tags:checked');
@@ -603,57 +520,39 @@
     formData.set('tags', selectedTags);
 
     // send the form data
-
-    if(currentPage == 'Edit Post')
-    {
-      fetch(newPostIsBeingCreated ? '/edit-post' : '/saveDraft', {
+    
+      fetch(newPostIsBeingCreated ? 'publish' : '/{{$user->username}}/saveDraft', {
       method: 'POST',
-      body: formData
+      body: formData,
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+       }
       }).then(res => res.json()).then((res) => {
-        //console.log(JSON.stringify(res));
+        console.log(JSON.stringify(res));
 
-        if(res.error == false && res.action == 'update')
-        {
+        // if(res.error == false && res.action == 'publish')
+        // {
+        //   window.localStorage.setItem('publish','success');
+        //   window.location = '/{{$user->username}}/timeline';
 
-          swal("Good job!", "You posts was successfully updated.", "success");
-        }
+        // }
+        // else if(res.error == false && res.action == 'savedToDrafts')
+        // {
+        //   window.localStorage.setItem('savedToDrafts','success');
+        //   window.location = '/{{$user->username}}/timeline';
+        // }
 
       }).catch((err) => {
         alert(`Failed with the following message: ${err.message}`);
       });
-    }
-    else
-    {
-      fetch(newPostIsBeingCreated ? './publish' : './saveDraft', {
-      method: 'POST',
-      body: formData
-      }).then(res => res.json()).then((res) => {
-        //console.log(JSON.stringify(res));
-
-        if(res.error == false && res.action == 'publish')
-        {
-          window.localStorage.setItem('publish','success');
-          window.location = './timeline';
-
-        }
-        else if(res.error == false && res.action == 'savedToDrafts')
-        {
-          window.localStorage.setItem('savedToDrafts','success');
-          window.location = './timeline';
-        }
-
-      }).catch((err) => {
-        alert(`Failed with the following message: ${err.message}`);
-      });
-    }
-
+    
   }
   else{
     swal({
           text: "Sorry,the post field is required!",
           icon: "error",
         });
-  }
+   }
   }
   // sleekx code ends here
   $(document).ready(function () {
@@ -679,161 +578,8 @@
 
 
 </script>
-<script>
-  //submit about section form starts here
-  var editAboutForm = document.querySelector('.edit-about');
-  editAboutForm.onsubmit = document.querySelector('button[name="editAbout"]').addEventListener('click', function(event){
-    event.preventDefault();
-    const AboutFormData = new FormData(document.querySelector('#aboutFormField'));
-    const about = document.querySelector("#aboutMe").value;
-    if(about == '' )
-    {
-      $('#aboutModal').modal('hide');
-      swal({
-          text: "Oops!You can't save an empty content.",
-          icon: "info",
-        });
-    }
-    else
-    {
-      fetch('/edit-about', {
-      method: 'POST',
-      body: AboutFormData
-      }).then(res => res.json()).then((res) => {
-        //console.log(JSON.stringify(res));
-
-        if(res.success == true)
-        {
-          window.localStorage.setItem('aboutsaved','success');
-          window.location = '/about';
-
-        }
-        else if(res.error == true)
-        {
-          window.localStorage.setItem('error','true');
-          window.location = '/about';
-        }
-
-      }).catch((err) => {
-        alert(`Failed with the following message: ${err.message}`);
-      });
-    }
-  });
-
-  $(document).ready(function () {
-    const PageSaved =window.localStorage.getItem('aboutsaved');
-    const ifErrorOcurred =window.localStorage.getItem('error');
-    if(PageSaved == 'success')
-    {
-      window.localStorage.removeItem('aboutsaved');
-      swal({
-          text: "Your changes has been saved successfully!",
-          icon: "success",
-        });
-    }
-    else if (ifErrorOcurred == 'true' )
-    {
-      window.localStorage.removeItem('error');
-      swal({
-          text: "Sorry! An error occurred while trying to save your changes",
-          icon: "error",
-        });
-    }
-  });
-  //submit about section form ends here
-
-  var contactForm = document.querySelector('.contact-form');
-  contactForm.onsubmit = document.querySelector('button[name="sendMail"]').addEventListener('click', function(event){
-    event.preventDefault();
-    const ContactFormData = new FormData(document.querySelector('#contactFormFields'));
-    // const name = document.querySelector("#guestName").value;
-    // const email = document.querySelector("#guestEmail").value;
-    // const subject = document.querySelector("#guestEmail").value;
-    fetch('/send',{
-      method: 'POST',
-      body: ContactFormData
-    }).then(res=>res.json()).then((res)=>{
-      //console.log(JSON.stringify(res));
-      if(res.FormFieldError){
-        swal({
-          text: res.FormFieldError,
-          icon: "error",
-        });
-      }else if(res.serverError)
-      {
-        swal({
-          text: res.serverError,
-          icon: "warning",
-        });
-      }else if(res.success)
-      {
-        document.querySelector('#contactFormFields').reset();
-        swal({
-          text: res.success,
-          icon: "success",
-        });
-      }
-
-      if(res.nameError)
-      {
-        const nameErrorContainer=document.querySelector('#nameError');
-        nameErrorContainer.style.display='block';
-        nameErrorContainer.innerHTML = res.nameError;
-      }
-      else
-      {
-        const nameErrorContainer=document.querySelector('#nameError');
-        nameErrorContainer.style.display='none';
-        nameErrorContainer.innerHTML = '';
-      }
-
-      if(res.emailError)
-      {
-        const emailErrorContainer=document.querySelector('#emailError');
-        emailErrorContainer.style.display='block';
-        emailErrorContainer.innerHTML = res.emailError;
-      }
-      else
-      {
-        const emailErrorContainer=document.querySelector('#emailError');
-        emailErrorContainer.style.display='none';
-        emailErrorContainer.innerHTML = '';
-      }
-
-      if(res.subjectError)
-      {
-        const subjectErrorContainer=document.querySelector('#SubjectError');
-        subjectErrorContainer.style.display='block';
-        subjectErrorContainer.innerHTML = res.subjectError;
-      }
-      else
-      {
-        const subjectErrorContainer=document.querySelector('#SubjectError');
-        subjectErrorContainer.style.display='none';
-        subjectErrorContainer.innerHTML = "";
-      }
-
-      if(res.msgError)
-      {
-        const msgErrorContainer=document.querySelector('#msgError');
-        msgErrorContainer.style.display='block';
-        msgErrorContainer.innerHTML = res.msgError;
-      }
-      else
-      {
-        const msgErrorContainer=document.querySelector('#msgError');
-        msgErrorContainer.style.display='none';
-        msgErrorContainer.innerHTML = "";
-      }
 
 
-    }).catch((err)=>{
-      alert(`Failed with the following message: ${err.message}`);
-    });
-
-  });
-</script>
-<script src="//cdn.quilljs.com/1.3.6/quill.core.js"></script>
 <footer>
   <div class="container-fluid">
     <div class="row footer">
@@ -844,7 +590,7 @@
   </div>
 </footer>
 <!-- alert -->
-<script src="./resources/themes/ghost/assets/js/toast.js"></script>
+<!-- <script src="./resources/themes/ghost/assets/js/toast.js"></script> -->
 
 </html>
 @endsection
