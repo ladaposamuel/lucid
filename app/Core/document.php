@@ -85,9 +85,9 @@ class Document
 
         // create slug by first removing spaces
         $striped = str_replace(' ', '-', $title);
-        // then removing encoded html chars
+       
         $striped = preg_replace("/(&#[0-9]+;)/", "", $striped);
-        //$yamlfile['slug'] = $striped . "-{$unix}";
+        
         $yamlfile['slug'] = $unix;
         $yamlfile['timestamp'] = $time;
         $yamlfile->setContent($content);
@@ -356,7 +356,7 @@ class Document
             krsort($feed);
             return $feed;
         } else {
-            return false;
+            return [];
         }
         krsort($feed);
         return $feed;

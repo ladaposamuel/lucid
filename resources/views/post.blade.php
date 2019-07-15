@@ -436,7 +436,7 @@
           let stillMatching = true;
           while (stillMatching) {
             if (markdown.includes(fullURI)) {
-              markdown = markdown.replace(fullURI, `/storage/images/${newImgName}`);
+              markdown = markdown.replace(fullURI, `/storage/{{$user->username}}/images/${newImgName}`);
             } else {
               stillMatching = false;
             }
@@ -488,7 +488,7 @@
   }
   else{
     swal({
-          text: "Sorry,the both fields are required!",
+          text: "Sorry,both fields are required!",
           icon: "error",
         });
    }

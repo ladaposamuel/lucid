@@ -16,17 +16,18 @@ class pageController extends Controller
 
     public function homePage($username)
     {
-        $ziki = new \Lucid\Core\Document($username);
-        $feed =$ziki->fetchRss();
+        
         if(!$this->user($username)) {
             return "=======404=========";
         }
+        $app = new \Lucid\Core\Document($username);
+        $feed =$app->fetchRss();
         $user = $this->user($username);
-      //  $count = new \Lucid\Core\Subscribe();
+      
             $fcount = 1;
-         $count = 1;
-         return view('home', ['posts' => $feed,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
-
+            $count = 1;
+         $userposts=$app->get();
+         return view('home', ['posts' => $feed,'user'=>$user,'fcount'=>$fcount, 'count' => $count,"userposts"=>$userposts]);
 
     }
 
@@ -55,10 +56,10 @@ class pageController extends Controller
         $user = $this->user($username);
         $app  = new \Lucid\Core\Document($username);
         $posts=$app->get();
-      //  $count = new \Lucid\Core\Subscribe();
+    
             $fcount = 1;
-          //  dd($fcount);
-      $count = 1;
+         
+            $count = 1;
         return view('post',compact('user','posts'), ['fcount'=>$fcount, 'count' => $count ]);
     }
 }
