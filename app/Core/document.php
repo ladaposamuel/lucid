@@ -59,11 +59,21 @@ class Document
         }
 
         if (!empty($image)) {
-            
-              $url = $this->file."/images/";
+            $url = $this->file."/images/";
+            if(is_array($image)) {
+                foreach ($image as $key => $value) {
+                    $img_path = storage_path('app/public/'.$this->file."/images/".$key);
+                    $decoded = base64_decode($image[$key]);
+                    FileSystem::write($img_path,$decoded);
+                    $yamlfile['image'] = $url.$key;
+                }
+            } else {
+               
               $path =  Storage::disk('public')->put($url, $image);
-
               $yamlfile['image'] = $path;
+            }
+
+              
         }
 
         if (!$extra) {
