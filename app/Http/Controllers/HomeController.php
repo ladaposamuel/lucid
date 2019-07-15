@@ -29,8 +29,8 @@ class HomeController extends Controller
       $post = new \Lucid\Core\Document($username);
             $feed = $post->fetchRss();
            // print_r($feed);
-           $count = new \Lucid\Core\Subscribe();
-               $fcount = $count->fcount();
+          // $count = new \Lucid\Core\Subscribe();
+               $fcount = 1;
            //    $count = $count->count();
         return view('home', ['posts' => $feed]);
 
@@ -46,9 +46,9 @@ class HomeController extends Controller
             $post = $post->fetchAllRss();
             //$count = $count->count();
           //  print_r($post);
-          $count = new \Lucid\Core\Subscribe();
-              $fcount = $count->fcount();
-              $count = $count->count();
+         // $count = new \Lucid\Core\Subscribe();
+              $fcount = 1;
+              $count = 1;
      return view('timeline', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
      }else {
 
@@ -62,7 +62,7 @@ class HomeController extends Controller
     }
 
 
-    public function microblog($username)
+    public function thoughts($username)
     {
       $user = Auth::user();
       if ($username == $user->username) {
@@ -75,13 +75,13 @@ class HomeController extends Controller
             //$fcount = $count->fcount();
             //$count = $count->count();
           //  print_r($post);
-          $count = new \Lucid\Core\Subscribe();
-              $fcount = $count->fcount();
-          //    $count = $count->count();
-     return view('microblog', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
+        //  $count = new \Lucid\Core\Subscribe();
+              $fcount = 1;
+          $count = 1;
+     return view('thoughts', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
      }else {
 
-       return redirect($user->username.'/microblog');
+       return redirect($user->username.'/thoughts');
      }
 
     }
@@ -131,10 +131,10 @@ return redirect($username.'/timeline')->with('msg', 'Post Published');
 //print_r(
   //$post
 //);
-$count = new \Lucid\Core\Subscribe();
-    $fcount = $count->fcount();
-//    $count = $count->count();
-        return view('subscribe', ['user'=>$user]);
+//$count = new \Lucid\Core\Subscribe();
+ $fcount = 1;
+          $count = 1;
+        return view('subscribe', ['user'=>$user,'fcount'=>$fcount, 'count' => $count]);
 
     }
 

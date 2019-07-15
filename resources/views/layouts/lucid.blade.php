@@ -26,31 +26,23 @@
       <!-- Beginning of Sidebar -->
       <div class="col-lg-4 pb-2 pt-2">
         <a href="/{{ $user->username}}"><img id="user-avatar" src="{{$user->image}}" class="img-fluid" /></a>
-        <h3 id="user-name">{{ $user->username}}</h3>
-        <p id="user-bio">
+        <h3 id="user-name" class="py-2">{{ $user->username}}</h3>
+        <p id="user-bio" class="pb-2">
           Front-end developer, Back-end Developer, UI/UX developer, Friend and
           Traveller.
         </p>
-        <p class="user-stats text-center">
-          @if (empty($fcount))
-          <a href="#" class="pr-2">0 <span>following</span></a>
-          @else
-          <a href="#" class="pr-2">{{$fcount}} <span>following</span></a>
-          @endif
-          <a href="#">0 <span>followers</span></a>
-        </p>
 
         <div class="divider"></div>
-        <div class="sidebar-nav">
+        <div class="sidebar-nav pt-2">
           <ul>
             <li><a href="/{{ $user->username}}/posts">Posts</a></li>
-            <li><a href="/{{ $user->username}}/microblog">Thoughts</a></li>
+            <li><a href="/{{ $user->username}}/thoughts">Thoughts</a></li>
             <li><a href="#">Videos</a></li>
             <li><a href="#">Contact</a></li>
           </ul>
         </div>
         <!-- Follow Modal Trigger -->
-        <div class="follow-me text-center">
+        <div class="follow-me text-center pt-3">
           <button class="btn btn-primary" data-toggle="modal" data-target="#followModal">Follow Me</button>
           <!-- Modal -->
 
@@ -79,6 +71,21 @@
           </div>
           <!-- End Modal -->
         </div>
+        <div class="user-stats text-center mt-3">
+          <div class="d-inline-block">
+            @if (empty($fcount))
+            <a href="#" class="pr-2">0 <br /> <small class="text-muted">Following</small></a>
+            @else
+            <a href="#" class="pr-2">{{$fcount}} <br /> <small class="text-muted">Following</small></a>
+            @endif
+          </div>
+          <div class="d-inline-block">
+            <a href="#">0 <br /> <small class="text-muted">Followers</small></a>
+          </div>
+          <div class="mt-3">
+            <small class="text-muted"><img src="{{ asset('img/logo.jpg') }}" alt="Lucid" class="img-fluid" style="filter: grayscale(100%);" /> Powered by Lucid</small>
+          </div>
+        </div>
       </div>
       <!-- End of Sidebar -->
 
@@ -95,7 +102,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   @guest
-                  <a class="dropdown-item" href="{{ url('/login/google') }}">{{ __('Login') }}</a>
+                  <a class="dropdown-item" href="{{ url('/login') }}">{{ __('Login') }}</a>
                   @else
                   <a class="dropdown-item" href="/home">Home</a>
                   <a href="/settings" class="dropdown-item">Settings</a>

@@ -9,7 +9,7 @@
 <p>Write a Post</p>
 
 <form method="POST" action="{{url('/save-post')}}" enctype="multipart/form-data" class="mb-3">
-    @csrf
+  @csrf
   <div class="form-row mb-3">
     <div class="col-7">
       <input type="text" name="title" class="form-control" placeholder="Title">
@@ -27,25 +27,25 @@
   </div>
 </form>
 <!-- End Editor -->
-<br/>
+<br />
 <h5 class="font-weight-bold mb-5">Latest stories</h5>
- <!-- Begin content -->
+<!-- Begin content -->
 
 
 @foreach ($posts as $feeds)
 <div class="post-content">
   @if (empty($feeds->site_image))
-<img src="{{ asset('img/logo.jpg') }}"  style="border-radius:100%;height:60px; height:60px" class="img-fluid" alt="user" />
-@else
-<img src="{{ $feeds->site_image}}"  style="border-radius:100%;height:60px; height:60px" class="img-fluid" alt="user" />
-@endif
+  <img src="{{ asset('img/logo.jpg') }}" style="border-radius:100%;height:60px; height:60px" class="img-fluid" alt="user" />
+  @else
+  <img src="{{ $feeds->site_image}}" style="border-radius:100%;height:60px; height:60px" class="img-fluid" alt="user" />
+  @endif
   <div class="post-content-body">
-      <a href="{{$feeds->link}}"> <h5 class="font-weight-bold">{{$feeds->title}}</h5></a>
-      <p class="">
+    <a href="{{$feeds->link}}"></a>
+    <p class="mb-1">{{$feeds->site}} -<small class="text-muted">{{$feeds->date}} </small></p>
+    <p class="">
       {{$feeds->des}}
-      </p>
-      <p class="">{{$feeds->site}} -<small class="text-muted">{{$feeds->date}} </small></p>
-    </div>
+    </p>
+  </div>
 </div>
 
 @endforeach

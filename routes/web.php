@@ -38,7 +38,8 @@ Route::post('save-post','HomeController@savePost');
 //     return view('posts');
 // });
 Route::get('settings', function (){
-    return view('settings');
+     $user = Auth::user();
+    return view('settings', ['user'=>$user,'fcount' => 1, 'count' => 1]);
 });
 
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
@@ -54,7 +55,7 @@ Route::prefix('{username}')->group(function () {
     Route::get('/post/{postTitle}','pageController@singlePostPage');
     Route::get('/','pageController@homePage');
     Route::get('/home','pageController@homePage');
-    Route::get('/microblog','HomeController@microblog');
+    Route::get('/thoughts','HomeController@thoughts');
     Route::post('/save-post','HomeController@savePost');
     Route::get('/logout', "Auth\LoginController@logout");
     Route::get('/posts','pageController@posts');
