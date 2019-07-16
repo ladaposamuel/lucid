@@ -13,11 +13,11 @@
         <cite class="post-body">
             Published on {{ $post['date'] }}
         </cite>
-        <h3 class="post-title mb-h">
+        <h3 class="post-title mb-1">
          {{ $post['title'] }}
         </h3>
         @isset($post['crawlerImage'])
-        <img src="{{URL::to('/')}}/storage/{{$post['crawlerImage']}}" alt="" style="width:100%"class="my-4">
+        <img src="{{URL::to('/')}}/storage/{{$post['crawlerImage']}}" alt="" style="width:100%" class="my-1">
         @endisset
         <div class="blog-content">
             {!! $post['body'] !!}
