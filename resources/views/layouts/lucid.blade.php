@@ -98,7 +98,7 @@
             <ul class="navbar-nav ml-auto">
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <img src="{{ asset('img/logo.jpg') }}" alt="Lucid" class="img-fluid" />
+                  <img src="{{ asset('img/lucid-logo.png') }}" alt="The Lucid Logo" class="img-fluid" width="65px" />
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   @guest
