@@ -54,10 +54,10 @@ header {
 	outline: none;
 }
 .no-decoration {
-	text-decoration: none;
+	text-decoration: none !important; 
 }
 .no-decoration:hover {
-    text-decoration: none;
+    text-decoration: none !important;
 }
 .nav-link {
     color: #333333;
@@ -111,31 +111,31 @@ a.navbar-btn.btn.btn-primary {
     font-size: 18px;
 }
 /* settings page */
-.settings a {
+.page-tab a {
     color: #000000;
 }
-.settings ul.nav-tabs {
+.page-tab ul.nav-tabs {
     border: none;
 }
-.settings ul.nav-tabs a.nav-link {
+.page-tab ul.nav-tabs a.nav-link {
     border: none;
     padding: 0.5rem 0.7rem 0.2rem;
     margin-right: 3rem;
 }
-.settings .nav-tabs a.tab-link:hover {
+.page-tab .nav-tabs a.tab-link:hover {
     color: var(--secondary-color);
     /* text-decoration: underline var(--secondary-color); */
     border-color: transparent;
 }
-.settings .nav-tabs a.tab-link.active {
+.page-tab .nav-tabs a.tab-link.active {
     color: var(--secondary-color);
     border-bottom: 2px solid var(--secondary-color);
 }
-.settings button[type='submit'] {
+.page-tab button[type='submit'] {
     color: #ffffff;
     background-color: var(--secondary-color);
 }
-.settings button[type='submit']:hover {
+.page-tab button[type='submit']:hover {
     color: #ffffff;
 }
 /* ends here */

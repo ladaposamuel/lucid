@@ -245,7 +245,8 @@
 </div>
 
 <!-- Begin content -->
-<ul class="nav nav-tabs" id="timeline-tabs" role="tablist">
+<div class="page-tab">
+<ul class="nav nav-tabs navbar-light" id="timeline-tabs" role="tablist">
   <li class="nav-item">
     <a href="#timeline" class="nav-link tab-link active" data-toggle="tab" role="tab" aria-controls="profile" aria-selected="true">
       <h6>Profile</h6>
@@ -258,11 +259,12 @@
   </li>
   <li class="nav-item">
     <a href="#followers" class="nav-link tab-link" data-toggle="tab" role="tab" aria-controls="followers" aria-selected="false">
-      <h6>Follwers</h6>
+      <h6>Followers</h6>
     </a>
   </li>
 </ul>
 
+</div>
 <div class="tab-content">
   <!-- Timeline Page -->
   <div class="container tab-pane fade in show active" role="tabpanel" id="timeline">
@@ -276,7 +278,7 @@
           <img src="{{ $feeds->site_image}}" style="border-radius:100%;height:60px; height:60px" class="img-fluid" alt="user" />
           @endif
           <div class="post-content-body">
-            <a href="{{$feeds->link}}">
+            <a href="{{$feeds->link}}" class="no-decoration">
               <h5 class="font-weight-bold">{{$feeds->title}}</h5>
             </a>
             <p class="">
