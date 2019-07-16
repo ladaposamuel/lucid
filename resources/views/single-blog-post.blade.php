@@ -8,8 +8,8 @@
 <div class="post-content">
     <div class="post-content-body">
         <p class="post-date">
-        <a href="{{URL::to('/')}}/{{$user->username}}/home"> Home </a> /
-        <a href="../home"> Blog </a> / <span class="text-muted">{{ $post['title'] }}</span></p>
+        <a href="{{URL::to('/')}}/{{$user->username}}/home" class="text-secondary"> Home </a> /
+        <a href="../home" class="text-secondary"> Blog </a> / <span class="text-muted">{{ $post['title'] }}</span></p>
         <cite class="post-body">
             Published on {{ $post['date'] }}
         </cite>
