@@ -34,7 +34,9 @@ class pageController extends Controller
                 $username = $user->username;
                 $post = new \Lucid\Core\Document($username);
                 $post = $post->fetchAllRss();
-                
+                $fcount = 1;
+                $count = 1;
+
                 return view($user->username.'/timeline', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
 
             }
@@ -101,3 +103,4 @@ class pageController extends Controller
         return view('contact',compact('user','posts'), ['fcount'=>$fcount, 'count' => $count ]);
     }
 }
+
