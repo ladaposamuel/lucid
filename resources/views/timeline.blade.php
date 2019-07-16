@@ -326,7 +326,7 @@
 
   <!-- Followers Page -->
   <div class="tab-pane fade" role="tabpanel" id="followers">
-    <h5 class="mt-3 font-weight-bold">{{ $user->username}} is followed by</h5>
+    <h5 class="my-3 font-weight-bold">{{ $user->username}} is followed by</h5>
     <div class="post-content border p-3 my-2">
       <img src="{{ asset('img/mb-1.png') }}" class="img-fluid img-thumb" alt="user" />
       <div class="post-content-body">
