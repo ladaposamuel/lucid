@@ -258,7 +258,7 @@
   </li>
   <li class="nav-item">
     <a href="#followers" class="nav-link tab-link" data-toggle="tab" role="tab" aria-controls="followers" aria-selected="false">
-      <h6>Follwers</h6>
+      <h6>Followers</h6>
     </a>
   </li>
 </ul>
@@ -276,7 +276,7 @@
           <img src="{{ $feeds->site_image}}" style="border-radius:100%;height:60px; height:60px" class="img-fluid" alt="user" />
           @endif
           <div class="post-content-body">
-            <a href="{{$feeds->link}}">
+            <a href="{{$feeds->link}}" class="no-decoration">
               <h5 class="font-weight-bold">{{$feeds->title}}</h5>
             </a>
             <p class="">
