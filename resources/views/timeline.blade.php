@@ -273,9 +273,9 @@
         @foreach ($posts as $feeds)
         <div class="post-content">
           @if (empty($feeds->site_image))
-          <img src="{{ asset('img/logo.jpg') }}" style="border-radius:100%;height:60px; height:60px" class="img-fluid" alt="user" />
+          <img src="{{ asset('img/logo.jpg') }}" class="img-fluid img-thumb" alt="user" />
           @else
-          <img src="{{ $feeds->site_image}}" style="border-radius:100%;height:60px; height:60px" class="img-fluid" alt="user" />
+          <img src="{{ $feeds->site_image}}" class="img-fluid img-thumb" alt="user" />
           @endif
           <div class="post-content-body">
             <a href="{{$feeds->link}}" class="no-decoration">
