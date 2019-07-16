@@ -51,7 +51,7 @@ Route::prefix('{username}')->group(function () {
   //Auth::routes();
     // Route::get('/', 'HomeController@index');
     // Route::get('/home', 'HomeController@index');
-    Route::get('/timeline', 'HomeController@timeline');
+    //Route::get('/timeline', 'HomeController@timeline');
     Route::get('/contact', 'pageController@contact');
     Route::get('/post/{postTitle}','pageController@singlePostPage');
     Route::get('/','pageController@homePage');
