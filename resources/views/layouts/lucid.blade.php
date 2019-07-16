@@ -26,7 +26,7 @@
       <!-- Beginning of Sidebar -->
       <div class="col-lg-4 pb-2 pt-2">
         <a href="/{{ $user->username}}"><img id="user-avatar" src="{{$user->image}}" class="img-fluid" /></a>
-        <a href="/{{ $user->username}}" class="py-2 no-decoration"><h3 id="user-name">{{ $user->username}}</h3></a>
+        <a href="/{{ $user->username}}" class="no-decoration"><h3 id="user-name" class="pt-2">{{ $user->username}}</h3></a>
         <p id="user-bio" class="pb-2">
           Front-end developer, Back-end Developer, UI/UX developer, Friend and
           Traveller.

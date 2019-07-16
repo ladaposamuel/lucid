@@ -246,23 +246,23 @@
 
 <!-- Begin content -->
 <div class="page-tab">
-<ul class="nav nav-tabs navbar-light" id="timeline-tabs" role="tablist">
-  <li class="nav-item">
-    <a href="#timeline" class="nav-link tab-link active" data-toggle="tab" role="tab" aria-controls="profile" aria-selected="true">
-      <h6>Profile</h6>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a href="#following" class="nav-link tab-link" data-toggle="tab" role="tab" aria-controls="following" aria-selected="false">
-      <h6>Following</h6>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a href="#followers" class="nav-link tab-link" data-toggle="tab" role="tab" aria-controls="followers" aria-selected="false">
-      <h6>Followers</h6>
-    </a>
-  </li>
-</ul>
+  <ul class="nav nav-tabs navbar-light" id="timeline-tabs" role="tablist">
+    <li class="nav-item">
+      <a href="#timeline" class="nav-link tab-link active" data-toggle="tab" role="tab" aria-controls="profile" aria-selected="true">
+        <h6>Profile</h6>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#following" class="nav-link tab-link" data-toggle="tab" role="tab" aria-controls="following" aria-selected="false">
+        <h6>Following</h6>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#followers" class="nav-link tab-link" data-toggle="tab" role="tab" aria-controls="followers" aria-selected="false">
+        <h6>Followers</h6>
+      </a>
+    </li>
+  </ul>
 
 </div>
 <div class="tab-content">
@@ -296,13 +296,13 @@
 
   <!-- Following Page -->
   <div class="tab-pane fade" role="tabpanel" id="following">
-    <h3 class="mt-5">Following page coming soon...</h3>
+    <h5 class="mt-3">Following page coming soon...</h5>
   </div>
   <!-- End following Page -->
 
   <!-- Followers Page -->
   <div class="tab-pane fade" role="tabpanel" id="followers">
-    <h3 class="mt-5">Followers page coming soon...</h3>
+    <h5 class="mt-3">Followers page coming soon...</h5>
   </div>
   <!-- End followers page -->
 </div>
