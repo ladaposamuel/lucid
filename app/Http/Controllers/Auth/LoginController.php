@@ -30,7 +30,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/timeline';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -64,7 +64,7 @@ class LoginController extends Controller
           Storage::makeDirectory($username);
 
           $this->store_settings($path, $users->id);
-          return redirect()->to("/{$username}/timeline");
+          return redirect()->to("/{$username}");
     }
 
 

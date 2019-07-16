@@ -21,7 +21,7 @@ class SocialController extends Controller
             Auth::login($users);
             $username = preg_split('/ +/', $users->name);
             $dir = strtolower($username[0]);
-            return redirect("/{$dir}/timeline");
+            return redirect("/{$dir}");
         }else{
             $user = User::create([
                 'name'          => $userSocial->getName(),
@@ -32,7 +32,7 @@ class SocialController extends Controller
             ]);
             $username = preg_split('/ +/', $user->name);
             $dir = strtolower($username[0]);
-            return redirect("/{$dir}/timeline");
+            return redirect("/{$dir}");
             // to fix
             // redirect to a route where the username would be set
          return redirect()->route('home');
