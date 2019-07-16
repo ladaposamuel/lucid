@@ -54,10 +54,10 @@ header {
 	outline: none;
 }
 .no-decoration {
-	text-decoration: none;
+	text-decoration: none !important; 
 }
 .no-decoration:hover {
-    text-decoration: none;
+    text-decoration: none !important;
 }
 .nav-link {
     color: #333333;
