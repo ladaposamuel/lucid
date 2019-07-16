@@ -245,7 +245,8 @@
 </div>
 
 <!-- Begin content -->
-<ul class="nav nav-tabs" id="timeline-tabs" role="tablist">
+<div class="page-tab">
+<ul class="nav nav-tabs navbar-light" id="timeline-tabs" role="tablist">
   <li class="nav-item">
     <a href="#timeline" class="nav-link tab-link active" data-toggle="tab" role="tab" aria-controls="profile" aria-selected="true">
       <h6>Profile</h6>
@@ -263,6 +264,7 @@
   </li>
 </ul>
 
+</div>
 <div class="tab-content">
   <!-- Timeline Page -->
   <div class="container tab-pane fade in show active" role="tabpanel" id="timeline">

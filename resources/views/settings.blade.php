@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <!-- beginning of settings page -->
-<div class="settings">
+<div class="page-tab">
   <!-- tab navigation here -->
   <h4><strong>Settings</strong></h4>
   <ul class="nav nav-tabs navbar-light" id="settings-tabs" role="tablist">
