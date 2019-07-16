@@ -248,8 +248,8 @@
 <div class="page-tab">
   <ul class="nav nav-tabs navbar-light" id="timeline-tabs" role="tablist">
     <li class="nav-item">
-      <a href="#timeline" class="nav-link tab-link active" data-toggle="tab" role="tab" aria-controls="profile" aria-selected="true">
-        <h6>Profile</h6>
+      <a href="#timeline" class="nav-link tab-link active" data-toggle="tab" role="tab" aria-controls="timeline" aria-selected="true">
+        <h6>Timeline</h6>
       </a>
     </li>
     <li class="nav-item">
