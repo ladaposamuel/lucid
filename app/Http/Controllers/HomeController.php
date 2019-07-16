@@ -43,12 +43,10 @@ class HomeController extends Controller
       $username = $user->username;
       $post = new \Lucid\Core\Document($username);
 
-            $post = $post->fetchAllRss();
-            //$count = $count->count();
-          //  print_r($post);
-         // $count = new \Lucid\Core\Subscribe();
-              $fcount = 1;
-              $count = 1;
+      $post = $post->fetchAllRss();
+      
+      $fcount = 1;
+      $count = 1;
      return view('timeline', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
      }else {
 

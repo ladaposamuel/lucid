@@ -30,8 +30,8 @@
 <!-- Beginning of Post Content -->
 
 <!-- End of Post Content -->
-@auth
-@foreach ($posts as $feeds)
+
+{{--@foreach ($posts as $feeds)
 @if (empty($feeds['image']))
 
 <div class="post-content">
@@ -65,8 +65,8 @@
   </a>
 </div>
 @endif
-@endforeach
-@else
+@endforeach--}}
+
 
 @foreach($userposts as $userpost)
 
@@ -115,8 +115,6 @@
 @endif
 
 @endforeach
-
-@endauth
 
 
 @php 
