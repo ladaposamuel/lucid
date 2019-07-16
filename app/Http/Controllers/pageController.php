@@ -21,16 +21,20 @@ class pageController extends Controller
             $user = Auth::user();
             if ($username == $user->username) {
 
-            $username = $user->username;
-            $post = new \Lucid\Core\Document($username);
+                $username = $user->username;
+                $post = new \Lucid\Core\Document($username);
 
-            $post = $post->fetchAllRss();
-            
-            $fcount = 1;
-            $count = 1;
-            return view('timeline', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
+                $post = $post->fetchAllRss();
+                
+                $fcount = 1;
+                $count = 1;
+                return view('timeline', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
             }else {
 
+                $username = $user->username;
+                $post = new \Lucid\Core\Document($username);
+                $post = $post->fetchAllRss();
+                
                 return view($user->username.'/timeline', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
 
             }
