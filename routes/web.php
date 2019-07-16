@@ -52,6 +52,7 @@ Route::prefix('{username}')->group(function () {
     // Route::get('/', 'HomeController@index');
     // Route::get('/home', 'HomeController@index');
     Route::get('/timeline', 'HomeController@timeline');
+    Route::get('/contact', 'pageController@contact');
     Route::get('/post/{postTitle}','pageController@singlePostPage');
     Route::get('/','pageController@homePage');
     Route::get('/home','pageController@homePage');

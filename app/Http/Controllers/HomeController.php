@@ -99,22 +99,22 @@ class HomeController extends Controller
     {
       //dd($request->all());
 
-$this->validate($request, [
-  'file' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
-]);
+      $this->validate($request, [
+        'file' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+      ]);
 
-  $title = isset($request->title) ? $request->title : '';
-  $body = $request->body;
-  // filter out non-image data
+      $title = isset($request->title) ? $request->title : '';
+      $body = $request->body;
+      // filter out non-image data
 
-  $images = $request->file('file');
+      $images = $request->file('file');
 
-  $extra = "";
-  $user = Auth::user();
-  $username = $user->username;
-  $post = new \Lucid\Core\Document($username);
-  $result = $post->create($title, $body, $tag="", $images, $extra);
-return redirect($username.'/timeline')->with('msg', 'Post Published');
+      $extra = "";
+      $user = Auth::user();
+      $username = $user->username;
+      $post = new \Lucid\Core\Document($username);
+      $result = $post->create($title, $body, $tag="", $images, $extra);
+      return redirect($username.'/timeline')->with('msg', 'Post Published');
     }
 
     public function subscribe()
@@ -122,19 +122,12 @@ return redirect($username.'/timeline')->with('msg', 'Post Published');
       $user = Auth::user();
       $username = preg_split('/ +/', $user->name);
       $path = $username[0];
-      // $ziki = new \Lucid\Core\Document($path);
-      //       $post = $ziki->fetchAllRss();
+      
       $post=[];
-            //$count = new Ziki\Core\Subscribe();
-            //$fcount = $count->fcount();
-            //$count = $count->count();
-//print_r(
-  //$post
-//);
-//$count = new \Lucid\Core\Subscribe();
- $fcount = 1;
-          $count = 1;
-        return view('subscribe', ['user'=>$user,'fcount'=>$fcount, 'count' => $count]);
+        
+      $fcount = 1;
+      $count = 1;
+      return view('subscribe', ['user'=>$user,'fcount'=>$fcount, 'count' => $count]);
 
     }
 
@@ -161,5 +154,8 @@ return redirect($username.'/timeline')->with('msg', 'Post Published');
         $result = $app->create($title, $body, $tags, $images, $extra);
         return json_encode($result);
     }
+
+
+    
 
 }

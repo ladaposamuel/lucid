@@ -42,9 +42,9 @@ class pageController extends Controller
         if(!$post){
             return redirect('/'.$username.'/home');
         }
-      //  $count = new \Lucid\Core\Subscribe();
-            $fcount = 1;
-       $count = 1;
+      
+        $fcount = 1;
+        $count = 1;
         return view('single-blog-post',compact('post','user'),['fcount'=>$fcount, 'count' => $count ]);
     }
 
@@ -61,5 +61,19 @@ class pageController extends Controller
          
             $count = 1;
         return view('post',compact('user','posts'), ['fcount'=>$fcount, 'count' => $count ]);
+    }
+
+    public function contact($username){
+        if(!$this->user($username)) {
+            return '========404========';
+        }
+
+        $user = $this->user($username);
+
+        $fcount = 1;
+         
+        $count = 1;
+
+        return view('contact',compact('user','posts'), ['fcount'=>$fcount, 'count' => $count ]);
     }
 }
