@@ -153,10 +153,7 @@ body {
 	-webkit-box-flex: 1;
 	-ms-flex: 1;
 	flex: 1;
-}
-
-.post-content img {
-	padding-right: 15px;
+	margin-left: 15px;
 }
 
 .post-title {

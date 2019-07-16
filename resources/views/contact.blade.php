@@ -21,10 +21,7 @@
             <!-- Beginning of Post Content -->
             <div class="col-lg-8 pb-5">
                 <div class="post-content">
-                    <!-- <div class="post-image d-none d-lg-flex d-xl-flex d-md-flex">
-						<img src="./assets/img/post-1.jpg" class="img-fluid post-img"
-							alt="What I think of Donald Glover’s New Video" />
-                    </div> -->
+                    
 
                     <div class="container">
                         <h2>Contact Me</h2>

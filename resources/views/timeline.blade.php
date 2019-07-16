@@ -4,45 +4,73 @@
 @endsection
 @section('content')
 <style>
-  .btn.btn-primary.canel-post{background-color: transparent !important; border: 1px solid red; color: red; padding: 6px 5px;}
-  .btn.btn-primary.publish-post, .btn.btn-primary.save-draft, .btn.btn-primary.add-tags{background-color: #280a66 !important; border: 1px solid #280a66; padding: 6px 5px; color: #fff;}
+  .btn.btn-primary.canel-post {
+    background-color: transparent !important;
+    border: 1px solid red;
+    color: red;
+    padding: 6px 5px;
+  }
 
-  .main-content{padding-top: 30px; padding-bottom: 30px;}
+  .btn.btn-primary.publish-post,
+  .btn.btn-primary.save-draft,
+  .btn.btn-primary.add-tags {
+    background-color: #280a66 !important;
+    border: 1px solid #280a66;
+    padding: 6px 5px;
+    color: #fff;
+  }
 
-  .btn-info{background-color: #280a66 !important; border: 0 !important;}
+  .main-content {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
 
-  
+  .btn-info {
+    background-color: #280a66 !important;
+    border: 0 !important;
+  }
 
-  .form-check-label{padding-right: 10px;}
+
+
+  .form-check-label {
+    padding-right: 10px;
+  }
+
   .mb-editor-area {
     background: #f5f5f5;
     border-radius: 5px;
   }
 
-  #new-post-title{
-    outline:0px !important;
-    -webkit-appearance:none;
+  #new-post-title {
+    outline: 0px !important;
+    -webkit-appearance: none;
     box-shadow: none !important;
   }
+
   .mb-editor {
     background: #ffffff;
     border-radius: 5px;
   }
 
 
-  .micro-blog-enclosure{
+  .micro-blog-enclosure {
     background-color: #E0E0E0;
     border-radius: 10px;
   }
 
   .editor-btns {
-  background: #280a66;
-  border-radius: 5px;
+    background: #280a66;
+    border-radius: 5px;
   }
 
   /*Tag styles*/
-  .tags {padding-right: 10px;}
-  .btn-outline-primary:not(:disabled):not(.disabled).active, .btn-outline-primary:not(:disabled):not(.disabled):active, .show>.btn-outline-primary.dropdown-toggle {
+  .tags {
+    padding-right: 10px;
+  }
+
+  .btn-outline-primary:not(:disabled):not(.disabled).active,
+  .btn-outline-primary:not(:disabled):not(.disabled):active,
+  .show>.btn-outline-primary.dropdown-toggle {
     color: #fff !important;
     background-color: #280a66 !important;
     border-color: #280a66 !important;
@@ -207,43 +235,125 @@
   }
 </style>
 <div class="row">
-<div class="col-12 col-sm-1"></div>
-<div class="col-12 col-sm-10">
-  
+  <div class="col-12 col-sm-1"></div>
+  <div class="col-12 col-sm-10">
+
+  </div>
+  <div class="col-11 col-sm-1"></div>
+
+  <!-- Feed section ends here -->
 </div>
-<div class="col-11 col-sm-1"></div>
 
-      <!-- Feed section ends here -->
+<!-- Begin content -->
+<div class="page-tab">
+  <ul class="nav nav-tabs navbar-light" id="timeline-tabs" role="tablist">
+    <li class="nav-item">
+      <a href="#timeline" class="nav-link tab-link active" data-toggle="tab" role="tab" aria-controls="timeline" aria-selected="true">
+        <h6>Timeline</h6>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#following" class="nav-link tab-link" data-toggle="tab" role="tab" aria-controls="following" aria-selected="false">
+        <h6>Following</h6>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#followers" class="nav-link tab-link" data-toggle="tab" role="tab" aria-controls="followers" aria-selected="false">
+        <h6>Followers</h6>
+      </a>
+    </li>
+  </ul>
+
 </div>
-
- <!-- Begin content -->
-<div class="container" >
-
-  <div class="row mt-5">
-    <div class="col-md-12">
-    @foreach ($posts as $feeds)
-      <div class="post-content">
-        @if (empty($feeds->site_image))
-      <img src="{{ asset('img/logo.jpg') }}"  style="border-radius:100%;height:60px; height:60px" class="img-fluid" alt="user" />
-      @else
-      <img src="{{ $feeds->site_image}}"  style="border-radius:100%;height:60px; height:60px" class="img-fluid" alt="user" />
-      @endif
-        <div class="post-content-body">
-            <a href="{{$feeds->link}}"> <h5 class="font-weight-bold">{{$feeds->title}}</h5></a>
+<div class="tab-content">
+  <!-- Timeline Page -->
+  <div class="container tab-pane fade in show active" role="tabpanel" id="timeline">
+    <div class="row mt-5">
+      <div class="col-md-12">
+        @foreach ($posts as $feeds)
+        <div class="post-content">
+          @if (empty($feeds->site_image))
+          <img src="{{ asset('img/logo.jpg') }}" class="img-fluid img-thumb" alt="user" />
+          @else
+          <img src="{{ $feeds->site_image}}" class="img-fluid img-thumb" alt="user" />
+          @endif
+          <div class="post-content-body">
+            <a href="{{$feeds->link}}" class="no-decoration">
+              <h5 class="font-weight-bold">{{$feeds->title}}</h5>
+            </a>
             <p class="">
-            {{$feeds->des}}
+              {{$feeds->des}}
             </p>
             <p class="">{{$feeds->site}} -<small class="text-muted">{{$feeds->date}} </small></p>
           </div>
+        </div>
+        @endforeach
       </div>
-@endforeach
     </div>
   </div>
+
+  <!-- End Timeline Page -->
+
+  <!-- Following Page -->
+  <div class="tab-pane fade" role="tabpanel" id="following">
+    <h5 class="my-3 font-weight-bold">{{ $user->username}} follows</h5>
+    <div class="post-content border p-3 my-2">
+      <img src="{{ asset('img/mb-1.png') }}" class="img-fluid img-thumb" alt="user" />
+      <div class="post-content-body">
+        <p class="m-0 font-weight-bold">Henry</p>
+        <p class="mb-2">Cras eget metus non ipsum condimentum accumsan in et ex. Quisque ac aliquam turpis. Cras interdum risus eget quam congue posuere </p>
+        <a href="#" class="no-decoration text-secondary font-weight-bold">Follow</a>
+      </div>
+    </div>
+    <div class="post-content border p-3 my-2">
+      <img src="{{ asset('img/mb-2.png') }}" class="img-fluid img-thumb" alt="user" />
+      <div class="post-content-body">
+        <p class="m-0 font-weight-bold">Henry</p>
+        <p class="mb-2">Cras eget metus non ipsum condimentum accumsan in et ex. Quisque ac aliquam turpis. Cras interdum risus eget quam congue posuere </p>
+        <a href="#" class="no-decoration text-secondary font-weight-bold">Follow</a>
+      </div>
+    </div>
+    <div class="post-content border p-3 my-2">
+      <img src="{{ asset('img/mb-3.png') }}" class="img-fluid img-thumb" alt="user" />
+      <div class="post-content-body">
+        <p class="m-0 font-weight-bold">Henry</p>
+        <p class="mb-2">Cras eget metus non ipsum condimentum accumsan in et ex. Quisque ac aliquam turpis. Cras interdum risus eget quam congue posuere </p>
+        <a href="#" class="no-decoration text-secondary font-weight-bold">Follow</a>
+      </div>
+    </div>
+  </div>
+  <!-- End following Page -->
+
+  <!-- Followers Page -->
+  <div class="tab-pane fade" role="tabpanel" id="followers">
+    <h5 class="my-3 font-weight-bold">{{ $user->username}} is followed by</h5>
+    <div class="post-content border p-3 my-2">
+      <img src="{{ asset('img/mb-1.png') }}" class="img-fluid img-thumb" alt="user" />
+      <div class="post-content-body">
+        <p class="m-0 font-weight-bold">Henry</p>
+        <p class="mb-2">Cras eget metus non ipsum condimentum accumsan in et ex. Quisque ac aliquam turpis. Cras interdum risus eget quam congue posuere </p>
+        <a href="#" class="no-decoration text-secondary font-weight-bold">Follow</a>
+      </div>
+    </div>
+    <div class="post-content border p-3 my-2">
+      <img src="{{ asset('img/mb-2.png') }}" class="img-fluid img-thumb" alt="user" />
+      <div class="post-content-body">
+        <p class="m-0 font-weight-bold">Henry</p>
+        <p class="mb-2">Cras eget metus non ipsum condimentum accumsan in et ex. Quisque ac aliquam turpis. Cras interdum risus eget quam congue posuere </p>
+        <a href="#" class="no-decoration text-secondary font-weight-bold">Follow</a>
+      </div>
+    </div>
+    <div class="post-content border p-3 my-2">
+      <img src="{{ asset('img/mb-3.png') }}" class="img-fluid img-thumb" alt="user" />
+      <div class="post-content-body">
+        <p class="m-0 font-weight-bold">Henry</p>
+        <p class="mb-2">Cras eget metus non ipsum condimentum accumsan in et ex. Quisque ac aliquam turpis. Cras interdum risus eget quam congue posuere </p>
+        <a href="#" class="no-decoration text-secondary font-weight-bold">Follow</a>
+      </div>
+    </div>
+  </div>
+  <!-- End followers page -->
 </div>
-
-
-
-
 
 </html>
 @endsection
