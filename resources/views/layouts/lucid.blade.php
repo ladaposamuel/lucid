@@ -25,8 +25,8 @@
       @section('sidebar')
       <!-- Beginning of Sidebar -->
       <div class="col-lg-4 pb-2 pt-2">
-        <a href="/{{ $user->username}}/timeline"><img id="user-avatar" src="{{$user->image}}" class="img-fluid" /></a>
-        <a href="/{{ $user->username}}/timeline"><h3 id="user-name" class="py-2">{{ $user->username}}</h3></a>
+        <a href="/{{ $user->username}}"><img id="user-avatar" src="{{$user->image}}" class="img-fluid" /></a>
+        <a href="/{{ $user->username}}" class="no-decoration"><h3 id="user-name" class="pt-2">{{ $user->username}}</h3></a>
         <p id="user-bio" class="pb-2">
           Front-end developer, Back-end Developer, UI/UX developer, Friend and
           Traveller.
@@ -98,7 +98,7 @@
             <ul class="navbar-nav ml-auto">
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <img src="{{ asset('img/logo.jpg') }}" alt="Lucid" class="img-fluid" />
+                  <img src="{{ asset('img/lucid-logo.png') }}" alt="The Lucid Logo" class="img-fluid" width="65px" />
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   @guest
