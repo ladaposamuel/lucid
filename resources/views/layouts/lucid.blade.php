@@ -38,7 +38,7 @@
             <li><a href="/{{ $user->username}}/posts">Posts</a></li>
             <li><a href="/{{ $user->username}}/thoughts">Thoughts</a></li>
             <li><a href="#">Videos</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="/{{ $user->username}}/contact">Contact</a></li>
           </ul>
         </div>
         <!-- Follow Modal Trigger -->
