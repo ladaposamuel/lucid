@@ -32,7 +32,7 @@
   <!-- tab content here -->
   <div class="tab-content" id="settings-tabs-content">
     <!-- profile settings tab -->
-    <div class="tab-pane fade in show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    <div class="tab-pane fade in show active" id="profile" role="tabpanel">
       <form action="" class="mt-5">
         <div class="row">
           <div class="form-group col-sm-12 col-md-6">
@@ -75,15 +75,15 @@
     </div>
 
     <!-- account tab -->
-    <div class="tab-pane fade" id="account" role="tabpanel" aria-labelledby="account-tab" id="account">
+    <div class="tab-pane fade" id="account" role="tabpanel">
       <h3 class="mt-5">Account page coming soon...</h3>
     </div>
     <!-- links tab -->
-    <div class="tab-pane fade" id="links" role="tabpanel" aria-labelledby="links-tab" id="links">
+    <div class="tab-pane fade" id="links" role="tabpanel">
       <h3 class="mt-5">Links page coming soon...</h3>
     </div>
     <!-- security tab -->
-    <div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab" id="security">
+    <div class="tab-pane fade" id="security" role="tabpanel">
       <h3 class="mt-5">Security page coming soon...</h3>
     </div>
   </div>
