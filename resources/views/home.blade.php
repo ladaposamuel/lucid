@@ -76,7 +76,7 @@
   <div class="post-image d-none d-lg-flex d-xl-flex d-md-flex">
     <img src="{{URL::to('/')}}/storage/{{$userpost['image']}}" class="img-fluid post-img" alt="Looking For Where To Spend Christmas in the comform of your home" />
   </div>
-  <a class="no-decoration" href="post/{{$userpost['slug']}}">
+  <a class="no-decoration" href="/{{$user->username}}/post/{{$userpost['slug']}}">
     <div class="post-content-body">
       <p class="post-date">{{$userpost['date']}}</p>
       <h3 class="post-title">
@@ -95,7 +95,7 @@
 @else
 
 <div class="post-content">
-  <a class="no-decoration" href="post/{{$userpost['slug']}}">
+  <a class="no-decoration" href="/{{$user->username}}/post/{{$userpost['slug']}}">
     <div class="post-content-body">
       <p class="post-date">{{$userpost['date']}}</p>
       <h3 class="post-title">
