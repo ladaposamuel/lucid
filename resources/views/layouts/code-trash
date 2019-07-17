@@ -1,0 +1,14 @@
+// }
+            // else {
+
+            //     $username = $username;
+            //     $post = new \Lucid\Core\Document($username);
+            //     $post = $post->fetchAllRss();
+            //     $fcount = 1;
+            //     $count = 1;
+
+            //     return view('timeline', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
+
+            // }
+
+             // if ($username == $user->username) {

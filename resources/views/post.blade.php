@@ -236,7 +236,7 @@
   }
 </style>
 <!-- The editor code goes here -->
-@auth
+@if(Auth::user()->username == $user->username)
 <div id="form-container">
   <form method="POST" class="timeline-editor" id="editor-form" autocomplete="OFF">
     <div class=" row pt-3 pb-3">
@@ -320,7 +320,7 @@
   </form>
 </div>
 <!-- Beginning of Post Content -->
-@endauth
+@endif
 
 @forelse($posts as $post)
 

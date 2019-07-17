@@ -17,11 +17,15 @@ class pageController extends Controller
 
     public function homePage($username)
     {
-        if(Auth::user()){
-            $user = Auth::user();
-            if ($username == $user->username) {
-
+        if(!$this->user($username)) {
+            return "=======404=========";
+        }
+        $user = $this->user($username);
+        
+        if(Auth::user() && Auth::user()->username ==$username){
+                $user = Auth::user();
                 $username = $user->username;
+           
                 $post = new \Lucid\Core\Document($username);
 
                 $post = $post->fetchAllRss();
@@ -29,25 +33,13 @@ class pageController extends Controller
                 $fcount = 1;
                 $count = 1;
                 return view('timeline', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
-            }else {
-
-                $username = $username;
-                $post = new \Lucid\Core\Document($username);
-                $post = $post->fetchAllRss();
-                $fcount = 1;
-                $count = 1;
-
-                return view('timeline', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
-
-            }
+            
         }else {
 
-            if(!$this->user($username)) {
-                return "=======404=========";
-            }
+            
             $app = new \Lucid\Core\Document($username);
             $feed =$app->fetchRss();
-            $user = $this->user($username);
+            
           
                 $fcount = 1;
                 $count = 1;
