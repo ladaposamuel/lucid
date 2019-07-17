@@ -24,7 +24,7 @@
 
       @section('sidebar')
       <!-- Beginning of Sidebar -->
-      <div class="col-lg-4 pb-2 pt-2">
+      <div class="col-lg-4 pb-0 mb-0 pt-2">
         <a href="/{{ $user->username}}"><img id="user-avatar" src="{{$user->image}}" class="img-fluid" /></a>
         <a href="/{{ $user->username}}" class="no-decoration"><h3 id="user-name" class="pt-2">{{ $user->name}}</h3></a>
         <p id="user-bio" class="pb-2">
@@ -71,7 +71,7 @@
           </div>
           <!-- End Modal -->
         </div>
-        <div class="user-stats text-center mt-3">
+        <div class="user-stats text-center mt-3 pb-0">
           <div class="d-inline-block">
             @if (empty($fcount))
             <a href="#" class="pr-2">0 <br /> <small class="text-muted">Following</small></a>
@@ -90,7 +90,7 @@
       <!-- End of Sidebar -->
 
       @show
-      <div class="col-lg-8 pb-5">
+      <div class="col-lg-8 pb-0">
 
         <!-- Beginning of Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light pt-2 mb-5">
