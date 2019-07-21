@@ -65,4 +65,5 @@ Route::prefix('{username}')->group(function () {
     Route::post('/addrss','ExtRssController@addRss');
     Route::post('/extrss','ExtRssController@addExtRss');
     Route::post('/publish','HomeController@publish');
+    Route::post('/send-mail','SendEmailController@sendEmail');
 });

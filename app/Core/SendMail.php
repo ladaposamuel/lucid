@@ -1,9 +1,5 @@
 <?php 
-//namespace Lucid\Core;
 
-include ZIKI_BASE_PATH."/src/mailer/PHPMailerAutoload.php";
-
-//use Lucid\Core\filesystem as FileSystem;
 
 class SendContactMail{
     

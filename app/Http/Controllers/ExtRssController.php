@@ -30,9 +30,9 @@ class ExtRssController extends Controller
   //$url = "https://www.feedforall.com//sample-feed.xml";
     $data = new \Lucid\Core\Subscribe();
           $feed = $data->extract($rss);
-          print_r($feed);
+          // print_r($feed);
 
-     return redirect($username.'/microblog')->with('rss', 'You have subscribed to '.$request.' channel' );
+     return redirect($username.'/thoughts')->with('rss', 'You have subscribed to '.$request.' channel' );
 
   }
   public function addExtRss(Request $request)

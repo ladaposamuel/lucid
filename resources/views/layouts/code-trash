@@ -12,3 +12,19 @@
             // }
 
              // if ($username == $user->username) {
+
+
+
+
+     // if(res.subjectError)
+      // {
+      //   const subjectErrorContainer=document.querySelector('#SubjectError');
+      //   subjectErrorContainer.style.display='block';
+      //   subjectErrorContainer.innerHTML = res.subjectError;
+      // }
+      // else
+      // {
+      //   const subjectErrorContainer=document.querySelector('#SubjectError');
+      //   subjectErrorContainer.style.display='none';
+      //   subjectErrorContainer.innerHTML = "";
+      // }

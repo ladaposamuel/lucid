@@ -7,7 +7,7 @@ use Lucid\ext_rss;
 /**
  *
  */
-class Subscribe
+class Subscribe 
 {
   var $name;
   var $rss;
