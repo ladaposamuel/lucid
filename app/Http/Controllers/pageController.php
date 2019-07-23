@@ -43,7 +43,7 @@ class pageController extends Controller
           
                 $fcount = 1;
                 $count = 1;
-             $userposts=$app->get();
+             $userposts=$app->get('posts');
              return view('home', ['posts' => $feed,'user'=>$user,'fcount'=>$fcount, 'count' => $count,"userposts"=>$userposts]);
         }
 
@@ -67,23 +67,23 @@ class pageController extends Controller
     }
 
     public function posts($username){
-        if(Auth::user() && $username == Auth::user()->username){
+            if(Auth::user() && $username == Auth::user()->username){
             
-        if(!$this->user($username)) {
-            return '========404========';
-        }
+            if(!$this->user($username)) {
+                return '========404========';
+            }
 
-        $user = $this->user($username);
-        $app  = new \Lucid\Core\Document($username);
-        $posts=$app->get();
-    
-            $fcount = 1;
-         
-            $count = 1;
-        return view('post',compact('user','posts'), ['fcount'=>$fcount, 'count' => $count ]);
-     }else {
-         return redirect('/login');
-     }
+            $user = $this->user($username);
+            $app  = new \Lucid\Core\Document($username);
+            $posts=$app->get('posts');
+        
+                $fcount = 1;
+            
+                $count = 1;
+            return view('post',compact('user','posts'), ['fcount'=>$fcount, 'count' => $count ]);
+        }else {
+            return redirect('/'.$username);
+        }
 
     }
 
@@ -99,6 +99,24 @@ class pageController extends Controller
         $count = 1;
 
         return view('contact',compact('user','posts'), ['fcount'=>$fcount, 'count' => $count ]);
+    }
+
+
+
+    public function thoughts($username)
+    {
+      if(!$this->user($username)) {
+          return '========404========';
+      }
+
+      $user = $this->user($username);
+      $post = new \Lucid\Core\Document($username);
+      $post = $post->get('micro-blog-posts');
+      $fcount = 1;
+      $count = 1;
+
+      return view('thoughts', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
+
     }
 }
 

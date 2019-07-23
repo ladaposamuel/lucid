@@ -60,29 +60,7 @@ class HomeController extends Controller
     }
 
 
-    public function thoughts($username)
-    {
-      $user = Auth::user();
-      if ($username == $user->username) {
-
-      $username = $user->username;
-      $post = new \Lucid\Core\Document($username);
-
-            $post = $post->fetchAllRss();
-            //$count = new Ziki\Core\Subscribe();
-            //$fcount = $count->fcount();
-            //$count = $count->count();
-          //  print_r($post);
-        //  $count = new \Lucid\Core\Subscribe();
-              $fcount = 1;
-          $count = 1;
-     return view('thoughts', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
-     }else {
-
-       return redirect($user->username.'/thoughts');
-     }
-
-    }
+    
 
 /*
 *
@@ -95,17 +73,13 @@ class HomeController extends Controller
 
     public function savePost(Request $request)
     {
-      //dd($request->all());
+      
 
-      // $this->validate($request, [
-      //   'file' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
-      // ]);
-
-      $title = isset($request->title) ? $request->title : '';
+      $title = '';
       $body = $request->body;
       // filter out non-image data
 
-      $images = "";     // $request->file('file');
+      $images = "";     
 
       $extra = "";
       $user = Auth::user();

@@ -12,16 +12,11 @@
     box-shadow: none !important;
   }
 </style>
-@if(Auth::user()->username == $user->username)
+@if(Auth::user() && Auth::user()->username == $user->username)
 <p>Write a Post</p>
 
 <form method="POST" action="{{url('/save-post')}}" autocomplete="off" enctype="multipart/form-data" class="mb-3">
   @csrf
-  <div class="form-row mb-3">
-    <div class="col-12">
-      <input type="text" name="title" class="form-control" placeholder="Title">
-    </div>
-  </div>
   <div class="form-group">
     <textarea type="text" name="body" class="form-control h-25" placeholder="Tell your story"></textarea>
   </div>
@@ -38,16 +33,11 @@
 
 @foreach ($posts as $feeds)
 <div class="post-content">
-  @if (empty($feeds->site_image))
-  <img src="{{ asset('img/logo.jpg') }}" class="img-fluid img-thumb" alt="user" />
-  @else
-  <img src="{{ $feeds->site_image}}" class="img-fluid img-thumb" alt="user" />
-  @endif
+  
   <div class="post-content-body">
-    <a href="{{$feeds->link}}"></a>
-    <p class="mb-1">{{$feeds->site}} -<small class="text-muted">{{$feeds->date}} </small></p>
+    <p class="mb-1">{{$user->name}}-<small class="text-muted">{{$feeds['date']}}</small></p>
     <p class="">
-      {{$feeds->des}}
+      {!!$feeds['body']!!}
     </p>
   </div>
 </div>

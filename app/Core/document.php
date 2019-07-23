@@ -120,7 +120,7 @@ class Document
         return $result;
     }
     //get post
-    public function get()
+    public function get($postTypeSubDir)
     {
         $finder = new Finder();
         // $finder->sortByModifiedTime();
@@ -128,9 +128,9 @@ class Document
 
         // find all files in the current directory
 
-        if(file_exists(storage_path('app/'.$this->file.'/content/posts/'))){
+        if(file_exists(storage_path('app/'.$this->file.'/content/'.$postTypeSubDir.'/'))){
 
-            $finder->files()->in(storage_path('app/'.$this->file.'/content/posts/'));
+            $finder->files()->in(storage_path('app/'.$this->file.'/content/'.$postTypeSubDir.'/'));
 
         $posts = [];
         if ($finder->hasResults()) {
