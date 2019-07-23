@@ -97,22 +97,22 @@ class HomeController extends Controller
     {
       //dd($request->all());
 
-      $this->validate($request, [
-        'file' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
-      ]);
+      // $this->validate($request, [
+      //   'file' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+      // ]);
 
       $title = isset($request->title) ? $request->title : '';
       $body = $request->body;
       // filter out non-image data
 
-      $images = $request->file('file');
+      $images = "";     // $request->file('file');
 
       $extra = "";
       $user = Auth::user();
       $username = $user->username;
       $post = new \Lucid\Core\Document($username);
-      $result = $post->create($title, $body, $tag="", $images, $extra);
-      return redirect($username.'/timeline')->with('msg', 'Post Published');
+      $result = $post->create($title, $body, $tag="", $images, $extra, $postType="micro-blog");
+      return redirect($username.'/thoughts')->with('msg', 'Post Published');
     }
 
     public function subscribe()
@@ -149,7 +149,7 @@ class HomeController extends Controller
       
         $extra = "";
         $app = new \Lucid\Core\Document($username);
-        $result = $app->create($title, $body, $tags, $images, $extra);
+        $result = $app->create($title, $body, $tags, $images, $extra, $postType="full-blog");
         return json_encode($result);
     }
 

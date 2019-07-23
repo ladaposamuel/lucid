@@ -36,7 +36,7 @@ class Document
 
     //for creating markdown files
     //kjarts code here
-    public function create($title, $content, $tag="", $image, $extra)
+    public function create($title, $content, $tag="", $image, $extra, $postType="")
     {
        
         date_default_timezone_set("Africa/Lagos");
@@ -93,7 +93,13 @@ class Document
         $yamlfile->setContent($content);
         $yaml = FrontMatter::dump($yamlfile);
         $file = $this->file;
-        $dir = $file .'/content/'. $unix . ".md";
+        $dir = '';
+        if($postType == "full-blog"){
+            $dir = $file .'/content/posts/'. $unix . ".md";
+        }elseif($postType == "micro-blog") {
+            $dir = $file .'/content/micro-blog-posts/'. $unix . ".md";
+        }
+        
         //return $dir; die();
         $doc = Storage::put($dir, $yaml);
         if (!$extra) {
@@ -122,9 +128,9 @@ class Document
 
         // find all files in the current directory
 
-        if(file_exists(storage_path('app/'.$this->file.'/content/'))){
+        if(file_exists(storage_path('app/'.$this->file.'/content/posts/'))){
 
-            $finder->files()->in(storage_path('app/'.$this->file.'/content/'));
+            $finder->files()->in(storage_path('app/'.$this->file.'/content/posts/'));
 
         $posts = [];
         if ($finder->hasResults()) {

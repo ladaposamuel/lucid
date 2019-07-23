@@ -302,9 +302,9 @@
       </div>
       <div class="col-12 mt-3">
         <div class="row form-row flex-row-reverse">
-          <div class="col-3 col-sm-3 col-md-2">
+          <!-- <div class="col-3 col-sm-3 col-md-2">
             <input type="button" class="form-control btn-sm btn btn-primary save-draft" value="Save Draft" />
-          </div>
+          </div> -->
           <div class="col-3 col-sm-3 col-md-2">
             <input type="submit" class="form-control btn-sm btn btn-primary publish-post" value="Publish">
           </div>

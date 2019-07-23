@@ -35,7 +35,11 @@
         <div class="divider"></div>
         <div class="sidebar-nav pt-2">
           <ul>
+          @if(Auth::user() && Auth::user()->username == $user->username)
             <li><a href="/{{ $user->username}}/posts">Posts</a></li>
+          @else 
+            <li><a href="/{{ $user->username}}">Posts</a></li>
+          @endif
             <li><a href="/{{ $user->username}}/thoughts">Thoughts</a></li>
             <li><a href="#">Videos</a></li>
             <li><a href="/{{ $user->username}}/contact">Contact</a></li>

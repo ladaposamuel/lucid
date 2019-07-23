@@ -5,18 +5,21 @@
 @endsection
 @section('content')
 <!-- Editor -->
-
+<style>
+  .form-control{
+    outline: 0px !important;
+    -webkit-appearance: none;
+    box-shadow: none !important;
+  }
+</style>
+@if(Auth::user()->username == $user->username)
 <p>Write a Post</p>
 
-<form method="POST" action="{{url('/save-post')}}" enctype="multipart/form-data" class="mb-3">
+<form method="POST" action="{{url('/save-post')}}" autocomplete="off" enctype="multipart/form-data" class="mb-3">
   @csrf
   <div class="form-row mb-3">
-    <div class="col-7">
+    <div class="col-12">
       <input type="text" name="title" class="form-control" placeholder="Title">
-    </div>
-    <div class="col-4 offset-md-1 border-dark ">
-      <input type="file" name="file" class="" id="customFile" style="display:none">
-      <label class="text-muted form-control p-2 w-100" for="customFile"><i class="icon ion-md-add p-1"></i> Add post Image</label>
     </div>
   </div>
   <div class="form-group">
@@ -26,6 +29,7 @@
     <button type="submit" class="btn bg-alt text-white">Publish</button>
   </div>
 </form>
+@endif
 <!-- End Editor -->
 <br />
 <h5 class="font-weight-bold mb-5">Latest stories</h5>

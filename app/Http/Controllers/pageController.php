@@ -67,6 +67,8 @@ class pageController extends Controller
     }
 
     public function posts($username){
+        if(Auth::user() && $username == Auth::user()->username){
+            
         if(!$this->user($username)) {
             return '========404========';
         }
@@ -79,6 +81,10 @@ class pageController extends Controller
          
             $count = 1;
         return view('post',compact('user','posts'), ['fcount'=>$fcount, 'count' => $count ]);
+     }else {
+         return redirect('/login');
+     }
+
     }
 
     public function contact($username){
