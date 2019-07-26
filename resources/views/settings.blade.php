@@ -3,6 +3,13 @@
 @parent
 @endsection
 @section('content')
+<style>
+  .form-control {
+    outline: 0px !important;
+    -webkit-appearance: none;
+    box-shadow: none !important;
+  }
+</style>
 <!-- beginning of settings page -->
 <div class="page-tab">
   <!-- tab navigation here -->
@@ -33,44 +40,48 @@
   <div class="tab-content" id="settings-tabs-content">
     <!-- profile settings tab -->
     <div class="tab-pane fade in show active" id="profile" role="tabpanel">
-      <form action="" class="mt-5">
+      <form action="" class="mt-5" autocomplete="off" id="settingsForm">
         <div class="row">
           <div class="form-group col-sm-12 col-md-6">
-            <label for="name"><strong>Your Name</strong></label>
-            <input class="form-control" type="text" name="name" id="name" value="" placeholder="Jon Champion" />
+            <label for="name"><strong>Full Name</strong></label>
+            <span class="text-danger" id="fullname" style="display:none;"></span>
+            <input class="form-control" type="text" name="name" id="name" value="{{Auth::user()->name}}" placeholder="e.g Jon Champion" />
           </div>
           <div class="form-group col-sm-12 col-md-6">
-            <label for="email"><strong>Your Email Address</strong></label>
-            <input type="email" name="email" id="email" class="form-control" value="" placeholder="example@gmail.com" />
+            <label for="email"><strong>Email Address</strong></label>
+            <span class="text-danger" id="emailError" style="display:none;"></span>
+            <input type="email" name="email" id="email" class="form-control" value="{{Auth::user()->email}}" placeholder="example@gmail.com" />
           </div>
         </div>
         <div class="row">
           <div class="form-group col-sm-12 col-md-6">
-            <label for="nick-name"><strong>Your Nick Name</strong></label>
-            <input class="form-control" type="text" name="nickname" id="nick-name" value="" placeholder="Ninja" />
+            <label for="nick-name"><strong>Username</strong></label>
+            <input class="form-control" type="text" name="nickname" id="nick-name" value="{{Auth::user()->username}}" disabled/>
           </div>
           <div class="form-group col-sm-12 col-md-6">
-            <p class="font-weight-bold">Your Profile Image</p>
+            <p class="font-weight-bold">Profile Image</p>
             <div class="d-flex">
               <div class="d-inline-block">
-                <img src="{{Auth::user()->image}}" class="img-thumb" alt="user" />
+                <img src="{{Auth::user()->image}}" class="img-thumb" alt="user" id="imgtag"/>
               </div>
               <div class="d-inline-block ml-3 py-2">
                 <input type="file" name="profileimage" id="profileimage" class="form-control-file" accept=".png,.jpg" style="display:none">
 
                 <label class="text-muted form-control p-2 w-100" for="profileimage" style="cursor:pointer">Choose file</label>
+                <span class="text-danger" id="imgError" style="display:none;"></span>
+                <input type="hidden" name="user_id" value="{{Auth::user()->id}}"/>
               </div>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="form-group col-sm-12 col-md-6">
-            <label for="bio"><strong>Your Short Bio</strong></label>
-            <textarea name="bio" id="bio" class="form-control" rows="5" placeholder="type here.."></textarea>
+            <label for="bio"><strong>Short Bio</strong></label>
+            <textarea name="bio" id="bio" class="form-control" rows="5" placeholder="type here..">{{Auth::user()->short_bio}}</textarea>
           </div>
         </div>
         <!-- submit button -->
-        <button type="submit" class="btn btn-lg col-sm-12 col-md-3 mt-5">Update Profile</button>
+        <button type="submit" class="btn btn-lg col-sm-12 col-md-3 mt-5" name="update">Update Profile</button>
       </form>
     </div>
 
@@ -88,4 +99,94 @@
     </div>
   </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!-- convert to markdown script ends -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+  $(document).ready(function (){
+
+    ////render selected image to the profile image tag
+    $("#profileimage").on('change',function(){
+      const file = $(this)[0].files;
+
+      if (file.length == 1 ){
+
+         const reader = new FileReader();
+         const imgTag = document.getElementById('imgtag');
+         reader.onload = function(event){
+           imgTag.src=event.target.result;
+         }
+
+         reader.readAsDataURL(file[0])
+      }
+
+    })
+
+
+    document.querySelector('button[name="update"]').addEventListener('click',function (event){
+      event.preventDefault();
+      const formData = new FormData(document.querySelector('#settingsForm'));
+
+      fetch('save_settings',{
+        method: 'POST',
+        body: formData,
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      }).then(response=>response.json()).then((response)=>{
+        //console.log(JSON.stringify(response));
+
+        if (response.success) {
+            swal({
+              text: response.success,
+              icon: "success",
+            })
+
+            if(response.img_path){
+               document.querySelector('#user-avatar').src = response.img_path;
+            }
+            document.querySelector('#user-name').innerHTML = formData.get('name');
+            if(formData.get('bio') !==""){
+               document.querySelector('#user-bio').innerHTML = formData.get('bio');
+            }else {
+              document.querySelector('#user-bio').innerHTML = ' Be The First To Get The Latest Posts From Me By Clicking On The Follow Me Button Below';
+            }
+           
+        }
+
+        const name = document.querySelector('#fullname');
+        const email = document.querySelector('#emailError');
+        const img = document.querySelector('#imgError');
+        if (response.name){
+            name.style.display="block"
+            name.innerHTML = response.name
+        }else {
+            name.style.display="none"
+            name.innerHTML = ''
+        }
+
+        if (response.email){
+            email.style.display="block"
+            email.innerHTML = response.email
+        }else {
+            email.style.display="none"
+            email.innerHTML = ''
+        }
+
+        if (response.profileimage){
+            img.style.display="block"
+            img.innerHTML = response.profileimage
+        }else {
+            img.style.display="none"
+            img.innerHTML = ''
+        }
+        
+      }).catch((err) => {
+        alert(`Failed with the following message: ${err.message}`);
+      });
+
+    })
+
+  })
+</script>
 @endsection

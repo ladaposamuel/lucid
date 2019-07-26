@@ -4,7 +4,9 @@ namespace Lucid\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Validator;
+use DB;
+use Storage;
 class HomeController extends Controller
 {
     /**
@@ -127,7 +129,46 @@ class HomeController extends Controller
         return json_encode($result);
     }
 
+    public function settings(){
+      $user = Auth::user();
+      return view('settings', ['user'=>$user,'fcount' => 1, 'count' => 1]);
 
-    
+    }
+
+    public function saveSettings(Request $request) {
+          $validator=Validator::make($request->all(),[
+            'name' => 'required',
+            'email' => 'required|email',
+            'profileimage' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'user_id' =>'required'
+        ]);
+
+      if($validator->fails()){
+          return response()->json($validator->messages(), 200);
+      }
+
+      if(!empty($request->file('profileimage'))){
+         $url = Auth::user()->username."/images/";
+         $path = Storage::disk('public')->put($url, $request->file('profileimage'));
+         $fullPath = '/storage/'.$path;
+         $updated= DB::table('users')->where('id',$request->user_id)
+                           ->update(['name'=>$request->name,'email'=>$request->email,'image'=>$fullPath,
+                           'short_bio'=>$request->bio]);
+                           
+        if($updated) {
+          
+          return response()->json(['success'=>"Your changes has been saved successfully",'img_path'=>$fullPath], 200);
+        }
+      } else {
+        $updated = DB::table('users')->where('id',$request->user_id)
+                          ->update(['name'=>$request->name,'email'=>$request->email,'short_bio'=>$request->bio]);
+                          
+                          if($updated){
+                            return response()->json(['success'=>"Your changes has been saved successfully"], 200);
+                          }
+      }
+      
+
+    }
 
 }

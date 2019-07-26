@@ -28,8 +28,11 @@
         <a href="/{{ $user->username}}"><img id="user-avatar" src="{{$user->image}}" class="img-fluid" /></a>
         <a href="/{{ $user->username}}" class="no-decoration"><h3 id="user-name" class="pt-2">{{ $user->name}}</h3></a>
         <p id="user-bio" class="pb-2">
-          Front-end developer, Back-end Developer, UI/UX developer, Friend and
-          Traveller.
+         @if ($user->short_bio =="") 
+          Be The First To Get The Latest Posts From Me By Clicking On The Follow Me Button Below
+         @else
+          {{ $user->short_bio }}
+         @endif
         </p>
 
         <div class="divider"></div>

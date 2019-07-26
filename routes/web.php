@@ -37,10 +37,7 @@ Route::post('save-post','HomeController@savePost');
 // Route::get('posts', function () {
 //     return view('posts');
 // });
-Route::get('settings', function (){
-     $user = Auth::user();
-    return view('settings', ['user'=>$user,'fcount' => 1, 'count' => 1]);
-});
+
 
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
@@ -66,4 +63,6 @@ Route::prefix('{username}')->group(function () {
     Route::post('/extrss','ExtRssController@addExtRss');
     Route::post('/publish','HomeController@publish');
     Route::post('/send-mail','SendEmailController@sendEmail');
+    Route::get('/settings', 'HomeController@settings');
+    Route::post('/save_settings','HomeController@saveSettings');
 });
