@@ -27,12 +27,17 @@ class pageController extends Controller
                 $username = $user->username;
            
                 $post = new \Lucid\Core\Document($username);
-
+                $following = $post->subscription();
+                $follower = $post->subscriber();
                 $post = $post->fetchAllRss();
+                $count = new \Lucid\Core\Subscribe();
                 
-                $fcount = 1;
-                $count = 1;
-                return view('timeline', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
+                $fcount = $count->fcount();
+                $count = $count->count();
+                
+            
+            
+                return view('timeline', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count, 'following' => $following, 'follower' => $follower]);
             
         }else {
 
@@ -40,15 +45,19 @@ class pageController extends Controller
             $app = new \Lucid\Core\Document($username);
             $feed =$app->fetchRss();
             
-          
-                $fcount = 1;
-                $count = 1;
+            $count = new \Lucid\Core\Subscribe();
+                
+            $fcount = $count->fcount();
+            $count = $count->count();
+
+            $follower = $app->subscription();
+
              $userposts=$app->get('posts');
              return view('home', ['posts' => $feed,'user'=>$user,'fcount'=>$fcount, 'count' => $count,"userposts"=>$userposts]);
         }
 
     }
-
+ 
     public function singlePostPage($username,$postTitle){
         if(!$this->user($username)) {
             return "=======404=========";

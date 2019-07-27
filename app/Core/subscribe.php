@@ -241,7 +241,7 @@ public function extract($url)
   public function count()
   {
     $user = Auth::user();
-    $file= ext_rss::where('user_id', $user['id'])->get();
+    $file= ext_rss::where('title', $user['name'])->get();
 
     $data=json_decode($file,true);
     if(!empty($data)){
