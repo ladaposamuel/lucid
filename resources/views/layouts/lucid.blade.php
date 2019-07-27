@@ -48,6 +48,8 @@
             <li><a href="/{{ $user->username}}/contact">Contact</a></li>
           </ul>
         </div>
+        @if(Auth::user() && Auth::user()->username == $user->username)
+        @else 
         <!-- Follow Modal Trigger -->
         <div class="follow-me text-center pt-3">
           <button class="btn btn-primary" data-toggle="modal" data-target="#followModal">Follow Me</button>
@@ -77,7 +79,9 @@
             </div>
           </div>
           <!-- End Modal -->
+         
         </div>
+        @endif
         <div class="user-stats text-center mt-3 pb-0">
           <div class="d-inline-block">
             @if (empty($fcount))
@@ -87,7 +91,11 @@
             @endif
           </div>
           <div class="d-inline-block">
+          @if (empty($count))
             <a href="#">0 <br /> <small class="text-muted">Followers</small></a>
+            @else
+            <a href="#">{{$count}} <br /> <small class="text-muted">Followers</small></a>
+            @endif
           </div>
           <div class="mt-3">
             <small class="text-muted"><img src="{{ asset('img/logo.jpg') }}" alt="Lucid" class="img-fluid" style="filter: grayscale(100%);" /> Powered by Lucid</small>
@@ -127,7 +135,9 @@
 
         <!-- Beginning of Post Content -->
         @yield('content')
+        
       </div>
+      
   </section>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

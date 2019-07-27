@@ -297,60 +297,33 @@
   <!-- Following Page -->
   <div class="tab-pane fade" role="tabpanel" id="following">
     <h5 class="my-3 font-weight-bold">{{ $user->username}} follows</h5>
+    @foreach ($following as $follow)
     <div class="post-content border p-3 my-2">
-      <img src="{{ asset('img/mb-1.png') }}" class="img-fluid img-thumb" alt="user" />
+      <img src="{{$follow['img']}}" class="img-fluid img-thumb" alt="user" />
       <div class="post-content-body">
-        <p class="m-0 font-weight-bold">Henry</p>
-        <p class="mb-2">Cras eget metus non ipsum condimentum accumsan in et ex. Quisque ac aliquam turpis. Cras interdum risus eget quam congue posuere </p>
-        <a href="#" class="no-decoration text-secondary font-weight-bold">Follow</a>
+        <p class="m-0 font-weight-bold">{{$follow['name']}}</p>
+        <p class="mb-2">{{$follow['desc']}}</p>
+        <a href="#" class="no-decoration text-secondary font-weight-bold">Following</a>
       </div>
     </div>
-    <div class="post-content border p-3 my-2">
-      <img src="{{ asset('img/mb-2.png') }}" class="img-fluid img-thumb" alt="user" />
-      <div class="post-content-body">
-        <p class="m-0 font-weight-bold">Henry</p>
-        <p class="mb-2">Cras eget metus non ipsum condimentum accumsan in et ex. Quisque ac aliquam turpis. Cras interdum risus eget quam congue posuere </p>
-        <a href="#" class="no-decoration text-secondary font-weight-bold">Follow</a>
-      </div>
-    </div>
-    <div class="post-content border p-3 my-2">
-      <img src="{{ asset('img/mb-3.png') }}" class="img-fluid img-thumb" alt="user" />
-      <div class="post-content-body">
-        <p class="m-0 font-weight-bold">Henry</p>
-        <p class="mb-2">Cras eget metus non ipsum condimentum accumsan in et ex. Quisque ac aliquam turpis. Cras interdum risus eget quam congue posuere </p>
-        <a href="#" class="no-decoration text-secondary font-weight-bold">Follow</a>
-      </div>
-    </div>
+    @endforeach
   </div>
   <!-- End following Page -->
 
   <!-- Followers Page -->
   <div class="tab-pane fade" role="tabpanel" id="followers">
     <h5 class="my-3 font-weight-bold">{{ $user->username}} is followed by</h5>
+    @foreach ($follower as $follower)
     <div class="post-content border p-3 my-2">
-      <img src="{{ asset('img/mb-1.png') }}" class="img-fluid img-thumb" alt="user" />
+      <img src="{{$follower['img']}}" class="img-fluid img-thumb" alt="user" />
       <div class="post-content-body">
-        <p class="m-0 font-weight-bold">Henry</p>
-        <p class="mb-2">Cras eget metus non ipsum condimentum accumsan in et ex. Quisque ac aliquam turpis. Cras interdum risus eget quam congue posuere </p>
-        <a href="#" class="no-decoration text-secondary font-weight-bold">Follow</a>
+        <p class="m-0 font-weight-bold">{{$follower['name']}}</p>
+        <p class="mb-2">{{$follower['desc']}}</p>
+        <a href="#" class="no-decoration text-secondary font-weight-bold">Following</a>
       </div>
     </div>
-    <div class="post-content border p-3 my-2">
-      <img src="{{ asset('img/mb-2.png') }}" class="img-fluid img-thumb" alt="user" />
-      <div class="post-content-body">
-        <p class="m-0 font-weight-bold">Henry</p>
-        <p class="mb-2">Cras eget metus non ipsum condimentum accumsan in et ex. Quisque ac aliquam turpis. Cras interdum risus eget quam congue posuere </p>
-        <a href="#" class="no-decoration text-secondary font-weight-bold">Follow</a>
-      </div>
-    </div>
-    <div class="post-content border p-3 my-2">
-      <img src="{{ asset('img/mb-3.png') }}" class="img-fluid img-thumb" alt="user" />
-      <div class="post-content-body">
-        <p class="m-0 font-weight-bold">Henry</p>
-        <p class="mb-2">Cras eget metus non ipsum condimentum accumsan in et ex. Quisque ac aliquam turpis. Cras interdum risus eget quam congue posuere </p>
-        <a href="#" class="no-decoration text-secondary font-weight-bold">Follow</a>
-      </div>
-    </div>
+    @endforeach
+    
   </div>
   <!-- End followers page -->
 </div>

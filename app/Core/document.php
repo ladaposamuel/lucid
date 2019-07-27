@@ -517,41 +517,41 @@ $user = Auth::user();
     }
     public function subscriber()
     {
-      $user = Auth::user();
-      $data= ext_rss::where('user_id', $user['id'])->get();
-        $data = json_decode($file, true);
-        if (count($data) >= 1) {
-            unset($file);
-            $posts = [];
-            foreach ($data as $key => $value) {
-
-                $content['name'] = $value['name'];
-                $content['img'] = $value['img'];
-                $content['time'] = $value['time'];
-                $content['desc'] = $value['desc'];
-                $content['link'] = $value['link'];
-                array_push($posts, $content);
-            }
-            return $posts;
-        }
+        $user = Auth::user();
+        $data= ext_rss::where('title', $user['name'])->get();
+        $data = json_decode($data, true);
+        
+          $follower = [];
+          foreach ($data as $key => $value) {
+  
+              $content['name'] = $value['title'];
+              $content['img'] = $value['image'];
+              $content['time'] = $value['created_at'];
+              $content['desc'] = $value['description'];
+              $content['link'] = $value['link'];
+              array_push($follower, $content);
+          }
+          //dd( $following);
+          return $follower;
     }
     public function subscription()
     {
       $user = Auth::user();
       $data= ext_rss::where('user_id', $user['id'])->get();
-      $data = json_decode($file, true);
-        unset($file);
-        $posts = [];
+      $data = json_decode($data, true);
+      
+        $following = [];
         foreach ($data as $key => $value) {
 
-            $content['name'] = $value['name'];
-            $content['img'] = $value['img'];
-            $content['time'] = $value['time'];
-            $content['desc'] = $value['desc'];
+            $content['name'] = $value['title'];
+            $content['img'] = $value['image'];
+            $content['time'] = $value['created_at'];
+            $content['desc'] = $value['description'];
             $content['link'] = $value['link'];
-            array_push($posts, $content);
+            array_push($following, $content);
         }
-        return $posts;
+        //dd( $following);
+        return $following;
     }
     //code for returnng details of each codes
     public function getEach($id)
