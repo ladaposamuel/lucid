@@ -149,7 +149,11 @@
                document.querySelector('#user-avatar').src = response.img_path;
             }
             document.querySelector('#user-name').innerHTML = formData.get('name');
-            
+            if(formData.get('bio') !==""){
+               document.querySelector('#user-bio').innerHTML = formData.get('bio');
+            }else {
+              document.querySelector('#user-bio').innerHTML = 'Set up a bio about yourself, let other lucid users know you.';
+            }
            
         }
 

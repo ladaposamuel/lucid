@@ -28,7 +28,11 @@
         <a href="/{{ $user->username}}"><img id="user-avatar" src="{{$user->image}}" class="img-fluid" /></a>
         <a href="/{{ $user->username}}" class="no-decoration"><h3 id="user-name" class="pt-2">{{ $user->name}}</h3></a>
         <p id="user-bio" class="pb-2">
+        @if(Auth::user() && Auth::user()->username == $user->username && $user->short_bio =="")
+          You haven't set up a short bio about yourself, do that <a href="/{{ $user->username}}/settings">here</a>
+        @else
           {{ $user->short_bio }}
+        @endif
         </p>
 
         <div class="divider"></div>
