@@ -32,7 +32,7 @@ class ExtRssController extends Controller
           $feed = $data->extract($rss);
           // print_r($feed);
 
-     return redirect($username.'/thoughts')->with('rss', 'You have subscribed to '.$request.' channel' );
+     return redirect($username.'/')->with('rss', 'You have subscribed to '.$request.' channel' );
 
   }
   public function addExtRss(Request $request)

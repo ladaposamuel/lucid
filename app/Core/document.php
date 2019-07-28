@@ -447,6 +447,47 @@ $user = Auth::user();
         }
     }
 
+    public function DemoRSS()
+    {
+      //  $user = file_get_contents("./src/config/auth.json");
+        //$user = json_decode($user, true);
+$user = Auth::user();
+          date_default_timezone_set("Africa/Lagos");
+        $Feed = new RSS2;
+        // Setting some basic channel elements. These three elements are mandatory.
+        $Feed->setTitle($user['name']);
+        $Feed->setLink(storage_path('app/'.$this->file.'./rss/rss.xml'));
+        $Feed->setDescription("");
+
+        // Image title and link must match with the 'title' and 'link' channel elements for RSS 2.0,
+        // which were set above.
+        $Feed->setImage($user['name'], '', $user['image']);
+
+        $Feed->setChannelElement('language', 'en-US');
+        $Feed->setDate(date(DATE_RSS, time()));
+        $Feed->setChannelElement('pubDate', date(\DATE_RSS, strtotime('2013-04-06')));
+
+
+        $Feed->setSelfLink(storage_path('app/'.$this->file."/rss/rss.xml"));
+        $Feed->setAtomLink('http://pubsubhubbub.appspot.com', 'hub');
+
+        $Feed->addNamespace('creativeCommons', 'http://backend.userland.com/creativeCommonsRssModule');
+        $Feed->setChannelElement('creativeCommons:license', 'http://www.creativecommons.org/licenses/by/1.0');
+
+        $Feed->addGenerator();
+
+        
+            $myFeed = $Feed->generateFeed();
+
+            $handle = $this->file."/rss/rss.xml";
+          //  dd($handle);
+            $doc = Storage::put($handle, $myFeed);
+            //        fwrite($handle, $myFeed);
+            //      fclose($handle);
+           // $strxml = $Feed->printFeed();
+       
+    }
+
     //RSS designed By DMAtrix;
     public function getRss()
     {
@@ -523,15 +564,20 @@ $user = Auth::user();
         
           $follower = [];
           foreach ($data as $key => $value) {
-  
-              $content['name'] = $value['title'];
-              $content['img'] = $value['image'];
-              $content['time'] = $value['created_at'];
-              $content['desc'] = $value['description'];
-              $content['link'] = $value['link'];
-              array_push($follower, $content);
+              
+            $follow = DB::table('users')->where('id', $value['user_id'])->get();
+          
+             foreach($follow as $key => $follow){
+         
+            $content['name'] = $follow->name;
+            $content['username'] = $follow->username;
+            $content['img'] = $follow->image;
+            $content['id'] = $follow->id;
+            $content['desc'] = $follow->short_bio;
+            array_push($follower, $content);
+              
+        }
           }
-          //dd( $following);
           return $follower;
     }
     public function subscription()

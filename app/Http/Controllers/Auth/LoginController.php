@@ -64,6 +64,8 @@ class LoginController extends Controller
           Storage::makeDirectory($username);
 
           $this->store_settings($path, $users->id);
+          $rss = new \Lucid\Core\Document($username);
+            $rss->DemoRSS();
           return redirect()->to("/{$username}");
     }
 

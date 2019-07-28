@@ -85,10 +85,10 @@ class pageController extends Controller
             $user = $this->user($username);
             $app  = new \Lucid\Core\Document($username);
             $posts=$app->get('posts');
-        
-                $fcount = 1;
-            
-                $count = 1;
+            $count = new \Lucid\Core\Subscribe();
+                
+            $fcount = $count->fcount();
+            $count = $count->count();
             return view('post',compact('user','posts'), ['fcount'=>$fcount, 'count' => $count ]);
         }else {
             return redirect('/'.$username);
@@ -102,11 +102,10 @@ class pageController extends Controller
         }
 
         $user = $this->user($username);
-
-        $fcount = 1;
-         
-        $count = 1;
-
+        $count = new \Lucid\Core\Subscribe();
+                
+        $fcount = $count->fcount();
+        $count = $count->count();
         return view('contact',compact('user','posts'), ['fcount'=>$fcount, 'count' => $count ]);
     }
 
@@ -121,9 +120,10 @@ class pageController extends Controller
       $user = $this->user($username);
       $post = new \Lucid\Core\Document($username);
       $post = $post->get('micro-blog-posts');
-      $fcount = 1;
-      $count = 1;
-
+      $count = new \Lucid\Core\Subscribe();
+                
+                $fcount = $count->fcount();
+                $count = $count->count();
       return view('thoughts', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
 
     }
