@@ -38,14 +38,14 @@ class Subscribe
 public function extract($url)
 {
   $rss = new \DOMDocument();
-
+//dd(storage_path('app/'.$url."/rss/rss.xml"));
   if (!file_exists(storage_path('app/'.$url."/rss/rss.xml"))) {
       } else {
 
         //$url = storage_path('app/'.$url."/rss/rss.xml");
 
       $rss->load(trim(storage_path('app/'.$url."/rss/rss.xml")));
-        //dd($rss );
+     //   dd($rss );
       foreach ($rss->getElementsByTagName('channel') as $r) {
         $title = $r->getElementsByTagName('title')->item(0)->nodeValue;
         $link = $r->getElementsByTagName('link')->item(0)->nodeValue;
@@ -125,13 +125,13 @@ public function extract($url)
     }
 
   public function findOrCreateRss($name, $url, $desc, $link, $img,$lastbuild){
-      $rss       =   ext_rss::where('title', $name)->first();
-      if($rss){
-          return $rss;
-      }
+      //$rss       =   ext_rss::where('title', $name)->first();
+     // if($rss){
+    //      return $rss;
+     // }
       $user = Auth::user();
 
-          return ext_rss::create([
+          return ext_rss::insert([
               'user_id'          => $user['id'],
               'title'            => $name,
               'url'              => $url,
