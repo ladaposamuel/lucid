@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- <title>{{ config('app.name', 'Lucid') }}</title> -->
-  <title>Lucid</title>
+  <title>@yield('title') - Lucid</title>
   <link rel="short icon" type="image/png" sizes="16x16" href="{{ asset('img/luci-logo.png') }}">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap" rel="stylesheet" />
@@ -28,11 +28,7 @@
         <a href="/{{ $user->username}}"><img id="user-avatar" src="{{$user->image}}" class="img-fluid" /></a>
         <a href="/{{ $user->username}}" class="no-decoration"><h3 id="user-name" class="pt-2">{{ $user->name}}</h3></a>
         <p id="user-bio" class="pb-2">
-         @if ($user->short_bio =="") 
-          Be The First To Get The Latest Posts From Me By Clicking On The Follow Me Button Below
-         @else
           {{ $user->short_bio }}
-         @endif
         </p>
 
         <div class="divider"></div>

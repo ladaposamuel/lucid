@@ -1,4 +1,7 @@
 @extends('layouts.lucid')
+@section('title')
+  {{ $user->name }}
+@endsection
 @section('sidebar')
 @parent
 @endsection
@@ -146,11 +149,7 @@
                document.querySelector('#user-avatar').src = response.img_path;
             }
             document.querySelector('#user-name').innerHTML = formData.get('name');
-            if(formData.get('bio') !==""){
-               document.querySelector('#user-bio').innerHTML = formData.get('bio');
-            }else {
-              document.querySelector('#user-bio').innerHTML = ' Be The First To Get The Latest Posts From Me By Clicking On The Follow Me Button Below';
-            }
+            
            
         }
 

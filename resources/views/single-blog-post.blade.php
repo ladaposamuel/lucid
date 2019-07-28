@@ -1,4 +1,7 @@
 @extends('layouts.lucid')
+@section('title')
+  {{ $post['title'] }} - {{ $user->name }}
+@endsection
 @section('sidebar')
 @parent
 
