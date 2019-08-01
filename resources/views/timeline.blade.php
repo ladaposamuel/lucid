@@ -304,7 +304,7 @@
     <div class="post-content border p-3 my-2">
       <img src="{{$follow['img']}}" class="img-fluid img-thumb" alt="user" />
       <div class="post-content-body">
-        <p class="m-0 font-weight-bold">{{$follow['name']}}</p>
+        <p class="m-0 font-weight-bold"><a href="{{URL::to('/')}}/{{$follow['username']}}/">{{$follow['name']}}</a></p>
         <p class="mb-2">{{$follow['desc']}}</p>
         <a href="#" class="no-decoration text-secondary font-weight-bold">Following</a>
       </div>
@@ -330,12 +330,12 @@
                       <input type="hidden" name="rss" value="{{$follower['username']}}">
                       <button type="submit" class="btn no-decoration text-secondary font-weight-bold">Follow</button>
                     </form>
-      
+
     @endif
       </div>
     </div>
     @endforeach
-    
+
   </div>
   <!-- End followers page -->
 </div>

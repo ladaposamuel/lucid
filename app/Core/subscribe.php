@@ -3,17 +3,32 @@ namespace Lucid\Core;
 use Auth;
 use Storage;
 use Lucid\ext_rss;
+use DB;
 
 /**
  *
  */
-class Subscribe 
+class Subscribe
 {
   var $name;
   var $rss;
   var $img;
   var $desc;
   var $link;
+
+  protected $user;
+
+  public function __construct($user)
+  {
+
+      $this->user  = $user;
+  }
+
+  public function file()
+  {
+      return $this->file;
+  }
+
 
   public function setSubName($value)
   {
@@ -221,43 +236,47 @@ public function extract($url)
     }
   public function unfollow($del)
   {
-    $db = "storage/rss/subscription.json";
-    $file = FileSystem::read($db);
-    $data = json_decode($file, true);
-    unset($file);
-    //Sample Feed - Favorite RSS Related Software & Resources
+    $user = Auth::user();
 
-    foreach ($data as $key => $value) {
+//$file= ext_rss::select('select * from users where user_id = :user_id and title = :title', [
+//  "user_id" => $user->id,
+  //"title" => $del]);
 
-      if ($value["time"] == $del) {
-        unset($data[$key]);
-      }
-    };
+  $file= DB::table('ext_rsses')->where('user_id', $user->id)->where('title', $del)->delete();
 
-    $result = json_encode($data);
-    FileSystem::write($db, $result);
-    unset($result);
+return $file;
+
   }
   public function count()
   {
-    $user = Auth::user();
-    $file= ext_rss::where('title', $user['name'])->get();
 
+    $user= DB::table('users')->where('username', $this->user)->get();
+
+    foreach($user as $key => $user){
+
+  $file= ext_rss::where('title', $user->name)->get();
+}
     $data=json_decode($file,true);
     if(!empty($data)){
       unset($file);
-      return count($data);
+      return $data;
     }
   }
   public function fcount()
   {
-    $user = Auth::user();
-    $file= ext_rss::where('user_id', $user['id'])->get();
+  //  $user = Auth::user();
+      $user= DB::table('users')->where('username', $this->user)->get();
+      //extract();
+      foreach($user as $key => $user){
 
+    $file= ext_rss::where('user_id', $user->id)->get();
+}
     $data=json_decode($file,true);
+
     if(!empty($data)){
       unset($file);
       return count($data);
+
     }
 
 
