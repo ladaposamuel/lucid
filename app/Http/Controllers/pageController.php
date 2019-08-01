@@ -70,6 +70,9 @@ class pageController extends Controller
             if (!empty($count)) {
                 $count = count($count);
               }
+              else {
+                $count = "";
+              }
             $follower = $app->subscription();
 
              $userposts=$app->get('posts');
