@@ -249,18 +249,17 @@ class Document
             //$data=[];
             $urlArray = json_decode($data, true);
             $urlArray2 = array(
-                array('title' => $user['name'], 'url' => $url, 'desc' => '', 'link' => '', 'image' => $user['image'], 'time' => ''),
+            //    array('title' => $user['name'], 'url' => $url, 'desc' => '', 'link' => '', 'image' => $user['image'], 'time' => ''),
                 array('title' => 'Stratechery by Ben Thompson',  'url' => 'http://stratechery.com/feed/' , 'desc' => 'On the business, strategy, and impact of technology.', 'link' => '', 'image' => "https://stratechery.com/wp-content/uploads/2018/03/cropped-android-chrome-512x512-1-32x32.png", 'time' => ' Fri, 12 Jul 2019 16:06:22 +0000')
             );
-
             $result = array_merge($urlArray, $urlArray2);
             //  print_r($result);
             foreach ($result as $url) {
-              if (extfeeds::where('site', $url["title"])->exists() == 1) {
-                $feeds = DB::table('extfeeds')->where('user_id', $user['id'])->get();
+            //  if (extfeeds::where('site', $url["title"])->exists() == 1) {
+              //  $feeds = DB::table('extfeeds')->where('user_id', $user['id'])->get();
             //  return $feeds;
-              }
-            if (extfeeds::where('site', $url["title"])->doesntExist() == 1) {
+              //}
+            //if (extfeeds::where('site', $url["title"])->doesntExist() == 1) {
               //  dd($url['link']);
               $rss->load($url['url']);
               $user = Auth::user();
@@ -294,7 +293,7 @@ class Document
                       );
                   }
                   array_push($feed, $item);
-                }
+                //}
               }
 
                   krsort($feed);
@@ -317,6 +316,7 @@ class Document
                 }
 
                   $feeds = DB::table('extfeeds')->where('user_id', $user['id'])->get();
+                  //  dd($feed);
                 return $feeds;
 
               } else {
