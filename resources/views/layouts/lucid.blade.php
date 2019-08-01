@@ -42,11 +42,7 @@
           <ul>
             @if(Auth::user() && Auth::user()->username == $user->username)
             <li><a href="/{{ $user->username}}/posts">Posts</a></li>
-<<<<<<< HEAD
           @else
-=======
-            @else
->>>>>>> lucid-v1.2
             <li><a href="/{{ $user->username}}">Posts</a></li>
             @endif
             <li><a href="/{{ $user->username}}/thoughts">Thoughts</a></li>
@@ -110,11 +106,7 @@
             </div>
           </div>
           <!-- End Modal -->
-<<<<<<< HEAD
 @endif
-=======
-
->>>>>>> lucid-v1.2
         </div>
 
         @endif
@@ -166,7 +158,7 @@
                   @endguest
                 </div>
               </li>
-            </ul> 
+            </ul>
           </div>
         </nav>
         <!-- End of Navbar -->
