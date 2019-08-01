@@ -56,6 +56,9 @@ class HomeController extends Controller
            if (!empty($count)) {
                $count = count($count);
              }
+             else {
+               $count = "";
+             }
         return view('home', ['fcheck' => $fcheck, 'posts' => $feed,'fcount'=>$fcount, 'count' => $count]);
 
     }
@@ -93,6 +96,9 @@ class HomeController extends Controller
       $count = $count->count();
       if (!empty($count)) {
           $count = count($count);
+        }
+        else {
+          $count = "";
         }
      return view('timeline', ['posts' => $post,'fcheck' => $fcheck, 'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
      }else {
@@ -161,6 +167,9 @@ class HomeController extends Controller
       $count = $count->count();
       if (!empty($count)) {
           $count = count($count);
+        }
+        else {
+          $count = "";
         }
       return view('subscribe', ['fcheck' => $fcheck,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
 

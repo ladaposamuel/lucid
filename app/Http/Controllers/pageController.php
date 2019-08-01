@@ -32,10 +32,34 @@ class pageController extends Controller
                 $post = $post->fetchAllRss();
                 $count = new \Lucid\Core\Subscribe($username);
                 $fcount = $count->fcount();
-              //  dd($fcount);
+                $count = new \Lucid\Core\Subscribe($username);
+
+
+                $fcount =$count->fcount();
+          //      dd($count->count());
+                $title = [];
+                if (!is_null($count->count())) {
+
+                foreach($count->count() as $key => $fuser){
+                $title['name'] = $fuser['title'];
+                //array_push($title , $title);
+              }
+
+        }
+
+                if (in_array($user->name, $title)) {
+                  $fcheck = "yes";
+                }else {
+                  $fcheck = "no";
+                }
+              //  $data  = $count->count();
                 $count = $count->count();
-
-
+                if (!empty($count)) {
+                    $count = count($count);
+                  }
+                  else {
+                    $count = "";
+                  }
 
                 return view('timeline', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count, 'following' => $following, 'follower' => $follower]);
 
@@ -49,7 +73,7 @@ class pageController extends Controller
 
 
             $fcount =$count->fcount();
-            //dd($count->count());
+        //    dd($count->count());
             $title = [];
             if (!is_null($count->count())) {
 
@@ -118,6 +142,9 @@ class pageController extends Controller
         if (!empty($count)) {
             $count = count($count);
           }
+          else {
+            $count = "";
+          }
         return view('single-blog-post',compact('post','user'),['fcheck' => $fcheck, 'fcount'=>$fcount, 'count' => $count ]);
     }
 
@@ -151,10 +178,14 @@ class pageController extends Controller
             }else {
               $fcheck = "no";
             }
+
           //  $data  = $count->count();
             $count = $count->count();
             if (!empty($count)) {
                 $count = count($count);
+              }
+              else {
+                $count = "";
               }
             return view('post',compact('user','posts'), ['fcheck' => $fcheck, 'fcount'=>$fcount, 'count' => $count ]);
         }else {
@@ -194,6 +225,9 @@ class pageController extends Controller
         if (!empty($count)) {
             $count = count($count);
           }
+          else {
+            $count = "";
+          }
         return view('contact',compact('user','posts'), ['fcheck' => $fcheck, 'fcount'=>$fcount, 'count' => $count ]);
     }
 
@@ -232,6 +266,9 @@ class pageController extends Controller
       $count = $count->count();
       if (!empty($count)) {
           $count = count($count);
+        }
+        else {
+          $count = "";
         }
       return view('thoughts', ['fcheck' => $fcheck,'posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
 
