@@ -38,7 +38,7 @@ class Document
     //kjarts code here
     public function create($title, $content, $tag="", $image, $extra, $postType="")
     {
-       
+
         date_default_timezone_set("Africa/Lagos");
         $time = date(DATE_RSS, time());
         $unix = strtotime($time);
@@ -68,12 +68,12 @@ class Document
                     $yamlfile['image'] = $url.$key;
                 }
             } else {
-               
+
               $path =  Storage::disk('public')->put($url, $image);
               $yamlfile['image'] = $path;
             }
 
-              
+
         }
 
         if (!$extra) {
@@ -85,9 +85,9 @@ class Document
 
         // create slug by first removing spaces
         $striped = str_replace(' ', '-', $title);
-       
+
         $striped = preg_replace("/(&#[0-9]+;)/", "", $striped);
-        
+
         $yamlfile['slug'] = $unix;
         $yamlfile['timestamp'] = $time;
         $yamlfile->setContent($content);
@@ -99,7 +99,7 @@ class Document
         }elseif($postType == "micro-blog") {
             $dir = $file .'/content/micro-blog-posts/'. $unix . ".md";
         }
-        
+
         //return $dir; die();
         $doc = Storage::put($dir, $yaml);
         if (!$extra) {
@@ -476,7 +476,7 @@ $user = Auth::user();
 
         $Feed->addGenerator();
 
-        
+
             $myFeed = $Feed->generateFeed();
 
             $handle = $this->file."/rss/rss.xml";
@@ -485,7 +485,7 @@ $user = Auth::user();
             //        fwrite($handle, $myFeed);
             //      fclose($handle);
            // $strxml = $Feed->printFeed();
-       
+
     }
 
     //RSS designed By DMAtrix;
@@ -561,21 +561,21 @@ $user = Auth::user();
         $user = Auth::user();
         $data= ext_rss::where('title', $user['name'])->get();
         $data = json_decode($data, true);
-        
+
           $follower = [];
           foreach ($data as $key => $value) {
-              
+
             $follow = DB::table('users')->where('id', $value['user_id'])->get();
-          
+
              foreach($follow as $key => $follow){
-         
+
             $content['name'] = $follow->name;
             $content['username'] = $follow->username;
             $content['img'] = $follow->image;
             $content['id'] = $follow->id;
             $content['desc'] = $follow->short_bio;
             array_push($follower, $content);
-              
+
         }
           }
           return $follower;
@@ -585,18 +585,20 @@ $user = Auth::user();
       $user = Auth::user();
       $data= ext_rss::where('user_id', $user['id'])->get();
       $data = json_decode($data, true);
-      
+
         $following = [];
         foreach ($data as $key => $value) {
-
-            $content['name'] = $value['title'];
-            $content['img'] = $value['image'];
-            $content['time'] = $value['created_at'];
-            $content['desc'] = $value['description'];
-            $content['link'] = $value['link'];
+  $follower= DB::table('users')->where('name', $value['title'])->get();
+          foreach($follower as $key => $follower){
+          $content['name'] = $follower->name;
+          $content['username'] = $follower->username;
+          $content['img'] = $follower->image;
+          $content['id'] = $follower->id;
+          $content['desc'] = $follower->short_bio;
             array_push($following, $content);
         }
-        //dd( $following);
+      }
+      //  dd( $following);
         return $following;
     }
     //code for returnng details of each codes

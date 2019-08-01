@@ -15,7 +15,7 @@
   <link href="{{ asset('css/style.css') }}" rel="stylesheet">
   <link href="{{ asset('css/main-style.css') }}" rel="stylesheet">
   <link href="{{ asset('css/tabletcss.css') }}" rel="stylesheet">
-  <link href="https://cdn.quilljs.com/1.3.4/quill.snow.css" rel="stylesheet"> 
+  <link href="https://cdn.quilljs.com/1.3.4/quill.snow.css" rel="stylesheet">
 </head>
 
 <body>
@@ -40,7 +40,7 @@
           <ul>
           @if(Auth::user() && Auth::user()->username == $user->username)
             <li><a href="/{{ $user->username}}/posts">Posts</a></li>
-          @else 
+          @else
             <li><a href="/{{ $user->username}}">Posts</a></li>
           @endif
             <li><a href="/{{ $user->username}}/thoughts">Thoughts</a></li>
@@ -49,9 +49,34 @@
           </ul>
         </div>
         @if(Auth::user() && Auth::user()->username == $user->username)
-        @else 
+        @else
         <!-- Follow Modal Trigger -->
         <div class="follow-me text-center pt-3">
+          @if($fcheck == "yes")
+          <button class="btn btn-primary" data-toggle="modal" data-target="#unfollowModal">UnFollow</button>
+
+    <div class="modal fade" id="unfollowModal" tabindex="-1" role="dialog" aria-labelledby="followModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+
+        <div>
+          <img src="{{ asset('img/following-the-idea.png') }}" class="img-fluid" />
+          <h4 class="text-main">Unfollow  {{$user->name}}</h4>
+          <p class="small"><em>Are you sure you want to Unfollow {{$user->name}} and miss out interesting post?<br /> Click the button below to unfollow</em></p>
+          <form method="POST" action="{{URL::to('/')}}/{{Auth::user()->username}}/unfollow">
+            @csrf
+            <input type="hidden" name="rss" value="{{$user->name}}">
+            <button type="submit" class="btn btn-primary">UnFollow</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+          @else
+
           <button class="btn btn-primary" data-toggle="modal" data-target="#followModal">Follow Me</button>
           <!-- Modal -->
 
@@ -61,7 +86,7 @@
                 <div class="modal-body">
                   <div>
                     <img src="{{ asset('img/following-the-idea.png') }}" class="img-fluid" />
-                    <h4 class="text-main">FOLLOW ME</h4>
+                    <h4 class="text-main">Follow {{$user->name}}</h4>
                     <p class="small"><em>Do you have or would love to have Lucid installed on your domain?<br /> Click the button below to follow me</em></p>
                     <form method="POST" action="{{URL::to('/')}}/{{$user->username}}/addrss">
                       @csrf
@@ -79,9 +104,12 @@
             </div>
           </div>
           <!-- End Modal -->
-         
+@endif
         </div>
+
         @endif
+
+
         <div class="user-stats text-center mt-3 pb-0">
           <div class="d-inline-block">
             @if (empty($fcount))
@@ -135,9 +163,9 @@
 
         <!-- Beginning of Post Content -->
         @yield('content')
-        
+
       </div>
-      
+
   </section>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

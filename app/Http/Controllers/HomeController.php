@@ -31,10 +31,32 @@ class HomeController extends Controller
       $post = new \Lucid\Core\Document($username);
             $feed = $post->fetchRss();
            // print_r($feed);
-          // $count = new \Lucid\Core\Subscribe();
-               $fcount = 1;
-           //    $count = $count->count();
-        return view('home', ['posts' => $feed]);
+           $count = new \Lucid\Core\Subscribe($username);
+
+
+           $fcount =$count->fcount();
+           //dd($count->count());
+           $title = [];
+           if (!is_null($count->count())) {
+
+           foreach($count->count() as $key => $fuser){
+           $title['name'] = $fuser['title'];
+           //array_push($title , $title);
+         }
+
+   }
+
+           if (in_array($user->name, $title)) {
+             $fcheck = "yes";
+           }else {
+             $fcheck = "no";
+           }
+         //  $data  = $count->count();
+           $count = $count->count();
+           if (!empty($count)) {
+               $count = count($count);
+             }
+        return view('home', ['fcheck' => $fcheck, 'posts' => $feed,'fcount'=>$fcount, 'count' => $count]);
 
     }
     public function timeline($username)
@@ -46,23 +68,40 @@ class HomeController extends Controller
       $post = new \Lucid\Core\Document($username);
 
       $post = $post->fetchAllRss();
-      
-      $fcount = 1;
-      $count = 1;
-     return view('timeline', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
+
+      $count = new \Lucid\Core\Subscribe($username);
+
+
+      $fcount =$count->fcount();
+      //dd($count->count());
+      $title = [];
+      if (!is_null($count->count())) {
+
+      foreach($count->count() as $key => $fuser){
+      $title['name'] = $fuser['title'];
+      //array_push($title , $title);
+    }
+
+}
+
+      if (in_array($user->name, $title)) {
+        $fcheck = "yes";
+      }else {
+        $fcheck = "no";
+      }
+    //  $data  = $count->count();
+      $count = $count->count();
+      if (!empty($count)) {
+          $count = count($count);
+        }
+     return view('timeline', ['posts' => $post,'fcheck' => $fcheck, 'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
      }else {
 
         return view($user->username.'/timeline', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
 
     }
   }
-    public function userimage($id, $image)
-    {
-        return Image::make(storage_path() . '/' . $id . '/images' . $image)->response();
-    }
 
-
-    
 
 /*
 *
@@ -75,13 +114,13 @@ class HomeController extends Controller
 
     public function savePost(Request $request)
     {
-      
+
 
       $title = '';
       $body = $request->body;
       // filter out non-image data
 
-      $images = "";     
+      $images = "";
 
       $extra = "";
       $user = Auth::user();
@@ -96,12 +135,34 @@ class HomeController extends Controller
       $user = Auth::user();
       $username = preg_split('/ +/', $user->name);
       $path = $username[0];
-      
+
       $post=[];
-        
-      $fcount = 1;
-      $count = 1;
-      return view('subscribe', ['user'=>$user,'fcount'=>$fcount, 'count' => $count]);
+      $count = new \Lucid\Core\Subscribe($username);
+
+
+      $fcount =$count->fcount();
+      //dd($count->count());
+      $title = [];
+      if (!is_null($count->count())) {
+
+      foreach($count->count() as $key => $fuser){
+      $title['name'] = $fuser['title'];
+      //array_push($title , $title);
+    }
+
+}
+
+      if (in_array($user->name, $title)) {
+        $fcheck = "yes";
+      }else {
+        $fcheck = "no";
+      }
+    //  $data  = $count->count();
+      $count = $count->count();
+      if (!empty($count)) {
+          $count = count($count);
+        }
+      return view('subscribe', ['fcheck' => $fcheck,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
 
     }
 
@@ -111,18 +172,18 @@ class HomeController extends Controller
         $title = isset($request->title) ? $request->title : '';
         $body = $request->postVal;
         $tags = $request->tags;
-      
-        
+
+
           $initial_images = array_filter($request->all(), function ($key) {
             return preg_match('/^img-\w*$/', $key);
         }, ARRAY_FILTER_USE_KEY);
-        
+
         $images = [];
         foreach ($initial_images as $key => $value) {
             $newKey = preg_replace('/_/', '.', $key);
             $images[$newKey] = $value;
         }
-      
+
         $extra = "";
         $app = new \Lucid\Core\Document($username);
         $result = $app->create($title, $body, $tags, $images, $extra, $postType="full-blog");
@@ -131,7 +192,11 @@ class HomeController extends Controller
 
     public function settings(){
       $user = Auth::user();
-      return view('settings', ['user'=>$user,'fcount' => 1, 'count' => 1]);
+      $count = new \Lucid\Core\Subscribe();
+
+      $fcount = $count->fcount();
+      $count = $count->count();
+      return view('settings', ['user'=>$user,'fcount' => $fcount , 'count' => $count ]);
 
     }
 
@@ -154,20 +219,20 @@ class HomeController extends Controller
          $updated= DB::table('users')->where('id',$request->user_id)
                            ->update(['name'=>$request->name,'email'=>$request->email,'image'=>$fullPath,
                            'short_bio'=>$request->bio]);
-                           
+
         if($updated) {
-          
+
           return response()->json(['success'=>"Your changes has been saved successfully",'img_path'=>$fullPath], 200);
         }
       } else {
         $updated = DB::table('users')->where('id',$request->user_id)
                           ->update(['name'=>$request->name,'email'=>$request->email,'short_bio'=>$request->bio]);
-                          
+
                           if($updated){
                             return response()->json(['success'=>"Your changes has been saved successfully"], 200);
                           }
       }
-      
+
 
     }
 

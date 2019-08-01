@@ -60,6 +60,7 @@ Route::prefix('{username}')->group(function () {
 
     Route::get('/subscribe','HomeController@subscribe');
     Route::post('/addrss','ExtRssController@addRss');
+    Route::post('/unfollow','ExtRssController@unfollow');
     Route::post('/extrss','ExtRssController@addExtRss');
     Route::post('/publish','HomeController@publish');
     Route::post('/send-mail','SendEmailController@sendEmail');
