@@ -15,7 +15,7 @@
   <link href="{{ asset('css/style.css') }}" rel="stylesheet">
   <link href="{{ asset('css/main-style.css') }}" rel="stylesheet">
   <link href="{{ asset('css/tabletcss.css') }}" rel="stylesheet">
-  <link href="https://cdn.quilljs.com/1.3.4/quill.snow.css" rel="stylesheet"> 
+  <link href="https://cdn.quilljs.com/1.3.4/quill.snow.css" rel="stylesheet">
 </head>
 
 <body>
@@ -26,30 +26,32 @@
       <!-- Beginning of Sidebar -->
       <div class="col-lg-4 pb-0 mb-0 pt-2">
         <a href="/{{ $user->username}}"><img id="user-avatar" src="{{$user->image}}" class="img-fluid" /></a>
-        <a href="/{{ $user->username}}" class="no-decoration"><h3 id="user-name" class="pt-2">{{ $user->name}}</h3></a>
+        <a href="/{{ $user->username}}" class="no-decoration">
+          <h3 id="user-name" class="pt-2">{{ $user->name}}</h3>
+        </a>
         <p id="user-bio" class="pb-2">
-        @if(Auth::user() && Auth::user()->username == $user->username && $user->short_bio =="")
+          @if(Auth::user() && Auth::user()->username == $user->username && $user->short_bio =="")
           You haven't set up a short bio about yourself, do that <a href="/{{ $user->username}}/settings">here</a>
-        @else
+          @else
           {{ $user->short_bio }}
-        @endif
+          @endif
         </p>
 
         <div class="divider"></div>
         <div class="sidebar-nav pt-2">
           <ul>
-          @if(Auth::user() && Auth::user()->username == $user->username)
+            @if(Auth::user() && Auth::user()->username == $user->username)
             <li><a href="/{{ $user->username}}/posts">Posts</a></li>
-          @else 
+            @else
             <li><a href="/{{ $user->username}}">Posts</a></li>
-          @endif
+            @endif
             <li><a href="/{{ $user->username}}/thoughts">Thoughts</a></li>
             <li><a href="#">Videos</a></li>
             <li><a href="/{{ $user->username}}/contact">Contact</a></li>
           </ul>
         </div>
         @if(Auth::user() && Auth::user()->username == $user->username)
-        @else 
+        @else
         <!-- Follow Modal Trigger -->
         <div class="follow-me text-center pt-3">
           <button class="btn btn-primary" data-toggle="modal" data-target="#followModal">Follow Me</button>
@@ -79,7 +81,7 @@
             </div>
           </div>
           <!-- End Modal -->
-         
+
         </div>
         @endif
         <div class="user-stats text-center mt-3 pb-0">
@@ -91,14 +93,14 @@
             @endif
           </div>
           <div class="d-inline-block">
-          @if (empty($count))
+            @if (empty($count))
             <a href="#">0 <br /> <small class="text-muted">Followers</small></a>
             @else
             <a href="#">{{$count}} <br /> <small class="text-muted">Followers</small></a>
             @endif
           </div>
           <div class="mt-3">
-            <small class="text-muted"><img src="{{ asset('img/logo.jpg') }}" alt="Lucid" class="img-fluid" style="filter: grayscale(100%);" /> Powered by Lucid</small>
+            <a href="https://lucid.blog"> <small class="text-muted"><img src="{{ asset('img/logo.jpg') }}" alt="Lucid" class="img-fluid" style="filter: grayscale(100%);" /> Powered by Lucid</small></a>
           </div>
         </div>
       </div>
@@ -112,8 +114,8 @@
           <div class="container">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <img src="{{ asset('img/lucid-logo.png') }}" alt="The Lucid Logo" class="img-fluid" width="65px" />
+                <a class="nav-link dropdown-toggle pt-0" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <img src="{{ asset('img/lucid-logo.png') }}" alt="The Lucid Logo" class="img-fluid" width="40px"/>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   @guest
@@ -128,16 +130,16 @@
                   @endguest
                 </div>
               </li>
-            </ul>
+            </ul> 
           </div>
         </nav>
         <!-- End of Navbar -->
 
         <!-- Beginning of Post Content -->
         @yield('content')
-        
+
       </div>
-      
+
   </section>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
