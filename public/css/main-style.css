@@ -41,6 +41,9 @@ header {
 .border-main {
     border-color: var(--primary-color) !important;
 }
+.dropdown-toggle::after  {
+    margin-left: -5px !important;
+}
 .login-div {
     display: inline-block;
     width: 40%;
