@@ -320,7 +320,7 @@
     <div class="post-content border p-3 my-2">
       <img src="{{$follower['img']}}" class="img-fluid img-thumb" alt="user" />
       <div class="post-content-body">
-        <a href=""> <p class="m-0 font-weight-bold">{{$follower['name']}}</p></a>
+        <a href="{{URL::to('/')}}/{{$follower['username']}}/"> <p class="m-0 font-weight-bold">{{$follower['name']}}</p></a>
         <p class="mb-2">{{$follower['desc']}}</p>
         @if ($user->username == $follower['username'])
         <a href="#" class="no-decoration text-secondary font-weight-bold">Following</a>
