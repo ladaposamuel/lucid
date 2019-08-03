@@ -70,6 +70,7 @@ header {
 .single-post-img {
     width: 80%;
     object-fit: contain;
+    overflow: hidden;
 }
 .img-thumb {
 	border-radius: 50%;
