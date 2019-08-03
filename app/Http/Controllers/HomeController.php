@@ -201,7 +201,7 @@ class HomeController extends Controller
 
     public function settings(){
       $user = Auth::user();
-      $count = new \Lucid\Core\Subscribe();
+      $count = new \Lucid\Core\Subscribe($username);
 
       $fcount = $count->fcount();
       $count = $count->count();
