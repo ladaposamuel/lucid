@@ -36,6 +36,12 @@ class pageController extends Controller
 
 
                 $fcount =$count->fcount();
+                if (!empty($fcount)) {
+                    $fcount = count($fcount);
+                  }
+                  else {
+                    $fcount = "";
+                  }
           //      dd($count->count());
                 $title = [];
                 if (!is_null($count->count())) {
@@ -73,22 +79,37 @@ class pageController extends Controller
 
 
             $fcount =$count->fcount();
+            if (!empty($fcount)) {
+                $fcount = count($fcount);
+              }
+              else {
+                $fcount = "";
+              }
+
         //    dd($count->count());
-            $title = [];
-            if (!is_null($count->count())) {
 
-            foreach($count->count() as $key => $fuser){
-            $title['name'] = $fuser['title'];
-            //array_push($title , $title);
-          }
 
-    }
+if(Auth::user()){
+  $check = new \Lucid\Core\Subscribe(Auth::user()->username);
+  $title = [];
+  if (!is_null($check->fcount())) {
+
+  foreach($check->fcount() as $key => $fuser){
+//  $title = $fuser['title'];
+  array_push($title , $fuser['title']);
+}
 
             if (in_array($user->name, $title)) {
               $fcheck = "yes";
             }else {
               $fcheck = "no";
             }
+          }
+        }
+          else {
+            $fcheck = "no";
+          }
+        //  dd($fcheck);
           //  $data  = $count->count();
             $count = $count->count();
             if (!empty($count)) {
@@ -102,6 +123,7 @@ class pageController extends Controller
              $userposts=$app->get('posts');
              return view('home', ['posts' => $feed,'user'=>$user,'fcheck' => $fcheck,'fcount'=>$fcount, 'count' => $count,"userposts"=>$userposts]);
         }
+
 
     }
 
@@ -121,23 +143,33 @@ class pageController extends Controller
 
 
         $fcount =$count->fcount();
-        //dd($count->count());
-        $title = [];
-        if (!is_null($count->count())) {
+        if (!empty($fcount)) {
+            $fcount = count($fcount);
+          }
+          else {
+            $fcount = "";
+          }
+          if(Auth::user()){
+            $check = new \Lucid\Core\Subscribe(Auth::user()->username);
+            $title = [];
+            if (!is_null($check->fcount())) {
 
-        foreach($count->count() as $key => $fuser){
-        $title['name'] = $fuser['title'];
-        //array_push($title , $title);
-      }
+            foreach($check->fcount() as $key => $fuser){
+          //  $title = $fuser['title'];
+            array_push($title , $fuser['title']);
+          }
 
-}
+                      if (in_array($user->name, $title)) {
+                        $fcheck = "yes";
+                      }else {
+                        $fcheck = "no";
+                      }
+                    }
+                  }
+                    else {
+                      $fcheck = "no";
+                    }
 
-        if (in_array($user->name, $title)) {
-          $fcheck = "yes";
-        }else {
-          $fcheck = "no";
-        }
-      //  $data  = $count->count();
         $count = $count->count();
         if (!empty($count)) {
             $count = count($count);
@@ -162,6 +194,12 @@ class pageController extends Controller
 
 
             $fcount =$count->fcount();
+            if (!empty($fcount)) {
+                $fcount = count($fcount);
+              }
+              else {
+                $fcount = "";
+              }
             //dd($count->count());
             $title = [];
             if (!is_null($count->count())) {
@@ -204,23 +242,33 @@ class pageController extends Controller
 
 
         $fcount =$count->fcount();
-        //dd($count->count());
-        $title = [];
-        if (!is_null($count->count())) {
+        if (!empty($fcount)) {
+            $fcount = count($fcount);
+          }
+          else {
+            $fcount = "";
+          }
+          if(Auth::user()){
+            $check = new \Lucid\Core\Subscribe(Auth::user()->username);
+            $title = [];
+            if (!is_null($check->fcount())) {
 
-        foreach($count->count() as $key => $fuser){
-        $title['name'] = $fuser['title'];
-        //array_push($title , $title);
-      }
+            foreach($check->fcount() as $key => $fuser){
+          //  $title = $fuser['title'];
+            array_push($title , $fuser['title']);
+          }
 
-}
+                      if (in_array($user->name, $title)) {
+                        $fcheck = "yes";
+                      }else {
+                        $fcheck = "no";
+                      }
+                    }
+                  }
+                    else {
+                      $fcheck = "no";
+                    }
 
-        if (in_array($user->name, $title)) {
-          $fcheck = "yes";
-        }else {
-          $fcheck = "no";
-        }
-      //  $data  = $count->count();
         $count = $count->count();
         if (!empty($count)) {
             $count = count($count);
@@ -246,6 +294,12 @@ class pageController extends Controller
 
 
       $fcount =$count->fcount();
+      if (!empty($fcount)) {
+          $fcount = count($fcount);
+        }
+        else {
+          $fcount = "";
+        }
       //dd($count->count());
       $title = [];
       if (!is_null($count->count())) {
