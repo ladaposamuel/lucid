@@ -38,6 +38,7 @@
         </p>
 
         <div class="divider"></div>
+        
         <div class="sidebar-nav pt-2">
           <ul>
             @if(Auth::user() && Auth::user()->username == $user->username)
@@ -54,6 +55,7 @@
         @else
         <!-- Follow Modal Trigger -->
         <div class="follow-me text-center pt-3">
+
           @if($fcheck == "yes")
           <button class="btn btn-primary" data-toggle="modal" data-target="#unfollowModal">UnFollow</button>
 
@@ -66,7 +68,7 @@
           <img src="{{ asset('img/following-the-idea.png') }}" class="img-fluid" />
           <h4 class="text-main">Unfollow  {{$user->name}}</h4>
           <p class="small"><em>Are you sure you want to Unfollow {{$user->name}} and miss out interesting post?<br /> Click the button below to unfollow</em></p>
-          <form method="POST" action="{{URL::to('/')}}/{{Auth::user()->username}}/unfollow">
+          <form method="POST" action="{{URL::to('/')}}/{{$user->username}}/unfollow">
             @csrf
             <input type="hidden" name="rss" value="{{$user->name}}">
             <button type="submit" class="btn btn-primary">UnFollow</button>

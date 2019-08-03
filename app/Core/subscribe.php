@@ -275,7 +275,7 @@ return $file;
 
     if(!empty($data)){
       unset($file);
-      return count($data);
+      return $data;
 
     }
 
