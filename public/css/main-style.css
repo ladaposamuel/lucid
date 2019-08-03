@@ -67,6 +67,10 @@ header {
     font-weight: 500;
     padding: 0.7rem 1rem;
 }
+.single-post-img {
+    width: 80%;
+    object-fit: contain;
+}
 .img-thumb {
 	border-radius: 50%;
 	padding: 0 !important;

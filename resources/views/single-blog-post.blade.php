@@ -20,7 +20,7 @@
          {{ $post['title'] }}
         </h3>
         @isset($post['crawlerImage'])
-        <img src="{{URL::to('/')}}/storage/{{$post['crawlerImage']}}" alt="" style="width:100%" class="my-1">
+        <img src="{{URL::to('/')}}/storage/{{$post['crawlerImage']}}" alt="" class="single-post-img" style="width:100%" class="my-1">
         @endisset
         <div class="blog-content">
             {!! $post['body'] !!}
