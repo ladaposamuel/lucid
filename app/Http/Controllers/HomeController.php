@@ -201,11 +201,35 @@ class HomeController extends Controller
 
     public function settings(){
       $user = Auth::user();
+      $username = $user['username'];
       $count = new \Lucid\Core\Subscribe($username);
 
-      $fcount = $count->fcount();
+      $fcount =$count->fcount();
+      //dd($count->count());
+      $title = [];
+      if (!is_null($count->count())) {
+
+      foreach($count->count() as $key => $fuser){
+      $title['name'] = $fuser['title'];
+      //array_push($title , $title);
+    }
+
+}
+
+      if (in_array($user->name, $title)) {
+        $fcheck = "yes";
+      }else {
+        $fcheck = "no";
+      }
+    //  $data  = $count->count();
       $count = $count->count();
-      return view('settings', ['user'=>$user,'fcount' => $fcount , 'count' => $count ]);
+      if (!empty($count)) {
+          $count = count($count);
+        }
+        else {
+          $count = "";
+        }
+      return view('settings', ['fcheck' => $fcheck,'user'=>$user,'fcount' => $fcount , 'count' => $count ]);
 
     }
 
