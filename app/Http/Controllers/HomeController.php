@@ -57,7 +57,10 @@ class HomeController extends Controller
                        }else {
                          $fcheck = "no";
                        }
+                     }else {
+                       $fcheck = "no";
                      }
+                   //  dd($check->fcount());
                    }
                      else {
                        $fcheck = "no";
@@ -109,7 +112,10 @@ class HomeController extends Controller
                   }else {
                     $fcheck = "no";
                   }
+                }else {
+                  $fcheck = "no";
                 }
+              //  dd($check->fcount());
               }
                 else {
                   $fcheck = "no";
@@ -191,7 +197,10 @@ class HomeController extends Controller
                   }else {
                     $fcheck = "no";
                   }
+                }else {
+                  $fcheck = "no";
                 }
+              //  dd($check->fcount());
               }
                 else {
                   $fcheck = "no";
@@ -260,7 +269,10 @@ class HomeController extends Controller
                   }else {
                     $fcheck = "no";
                   }
+                }else {
+                  $fcheck = "no";
                 }
+              //  dd($check->fcount());
               }
                 else {
                   $fcheck = "no";

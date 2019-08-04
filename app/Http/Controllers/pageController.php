@@ -104,7 +104,10 @@ if(Auth::user()){
             }else {
               $fcheck = "no";
             }
+          }else {
+            $fcheck = "no";
           }
+        //  dd($check->fcount());
         }
           else {
             $fcheck = "no";
@@ -164,7 +167,10 @@ if(Auth::user()){
                       }else {
                         $fcheck = "no";
                       }
+                    }else {
+                      $fcheck = "no";
                     }
+                  //  dd($check->fcount());
                   }
                     else {
                       $fcheck = "no";
@@ -201,21 +207,29 @@ if(Auth::user()){
                 $fcount = "";
               }
             //dd($count->count());
-            $title = [];
-            if (!is_null($count->count())) {
+            if(Auth::user()){
+              $check = new \Lucid\Core\Subscribe(Auth::user()->username);
+              $title = [];
+              if (!is_null($check->fcount())) {
 
-            foreach($count->count() as $key => $fuser){
-            $title['name'] = $fuser['title'];
-            //array_push($title , $title);
-          }
-
-    }
-
-            if (in_array($user->name, $title)) {
-              $fcheck = "yes";
-            }else {
-              $fcheck = "no";
+              foreach($check->fcount() as $key => $fuser){
+            //  $title = $fuser['title'];
+              array_push($title , $fuser['title']);
             }
+
+                        if (in_array($user->name, $title)) {
+                          $fcheck = "yes";
+                        }else {
+                          $fcheck = "no";
+                        }
+                      }else {
+                        $fcheck = "no";
+                      }
+                    //  dd($check->fcount());
+                    }
+                      else {
+                        $fcheck = "no";
+                      }
 
           //  $data  = $count->count();
             $count = $count->count();
@@ -263,7 +277,10 @@ if(Auth::user()){
                       }else {
                         $fcheck = "no";
                       }
+                    }else {
+                      $fcheck = "no";
                     }
+                  //  dd($check->fcount());
                   }
                     else {
                       $fcheck = "no";
@@ -301,21 +318,29 @@ if(Auth::user()){
           $fcount = "";
         }
       //dd($count->count());
-      $title = [];
-      if (!is_null($count->count())) {
+      if(Auth::user()){
+        $check = new \Lucid\Core\Subscribe(Auth::user()->username);
+        $title = [];
+        if (!is_null($check->fcount())) {
 
-      foreach($count->count() as $key => $fuser){
-      $title['name'] = $fuser['title'];
-      //array_push($title , $title);
-    }
-
-}
-
-      if (in_array($user->name, $title)) {
-        $fcheck = "yes";
-      }else {
-        $fcheck = "no";
+        foreach($check->fcount() as $key => $fuser){
+      //  $title = $fuser['title'];
+        array_push($title , $fuser['title']);
       }
+
+                  if (in_array($user->name, $title)) {
+                    $fcheck = "yes";
+                  }else {
+                    $fcheck = "no";
+                  }
+                }else {
+                  $fcheck = "no";
+                }
+              //  dd($check->fcount());
+              }
+                else {
+                  $fcheck = "no";
+                }
     //  $data  = $count->count();
       $count = $count->count();
       if (!empty($count)) {
