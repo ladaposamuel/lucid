@@ -115,3 +115,15 @@
             // }else {
             //   document.querySelector('#user-bio').innerHTML = ' Be The First To Get The Latest Posts From Me By Clicking On The Follow Me Button Below';
             // }
+
+      //Auth::routes();
+    // Route::get('/', 'HomeController@index');
+    // Route::get('/home', 'HomeController@index');
+    //Route::get('/timeline', 'HomeController@timeline');
+
+
+    //Route::post('/addrss','ExtRssController@add');
+
+// Route::get('posts', function () {
+//     return view('posts');
+// });

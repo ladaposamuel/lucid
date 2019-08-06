@@ -352,4 +352,121 @@ if(Auth::user()){
       return view('thoughts', ['fcheck' => $fcheck,'posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
 
     }
+
+    public function following($username) {
+        if(!$this->user($username)) {
+          return "=======404=========";
+      }
+      $user = $this->user($username);
+
+      $post = new \Lucid\Core\Document($username);
+              $following = $post->subscription();
+              $follower = $post->subscriber();
+              $post = $post->fetchAllRss();
+              $count = new \Lucid\Core\Subscribe($username);
+              $fcount = $count->fcount();
+              $count = new \Lucid\Core\Subscribe($username);
+
+
+              $ $fcount =$count->fcount();
+              if (!empty($fcount)) {
+                  $fcount = count($fcount);
+                }
+                else {
+                  $fcount = "";
+                }
+              //dd($count->count());
+              if(Auth::user()){
+                $check = new \Lucid\Core\Subscribe(Auth::user()->username);
+                $title = [];
+                if (!is_null($check->fcount())) {
+  
+                foreach($check->fcount() as $key => $fuser){
+              //  $title = $fuser['title'];
+                array_push($title , $fuser['title']);
+              }
+  
+                          if (in_array($user->name, $title)) {
+                            $fcheck = "yes";
+                          }else {
+                            $fcheck = "no";
+                          }
+                        }else {
+                          $fcheck = "no";
+                        }
+                      //  dd($check->fcount());
+                      }
+                        else {
+                          $fcheck = "no";
+                        }
+  
+            //  $data  = $count->count();
+              $count = $count->count();
+              if (!empty($count)) {
+                  $count = count($count);
+                }
+                else {
+                  $count = "";
+                }
+      return view('follow-details', ['fcheck' => $fcheck,'posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count, 'following' => $following, 'follower' => $follower]);
+    }
+
+    public function followers($username) {
+        if(!$this->user($username)) {
+          return "=======404=========";
+      }
+      $user = $this->user($username);
+
+      $post = new \Lucid\Core\Document($username);
+                $following = $post->subscription();
+                $follower = $post->subscriber();
+                $post = $post->fetchAllRss();
+                $count = new \Lucid\Core\Subscribe($username);
+                $fcount = $count->fcount();
+                $count = new \Lucid\Core\Subscribe($username);
+
+
+                $fcount =$count->fcount();
+                if (!empty($fcount)) {
+                    $fcount = count($fcount);
+                  }
+                  else {
+                    $fcount = "";
+                  }
+                //dd($count->count());
+                if(Auth::user()){
+                  $check = new \Lucid\Core\Subscribe(Auth::user()->username);
+                  $title = [];
+                  if (!is_null($check->fcount())) {
+    
+                  foreach($check->fcount() as $key => $fuser){
+                //  $title = $fuser['title'];
+                  array_push($title , $fuser['title']);
+                }
+    
+                            if (in_array($user->name, $title)) {
+                              $fcheck = "yes";
+                            }else {
+                              $fcheck = "no";
+                            }
+                          }else {
+                            $fcheck = "no";
+                          }
+                        //  dd($check->fcount());
+                        }
+                          else {
+                            $fcheck = "no";
+                          }
+    
+              //  $data  = $count->count();
+                $count = $count->count();
+                if (!empty($count)) {
+                    $count = count($count);
+                  }
+                  else {
+                    $count = "";
+                  }
+
+      return view('follow-details', ['fcheck' => $fcheck,'posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count, 'following' => $following, 'follower' => $follower]);
+    }
 }
