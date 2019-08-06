@@ -32,11 +32,7 @@ Route::get('subscribe', function () {
 });
 Route::get('microblog','HomeController@microblog');
 Route::post('save-post','HomeController@savePost');
-//Route::post('/addrss','ExtRssController@add');
 
-// Route::get('posts', function () {
-//     return view('posts');
-// });
 
 
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
@@ -45,10 +41,7 @@ Route::post('login', 'LoginController@do')->name('login');
 
 Route::prefix('{username}')->group(function () {
 
-  //Auth::routes();
-    // Route::get('/', 'HomeController@index');
-    // Route::get('/home', 'HomeController@index');
-    //Route::get('/timeline', 'HomeController@timeline');
+  
     Route::get('/contact', 'pageController@contact');
     Route::get('/post/{postTitle}','pageController@singlePostPage');
     Route::get('/','pageController@homePage');
@@ -66,4 +59,6 @@ Route::prefix('{username}')->group(function () {
     Route::post('/send-mail','SendEmailController@sendEmail');
     Route::get('/settings', 'HomeController@settings');
     Route::post('/save_settings','HomeController@saveSettings');
+    Route::get('/following','pageController@following')->name("following");
+    Route::get('/followers','pageController@followers')->name("followers");
 });
