@@ -31,7 +31,7 @@
         </a>
         <p id="user-bio" class="pb-2">
           @if(Auth::user() && Auth::user()->username == $user->username && $user->short_bio =="")
-          You haven't set up a short bio about yourself, do that <a href="/{{ $user->username}}/settings">here</a>
+          You haven't set up a short bio about yourself, do that de <a href="/{{ $user->username}}/settings">here</a>
           @else
           {{ $user->short_bio }}
           @endif
