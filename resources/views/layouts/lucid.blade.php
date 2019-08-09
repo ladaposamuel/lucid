@@ -151,7 +151,7 @@
                   @guest
                   <a class="dropdown-item" href="{{ url('/login') }}">{{ __('Login') }}</a>
                   @else
-                  <a class="dropdown-item" href="/home">Home</a>
+                  <a class="dropdown-item" href="/{{ Auth::user()->username}}">Home</a>
                   <a href="/{{ $user->username}}/settings" class="dropdown-item">Settings</a>
                   <a class="dropdown-item" href="/{{ $user->username}}/logout">
                     {{ __('Logout') }}
