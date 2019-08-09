@@ -29,7 +29,8 @@ class pageController extends Controller
                 $post = new \Lucid\Core\Document($username);
                 $following = $post->subscription();
                 $follower = $post->subscriber();
-                $post = $post->fetchAllRss();
+                $post = $post->Feeds();
+            //$post =[];
                 $count = new \Lucid\Core\Subscribe($username);
                 $fcount = $count->fcount();
                 $count = new \Lucid\Core\Subscribe($username);
@@ -66,8 +67,8 @@ class pageController extends Controller
                   else {
                     $count = "";
                   }
-
-                return view('timeline', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count, 'following' => $following, 'follower' => $follower]);
+  //dd($fcheck);
+                return view('timeline', ['posts' => $post,'fcheck' => $fcheck,'user'=>$user,'fcount'=>$fcount, 'count' => $count, 'following' => $following, 'follower' => $follower]);
 
         }else {
 
@@ -124,6 +125,7 @@ if(Auth::user()){
             $follower = $app->subscription();
 
              $userposts=$app->get('posts');
+
              return view('home', ['posts' => $feed,'user'=>$user,'fcheck' => $fcheck,'fcount'=>$fcount, 'count' => $count,"userposts"=>$userposts]);
         }
 
@@ -364,6 +366,7 @@ if(Auth::user()){
               $follower = $post->subscriber();
               $post = $post->fetchAllRss();
               $count = new \Lucid\Core\Subscribe($username);
+            //  dd($following);
               $fcount = $count->fcount();
               $count = new \Lucid\Core\Subscribe($username);
 

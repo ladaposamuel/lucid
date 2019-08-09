@@ -73,6 +73,7 @@ class HomeController extends Controller
              else {
                $count = "";
              }
+             dd($fcheck);
         return view('home', ['fcheck' => $fcheck, 'posts' => $feed,'fcount'=>$fcount, 'count' => $count]);
 
     }

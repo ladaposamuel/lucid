@@ -120,7 +120,7 @@
 @endforeach
 
 
-@php 
+@php
  if(count($userposts) > 30) {
 @endphp
   <div class="text-center">
