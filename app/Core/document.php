@@ -51,7 +51,7 @@ class Document
 
         $yaml = $markdown->getYAML();
         $html = $markdown->getContent();
-        
+
 
         $yamlfile = new Doc();
         if ($title != "") {
@@ -62,9 +62,9 @@ class Document
             $url = $this->file."/images/";
             if(is_array($image)) {
                 foreach ($image as $key => $value) {
-                  
+
                     $decoded = base64_decode($image[$key]);
-                    
+
                     $img_path = 'public/'.$this->file."/images/".$key;
                     Storage::disk('local')->put( $img_path, $decoded);
                     $yamlfile['image'] = $url.$key;
@@ -82,7 +82,7 @@ class Document
             $yamlfile['post_dir'] =$this->file."/contents/{$unix}";
         } else {
             $yamlfile['post_dir'] = $this->file."/drafts/{$unix}";
-           
+
         }
 
         // create slug by first removing spaces
@@ -652,9 +652,10 @@ $user = Auth::user();
     }
     public function subscriber()
     {
-        $user = Auth::user();
-        $data= ext_rss::where('title', $user['name'])->get();
+      $user =   DB::table('users')->where('username', $this->file)->first();
+        $data= ext_rss::where('title', $user->name)->get();
         $data = json_decode($data, true);
+        //  dd($data);
 
           $follower = [];
           foreach ($data as $key => $value) {
@@ -676,10 +677,12 @@ $user = Auth::user();
     }
     public function subscription()
     {
-      $user = Auth::user();
-      $data= ext_rss::where('user_id', $user['id'])->get();
+      //$user = Auth::user();
+    $user =   DB::table('users')->where('username', $this->file)->first();
+      $data= ext_rss::where('user_id', $user->id)->get();
       $data = json_decode($data, true);
 
+      //dd($data);
         $following = [];
         foreach ($data as $key => $value) {
   $follower= DB::table('users')->where('name', $value['title'])->get();
