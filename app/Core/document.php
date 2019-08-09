@@ -100,6 +100,7 @@ class Document
             $dir = $file .'/content/micro-blog-posts/'. $unix . ".md";
         }
 
+
         //return $dir; die();
         $doc = Storage::put($dir, $yaml);
         if (!$extra) {
@@ -229,6 +230,95 @@ class Document
         return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
     }
 
+ static function build_sorter($key) {
+    // dd($key);
+    return function ($a, $b) use ($key) {
+        return strnatcmp($a[$key], $b[$key]);
+    };
+}
+
+public function Feeds()
+{
+  $user = Auth::user();
+  $data= ext_rss::where('user_id', $user['id'])->get();
+  //$data=[];
+  $urlArray = json_decode($data, true);
+  $urlArray2 = array(
+  //    array('title' => $user['name'], 'url' => $url, 'desc' => '', 'link' => '', 'image' => $user['image'], 'time' => ''),
+      array('title' => 'Stratechery by Ben Thompson',  'url' => 'http://stratechery.com/feed/' , 'desc' => 'On the business, strategy, and impact of technology.', 'link' => '', 'image' => "https://stratechery.com/wp-content/uploads/2018/03/cropped-android-chrome-512x512-1-32x32.png", 'time' => ' Fri, 12 Jul 2019 16:06:22 +0000')
+  );
+  $result = array_merge($urlArray, $urlArray2);
+  $feed = [];
+foreach ($result as $url) {
+  $feeds = DB::table('extfeeds')->where('site', $url['title'])->get();
+    $feeds = json_decode($feeds, true);
+  array_push($feed, $feeds);
+}
+  //dd($feed);
+  $ex =[];
+  for ($i=0; $i < count($feed) ; $i++) {
+    for ($j=0; $j <count($feed[$i]) ; $j++) {
+       $rv=$feed[$i][$j];
+    //   krsort($rv);
+      array_push($ex, $rv);
+      //dd($ex);
+    }
+  }
+  usort($ex, $this->build_sorter('id'));
+
+    //arsort($ex);
+  krsort($ex);
+  //dd($ex);
+  //$feed = json_decode($feed, true);
+
+return $ex;
+
+
+}
+
+
+public function checker()
+{
+
+
+  /////////////
+
+/*
+  $query = "SELECT * FROM notifications  WHERE status_user_id=($user_string) and sender_id !=($user_string) ORDER BY notif_id DESC";
+
+  $result = mysqli_query($con, $query);
+  $output = '';
+  if(mysqli_num_rows($result) > 0)
+  {
+
+  while($row = mysqli_fetch_array($result))
+
+  {
+  }
+
+  else{
+      $output .= '<a href="#" class="dropdown-item">No Noti Found</a>';
+  }
+
+  $status_query = "SELECT * FROM notifications WHERE status_user_id=($user_string) and sender_id !=($user_string) and comment_status=0 ";
+  $result_query = mysqli_query($con, $status_query);
+  $count = mysqli_num_rows($result_query);
+
+  $data = array(
+     'notification' => $output,
+     'unseen_notification'  => $count
+  );
+
+  echo json_encode($data);
+
+
+
+
+  ////////////
+  */
+
+}
+
     public function fetchAllRss()
     {
       if (file_exists(storage_path('app/'.$this->file."/rss/rss.xml"))) {
@@ -239,64 +329,67 @@ class Document
           $url = base_path("storage/rss/rss.xml");
           }
 
-      //  $xml = file_get_contents(storage_path('app/'.$this->file."/rss/rss.xml"));
+        $url = storage_path('app/'.$this->file."/rss/rss.xml");
         $feed = [];
         if (strlen($xml != "")) {
             $rss = new \DOMDocument();
 
             $user = Auth::user();
-            $data= ext_rss::where('user_id', $user['id'])->get();
+            //$data= ext_rss::where('user_id', $user['id'])->get();
             //$data=[];
-            $urlArray = json_decode($data, true);
+          //  $urlArray = json_decode($data, true);
             $urlArray2 = array(
-            //    array('title' => $user['name'], 'url' => $url, 'desc' => '', 'link' => '', 'image' => $user['image'], 'time' => ''),
-                array('title' => 'Stratechery by Ben Thompson',  'url' => 'http://stratechery.com/feed/' , 'desc' => 'On the business, strategy, and impact of technology.', 'link' => '', 'image' => "https://stratechery.com/wp-content/uploads/2018/03/cropped-android-chrome-512x512-1-32x32.png", 'time' => ' Fri, 12 Jul 2019 16:06:22 +0000')
+                array('title' => $user['name'], 'url' => $url, 'desc' => '', 'link' => '', 'image' => $user['image'], 'time' => ''),
+              //  array('title' => 'Stratechery by Ben Thompson',  'url' => 'http://stratechery.com/feed/' , 'desc' => 'On the business, strategy, and impact of technology.', 'link' => '', 'image' => "https://stratechery.com/wp-content/uploads/2018/03/cropped-android-chrome-512x512-1-32x32.png", 'time' => ' Fri, 12 Jul 2019 16:06:22 +0000')
             );
-            $result = array_merge($urlArray, $urlArray2);
-            //  print_r($result);
-            foreach ($result as $url) {
-            //  if (extfeeds::where('site', $url["title"])->exists() == 1) {
-              //  $feeds = DB::table('extfeeds')->where('user_id', $user['id'])->get();
-            //  return $feeds;
-              //}
+          //  $result = array_merge($urlArray, $urlArray2);
+            foreach ($urlArray2 as $url) {
             //if (extfeeds::where('site', $url["title"])->doesntExist() == 1) {
               //  dd($url['link']);
               $rss->load($url['url']);
               $user = Auth::user();
+              $feeds = DB::table('extfeeds')->where('user_id', $user['id'])->get();
               foreach ($rss->getElementsByTagName('item') as $node) {
-                  if (!isset($node->getElementsByTagName('image')->item(0)->nodeValue)) {
+                   if (count($rss->getElementsByTagName('item')) == count($feeds)) {
+                return false;
+              }else{
 
-                      $item = array(
-                          'user_id'          => $user['id'],
-                          'site'  => $url['title'],
-                          'site_image'  => $url['image'],
-                          'title' => $node->getElementsByTagName('title')->item(0)->nodeValue,
-                          'des'  => isset( $node->getElementsByTagName('description')->item(0)->nodeValue) ?
-                                    $node->getElementsByTagName('description')->item(0)->nodeValue : '',
-                          //'link'  => $node->getElementsByTagName('link')->item(0)->nodeValue . "?d=" . base64_encode(SITE_URL),
-                          'link'  => $node->getElementsByTagName('link')->item(0)->nodeValue,
-                          'date'  => date("F j, Y, g:i a", strtotime(isset($node->getElementsByTagName('pubDate')->item(0)->nodeValue) ?
-                                          $node->getElementsByTagName('pubDate')->item(0)->nodeValue : '')),
-                          'image'  => "",
+                if (!isset($node->getElementsByTagName('image')->item(0)->nodeValue)) {
+                  $item = array(
+                    'user_id'          => $user['id'],
+                    'site'  => $url['title'],
+                    'site_image'  => $url['image'],
+                    'title' => $node->getElementsByTagName('title')->item(0)->nodeValue,
+                    'des'  => isset( $node->getElementsByTagName('description')->item(0)->nodeValue) ?
+                    $node->getElementsByTagName('description')->item(0)->nodeValue : '',
+                    //'link'  => $node->getElementsByTagName('link')->item(0)->nodeValue . "?d=" . base64_encode(SITE_URL),
+                    'link'  => $node->getElementsByTagName('link')->item(0)->nodeValue,
+                    'date'  => date("F j, Y, g:i a", strtotime(isset($node->getElementsByTagName('pubDate')->item(0)->nodeValue) ?
+                    $node->getElementsByTagName('pubDate')->item(0)->nodeValue : '')),
+                    'image'  => "",
 
-                      );
-                  } else {
-                      $item = array(
-                        'user_id'          => $user['id'],
-                          'site'  => $url['title'],
-                          'site_image'  => $url['image'],
-                          'title' => $node->getElementsByTagName('title')->item(0)->nodeValue,
-                          'des'  => $node->getElementsByTagName('description')->item(0)->nodeValue,
-                          'link'  => $node->getElementsByTagName('link')->item(0)->nodeValue,
-                          'date'  => date("F j, Y, g:i a", strtotime($node->getElementsByTagName('pubDate')->item(0)->nodeValue)),
-                          'image'  => $node->getElementsByTagName('image')->item(0)->nodeValue,
-                      );
-                  }
-                  array_push($feed, $item);
+                  );
+                } else {
+                  $item = array(
+                    'user_id'          => $user['id'],
+                    'site'  => $url['title'],
+                    'site_image'  => $url['image'],
+                    'title' => $node->getElementsByTagName('title')->item(0)->nodeValue,
+                    'des'  => $node->getElementsByTagName('description')->item(0)->nodeValue,
+                    'link'  => $node->getElementsByTagName('link')->item(0)->nodeValue,
+                    'date'  => date("F j, Y, g:i a", strtotime($node->getElementsByTagName('pubDate')->item(0)->nodeValue)),
+                    'image'  => $node->getElementsByTagName('image')->item(0)->nodeValue,
+                  );
+                }
                 //}
               }
+              array_push($feed, $item);
+              }
+
+            }
 
                   krsort($feed);
+              //  dd($feed);
                 //  print_r($feed);
                   foreach ($feed as $key => $value) {
 
@@ -313,11 +406,9 @@ class Document
                       ]);
                   }
                   };
-                }
 
-                  $feeds = DB::table('extfeeds')->where('user_id', $user['id'])->get();
-                  //  dd($feed);
-                return $feeds;
+
+                return true;
 
               } else {
                   return false;
@@ -432,16 +523,17 @@ $user = Auth::user();
 
                 $newItem->addElement('image', $image);
 
+
                 $Feed->addItem($newItem);
             }
             $myFeed = $Feed->generateFeed();
-
             $handle = $this->file."/rss/rss.xml";
           //  dd($handle);
             $doc = Storage::put($handle, $myFeed);
             //        fwrite($handle, $myFeed);
             //      fclose($handle);
            // $strxml = $Feed->printFeed();
+$this->fetchAllRss();
         } else {
             return false;
         }
