@@ -410,7 +410,7 @@ if(Auth::user()){
                 else {
                   $count = "";
                 }
-      return view('timeline', ['fcheck' => $fcheck,'posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count, 'following' => $following, 'follower' => $follower]);
+      return view('follow-details', ['fcheck' => $fcheck,'posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count, 'following' => $following, 'follower' => $follower]);
     }
 
     public function followers($username) {
@@ -469,6 +469,6 @@ if(Auth::user()){
                     $count = "";
                   }
 
-      return view('timeline', ['fcheck' => $fcheck,'posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count, 'following' => $following, 'follower' => $follower]);
+      return view('follow-details', ['fcheck' => $fcheck,'posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count, 'following' => $following, 'follower' => $follower]);
     }
 }

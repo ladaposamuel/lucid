@@ -127,3 +127,18 @@
 // Route::get('posts', function () {
 //     return view('posts');
 // });
+
+
+<!-- @isset($post['crawlerImage'])
+        <img src="{{URL::to('/')}}/storage/{{$post['crawlerImage']}}" alt="" class="single-post-img" style="width:100%" class="my-1">
+        @endisset -->
+
+
+        // FileSystem::write($img_path,$decoded);
+                    // $yamlfile['image'] = $url.$key;
+
+    // $img_path = storage_path('app/public/'.$this->file."/images/".$key);
+
+  //$doc = Storage::put($this->file, $yaml . "\n" . $html);
+
+   //$yamlfile['image'] = "./storage/images/" . $key;

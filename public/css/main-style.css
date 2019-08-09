@@ -356,3 +356,8 @@ ul.footer-links li a {
     box-sizing: border-box;
     background-color: #000000;
 }
+
+
+.blog-content img{
+    width:100%;
+}

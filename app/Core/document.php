@@ -51,7 +51,7 @@ class Document
 
         $yaml = $markdown->getYAML();
         $html = $markdown->getContent();
-        //$doc = Storage::put($this->file, $yaml . "\n" . $html);
+        
 
         $yamlfile = new Doc();
         if ($title != "") {
@@ -62,9 +62,11 @@ class Document
             $url = $this->file."/images/";
             if(is_array($image)) {
                 foreach ($image as $key => $value) {
-                    $img_path = storage_path('app/public/'.$this->file."/images/".$key);
+                  
                     $decoded = base64_decode($image[$key]);
-                    FileSystem::write($img_path,$decoded);
+                    
+                    $img_path = 'public/'.$this->file."/images/".$key;
+                    Storage::disk('local')->put( $img_path, $decoded);
                     $yamlfile['image'] = $url.$key;
                 }
             } else {
@@ -80,7 +82,7 @@ class Document
             $yamlfile['post_dir'] =$this->file."/contents/{$unix}";
         } else {
             $yamlfile['post_dir'] = $this->file."/drafts/{$unix}";
-            //$yamlfile['image'] = "./storage/images/" . $key;
+           
         }
 
         // create slug by first removing spaces
