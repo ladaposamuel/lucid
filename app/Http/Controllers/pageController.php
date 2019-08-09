@@ -366,6 +366,7 @@ if(Auth::user()){
               $follower = $post->subscriber();
               $post = $post->fetchAllRss();
               $count = new \Lucid\Core\Subscribe($username);
+            //  dd($following);
               $fcount = $count->fcount();
               $count = new \Lucid\Core\Subscribe($username);
 

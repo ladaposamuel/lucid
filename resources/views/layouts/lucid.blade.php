@@ -178,8 +178,22 @@
     const anchor = window.location.hash;
     $(`a[href="${anchor}"]`).tab('show')
   </script>
-  <script src="https://code.jquery.com/jquery-migrate-3.0.1.min.js"></script>
-
+  <script>
+    const pageUrl = window.location.href
+    if (pageUrl.includes('followers')) {
+      $('#follow-tabs a[href="#followers"]').tab('show')
+    }
+    else (
+      $('#follow-tabs a[href="#following"]').tab('show')
+    )
+    // $(`a[href="${anchor}"]`).tab('show')
+  </script>
+  <script>
+  function changeUrl(e) {
+    history.pushState(null, null, `/${document.getElementById("username").value+'/'+e}`)
+  }
+  </script>
+  
 </body>
 
 </html>

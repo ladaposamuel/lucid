@@ -266,7 +266,18 @@
 <div class="tab-content">
   <!-- Following Page -->
   <div class="tab-pane show active" role="tabpanel" id="following">
-    <h5 class="my-3 font-weight-bold">{{ $user->username}} follows</h5>
+    @if (Auth::user() && Auth::user()->username == $user->username)
+    <h5 class="my-3 font-weight-bold">You're following</h5>
+    @else
+
+    <h5 class="my-3 font-weight-bold">{{ $user->name}} is following</h5>
+    @endif
+
+    @if(empty($following))
+
+      <p class="mb-2">{{ $user->name}} is following no User</p>
+
+    @else
     @foreach ($following as $follow)
     <div class="post-content border p-3 my-2">
       <img src="{{$follow['img']}}" class="img-fluid img-thumb" alt="user" />
@@ -277,12 +288,18 @@
       </div>
     </div>
     @endforeach
+    @endif
   </div>
   <!-- End following Page -->
 
   <!-- Followers Page -->
   <div class="tab-pane" role="tabpanel" id="followers">
-    <h5 class="my-3 font-weight-bold">{{ $user->username}} is followed by</h5>
+      @if (Auth::user() && Auth::user()->username == $user->username)
+    <h5 class="my-3 font-weight-bold">Your followers</h5>
+    @else
+    <h5 class="my-3 font-weight-bold">Follower of {{ $user->name}}</h5>
+    @endif
+
     @foreach ($follower as $follower)
     <div class="post-content border p-3 my-2">
       <img src="{{$follower['img']}}" class="img-fluid img-thumb" alt="user" />
@@ -312,23 +329,6 @@
 <input type="hidden" value="{{ $user->username }}" id="username">
 
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script>
-  const pageUrl = window.location.href
-  if (pageUrl.includes('followers')) {
-    $('#follow-tabs a[href="#followers"]').tab('show')
-  }
-  else (
-    $('#follow-tabs a[href="#following"]').tab('show')
-  )
-  // $(`a[href="${anchor}"]`).tab('show')
-</script> 
-<script>
-function changeUrl(e) {
-  history.pushState(null, null, `/${document.getElementById("username").value+'/'+e}`)
-}
-</script>
-</html>
+
+
 @endsection
