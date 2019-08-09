@@ -117,16 +117,16 @@
         <div class="user-stats text-center mt-3 pb-0">
           <div class="d-inline-block">
             @if (empty($fcount))
-            <a href="#" class="pr-2">0 <br /> <small class="text-muted">Following</small></a>
+            <a href="/{{$user->username}}/following" class="pr-2">0 <br /> <small class="text-muted">Following</small></a>
             @else
-            <a href="#" class="pr-2">{{$fcount}} <br /> <small class="text-muted">Following</small></a>
+            <a href="/{{$user->username}}/following" class="pr-2">{{$fcount}} <br /> <small class="text-muted">Following</small></a>
             @endif
           </div>
           <div class="d-inline-block">
             @if (empty($count))
-            <a href="#">0 <br /> <small class="text-muted">Followers</small></a>
+            <a href="/{{$user->username}}/followers">0 <br /> <small class="text-muted">Followers</small></a>
             @else
-            <a href="#">{{$count}} <br /> <small class="text-muted">Followers</small></a>
+            <a href="/{{$user->username}}/followers">{{$count}} <br /> <small class="text-muted">Followers</small></a>
             @endif
           </div>
           <div class="mt-3">
@@ -151,7 +151,7 @@
                   @guest
                   <a class="dropdown-item" href="{{ url('/login') }}">{{ __('Login') }}</a>
                   @else
-                  <a class="dropdown-item" href="/home">Home</a>
+                  <a class="dropdown-item" href="/{{ Auth::user()->username}}">Home</a>
                   <a href="/{{ $user->username}}/settings" class="dropdown-item">Settings</a>
                   <a class="dropdown-item" href="/{{ $user->username}}/logout">
                     {{ __('Logout') }}
