@@ -267,16 +267,13 @@
             <p class="">
               {{$feeds['des']}}
             </p>
-		
             <p class="">{{$feeds['site']}} -<small class="text-muted">{{$feeds['date']}} </small></p>
-<div style="height:30%;width:30%" class="sharethis-inline-reaction-buttons"></div>
           </div>
         </div>
         @endforeach
       </div>
     </div>
   <!-- End Timeline Page -->
- <!-- End Timeline Page -->
 
 </html>
 @endsection
