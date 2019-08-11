@@ -16,6 +16,7 @@
   <link href="{{ asset('css/main-style.css') }}" rel="stylesheet">
   <link href="{{ asset('css/tabletcss.css') }}" rel="stylesheet">
   <link href="https://cdn.quilljs.com/1.3.4/quill.snow.css" rel="stylesheet">
+  <script src="https://platform-api.sharethis.com/js/sharethis.js#property=5d4fe9f33387b20012d776e8&product=inline-reaction-buttons"></script>
 </head>
 
 <body>

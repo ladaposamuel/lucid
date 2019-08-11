@@ -111,6 +111,7 @@
         echo  strip_tags($userpost['body'])
         @endphp
       </p>
+<div style="height:30%;width:30%" class="sharethis-inline-reaction-buttons">
     </div>
   </a>
 </div>

@@ -342,7 +342,9 @@
     <p class="post-body">
       {!! $post['body'] !!}
     </p>
+<div style="height:30%;width:30%" class="sharethis-inline-reaction-buttons">
   </div>
+
 </div>
 
 
