@@ -310,6 +310,7 @@
           </div> -->
           <div class="col-3 col-sm-3 col-md-2">
             <input type="submit" class="form-control btn-sm btn btn-primary publish-post" value="Publish">
+            <input type="hidden" class="form-control btn-sm btn btn-primary publish-post" value="Save Draft">
           </div>
           <div class="col-3 col-sm-3 col-md-2">
             <input class="form-control btn-sm btn btn-primary add-tags" type="button" data-toggle="collapse" data-target="  #collapseExample" aria-expanded="false" aria-controls="collapseExample" value="Add Tags">
@@ -340,25 +341,15 @@
       <a class="no-decoration text-dark" href="post/{{$post['slug']}}">{!! $post['title'] !!}</a>
     </h3>
     <p class="post-body">
-      {!! $post['body'] !!}
+      
+      @php
+        echo  strip_tags($post['body'])
+      @endphp
     </p>
   </div>
 </div>
 
 
-
-<!-- 
-<div class="post-content">
-  <div class="post-content-body">
-    <p class="post-date">{{ $post['date'] }}</p>
-    <h3 class="post-title">
-      <a class="no-decoration text-dark" href="post/{{$post['slug']}}">{!! $post['title'] !!}</a>
-    </h3>
-    <p class="post-body">
-      {!! $post['body'] !!}
-    </p>
-  </div>
-</div> -->
 
 
 <div class="text-center">
@@ -387,8 +378,10 @@
 <script src="https://unpkg.com/turndown-plugin-gfm/dist/turndown-plugin-gfm.js"></script>
 <!-- convert to markdown script ends -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <script type="text/javascript">
+let j = jQuery.noConflict();
   var toolbarOptions = [
     ['bold', 'italic'],
     ['blockquote'],
@@ -411,7 +404,7 @@
     },
     placeholder: 'Compose an epic...'
   });
-  $(".ql-toolbar").css("display", "block");
+  j(".ql-toolbar").css("display", "block");
 
   var form = document.querySelector('.timeline-editor');
 
@@ -492,27 +485,32 @@
 
       // send the form data
 
-      fetch(newPostIsBeingCreated ? 'publish' : '/{{$user->username}}/saveDraft', {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      }).then(res => res.json()).then((res) => {
-        console.log(JSON.stringify(res));
-
-        if (res.error == false && res.action == 'publish') {
-          window.localStorage.setItem('publish', 'success');
-          window.location = '/{{$user->username}}/posts';
-
-        } else if (res.error == false && res.action == 'savedToDrafts') {
-          window.localStorage.setItem('savedToDrafts', 'success');
-          window.location = '/{{$user->username}}/posts';
-        }
-
-      }).catch((err) => {
-        alert(`Failed with the following message: ${err.message}`);
+      j.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': j('meta[name="csrf-token"]').attr('content')
+          }
       });
+
+      j.ajax({
+            type: "POST",
+            dataType:'json',
+            url : "publish",
+            data:formData,
+            contentType: false,
+            processData: false,
+            success : function (res) {
+              console.log(JSON.stringify(res));
+
+                if (res.error == false && res.action == 'publish') {
+                  window.localStorage.setItem('publish', 'success');
+                  window.location = '/{{$user->username}}/posts';
+
+                } else if (res.error == false && res.action == 'savedToDrafts') {
+                  window.localStorage.setItem('savedToDrafts', 'success');
+                  window.location = '/{{$user->username}}/posts';
+                }
+            }
+        });
 
     } else {
       swal({
@@ -522,7 +520,7 @@
     }
   }
 
-  $(document).ready(function() {
+  j(document).ready(function() {
     const published = window.localStorage.getItem('publish');
     const savedToDrafts = window.localStorage.getItem('savedToDrafts');
     if (published == 'success') {

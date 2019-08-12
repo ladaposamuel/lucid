@@ -105,11 +105,13 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <!-- convert to markdown script ends -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-  $(document).ready(function (){
+  let j = jQuery.noConflict();
+  j(document).ready(function (){
 
     ////render selected image to the profile image tag
-    $("#profileimage").on('change',function(){
+    j("#profileimage").on('change',function(){
       const file = $(this)[0].files;
 
       if (file.length == 1 ){
@@ -130,63 +132,75 @@
       event.preventDefault();
       const formData = new FormData(document.querySelector('#settingsForm'));
 
-      fetch('save_settings',{
-        method: 'POST',
-        body: formData,
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      }).then(response=>response.json()).then((response)=>{
-        //console.log(JSON.stringify(response));
 
-        if (response.success) {
-            swal({
-              text: response.success,
-              icon: "success",
-            })
-
-            if(response.img_path){
-               document.querySelector('#user-avatar').src = response.img_path;
+      j.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': j('meta[name="csrf-token"]').attr('content')
             }
-            document.querySelector('#user-name').innerHTML = formData.get('name');
-            if(formData.get('bio') !==""){
-               document.querySelector('#user-bio').innerHTML = formData.get('bio');
-            }else {
-              document.querySelector('#user-bio').innerHTML = 'Set up a bio about yourself, let other lucid users know you.';
+        });
+
+      j.ajax({
+            type: "POST",
+            dataType:'json',
+            url : "save_settings",
+            data:formData,
+            contentType: false,
+            processData: false,
+            success : function (response) {
+              // console.log(JSON.stringify(res));
+
+                if (response.success) {
+                    swal({
+                      text: response.success,
+                      icon: "success",
+                    })
+
+                    if(response.img_path){
+                       document.querySelector('#user-avatar').src = response.img_path;
+                    }
+                    document.querySelector('#user-name').innerHTML = formData.get('name');
+                    if(formData.get('bio') !==""){
+                       document.querySelector('#user-bio').innerHTML = formData.get('bio');
+                       document.querySelector('#user-bio').style.color = "#000";
+
+                    }else {
+                      document.querySelector('#user-bio').innerHTML = 'You haven\'t set up a short bio about yourself, do that here';
+                      document.querySelector('#user-bio').style.color = "#a9a9a9";
+                    }
+                  
+                }
+
+                const name = document.querySelector('#fullname');
+                const email = document.querySelector('#emailError');
+                const img = document.querySelector('#imgError');
+                if (response.name){
+                    name.style.display="block"
+                    name.innerHTML = response.name
+                }else {
+                    name.style.display="none"
+                    name.innerHTML = ''
+                }
+
+                if (response.email){
+                    email.style.display="block"
+                    email.innerHTML = response.email
+                }else {
+                    email.style.display="none"
+                    email.innerHTML = ''
+                }
+
+                if (response.profileimage){
+                    img.style.display="block"
+                    img.innerHTML = response.profileimage
+                }else {
+                    img.style.display="none"
+                    img.innerHTML = ''
+                }
+              
             }
-           
-        }
+        });
 
-        const name = document.querySelector('#fullname');
-        const email = document.querySelector('#emailError');
-        const img = document.querySelector('#imgError');
-        if (response.name){
-            name.style.display="block"
-            name.innerHTML = response.name
-        }else {
-            name.style.display="none"
-            name.innerHTML = ''
-        }
-
-        if (response.email){
-            email.style.display="block"
-            email.innerHTML = response.email
-        }else {
-            email.style.display="none"
-            email.innerHTML = ''
-        }
-
-        if (response.profileimage){
-            img.style.display="block"
-            img.innerHTML = response.profileimage
-        }else {
-            img.style.display="none"
-            img.innerHTML = ''
-        }
-        
-      }).catch((err) => {
-        alert(`Failed with the following message: ${err.message}`);
-      });
+      
 
     })
 

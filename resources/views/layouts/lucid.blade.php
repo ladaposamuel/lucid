@@ -29,13 +29,17 @@
         <a href="/{{ $user->username}}" class="no-decoration">
           <h3 id="user-name" class="pt-2">{{ $user->name}}</h3>
         </a>
-        <p id="user-bio" class="pb-2">
+        
           @if(Auth::user() && Auth::user()->username == $user->username && $user->short_bio =="")
+          <p id="user-bio" class="pb-2" style="color:#a9a9a9;">
           You haven't set up a short bio about yourself, do that <a href="/{{ $user->username}}/settings">here</a>
+          </p>
           @else
+          <p id="user-bio" class="pb-2">
           {{ $user->short_bio }}
+          </p>
           @endif
-        </p>
+       
 
         <div class="divider"></div>
 
