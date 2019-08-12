@@ -1,0 +1,144 @@
+// }
+            // else {
+
+            //     $username = $username;
+            //     $post = new \Lucid\Core\Document($username);
+            //     $post = $post->fetchAllRss();
+            //     $fcount = 1;
+            //     $count = 1;
+
+            //     return view('timeline', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
+
+            // }
+
+             // if ($username == $user->username) {
+
+
+
+
+     // if(res.subjectError)
+      // {
+      //   const subjectErrorContainer=document.querySelector('#SubjectError');
+      //   subjectErrorContainer.style.display='block';
+      //   subjectErrorContainer.innerHTML = res.subjectError;
+      // }
+      // else
+      // {
+      //   const subjectErrorContainer=document.querySelector('#SubjectError');
+      //   subjectErrorContainer.style.display='none';
+      //   subjectErrorContainer.innerHTML = "";
+      // }
+
+
+
+      //$count = new Ziki\Core\Subscribe();
+            //$fcount = $count->fcount();
+            //$count = $count->count();
+          //  print_r($post);
+        //  $count = new \Lucid\Core\Subscribe();
+
+
+        public function thoughts($username)
+    {
+      if(!$this->user($username)) {
+          return '========404========';
+      }
+
+      $user = $this->user($username);
+      $post = new \Lucid\Core\Document($username);
+      $post = $post->fetchAllRss();
+      $fcount = 1;
+      $count = 1;
+
+      return view('thoughts', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
+
+    }
+
+
+    <div class="col-4 offset-md-1 border-dark ">
+      <input type="file" name="file" class="" id="customFile" style="display:none">
+      <label class="text-muted form-control p-2 w-100" for="customFile"><i class="icon ion-md-add p-1"></i> Add post Image</label>
+    </div>
+
+    public function thoughts($username)
+    {
+      $user = Auth::user();
+      if ($username == $user->username) {
+
+      $username = $user->username;
+      $post = new \Lucid\Core\Document($username);
+
+            $post = $post->fetchAllRss();
+            //$count = new Ziki\Core\Subscribe();
+            //$fcount = $count->fcount();
+            //$count = $count->count();
+          //  print_r($post);
+        //  $count = new \Lucid\Core\Subscribe();
+              $fcount = 1;
+          $count = 1;
+     return view('thoughts', ['posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
+     }else {
+
+       return redirect($user->username.'/thoughts');
+     }
+
+    }
+
+
+    @if (empty($feeds->site_image))
+  <img src="{{ asset('img/logo.jpg') }}" class="img-fluid img-thumb" alt="user" />
+  @else
+  <img src="{{ $feeds->site_image}}" class="img-fluid img-thumb" alt="user" />
+  @endif
+
+
+
+  <div class="form-row mb-3">
+    <div class="col-12">
+      <input type="text" name="title" class="form-control" placeholder="Title">
+    </div>
+  </div>
+
+
+  //dd($request->all());
+
+      // $this->validate($request, [
+      //   'file' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+      // ]);
+
+
+      // $request->file('file');
+
+
+      // if(formData.get('bio') !==""){
+            //    document.querySelector('#user-bio').innerHTML = formData.get('bio');
+            // }else {
+            //   document.querySelector('#user-bio').innerHTML = ' Be The First To Get The Latest Posts From Me By Clicking On The Follow Me Button Below';
+            // }
+
+      //Auth::routes();
+    // Route::get('/', 'HomeController@index');
+    // Route::get('/home', 'HomeController@index');
+    //Route::get('/timeline', 'HomeController@timeline');
+
+
+    //Route::post('/addrss','ExtRssController@add');
+
+// Route::get('posts', function () {
+//     return view('posts');
+// });
+
+
+<!-- @isset($post['crawlerImage'])
+        <img src="{{URL::to('/')}}/storage/{{$post['crawlerImage']}}" alt="" class="single-post-img" style="width:100%" class="my-1">
+        @endisset -->
+
+
+        // FileSystem::write($img_path,$decoded);
+                    // $yamlfile['image'] = $url.$key;
+
+    // $img_path = storage_path('app/public/'.$this->file."/images/".$key);
+
+  //$doc = Storage::put($this->file, $yaml . "\n" . $html);
+
+   //$yamlfile['image'] = "./storage/images/" . $key;
