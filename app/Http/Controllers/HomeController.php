@@ -4,6 +4,7 @@ namespace Lucid\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use Validator;
 use DB;
 use Storage;
@@ -293,34 +294,66 @@ class HomeController extends Controller
     public function saveSettings(Request $request) {
           $validator=Validator::make($request->all(),[
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => ['required','email',
+             Rule::unique('users')->ignore(Auth::user()->id),
+            ],
             'profileimage' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'user_id' =>'required'
+            'user_id' =>'required',
+            'username'=>['required',
+             Rule::unique('users')->ignore(Auth::user()->id),
+            ]
         ]);
 
       if($validator->fails()){
           return response()->json($validator->messages(), 200);
       }
+        $renamedUserContentFolder = false;
+        if(Auth::user()->username !== $request->username){
+          $oldUserPostFolderName = storage_path('app/'.Auth::user()->username);
+          $oldUserImgFolderName = storage_path('app/public/'.Auth::user()->username);
+          
+          $newUserPostFolderName = storage_path('app/'.$request->username);
+          $newUserImgFolderName = storage_path('app/public/'.$request->username);
+          
+        if(rename($oldUserPostFolderName, $newUserPostFolderName) && rename($oldUserImgFolderName, $newUserImgFolderName)){
+            $renamedUserContentFolder = $request->username;
+          }else{
+            $renamedUserContentFolder = false;
+          }
+      }
 
       if(!empty($request->file('profileimage'))){
-         $url = Auth::user()->username."/images/";
+          $url = Auth::user()->username."/images/";
+          if($renamedUserContentFolder !== false){
+            $url = $renamedUserContentFolder."/images/";
+          }
+        
          $path = Storage::disk('public')->put($url, $request->file('profileimage'));
          $fullPath = '/storage/'.$path;
          $updated= DB::table('users')->where('id',$request->user_id)
-                           ->update(['name'=>$request->name,'email'=>$request->email,'image'=>$fullPath,
+                           ->update(['name'=>$request->name,'username'=>$request->username,'email'=>$request->email,'image'=>$fullPath,
                            'short_bio'=>$request->bio]);
 
         if($updated) {
 
-          return response()->json(['success'=>"Your changes has been saved successfully",'img_path'=>$fullPath], 200);
+          return response()->json(['success'=>"Your changes has been saved successfully",'img_path'=>$fullPath,'renamedUserContentFolderName'=>$renamedUserContentFolder], 200);
         }
       } else {
-        $updated = DB::table('users')->where('id',$request->user_id)
-                          ->update(['name'=>$request->name,'email'=>$request->email,'short_bio'=>$request->bio]);
 
+        $fullPath = Auth::user()->image;
+        if($renamedUserContentFolder !== false){
+          $pathArr = explode('/',$fullPath);
+          $fullPath = '/storage/'.$renamedUserContentFolder.'/images//'.end($pathArr);
+        }
+
+        $updated = DB::table('users')->where('id',$request->user_id)
+                          ->update(['name'=>$request->name,'username'=>$request->username,'email'=>$request->email,'image'=>$fullPath,'short_bio'=>$request->bio]);
+                          
                           if($updated){
-                            return response()->json(['success'=>"Your changes has been saved successfully"], 200);
+                            return response()->json(['success'=>"Your changes has been saved successfully",'renamedUserContentFolderName'=>$renamedUserContentFolder], 200);
                           }
+        
+
       }
 
 
