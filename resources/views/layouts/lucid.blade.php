@@ -134,7 +134,7 @@
             @endif
           </div>
           <div class="mt-3">
-            <a href="https://lucid.blog"> <small class="text-muted"><img src="{{ asset('img/logo.jpg') }}" alt="Lucid" class="img-fluid" style="filter: grayscale(100%);" /> Powered by Lucid</small></a>
+            <a href="https://lucid.blog"> <small class="text-muted"><img src="{{ asset('img/logo.jpg') }}" alt="Lucid" class="img-fluid" style="filter: grayscale(100%); height: 20px;" /> Powered by Lucid</small></a>
           </div>
         </div>
       </div>
@@ -144,7 +144,7 @@
       <div class="col-lg-8 pb-0">
 
         <!-- Beginning of Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light pt-2 mb-5">
+        <nav class="navbar navbar-expand-lg navbar-light pt-2 pb-2">
           <div class="container">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item dropdown">
