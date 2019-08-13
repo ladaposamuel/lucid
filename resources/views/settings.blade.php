@@ -43,7 +43,7 @@
   <div class="tab-content" id="settings-tabs-content">
     <!-- profile settings tab -->
     <div class="tab-pane fade in show active" id="profile" role="tabpanel">
-      <form action="" class="mt-5" autocomplete="off" id="settingsForm">
+      <form action="" class="mt-4" autocomplete="off" id="settingsForm">
         <div class="row">
           <div class="form-group col-sm-12 col-md-6">
             <label for="name"><strong>Full Name</strong></label>
@@ -57,11 +57,11 @@
           </div>
         </div>
         <div class="row">
-          <div class="form-group col-sm-12 col-md-6">
+          <div class="form-group col-sm-12 col-md-6 pb-0 mb-0">
             <label for="nick-name"><strong>Username</strong></label>
             <input class="form-control" type="text" name="nickname" id="nick-name" value="{{Auth::user()->username}}" disabled/>
           </div>
-          <div class="form-group col-sm-12 col-md-6">
+          <div class="form-group col-sm-12 col-md-6 pb-0 mb-0">
             <p class="font-weight-bold">Profile Image</p>
             <div class="d-flex">
               <div class="d-inline-block">
@@ -78,13 +78,13 @@
           </div>
         </div>
         <div class="row">
-          <div class="form-group col-sm-12 col-md-6">
+          <div class="form-group col-sm-12 col-md-6 mt-0 pb-0">
             <label for="bio"><strong>Short Bio</strong></label>
-            <textarea name="bio" id="bio" class="form-control" rows="5" placeholder="type here..">{{Auth::user()->short_bio}}</textarea>
+            <textarea name="bio" id="bio" class="form-control" rows="3" placeholder="type here..">{{Auth::user()->short_bio}}</textarea>
           </div>
         </div>
         <!-- submit button -->
-        <button type="submit" class="btn btn-lg col-sm-12 col-md-3 mt-5" name="update">Update Profile</button>
+        <button type="submit" class="btn col-sm-12 col-md-3 mt-3" name="update">Update Profile</button>
       </form>
     </div>
 
