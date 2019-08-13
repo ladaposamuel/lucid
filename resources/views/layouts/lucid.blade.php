@@ -134,7 +134,7 @@
             @endif
           </div>
           <div class="mt-3">
-            <a href="https://lucid.blog"> <small class="text-muted"><img src="{{ asset('img/logo.jpg') }}" alt="Lucid" class="img-fluid" style="filter: grayscale(100%);" /> Powered by Lucid</small></a>
+            <a href="https://lucid.blog"> <small class="text-muted"><img src="{{ asset('img/logo.jpg') }}" alt="Lucid" class="img-fluid" style="filter: grayscale(100%); height: 20px;" /> Powered by Lucid</small></a>
           </div>
         </div>
       </div>
