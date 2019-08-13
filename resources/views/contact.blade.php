@@ -49,17 +49,19 @@
 
     <form class="font-weight-bold mt-4 mb-0 contact-form" autocomplete="OFF" id="formFields" action="">
         <div class="form-group row">
-            <div class="col-sm-12 col-md-6">
+            <div class="col-sm-12 col-md-8">
                 <label for="email" class="mb-2 mr-sm-2">Contact Email</label>
                 <input type="email" class="form-control mb-2 mr-sm-2" id="email" placeholder="Enter Email" name="email">
                 <span class="text-danger" id="emailError" style="display:none;"></span>
             </div>
         </div>
-        <div class="form-group mt-4">
-        <label for="message">Edit Display Message</label>
+        <div class="form-group row mt-4">
+          <div class="col-sm-12 col-md-8">
+          <label for="message">Edit Display Message</label>
         <textarea name="message" id="message" rows="5" class="form-control" placeholder="Cannot Be Blank">You can use this form to contact me.</textarea>
         <span class="text-danger" id="msgError" style="display:none;"></span>
         <button type="submit" name="editContactDetails" class="btn bg-alt text-white col-sm-12 col-md-3 mt-5">Save</button>
+          </div>
         </div>
     </form>
 
