@@ -47,7 +47,7 @@
     @endguest
     @auth
 
-    <form class="font-weight-bold mt-4 mb-0 contact-form" autocomplete="OFF" id="formFields" action="">
+    <form class="font-weight-bold mb-0 contact-form" autocomplete="OFF" id="formFields" action="">
         <div class="form-group row">
             <div class="col-sm-12 col-md-10">
                 <label for="email" class="mb-2 mr-sm-2">Contact Email</label>
