@@ -142,3 +142,221 @@
   //$doc = Storage::put($this->file, $yaml . "\n" . $html);
 
    //$yamlfile['image'] = "./storage/images/" . $key;
+
+
+
+   // fetch(newPostIsBeingCreated ? 'publish' : '/{{$user->username}}/saveDraft', {
+      //   method: 'POST',
+      //   body: formData,
+      //   headers: {
+      //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      //   }
+      // }).then(res => res.json()).then((res) => {
+      //   console.log(JSON.stringify(res));
+
+      //   if (res.error == false && res.action == 'publish') {
+      //     window.localStorage.setItem('publish', 'success');
+      //     window.location = '/{{$user->username}}/posts';
+
+      //   } else if (res.error == false && res.action == 'savedToDrafts') {
+      //     window.localStorage.setItem('savedToDrafts', 'success');
+      //     window.location = '/{{$user->username}}/posts';
+      //   }
+
+      // }).catch((err) => {
+      //   alert(`Failed with the following message: ${err.message}`);
+      // });
+
+
+
+
+
+
+
+
+      // fetch('send-mail',{
+    //   method: 'POST',
+    //   body: ContactFormData,
+    //   headers: {
+    //       'X-CSRF-TOKEN': j('meta[name="csrf-token"]').attr('content')
+    //     }
+    // }).then(res=>res.json()).then((res)=>{
+    //   //console.log(JSON.stringify(res));
+
+
+    //    if(res.success)
+    //   {
+    //     document.querySelector('#formFields').reset();
+    //     swal({
+    //       text: res.success,
+    //       icon: "success",
+    //     });
+    //   }
+
+
+    //   if(res.name)
+    //   {
+    //     const nameErrorContainer=document.querySelector('#nameError');
+    //     nameErrorContainer.style.display='block';
+    //     nameErrorContainer.innerHTML = res.name;
+    //   }
+    //   else
+    //   {
+    //     const nameErrorContainer=document.querySelector('#nameError');
+    //     nameErrorContainer.style.display='none';
+    //     nameErrorContainer.innerHTML = '';
+    //   }
+
+
+    //   if(res.email)
+    //   {
+    //     const emailErrorContainer=document.querySelector('#emailError');
+    //     emailErrorContainer.style.display='block';
+    //     emailErrorContainer.innerHTML = res.email;
+    //   }
+    //   else
+    //   {
+    //     const emailErrorContainer=document.querySelector('#emailError');
+    //     emailErrorContainer.style.display='none';
+    //     emailErrorContainer.innerHTML = '';
+    //   }
+
+
+    //   if(res.message)
+    //   {
+    //     const msgErrorContainer=document.querySelector('#msgError');
+    //     msgErrorContainer.style.display='block';
+    //     msgErrorContainer.innerHTML = res.message;
+    //   }
+    //   else
+    //   {
+    //     const msgErrorContainer=document.querySelector('#msgError');
+    //     msgErrorContainer.style.display='none';
+    //     msgErrorContainer.innerHTML = "";
+    //   }
+
+
+    // }).catch((err)=>{
+    //   alert(`Failed with the following message: ${err.message}`);
+    // });
+
+
+
+
+
+    // fetch('save_settings',{
+      //   method: 'POST',
+      //   body: formData,
+      //   headers: {
+      //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      //   }
+      // }).then(response=>response.json()).then((response)=>{
+      //   //console.log(JSON.stringify(response));
+
+      //   if (response.success) {
+      //       swal({
+      //         text: response.success,
+      //         icon: "success",
+      //       })
+
+      //       if(response.img_path){
+      //          document.querySelector('#user-avatar').src = response.img_path;
+      //       }
+      //       document.querySelector('#user-name').innerHTML = formData.get('name');
+      //       if(formData.get('bio') !==""){
+      //          document.querySelector('#user-bio').innerHTML = formData.get('bio');
+      //       }else {
+      //         document.querySelector('#user-bio').innerHTML = 'Set up a bio about yourself, let other lucid users know you.';
+      //       }
+           
+      //   }
+
+      //   const name = document.querySelector('#fullname');
+      //   const email = document.querySelector('#emailError');
+      //   const img = document.querySelector('#imgError');
+      //   if (response.name){
+      //       name.style.display="block"
+      //       name.innerHTML = response.name
+      //   }else {
+      //       name.style.display="none"
+      //       name.innerHTML = ''
+      //   }
+
+      //   if (response.email){
+      //       email.style.display="block"
+      //       email.innerHTML = response.email
+      //   }else {
+      //       email.style.display="none"
+      //       email.innerHTML = ''
+      //   }
+
+      //   if (response.profileimage){
+      //       img.style.display="block"
+      //       img.innerHTML = response.profileimage
+      //   }else {
+      //       img.style.display="none"
+      //       img.innerHTML = ''
+      //   }
+        
+      // }).catch((err) => {
+      //   alert(`Failed with the following message: ${err.message}`);
+      // });
+
+
+
+      
+
+<!-- 
+<div class="post-content">
+  <div class="post-content-body">
+    <p class="post-date">{{ $post['date'] }}</p>
+    <h3 class="post-title">
+      <a class="no-decoration text-dark" href="post/{{$post['slug']}}">{!! $post['title'] !!}</a>
+    </h3>
+    <p class="post-body">
+      {!! $post['body'] !!}
+    </p>
+  </div>
+</div> -->
+
+
+<div class="form-check form-check-inline">
+  <input class="form-check-input tags" type="checkbox" id="inlineCheckbox1" value="#Politics">
+  <label class="form-check-label" for="inlineCheckbox1">Politics</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input tags" type="checkbox" id="inlineCheckbox1" value="#Sports">
+  <label class="form-check-label" for="inlineCheckbox1">Sports</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input tags" type="checkbox" id="inlineCheckbox1" value="#Health">
+  <label class="form-check-label" for="inlineCheckbox1">Health</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input tags" type="checkbox" id="inlineCheckbox1" value="#Technology">
+  <label class="form-check-label" for="inlineCheckbox1">Technology</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input tags" type="checkbox" id="inlineCheckbox1" value="#Music">
+  <label class="form-check-label" for="inlineCheckbox1">Music</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input tags" type="checkbox" id="inlineCheckbox1" value="#News-Lifestyle">
+  <label class="form-check-label" for="inlineCheckbox1">News-Lifestyle</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input tags" type="checkbox" id="inlineCheckbox1" value="#Movies">
+  <label class="form-check-label" for="inlineCheckbox1">Movies</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input tags" type="checkbox" id="inlineCheckbox1" value="#Fitness">
+  <label class="form-check-label" for="inlineCheckbox1">Fitness</label>
+</div>
+
+// get tags
+      const selected = document.querySelectorAll('.tags:checked');
+      const selectedTags = Array.from(selected).map(el => el.value);
+      console.log(selectedTags);
+
+      // console.log(formData.get('tags'));
+      // formData.set('tags', selectedTags);

@@ -9,10 +9,10 @@
 					Privacy
 				</h1>
 				@guest
-				<a class="btn btn-primary" href="/register" target="_blank">Create Your Page For Free
+				<a class="btn btn-primary" href="/register">Create Your Page For Free
 					<i class="pl-2 icon ion-ios-arrow-round-forward"></i></a>
 				@else
-				<a class="btn btn-primary" href="{{ Auth::user()->username}}" target="_blank">Visit your blog
+				<a class="btn btn-primary" href="{{ Auth::user()->username}}">Visit your blog
 					<i class="pl-2 icon ion-ios-arrow-round-forward"></i></a>
 				@endguest
 			</div>

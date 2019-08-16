@@ -156,6 +156,10 @@ body {
 	margin-left: 15px;
 }
 
+.post-content-body a {
+	color: var(--main-color);
+}
+
 .post-title {
 	font-size: 24px;
 	font-weight: 700;
@@ -201,4 +205,16 @@ button.btn.btn-primary.pagination:hover {
 	border-radius: 50%;
 	border: solid 1px gray;
 	padding: 2px;
+}
+
+.standard-color{
+	background: #871e99;
+	color:#fff;
+	border:1px solid #871e99;
+  }
+  
+.standard-color:hover{
+background: #871e99 !important;
+color:#fff;
+border:1px solid #871e99 !important;
 }

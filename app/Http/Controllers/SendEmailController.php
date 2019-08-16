@@ -18,7 +18,7 @@ class SendEmailController extends Controller
 
         $validator=Validator::make($request->all(),[
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|max:255|regex:/(.*)@myemail\.com/i|unique:users',
             'message'=>'required'
         ]);
 
