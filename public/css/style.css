@@ -156,6 +156,10 @@ body {
 	margin-left: 15px;
 }
 
+.post-content-body a {
+	color: var(--main-color);
+}
+
 .post-title {
 	font-size: 24px;
 	font-weight: 700;
