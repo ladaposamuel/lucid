@@ -57,7 +57,7 @@
                 {{--<a href="#" class="nav-link mr-4">Features</a>--}}
             </li>
             <li class="nav-item">
-                <a href="get-started.php" class="nav-link mr-4">Get Started</a>
+                <a href="/explore" class="nav-link mr-4">Explore</a>
             </li>
             @guest
             <li class="nav-item">
@@ -92,9 +92,9 @@
         <ul class="footer-links">
           <li><a href="#">About us</a></li>
           <li><a href="#">Support</a></li>
-          <li><a href="/terms-and-conditions.php">Terms and Condition</a></li>
-          <li><a href="/privacy-policy.php">Privacy policy</a></li>
-          <li><a href="/get-started.php">Get Started</a></li>
+          <li><a href="/terms-and-conditions">Terms and Condition</a></li>
+          <li><a href="/privacy-policy">Privacy policy</a></li>
+          <li><a href="/get-started">Get Started</a></li>
         </ul>
       </div>
     </div>

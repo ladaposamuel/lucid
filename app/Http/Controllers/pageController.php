@@ -18,7 +18,7 @@ class pageController extends Controller
     public function homePage($username)
     {
         if(!$this->user($username)) {
-            return "=======404=========";
+            return abort(404);
         }
         $user = $this->user($username);
 
@@ -134,7 +134,7 @@ if(Auth::user()){
 
     public function singlePostPage($username,$postTitle){
         if(!$this->user($username)) {
-            return "=======404=========";
+            return abort(404);
         }
         $user = $this->user($username);
         $app  = new \Lucid\Core\Document($username);
@@ -192,7 +192,7 @@ if(Auth::user()){
             if(Auth::user() && $username == Auth::user()->username){
 
             if(!$this->user($username)) {
-                return '========404========';
+                return abort(404);
             }
 
             $user = $this->user($username);
@@ -250,7 +250,7 @@ if(Auth::user()){
 
     public function contact($username){
         if(!$this->user($username)) {
-            return '========404========';
+            return abort(404);
         }
 
         $user = $this->user($username);
@@ -303,7 +303,7 @@ if(Auth::user()){
     public function thoughts($username)
     {
       if(!$this->user($username)) {
-          return '========404========';
+          return abort(404);
       }
 
       $user = $this->user($username);
@@ -357,7 +357,7 @@ if(Auth::user()){
 
     public function following($username) {
         if(!$this->user($username)) {
-          return "=======404=========";
+          return abort(404);
       }
       $user = $this->user($username);
 
@@ -416,7 +416,7 @@ if(Auth::user()){
 
     public function followers($username) {
         if(!$this->user($username)) {
-          return "=======404=========";
+          return abort(404);
       }
       $user = $this->user($username);
 
