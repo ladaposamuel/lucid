@@ -318,3 +318,45 @@
     </p>
   </div>
 </div> -->
+
+
+<div class="form-check form-check-inline">
+  <input class="form-check-input tags" type="checkbox" id="inlineCheckbox1" value="#Politics">
+  <label class="form-check-label" for="inlineCheckbox1">Politics</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input tags" type="checkbox" id="inlineCheckbox1" value="#Sports">
+  <label class="form-check-label" for="inlineCheckbox1">Sports</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input tags" type="checkbox" id="inlineCheckbox1" value="#Health">
+  <label class="form-check-label" for="inlineCheckbox1">Health</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input tags" type="checkbox" id="inlineCheckbox1" value="#Technology">
+  <label class="form-check-label" for="inlineCheckbox1">Technology</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input tags" type="checkbox" id="inlineCheckbox1" value="#Music">
+  <label class="form-check-label" for="inlineCheckbox1">Music</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input tags" type="checkbox" id="inlineCheckbox1" value="#News-Lifestyle">
+  <label class="form-check-label" for="inlineCheckbox1">News-Lifestyle</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input tags" type="checkbox" id="inlineCheckbox1" value="#Movies">
+  <label class="form-check-label" for="inlineCheckbox1">Movies</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input tags" type="checkbox" id="inlineCheckbox1" value="#Fitness">
+  <label class="form-check-label" for="inlineCheckbox1">Fitness</label>
+</div>
+
+// get tags
+      const selected = document.querySelectorAll('.tags:checked');
+      const selectedTags = Array.from(selected).map(el => el.value);
+      console.log(selectedTags);
+
+      // console.log(formData.get('tags'));
+      // formData.set('tags', selectedTags);

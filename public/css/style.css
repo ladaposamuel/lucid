@@ -202,3 +202,15 @@ button.btn.btn-primary.pagination:hover {
 	border: solid 1px gray;
 	padding: 2px;
 }
+
+.standard-color{
+	background: #871e99;
+	color:#fff;
+	border:1px solid #871e99;
+  }
+  
+.standard-color:hover{
+background: #871e99 !important;
+color:#fff;
+border:1px solid #871e99 !important;
+}
