@@ -34,7 +34,25 @@
     border: 0 !important;
   }
 
+  .mr-3 {
+    margin-right:     3rem;
+  }
+  .ali-c {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .smalltext {
+    font-size:  13px;
+    line-height: 1;
+  }
 
+  .width-100 {
+    width:    100%;
+  }
+  .p-h {
+    padding: .5rem;
+  }
 
   .form-check-label {
     padding-right: 10px;
@@ -272,7 +290,6 @@
                     <input type="text" name="body">
                   </div>
                 </div>
-                
               </div>
             </div>
           </div>
@@ -289,6 +306,22 @@
           </div>
         </div>
       </div>
+      <div class="d-lg-flex col">
+        <div class="ql-container ql-snow width-100 mr-3 p-h">
+          <button class="btn btn-primary add-tags btn-sm smalltext">
+            Politics
+            <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.5 1.205L6.795 0.5L4 3.295L1.205 0.5L0.5 1.205L3.295 4L0.5 6.795L1.205 7.5L4 4.705L6.795 7.5L7.5 6.795L4.705 4L7.5 1.205Z" fill="white"/>
+            </svg>
+          </button>
+        </div>
+        <button class="ql-container ql-snow col-3 ali-c">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M14 8H8V14H6V8H0V6H6V0H8V6H14V8Z" fill="#332E2E"/>
+          </svg>
+          Add post image
+        </button>
+      </div>
       <div class="col-12 mt-3">
         <div class="row form-row flex-row-reverse">
           <!-- <div class="col-3 col-sm-3 col-md-2">
@@ -298,9 +331,9 @@
             <input type="submit" class="form-control btn-sm btn btn-primary publish-post" value="Publish">
             <input type="hidden" class="form-control btn-sm btn btn-primary publish-post" value="Save Draft">
           </div>
-          <div class="col-3 col-sm-3 col-md-2">
+          <!-- <div class="col-3 col-sm-3 col-md-2">
             <input  class="form-control btn-sm btn btn-primary add-tags" type="button" data-toggle="collapse" data-target="  #collapseExample" aria-expanded="false" aria-controls="collapseExample" value="Add Tags">
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
