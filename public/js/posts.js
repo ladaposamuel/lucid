@@ -72,13 +72,14 @@ let j = jQuery.noConflict();
           const [, fullURI, ext, uriData] = imageURI.match(/\!\[\]\((data:image\/(\w+);base64,([^)]*))\)/);
           const id = Math.random().toString(36).substr(2, 10);
           const newImgName = `img-${id}.${ext}`;
+          const username = j('meta[name="username"]').attr('content');
 
 
           // replace the image URI everywhere it occurs in the markdown
           let stillMatching = true;
           while (stillMatching) {
             if (markdown.includes(fullURI)) {
-              markdown = markdown.replace(fullURI, `/storage/{{$user->username}}/images/${newImgName}`);
+              markdown = markdown.replace(fullURI, `/storage/${username}/images/${newImgName}`);
             } else {
               stillMatching = false;
             }
@@ -112,15 +113,15 @@ let j = jQuery.noConflict();
             contentType: false,
             processData: false,
             success : function (res) {
-              console.log(JSON.stringify(res));
+              //console.log(JSON.stringify(res));
 
                 if (res.error == false && res.action == 'publish') {
                   window.localStorage.setItem('publish', 'success');
-                  window.location = '/{{$user->username}}/posts';
+                  window.location = '/'+j('meta[name="username"]').attr('content')+'/posts';
 
                 } else if (res.error == false && res.action == 'savedToDrafts') {
                   window.localStorage.setItem('savedToDrafts', 'success');
-                  window.location = '/{{$user->username}}/posts';
+                  window.location = '/'+j('meta[name="username"]').attr('content')+'/posts';
                 }
             }
         });
