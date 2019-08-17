@@ -295,7 +295,13 @@ if(Auth::user()){
           else {
             $count = "";
           }
-        return view('contact',compact('user','posts'), ['fcheck' => $fcheck, 'fcount'=>$fcount, 'count' => $count ]);
+
+          
+
+        $contact = DB::table('contact_settings')->where('user_id',$user->id)->first();
+
+
+        return view('contact',compact('user','posts','contact'), ['fcheck' => $fcheck, 'fcount'=>$fcount, 'count' => $count ]);
     }
 
 

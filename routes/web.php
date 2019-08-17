@@ -64,4 +64,5 @@ Route::prefix('{username}')->group(function () {
     Route::post('/save_settings','HomeController@saveSettings');
     Route::get('/following','pageController@following')->name("following");
     Route::get('/followers','pageController@followers')->name("followers");
+    Route::post('/update-contact-details','HomeController@updateContactDetails');
 });

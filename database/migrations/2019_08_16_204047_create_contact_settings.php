@@ -17,7 +17,7 @@ class CreateContactSettings extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->string('email');
-            $table->text('display_message');
+            $table->text('display_message')->nullable();
             $table->timestamps();
         });
     }
