@@ -1,6 +1,11 @@
 @extends('layouts.lucid')
 @section('title')
-  {{ $user->name }}
+  @if(Auth::user() && Auth::user()->username == $user->username)
+Thoughts / Lucid
+  @else
+  
+{{ $user->name }} (@ {{ $user->username }}) / Lucid
+  @endif
 @endsection
 @section('sidebar')
 @parent
@@ -36,7 +41,7 @@
 
 @foreach ($posts as $feeds)
 <div class="post-content">
-  
+
   <div class="post-content-body">
     <p class="mb-1">{{$user->name}}-<small class="text-muted">{{$feeds['date']}}</small></p>
     <p class="">

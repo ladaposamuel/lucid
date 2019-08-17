@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- <title>{{ config('app.name', 'Lucid') }}</title> -->
-  <title>@yield('title') - Lucid</title>
+  <title>@yield('title')</title>
   <link rel="short icon" type="image/png" sizes="16x16" href="{{ asset('img/luci-logo.png') }}">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap" rel="stylesheet" />
@@ -29,7 +29,7 @@
         <a href="/{{ $user->username}}" class="no-decoration">
           <h3 id="user-name" class="pt-2">{{ $user->name}}</h3>
         </a>
-        
+
           @if(Auth::user() && Auth::user()->username == $user->username && $user->short_bio =="")
           <p id="user-bio" class="pb-2" style="color:#a9a9a9;">
           You haven't set up a short bio about yourself, do that <a href="/{{ $user->username}}/settings">here</a>
@@ -39,7 +39,7 @@
           {{ $user->short_bio }}
           </p>
           @endif
-       
+
 
         <div class="divider"></div>
 
@@ -50,6 +50,7 @@
           @else
             <li><a href="/{{ $user->username}}">Posts</a></li>
             @endif
+        
             <li><a href="/{{ $user->username}}/thoughts">Thoughts</a></li>
             <li><a href="#">Videos</a></li>
             <li><a href="/{{ $user->username}}/contact">Contact</a></li>
@@ -197,7 +198,7 @@
     history.pushState(null, null, `/${document.getElementById("username").value+'/'+e}`)
   }
   </script>
-  
+
 </body>
 
 </html>
