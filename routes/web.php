@@ -33,6 +33,9 @@ Route::get('single-blog-post', function () {
 Route::get('subscribe', function () {
     return view('subscribe');
 });
+Route::get('construction', function (){
+    return view('under-construction');
+});
 Route::get('microblog','HomeController@microblog');
 Route::post('save-post','HomeController@savePost');
 

@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <meta name="csrf-token" content="{{ csrf_token() }}">
+  @auth
+  <meta name="username" content="{{ Auth::user()->username }}">
+  @endauth
   <!-- <title>{{ config('app.name', 'Lucid') }}</title> -->
   <title>@yield('title') - Lucid</title>
   <link rel="short icon" type="image/png" sizes="16x16" href="{{ asset('img/luci-logo.png') }}">
@@ -16,6 +19,8 @@
   <link href="{{ asset('css/main-style.css') }}" rel="stylesheet">
   <link href="{{ asset('css/tabletcss.css') }}" rel="stylesheet">
   <link href="https://cdn.quilljs.com/1.3.4/quill.snow.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/css/bootstrap-tokenfield.min.css">
 </head>
 
 <body>

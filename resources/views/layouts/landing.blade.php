@@ -57,7 +57,7 @@
                 {{--<a href="#" class="nav-link mr-4">Features</a>--}}
             </li>
             <li class="nav-item">
-                <a href="get-started" class="nav-link mr-4">Get Started</a>
+                <a href="/explore" class="nav-link mr-4">Explore</a>
             </li>
             @guest
             <li class="nav-item">
