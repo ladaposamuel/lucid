@@ -24,6 +24,9 @@ Route::get('login', function () {
 Route::get('register', function () {
     return view('auth/register');
 });
+Route::get('explore', function () {
+    return view('explore');
+});
 Route::get('single-blog-post', function () {
     return view('single-blog-post');
 });
