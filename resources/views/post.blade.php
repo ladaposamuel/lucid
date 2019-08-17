@@ -242,11 +242,11 @@
 @if(Auth::user()->username == $user->username)
 <div id="form-container">
   <form method="POST" class="timeline-editor" id="editor-form" autocomplete="OFF">
-    <div class=" row pt-3 pb-3">
+    <div class=" row pb-3">
       <div class="col-12">
 
-        <div class="white-background mt-3 mb-3">
-          <div class="row pt-3 pb-2">
+        <div class="white-background mb-3">
+          <div class="row pb-2">
             <div class="col-12">
               <div class="row form-group">
                 <div class="col-12 mb-3" id="titleBox">

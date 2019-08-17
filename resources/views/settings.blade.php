@@ -43,25 +43,26 @@
   <div class="tab-content" id="settings-tabs-content">
     <!-- profile settings tab -->
     <div class="tab-pane fade in show active" id="profile" role="tabpanel">
-      <form action="" class="mt-5" autocomplete="off" id="settingsForm">
+      <form action="" class="mt-4" autocomplete="off" id="settingsForm">
         <div class="row">
           <div class="form-group col-sm-12 col-md-6">
             <label for="name"><strong>Full Name</strong></label>
-            <span class="text-danger" id="fullname" style="display:none;"></span>
             <input class="form-control" type="text" name="name" id="name" value="{{Auth::user()->name}}" placeholder="e.g Jon Champion" />
+            <span class="text-danger" id="fullname" style="display:none;"></span>
           </div>
           <div class="form-group col-sm-12 col-md-6">
             <label for="email"><strong>Email Address</strong></label>
-            <span class="text-danger" id="emailError" style="display:none;"></span>
             <input type="email" name="email" id="email" class="form-control" value="{{Auth::user()->email}}" placeholder="example@gmail.com" />
+            <span class="text-danger" id="emailError" style="display:none;"></span>
           </div>
         </div>
         <div class="row">
-          <div class="form-group col-sm-12 col-md-6">
+          <div class="form-group col-sm-12 col-md-6 pb-0 mb-0">
             <label for="nick-name"><strong>Username</strong></label>
-            <input class="form-control" type="text" name="nickname" id="nick-name" value="{{Auth::user()->username}}" disabled/>
+            <input class="form-control" type="text" name="username" id="nick-name" value="{{Auth::user()->username}}"/>
+            <span class="text-danger" id="usernameError" style="display:none;"></span>
           </div>
-          <div class="form-group col-sm-12 col-md-6">
+          <div class="form-group col-sm-12 col-md-6 pb-0 mb-0">
             <p class="font-weight-bold">Profile Image</p>
             <div class="d-flex">
               <div class="d-inline-block">
@@ -71,20 +72,21 @@
                 <input type="file" name="profileimage" id="profileimage" class="form-control-file" accept=".png,.jpg" style="display:none">
 
                 <label class="text-muted form-control p-2 w-100" for="profileimage" style="cursor:pointer">Choose file</label>
-                <span class="text-danger" id="imgError" style="display:none;"></span>
+                
                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}"/>
+                <span class="text-danger" id="imgError" style="display:none;"></span>
               </div>
             </div>
           </div>
         </div>
         <div class="row">
-          <div class="form-group col-sm-12 col-md-6">
+          <div class="form-group col-sm-12 col-md-6 mt-0 pb-0">
             <label for="bio"><strong>Short Bio</strong></label>
-            <textarea name="bio" id="bio" class="form-control" rows="5" placeholder="type here..">{{Auth::user()->short_bio}}</textarea>
+            <textarea name="bio" id="bio" class="form-control" rows="3" placeholder="type here..">{{Auth::user()->short_bio}}</textarea>
           </div>
         </div>
         <!-- submit button -->
-        <button type="submit" class="btn btn-lg col-sm-12 col-md-3 mt-5" name="update">Update Profile</button>
+        <button type="submit" class="btn col-sm-12 col-md-3 mt-3" name="update">Update Profile</button>
       </form>
     </div>
 
@@ -127,6 +129,9 @@
 
     })
 
+    hereLinkOnSettingsPage = document.querySelector('#onSettingsPage');
+    hereLinkOnSettingsPage.style.color="#a9a9a9";
+    hereLinkOnSettingsPage.removeAttribute('href');
 
     document.querySelector('button[name="update"]').addEventListener('click',function (event){
       event.preventDefault();
@@ -147,7 +152,7 @@
             contentType: false,
             processData: false,
             success : function (response) {
-              // console.log(JSON.stringify(res));
+               //console.log(JSON.stringify(response));
 
                 if (response.success) {
                     swal({
@@ -167,12 +172,26 @@
                       document.querySelector('#user-bio').innerHTML = 'You haven\'t set up a short bio about yourself, do that here';
                       document.querySelector('#user-bio').style.color = "#a9a9a9";
                     }
+
+                    if(response.renamedUserContentFolderName){
+                       changeHrefs = document.querySelectorAll('.changeHref');
+                       changeHrefs.forEach(href=>{
+                        urlArray = href.getAttribute('href').split("\/");
+                        url = '';
+                        if(urlArray.length == 3){
+                          url = urlArray.pop();
+                        }
+                        href.setAttribute('href','/'+response.renamedUserContentFolderName+'/'+url)
+                       })
+                       window.history.pushState(null,null, '/lucid/public/'+response.renamedUserContentFolderName+'/settings')
+                    }
                   
                 }
 
                 const name = document.querySelector('#fullname');
                 const email = document.querySelector('#emailError');
                 const img = document.querySelector('#imgError');
+                const username = document.querySelector("#usernameError");
                 if (response.name){
                     name.style.display="block"
                     name.innerHTML = response.name
@@ -195,6 +214,14 @@
                 }else {
                     img.style.display="none"
                     img.innerHTML = ''
+                }
+
+                if (response.username){
+                    username.style.display="block"
+                    username.innerHTML = response.username
+                }else {
+                    username.style.display="none"
+                    username.innerHTML = ''
                 }
               
             }

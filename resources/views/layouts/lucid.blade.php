@@ -25,14 +25,14 @@
       @section('sidebar')
       <!-- Beginning of Sidebar -->
       <div class="col-lg-4 pb-0 mb-0 pt-2">
-        <a href="/{{ $user->username}}"><img id="user-avatar" src="{{$user->image}}" class="img-fluid" /></a>
-        <a href="/{{ $user->username}}" class="no-decoration">
+        <a href="/{{ $user->username}}" class="changeHref"><img id="user-avatar" src="{{$user->image}}" class="img-fluid" /></a>
+        <a href="/{{ $user->username}}" class="no-decoration changeHref">
           <h3 id="user-name" class="pt-2">{{ $user->name}}</h3>
         </a>
 
           @if(Auth::user() && Auth::user()->username == $user->username && $user->short_bio =="")
           <p id="user-bio" class="pb-2" style="color:#a9a9a9;">
-          You haven't set up a short bio about yourself, do that <a href="/{{ $user->username}}/settings">here</a>
+          You haven't set up a short bio about yourself, do that <a href="/{{ $user->username}}/settings" id="onSettingsPage">here</a>
           </p>
           @else
           <p id="user-bio" class="pb-2">
@@ -46,14 +46,13 @@
         <div class="sidebar-nav pt-2">
           <ul>
             @if(Auth::user() && Auth::user()->username == $user->username)
-            <li><a href="/{{ $user->username}}/posts">Posts</a></li>
+            <li><a class="changeHref" href="/{{ $user->username}}/posts">Posts</a></li>
           @else
-            <li><a href="/{{ $user->username}}">Posts</a></li>
+            <li><a class="changeHref" href="/{{ $user->username}}">Posts</a></li>
             @endif
-        
-            <li><a href="/{{ $user->username}}/thoughts">Thoughts</a></li>
-            <li><a href="#">Videos</a></li>
-            <li><a href="/{{ $user->username}}/contact">Contact</a></li>
+            <li><a class="changeHref" href="/{{ $user->username}}/thoughts">Thoughts</a></li>
+            <li><a class="changeHref" href="#">Videos</a></li>
+            <li><a class="changeHref" href="/{{ $user->username}}/contact">Contact</a></li>
           </ul>
         </div>
         @if(Auth::user() && Auth::user()->username == $user->username)
@@ -122,20 +121,20 @@
         <div class="user-stats text-center mt-3 pb-0">
           <div class="d-inline-block">
             @if (empty($fcount))
-            <a href="/{{$user->username}}/following" class="pr-2">0 <br /> <small class="text-muted">Following</small></a>
+            <a href="/{{$user->username}}/following" class="pr-2 changeHref">0 <br /> <small class="text-muted">Following</small></a>
             @else
-            <a href="/{{$user->username}}/following" class="pr-2">{{$fcount}} <br /> <small class="text-muted">Following</small></a>
+            <a href="/{{$user->username}}/following" class="pr-2 changeHref">{{$fcount}} <br /> <small class="text-muted">Following</small></a>
             @endif
           </div>
           <div class="d-inline-block">
             @if (empty($count))
-            <a href="/{{$user->username}}/followers">0 <br /> <small class="text-muted">Followers</small></a>
+            <a href="/{{$user->username}}/followers" class="changeHref">0 <br /> <small class="text-muted">Followers</small></a>
             @else
-            <a href="/{{$user->username}}/followers">{{$count}} <br /> <small class="text-muted">Followers</small></a>
+            <a href="/{{$user->username}}/followers" class="changeHref">{{$count}} <br /> <small class="text-muted">Followers</small></a>
             @endif
           </div>
           <div class="mt-3">
-            <a href="https://lucid.blog"> <small class="text-muted"><img src="{{ asset('img/logo.jpg') }}" alt="Lucid" class="img-fluid" style="filter: grayscale(100%);" /> Powered by Lucid</small></a>
+            <a href="https://lucid.blog"> <small class="text-muted"><img src="{{ asset('img/logo.jpg') }}" alt="Lucid" class="img-fluid" style="filter: grayscale(100%); height: 20px;" /> Powered by Lucid</small></a>
           </div>
         </div>
       </div>
@@ -145,7 +144,7 @@
       <div class="col-lg-8 pb-0">
 
         <!-- Beginning of Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light pt-2 mb-5">
+        <nav class="navbar navbar-expand-lg navbar-light pt-2 pb-2">
           <div class="container">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item dropdown">
@@ -156,9 +155,9 @@
                   @guest
                   <a class="dropdown-item" href="{{ url('/login') }}">{{ __('Login') }}</a>
                   @else
-                  <a class="dropdown-item" href="/{{ Auth::user()->username}}">Home</a>
-                  <a href="/{{ $user->username}}/settings" class="dropdown-item">Settings</a>
-                  <a class="dropdown-item" href="/{{ $user->username}}/logout">
+                  <a  class="dropdown-item changeHref" href="/{{ Auth::user()->username}}">Home</a>
+                  <a href="/{{ $user->username}}/settings" class="dropdown-item changeHref">Settings</a>
+                  <a class="dropdown-item changeHref" href="/{{ $user->username}}/logout">
                     {{ __('Logout') }}
                   </a>
 
