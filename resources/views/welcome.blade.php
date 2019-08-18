@@ -1,5 +1,19 @@
 @extends('layouts.landing')
 @section('content')
+<style>
+.standard-color{
+background: #9179ef;
+color:#fff;
+border:1px solid #9179ef;
+}
+
+.standard-color:hover{
+  background: #9179ef !important;
+  color:#fff;
+  border:1px solid #9179ef !important;
+}
+
+</style>
 <section class="hero-section">
 	<div class="container">
 		<div class="row justify-content-center">
@@ -157,12 +171,12 @@
 				</p>
 			</div>
 			<div class="col-lg-6">
-				<form action="subscribe.php" method="post">
+				<form action="" class="subscribe" method="post" id="formField">
 					<div class="input-group mb-3">
 						<input type="email" class="form-control newsletter-input" name="email" placeholder="Email Address"
 							required />
 						<div class="input-group-append">
-							<button class="btn btn-primary newsletter-btn" type="submit">
+							<button class="btn btn-primary newsletter-btn" type="submit" name="subscribe">
 								SUBSCRIBE
 							</button>
 						</div>
@@ -172,4 +186,64 @@
 	</div>
 	</div>
 </section>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+ let j = jQuery.noConflict();
+    var subscribe = document.querySelector('.subscribe');
+    subscribe.onsubmit = document.querySelector('button[name="subscribe"]').addEventListener('click', function(event){
+    event.preventDefault();
+    const subscribeFormData = new FormData(document.querySelector('#formField'));
+    
+
+      j.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': j('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+      j.ajax({
+            type: "POST",
+            dataType:'json',
+            url : "save-subscription",
+            data:subscribeFormData,
+            contentType: false,
+            processData: false,
+            success : function (res) {
+
+              if(res.success)
+              {
+                document.querySelector('#formField').reset();
+                swal({
+                  text: res.success,
+                  icon: "success",
+                  button: {
+                  text: "OK",
+                  value: true,
+                  visible: true,
+                  className: "standard-color",
+                  closeModal: true,
+                  },
+                });
+			  }
+			  
+			  if(res.email)
+              {
+                swal({
+                  text: res.email[0],
+                  icon: "error",
+                  button: {
+                  text: "OK",
+                  value: true,
+                  visible: true,
+                  className: "standard-color",
+                  closeModal: true,
+                  },
+                });
+              }
+
+            }
+        });
+  });
+</script>
 @endsection

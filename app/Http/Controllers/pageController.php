@@ -5,6 +5,7 @@ namespace Lucid\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Auth;
+use Validator;
 class pageController extends Controller
 {
     public function user($username) {
@@ -483,4 +484,26 @@ if(Auth::user()){
     public function construction(){
       return view('under-construction');
     }
+
+    public function saveSubscriptionEmail(Request $request){
+        $validator=Validator::make($request->all(),[
+          'email' =>'required|email'
+      ]);
+
+      if($validator->fails()){
+        return response()->json($validator->messages(), 200);
+    }
+
+    $insert = DB::table('maillists')->insert([
+      'email'=>$request->email
+    ]);
+
+    if($insert){
+      return response()->json(['success'=>'Thanks For Subscribing To Our Newsletters'], 200);
+    }
+
+
+  }
+
+
 }
