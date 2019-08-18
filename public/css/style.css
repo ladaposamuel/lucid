@@ -91,6 +91,11 @@ body {
 	background: var(--main-color);
 	border-radius: 5px;
 }
+.active-nav {
+	color: #ffffff !important;
+	background: var(--main-color);
+	border-radius: 5px;
+}
 
 .follow-me {
 	padding-top: 50px;
@@ -212,7 +217,7 @@ button.btn.btn-primary.pagination:hover {
 	color:#fff;
 	border:1px solid #871e99;
   }
-  
+
 .standard-color:hover{
 background: #871e99 !important;
 color:#fff;

@@ -17,6 +17,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="description"
     content="Welcome to the most private content sharing platform We built Lucid on the premise that ownership and privacy is about respect and that it is your right.">
   <meta name="robots" content="index, nofollow">
@@ -90,11 +91,11 @@
       </div>
       <div class="col-lg-12 text-center">
         <ul class="footer-links">
-          <li><a href="#">About us</a></li>
-          <li><a href="#">Support</a></li>
-          <li><a href="/terms-and-conditions">Terms and Condition</a></li>
-          <li><a href="/privacy-policy">Privacy policy</a></li>
-          <li><a href="/get-started">Get Started</a></li>
+          <li><a href="{{ route('under-construction') }}">About us</a></li>
+          <li><a href="{{ route('under-construction') }}">Support</a></li>
+          <li><a href="{{ route('under-construction') }}">Terms and Condition</a></li>
+          <li><a href="{{ route('under-construction') }}">Privacy policy</a></li>
+          <li><a href="/register">Get Started</a></li>
         </ul>
       </div>
     </div>

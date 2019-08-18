@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateContactSettings extends Migration
+class CreateMaillistsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateContactSettings extends Migration
      */
     public function up()
     {
-        Schema::create('contact_settings', function (Blueprint $table) {
+        Schema::create('maillists', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
             $table->string('email');
-            $table->text('display_message')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateContactSettings extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contact_settings');
+        Schema::dropIfExists('maillists');
     }
 }

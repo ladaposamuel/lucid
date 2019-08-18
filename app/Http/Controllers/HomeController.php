@@ -32,49 +32,32 @@ class HomeController extends Controller
       $post = new \Lucid\Core\Document($username);
             $feed = $post->fetchRss();
            // print_r($feed);
-           $count = new \Lucid\Core\Subscribe($username);
-
-
-           $fcount =$count->fcount();
+           // follower and following Count
+           $sub = new \Lucid\Core\Subscribe($username);
+           $fcount =$sub->myfollowercount();
+           $count = $sub->count();
+           //dd($fcount);
            if (!empty($fcount)) {
                $fcount = count($fcount);
-             }
-             else {
+             }else {
                $fcount = "";
              }
-           //dd($count->count());
-           if(Auth::user()){
-             $check = new \Lucid\Core\Subscribe(Auth::user()->username);
-             $title = [];
-             if (!is_null($check->fcount())) {
-
-             foreach($check->fcount() as $key => $fuser){
-           //  $title = $fuser['title'];
-             array_push($title , $fuser['title']);
-           }
-
-                       if (in_array($user->name, $title)) {
-                         $fcheck = "yes";
-                       }else {
-                         $fcheck = "no";
-                       }
-                     }else {
-                       $fcheck = "no";
-                     }
-                   //  dd($check->fcount());
-                   }
-                     else {
-                       $fcheck = "no";
-                     }
-         //  $data  = $count->count();
-           $count = $count->count();
-           if (!empty($count)) {
+             if (!empty($count)) {
                $count = count($count);
-             }
-             else {
+             }else {
                $count = "";
              }
-             dd($fcheck);
+
+
+             //User Follower checker
+             if(Auth::user()){
+               $check = new \Lucid\Core\Subscribe(Auth::user()->username);
+               $fcheck = $check->followCheck($user->name);
+             }
+             else {
+               $fcheck = "no";
+             }
+
         return view('home', ['fcheck' => $fcheck, 'posts' => $feed,'fcount'=>$fcount, 'count' => $count]);
 
     }
@@ -88,48 +71,32 @@ class HomeController extends Controller
 
       $post = $post->fetchAllRss();
 
-      $count = new \Lucid\Core\Subscribe($username);
-
-
-      $fcount =$count->fcount();
+      // follower and following Count
+      $sub = new \Lucid\Core\Subscribe($username);
+      $fcount =$sub->myfollowercount();
+      $count = $sub->count();
+      //dd($fcount);
       if (!empty($fcount)) {
           $fcount = count($fcount);
-        }
-        else {
+        }else {
           $fcount = "";
         }
-      //dd($count->count());
-      if(Auth::user()){
-        $check = new \Lucid\Core\Subscribe(Auth::user()->username);
-        $title = [];
-        if (!is_null($check->fcount())) {
-
-        foreach($check->fcount() as $key => $fuser){
-      //  $title = $fuser['title'];
-        array_push($title , $fuser['title']);
-      }
-
-                  if (in_array($user->name, $title)) {
-                    $fcheck = "yes";
-                  }else {
-                    $fcheck = "no";
-                  }
-                }else {
-                  $fcheck = "no";
-                }
-              //  dd($check->fcount());
-              }
-                else {
-                  $fcheck = "no";
-                }
-    //  $data  = $count->count();
-      $count = $count->count();
-      if (!empty($count)) {
+        if (!empty($count)) {
           $count = count($count);
-        }
-        else {
+        }else {
           $count = "";
         }
+
+
+        //User Follower checker
+        if(Auth::user()){
+          $check = new \Lucid\Core\Subscribe(Auth::user()->username);
+          $fcheck = $check->followCheck($user->name);
+        }
+        else {
+          $fcheck = "no";
+        }
+
      return view('timeline', ['posts' => $post,'fcheck' => $fcheck, 'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
      }else {
 
@@ -173,48 +140,32 @@ class HomeController extends Controller
       $path = $username[0];
 
       $post=[];
-      $count = new \Lucid\Core\Subscribe($username);
-
-
-      $fcount =$count->fcount();
+      // follower and following Count
+      $sub = new \Lucid\Core\Subscribe($username);
+      $fcount =$sub->myfollowercount();
+      $count = $sub->count();
+      //dd($fcount);
       if (!empty($fcount)) {
           $fcount = count($fcount);
-        }
-        else {
+        }else {
           $fcount = "";
         }
-      //dd($count->count());
-      if(Auth::user()){
-        $check = new \Lucid\Core\Subscribe(Auth::user()->username);
-        $title = [];
-        if (!is_null($check->fcount())) {
-
-        foreach($check->fcount() as $key => $fuser){
-      //  $title = $fuser['title'];
-        array_push($title , $fuser['title']);
-      }
-
-                  if (in_array($user->name, $title)) {
-                    $fcheck = "yes";
-                  }else {
-                    $fcheck = "no";
-                  }
-                }else {
-                  $fcheck = "no";
-                }
-              //  dd($check->fcount());
-              }
-                else {
-                  $fcheck = "no";
-                }
-    //  $data  = $count->count();
-      $count = $count->count();
-      if (!empty($count)) {
+        if (!empty($count)) {
           $count = count($count);
-        }
-        else {
+        }else {
           $count = "";
         }
+
+
+        //User Follower checker
+        if(Auth::user()){
+          $check = new \Lucid\Core\Subscribe(Auth::user()->username);
+          $fcheck = $check->followCheck($user->name);
+        }
+        else {
+          $fcheck = "no";
+        }
+
       return view('subscribe', ['fcheck' => $fcheck,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
 
     }
@@ -246,47 +197,32 @@ class HomeController extends Controller
     public function settings(){
       $user = Auth::user();
       $username = $user['username'];
-      $count = new \Lucid\Core\Subscribe($username);
-
-      $fcount =$count->fcount();
+      // follower and following Count
+      $sub = new \Lucid\Core\Subscribe($username);
+      $fcount =$sub->myfollowercount();
+      $count = $sub->count();
+      //dd($fcount);
       if (!empty($fcount)) {
           $fcount = count($fcount);
-        }
-        else {
+        }else {
           $fcount = "";
         }
-      //dd($count->count());
-      if(Auth::user()){
-        $check = new \Lucid\Core\Subscribe(Auth::user()->username);
-        $title = [];
-        if (!is_null($check->fcount())) {
-
-        foreach($check->fcount() as $key => $fuser){
-      //  $title = $fuser['title'];
-        array_push($title , $fuser['title']);
-      }
-
-                  if (in_array($user->name, $title)) {
-                    $fcheck = "yes";
-                  }else {
-                    $fcheck = "no";
-                  }
-                }else {
-                  $fcheck = "no";
-                }
-              //  dd($check->fcount());
-              }
-                else {
-                  $fcheck = "no";
-                }
-    //  $data  = $count->count();
-      $count = $count->count();
-      if (!empty($count)) {
+        if (!empty($count)) {
           $count = count($count);
-        }
-        else {
+        }else {
           $count = "";
         }
+
+
+        //User Follower checker
+        if(Auth::user()){
+          $check = new \Lucid\Core\Subscribe(Auth::user()->username);
+          $fcheck = $check->followCheck($user->name);
+        }
+        else {
+          $fcheck = "no";
+        }
+
       return view('settings', ['fcheck' => $fcheck,'user'=>$user,'fcount' => $fcount , 'count' => $count ]);
 
     }
@@ -311,10 +247,10 @@ class HomeController extends Controller
         if(Auth::user()->username !== $request->username){
           $oldUserPostFolderName = storage_path('app/'.Auth::user()->username);
           $oldUserImgFolderName = storage_path('app/public/'.Auth::user()->username);
-          
+
           $newUserPostFolderName = storage_path('app/'.$request->username);
           $newUserImgFolderName = storage_path('app/public/'.$request->username);
-          
+
         if(rename($oldUserPostFolderName, $newUserPostFolderName) && rename($oldUserImgFolderName, $newUserImgFolderName)){
             $renamedUserContentFolder = $request->username;
           }else{
@@ -327,12 +263,12 @@ class HomeController extends Controller
           if($renamedUserContentFolder !== false){
             $url = $renamedUserContentFolder."/images/";
           }
-        
+
          $path = Storage::disk('public')->put($url, $request->file('profileimage'));
          $fullPath = '/storage/'.$path;
          $updated= DB::table('users')->where('id',$request->user_id)
-                           ->update(['name'=>$request->name,'username'=>$request->username,'email'=>$request->email,'image'=>$fullPath,
-                           'short_bio'=>$request->bio]);
+                                    ->update(['name'=>$request->name,'username'=>$request->username,'email'=>$request->email,'image'=>$fullPath,
+                                    'short_bio'=>$request->bio]);
 
         if($updated) {
 
@@ -347,15 +283,54 @@ class HomeController extends Controller
         }
 
         $updated = DB::table('users')->where('id',$request->user_id)
-                          ->update(['name'=>$request->name,'username'=>$request->username,'email'=>$request->email,'image'=>$fullPath,'short_bio'=>$request->bio]);
-                          
-                          if($updated){
-                            return response()->json(['success'=>"Your changes has been saved successfully",'renamedUserContentFolderName'=>$renamedUserContentFolder], 200);
-                          }
-        
+                                    ->update(['name'=>$request->name,'username'=>$request->username,'email'=>$request->email,'image'=>$fullPath,'short_bio'=>$request->bio]);
 
+                                      if($updated){
+                                        return response()->json(['success'=>"Your changes has been saved successfully",'renamedUserContentFolderName'=>$renamedUserContentFolder], 200);
+                                      }
       }
 
+    }
+
+    public function updateContactDetails(Request $request){
+        $validator=Validator::make($request->all(),[
+          'email' => ['required','email',
+            Rule::unique('contact_settings')->ignore(Auth::user()->id,'user_id'),
+          ],
+          'user_id'=>'required'
+
+      ]);
+
+      if($validator->fails()){
+        return response()->json($validator->messages(), 200);
+      }
+
+      $detailsExist = DB::table('contact_settings')->where('user_id',$request->user_id)->first();
+
+      if(empty($detailsExist)){
+        $insert = DB::table('contact_settings')->insert([
+          'user_id'=>$request->user_id,
+          'email'=>$request->email,
+          'display_message'=>$request->message
+        ]);
+
+        if($insert) {
+          return response()->json(['success'=>'Your changes has been saved successfully'], 200);
+        }
+
+
+      }else{
+        $update = DB::table('contact_settings')->where('user_id',$request->user_id)->update([
+          'email'=>$request->email,
+          'display_message'=>$request->message
+        ]);
+
+        if($update) {
+          return response()->json(['success'=>'Your changes has been saved successfully'], 200);
+        }else{
+          return response()->json(['noChanges'=>'You made no changes'], 200);
+        }
+      }
 
     }
 

@@ -1,5 +1,19 @@
 @extends('layouts.landing')
 @section('content')
+<style>
+.standard-color{
+background: #9179ef;
+color:#fff;
+border:1px solid #9179ef;
+}
+
+.standard-color:hover{
+  background: #9179ef !important;
+  color:#fff;
+  border:1px solid #9179ef !important;
+}
+
+</style>
 <section class="hero-section">
 	<div class="container">
 		<div class="row justify-content-center">
@@ -98,34 +112,28 @@
 					<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
 						<div class="carousel-inner">
 							<div class="carousel-item active text-center">
-								<img src="{{ asset('img/Alex.jpg ') }}" alt="" srcset="" />
+								<img src="{{ asset('img/geek.jpg ') }}" alt="" srcset="" />
 								<h5 class="testimonal-text">
 									“Lucid has done a very good job in building my website
 									with those awesome themes. The customer support guys were
 									really helpful. My website has ranked high ever since on
 									Google.”
 								</h5>
-								<p class="username">Alexander Garuba</p>
+								<p class="username">Watson Torquil</p>
 							</div>
 							<div class="carousel-item text-center">
-								<img src="{{ asset('img/Alex.jpg') }}" alt="" srcset="" />
+								<img src="{{ asset('img/images.jpg') }}" alt="" srcset="" />
 								<h5 class="testimonal-text">
-									“Lucid has done a very good job in building my website
-									with those awesome themes. The customer support guys were
-									really helpful. My website has ranked high ever since on
-									Google.”
+									“I'm happy with how fast it was for me to set up my page on lucid,it took me just a sign up using my google account to do that and now i can share my stories with the world and still retained my rights to privacy.”
 								</h5>
-								<p class="username">John Doe</p>
+								<p class="username">Frederick Conrad</p>
 							</div>
 							<div class="carousel-item text-center">
-								<img src="{{ asset('img/Alex.jpg') }}" alt="" srcset="" />
+								<img src="{{ asset('img/geek1.jpg') }}" alt="" srcset="" />
 								<h5 class="testimonal-text">
-									“Lucid has done a very good job in building my website
-									with those awesome themes. The customer support guys were
-									really helpful. My website has ranked high ever since on
-									Google.”
+									“Sharing my stories with the world has never been this easy,lucid made it possible for me to share my thoughts and  ideas,allowing me to make my own decisions and not putting my contents behind paywall ”
 								</h5>
-								<p class="username">Anthony Brown</p>
+								<p class="username">Natasha Quinn</p>
 							</div>
 						</div>
 						<ol class="carousel-indicators">
@@ -163,12 +171,12 @@
 				</p>
 			</div>
 			<div class="col-lg-6">
-				<form action="subscribe.php" method="post">
+				<form action="" class="subscribe" method="post" id="formField">
 					<div class="input-group mb-3">
 						<input type="email" class="form-control newsletter-input" name="email" placeholder="Email Address"
 							required />
 						<div class="input-group-append">
-							<button class="btn btn-primary newsletter-btn" type="submit">
+							<button class="btn btn-primary newsletter-btn" type="submit" name="subscribe">
 								SUBSCRIBE
 							</button>
 						</div>
@@ -178,4 +186,64 @@
 	</div>
 	</div>
 </section>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+ let j = jQuery.noConflict();
+    var subscribe = document.querySelector('.subscribe');
+    subscribe.onsubmit = document.querySelector('button[name="subscribe"]').addEventListener('click', function(event){
+    event.preventDefault();
+    const subscribeFormData = new FormData(document.querySelector('#formField'));
+    
+
+      j.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': j('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+      j.ajax({
+            type: "POST",
+            dataType:'json',
+            url : "save-subscription",
+            data:subscribeFormData,
+            contentType: false,
+            processData: false,
+            success : function (res) {
+
+              if(res.success)
+              {
+                document.querySelector('#formField').reset();
+                swal({
+                  text: res.success,
+                  icon: "success",
+                  button: {
+                  text: "OK",
+                  value: true,
+                  visible: true,
+                  className: "standard-color",
+                  closeModal: true,
+                  },
+                });
+			  }
+			  
+			  if(res.email)
+              {
+                swal({
+                  text: res.email[0],
+                  icon: "error",
+                  button: {
+                  text: "OK",
+                  value: true,
+                  visible: true,
+                  className: "standard-color",
+                  closeModal: true,
+                  },
+                });
+              }
+
+            }
+        });
+  });
+</script>
 @endsection

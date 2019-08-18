@@ -23,7 +23,7 @@ let j = jQuery.noConflict();
                 j('#sendEmailBtn').html('Sending Message...');
             },
             success : function (res) {
-              console.log(JSON.stringify(res));
+              // console.log(JSON.stringify(res));
 
               j('#sendEmailBtn').removeAttr('disabled');
               j('#sendEmailBtn').html('Send Message');
@@ -90,3 +90,5 @@ let j = jQuery.noConflict();
     
 
   });
+
+  

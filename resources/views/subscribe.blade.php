@@ -2,6 +2,9 @@
 @section('title')
   {{ $user->name }}
 @endsection
+@php
+$location= 'subscribe';
+@endphp
 @section('sidebar')
 @parent
 
