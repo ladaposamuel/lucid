@@ -222,7 +222,7 @@ class HomeController extends Controller
         else {
           $fcheck = "no";
         }
-        
+
       return view('settings', ['fcheck' => $fcheck,'user'=>$user,'fcount' => $fcount , 'count' => $count ]);
 
     }

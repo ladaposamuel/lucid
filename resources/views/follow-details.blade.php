@@ -287,7 +287,17 @@ $location= 'follow';
       <div class="post-content-body">
         <p class="m-0 font-weight-bold"><a href="{{URL::to('/')}}/{{$follow['username']}}/">{{$follow['name']}}</a></p>
         <p class="mb-2">{{$follow['desc']}}</p>
+
+@php
+      if(in_array($follow['name'],$followerArray)){ @endphp
         <a href="#" class="no-decoration text-secondary font-weight-bold">Following</a>
+
+      @php  }else if(Auth::user() && Auth::user()->username == $follow['username']) { @endphp
+
+    @php  }else { @endphp
+      <a href="#" class="no-decoration text-secondary font-weight-bold">Follow</a>
+
+  @php  } @endphp
       </div>
     </div>
     @endforeach
@@ -311,16 +321,21 @@ $location= 'follow';
           <p class="m-0 font-weight-bold">{{$follower['name']}}</p>
         </a>
         <p class="mb-2">{{$follower['desc']}}</p>
-        @if ($user->username == $follower['username'])
-        <a href="#" class="no-decoration text-secondary font-weight-bold">Following</a>
-        @else
+
+
+        @php
+              if(in_array($follower['name'],$followerArray) || Auth::user() && Auth::user()->username == $follower['username']){ @endphp
+                <a href="{{URL::to('/')}}/{{$follower['username']}}/" class="no-decoration text-secondary font-weight-bold">Following</a>
+
+              @php  }else { @endphp
+
         <form method="POST" action="{{URL::to('/')}}/{{$user->username}}/addrss">
           @csrf
           <input type="hidden" name="rss" value="{{$follower['username']}}">
           <button type="submit" class="btn no-decoration text-secondary font-weight-bold">Follow</button>
         </form>
 
-        @endif
+        @php  } @endphp
       </div>
     </div>
     @endforeach

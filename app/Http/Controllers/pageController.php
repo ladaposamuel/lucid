@@ -286,12 +286,23 @@ class pageController extends Controller
                 if(Auth::user()){
                   $check = new \Lucid\Core\Subscribe(Auth::user()->username);
                   $fcheck = $check->followCheck($user->name);
+                    $myfollower = $check->followerArray();
+                //    dd($myfollower);
                 }
                 else {
                   $fcheck = "no";
                 }
 
-      return view('follow-details', ['fcheck' => $fcheck,'posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count, 'following' => $following, 'follower' => $follower]);
+      return view('follow-details', [
+        'fcheck' => $fcheck,
+        'posts' => $post,
+        'user'=>$user,
+        'fcount'=>$fcount,
+        'count' => $count,
+        'following' => $following,
+        'follower' => $follower,
+        'followerArray' =>$myfollower
+      ]);
     }
 
     public function followers($username) {
@@ -325,11 +336,22 @@ class pageController extends Controller
                   if(Auth::user()){
                     $check = new \Lucid\Core\Subscribe(Auth::user()->username);
                     $fcheck = $check->followCheck($user->name);
+                    $myfollower = $check->followerArray();
+//dd($myfollower);
                   }
                   else {
                     $fcheck = "no";
                   }
-                  
-      return view('follow-details', ['fcheck' => $fcheck,'posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count, 'following' => $following, 'follower' => $follower]);
+
+      return view('follow-details', [
+        'fcheck' => $fcheck,
+        'posts' => $post,
+        'user'=>$user,
+        'fcount'=>$fcount,
+        'count' => $count,
+        'following' => $following,
+        'follower' => $follower,
+        'followerArray' =>$myfollower
+      ]);
     }
 }
