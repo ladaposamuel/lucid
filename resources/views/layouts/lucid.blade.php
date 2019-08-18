@@ -56,7 +56,7 @@
             <li><a class="changeHref" href="/{{ $user->username}}">Posts</a></li>
             @endif
             <li><a class="changeHref" href="/{{ $user->username}}/thoughts">Thoughts</a></li>
-            <li><a class="changeHref" href="#">Videos</a></li>
+            <li><a class="changeHref" href="{{ route('under-construction') }}">Videos</a></li>
             <li><a class="changeHref" href="/{{ $user->username}}/contact">Contact</a></li>
           </ul>
         </div>

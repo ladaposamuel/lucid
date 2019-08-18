@@ -37,7 +37,7 @@
       <h2>Something's not right</h2>
       <img src="{{ asset('img/404-space-ship.svg') }}" alt="space ship image">
       <p>It seems the aliens have taken this page..</p>
-      <a href="/">Click this button to return home</a>
+      <a href="javascript: history.go(-1)">Click this button to return home</a>
     </main>
 </body>
 </html>

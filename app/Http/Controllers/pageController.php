@@ -478,4 +478,9 @@ if(Auth::user()){
 
       return view('follow-details', ['fcheck' => $fcheck,'posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count, 'following' => $following, 'follower' => $follower]);
     }
+
+
+    public function construction(){
+      return view('under-construction');
+    }
 }
