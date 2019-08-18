@@ -57,7 +57,7 @@
             <li><a class="@if($location == "post") active-nav @endif changeHref" href="/{{ $user->username}}">Posts</a></li>
             @endif
             <li><a class="@if($location == "thoughts") active-nav @endif changeHref" href="/{{ $user->username}}/thoughts">Thoughts</a></li>
-            <li><a class="@if($location == "video") active-nav @endif changeHref" href="#">Videos</a></li>
+            <li><a class="@if($location == "video") active-nav @endif changeHref" href="{{ route('under-construction') }}">Videos</a></li>
             <li><a class="@if($location == "contact") active-nav @endif changeHref" href="/{{ $user->username}}/contact">Contact</a></li>
           </ul>
         </div>
@@ -75,7 +75,9 @@
           <div class="modal-body">
 
         <div>
-          <img src="{{ asset('img/following-the-idea.png') }}" class="img-fluid" />
+          <img src="{{$user->image}}" width="100" height="100" style="border-radius:100%;" class="img-fluid" />
+          <br>
+          <br>
           <h4 class="text-main">Unfollow  {{$user->name}}</h4>
           <p class="small"><em>Are you sure you want to Unfollow {{$user->name}} and miss out interesting post?<br /> Click the button below to unfollow</em></p>
           <form method="POST" action="{{URL::to('/')}}/{{$user->username}}/unfollow">
@@ -99,7 +101,9 @@
               <div class="modal-content">
                 <div class="modal-body">
                   <div>
-                    <img src="{{ asset('img/following-the-idea.png') }}" class="img-fluid" />
+                    <img src="{{$user->image}}" width="100" height="100" style="border-radius:100%;" class="img-fluid" />
+                    <br>
+                    <br>
                     <h4 class="text-main">Follow {{$user->name}}</h4>
                     <p class="small"><em>Do you have or would love to have Lucid installed on your domain?<br /> Click the button below to follow me</em></p>
                     <form method="POST" action="{{URL::to('/')}}/{{$user->username}}/addrss">
@@ -181,6 +185,7 @@
       </div>
 
   </section>
+
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

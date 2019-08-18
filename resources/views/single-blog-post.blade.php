@@ -1,9 +1,9 @@
 @extends('layouts.lucid')
 @section('title')
 @if(Auth::user() && Auth::user()->username == $user->username)
-{{ $post['title'] }}  / Lucid
+{{ $post['title'] }} - {{ $user->username }} - Lucid
 @else
-{{ $post['title'] }} / {{ $user->name }} (@ {{ $user->username }})
+{{ $post['title'] }} - {{ $user->name }} (@ {{ $user->username }})
 @endif
 @php
 $location= 'singlePost';

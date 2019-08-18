@@ -79,7 +79,7 @@ let j = jQuery.noConflict();
                         }
                         href.setAttribute('href','/'+response.renamedUserContentFolderName+'/'+url)
                        })
-                       window.history.pushState(null,null, '/lucid/public/'+response.renamedUserContentFolderName+'/settings')
+                       window.history.pushState(null,null, '/'+response.renamedUserContentFolderName+'/settings')
                     }
                   
                 }
