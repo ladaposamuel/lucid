@@ -1,6 +1,6 @@
 @extends('layouts.lucid')
 @section('title')
-  Contact {{ $user->name }}
+  Contact - {{ $user->name }} - Lucid
 @endsection
 @php
 $location= 'contact';
