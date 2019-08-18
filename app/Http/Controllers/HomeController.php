@@ -267,8 +267,8 @@ class HomeController extends Controller
          $path = Storage::disk('public')->put($url, $request->file('profileimage'));
          $fullPath = '/storage/'.$path;
          $updated= DB::table('users')->where('id',$request->user_id)
-                           ->update(['name'=>$request->name,'username'=>$request->username,'email'=>$request->email,'image'=>$fullPath,
-                           'short_bio'=>$request->bio]);
+                                    ->update(['name'=>$request->name,'username'=>$request->username,'email'=>$request->email,'image'=>$fullPath,
+                                    'short_bio'=>$request->bio]);
 
         if($updated) {
 
@@ -283,15 +283,54 @@ class HomeController extends Controller
         }
 
         $updated = DB::table('users')->where('id',$request->user_id)
-                          ->update(['name'=>$request->name,'username'=>$request->username,'email'=>$request->email,'image'=>$fullPath,'short_bio'=>$request->bio]);
+                                    ->update(['name'=>$request->name,'username'=>$request->username,'email'=>$request->email,'image'=>$fullPath,'short_bio'=>$request->bio]);
 
-                          if($updated){
-                            return response()->json(['success'=>"Your changes has been saved successfully",'renamedUserContentFolderName'=>$renamedUserContentFolder], 200);
-                          }
-
-
+                                      if($updated){
+                                        return response()->json(['success'=>"Your changes has been saved successfully",'renamedUserContentFolderName'=>$renamedUserContentFolder], 200);
+                                      }
       }
 
+    }
+
+    public function updateContactDetails(Request $request){
+        $validator=Validator::make($request->all(),[
+          'email' => ['required','email',
+            Rule::unique('contact_settings')->ignore(Auth::user()->id,'user_id'),
+          ],
+          'user_id'=>'required'
+
+      ]);
+
+      if($validator->fails()){
+        return response()->json($validator->messages(), 200);
+      }
+
+      $detailsExist = DB::table('contact_settings')->where('user_id',$request->user_id)->first();
+
+      if(empty($detailsExist)){
+        $insert = DB::table('contact_settings')->insert([
+          'user_id'=>$request->user_id,
+          'email'=>$request->email,
+          'display_message'=>$request->message
+        ]);
+
+        if($insert) {
+          return response()->json(['success'=>'Your changes has been saved successfully'], 200);
+        }
+
+
+      }else{
+        $update = DB::table('contact_settings')->where('user_id',$request->user_id)->update([
+          'email'=>$request->email,
+          'display_message'=>$request->message
+        ]);
+
+        if($update) {
+          return response()->json(['success'=>'Your changes has been saved successfully'], 200);
+        }else{
+          return response()->json(['noChanges'=>'You made no changes'], 200);
+        }
+      }
 
     }
 

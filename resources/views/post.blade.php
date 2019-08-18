@@ -22,8 +22,8 @@ $location= 'post';
   .btn.btn-primary.publish-post,
   .btn.btn-primary.save-draft,
   .btn.btn-primary.add-tags {
-    background-color: #280a66 !important;
-    border: 1px solid #280a66;
+    background-color: #871e99 !important;
+    border: 1px solid #871e99;
     padding: 6px 5px;
     color: #fff;
   }
@@ -34,7 +34,7 @@ $location= 'post';
   }
 
   .btn-info {
-    background-color: #280a66 !important;
+    background-color: #871e99 !important;
     border: 0 !important;
   }
 
@@ -67,7 +67,7 @@ $location= 'post';
   }
 
   .editor-btns {
-    background: #280a66;
+    background: #871e99;
     border-radius: 5px;
   }
 
@@ -80,19 +80,19 @@ $location= 'post';
   .btn-outline-primary:not(:disabled):not(.disabled):active,
   .show>.btn-outline-primary.dropdown-toggle {
     color: #fff !important;
-    background-color: #280a66 !important;
-    border-color: #280a66 !important;
+    background-color: #871e99 !important;
+    border-color: #871e99 !important;
   }
 
   .btn-outline-primary {
-    color: #280a66 !important;
-    border-color: #280a66 !important;
+    color: #871e99 !important;
+    border-color: #871e99 !important;
   }
 
   .btn-outline-primary:hover {
     color: #fff !important;
-    background-color: #280a66 !important;
-    border-color: #280a66 !important;
+    background-color: #871e99 !important;
+    border-color: #871e99 !important;
   }
 
   /*tag styples end here..*/
@@ -133,7 +133,7 @@ $location= 'post';
   }
 
   .icon-photo {
-    color: #280a66;
+    color: #871e99;
   }
 
   .icon-video {
@@ -241,6 +241,20 @@ $location= 'post';
       width: 100% !important;
     }
   }
+
+  .tokenfield .token.standardColor { 
+     background: #871e99;
+     color: #fff;
+     padding-bottom:23px;
+     }
+
+  .tokenfield{
+    padding:7px;
+  }
+
+
+
+
 </style>
 <!-- The editor code goes here -->
 @if(Auth::user()->username == $user->username)
@@ -262,44 +276,16 @@ $location= 'post';
                     <input type="text" name="body">
                   </div>
                 </div>
+                
               </div>
             </div>
           </div>
-          <div class="row mt-4">
+          <div class="row mt-5">
             <div class="col-12">
               <div class="row">
-                <div class="col-12 m-2 collapse" id="collapseExample">
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input tags" type="checkbox" id="inlineCheckbox1" value="#Politics">
-                    <label class="form-check-label" for="inlineCheckbox1">Politics</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input tags" type="checkbox" id="inlineCheckbox1" value="#Sports">
-                    <label class="form-check-label" for="inlineCheckbox1">Sports</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input tags" type="checkbox" id="inlineCheckbox1" value="#Health">
-                    <label class="form-check-label" for="inlineCheckbox1">Health</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input tags" type="checkbox" id="inlineCheckbox1" value="#Technology">
-                    <label class="form-check-label" for="inlineCheckbox1">Technology</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input tags" type="checkbox" id="inlineCheckbox1" value="#Music">
-                    <label class="form-check-label" for="inlineCheckbox1">Music</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input tags" type="checkbox" id="inlineCheckbox1" value="#News-Lifestyle">
-                    <label class="form-check-label" for="inlineCheckbox1">News-Lifestyle</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input tags" type="checkbox" id="inlineCheckbox1" value="#Movies">
-                    <label class="form-check-label" for="inlineCheckbox1">Movies</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input tags" type="checkbox" id="inlineCheckbox1" value="#Fitness">
-                    <label class="form-check-label" for="inlineCheckbox1">Fitness</label>
+                <div class="col-12 collapse" id="collapseExample">
+                  <div class="form-group">
+                    <input type="text" name="tags" id="tags"  class="form-control" placeholder="Add">
                   </div>
                 </div>
               </div>
@@ -317,7 +303,7 @@ $location= 'post';
             <input type="hidden" class="form-control btn-sm btn btn-primary publish-post" value="Save Draft">
           </div>
           <div class="col-3 col-sm-3 col-md-2">
-            <input class="form-control btn-sm btn btn-primary add-tags" type="button" data-toggle="collapse" data-target="  #collapseExample" aria-expanded="false" aria-controls="collapseExample" value="Add Tags">
+            <input  class="form-control btn-sm btn btn-primary add-tags" type="button" data-toggle="collapse" data-target="  #collapseExample" aria-expanded="false" aria-controls="collapseExample" value="Add Tags">
           </div>
         </div>
       </div>
@@ -373,9 +359,15 @@ $location= 'post';
 
 @endforelse
 
+<form>
+<div class="row">
+<div class="col-12">
+  
+</div>
+</div>
+</form>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-
 <script src="https://cdn.quilljs.com/1.3.4/quill.js"></script>
 <!-- Convert to markdown script -->
 <script src="https://unpkg.com/turndown/dist/turndown.js"></script>
@@ -383,164 +375,9 @@ $location= 'post';
 <!-- convert to markdown script ends -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-<script type="text/javascript">
-let j = jQuery.noConflict();
-  var toolbarOptions = [
-    ['bold', 'italic'],
-    ['blockquote'],
-    [{
-      'list': 'ordered'
-    }, {
-      'list': 'bullet'
-    }],
-    [{
-      'header': [1, 2, 3, 4, 5, 6, false]
-    }],
-    ['link', 'image'],
-    ['clean']
-  ];
-
-  var quill = new Quill('#editor', {
-    theme: 'snow',
-    modules: {
-      toolbar: toolbarOptions
-    },
-    placeholder: 'Compose an epic...'
-  });
-  j(".ql-toolbar").css("display", "block");
-
-  var form = document.querySelector('.timeline-editor');
-
-  // handle creating new post
-  form.onsubmit = newPostSubmitHandler;
-
-  // handle saving draft
-  document.querySelector('input[value="Save Draft"]').addEventListener('click', newPostSubmitHandler);
-
-  function newPostSubmitHandler(event) {
-    event.preventDefault();
-    let currentPage = window.localStorage.getItem('page');
-    const formData = new FormData(document.querySelector('#editor-form'));
-    const blogBody = document.querySelector('.ql-editor').innerHTML;
-
-
-
-
-    const title = document.querySelector("#new-post-title").value;
-
-
-    // convert to markdown
-    const turndownService = new TurndownService({
-      codeBlockStyle: 'fenced'
-    });
-    const gfm = turndownPluginGfm.gfm;
-    turndownService.use(gfm);
-    let markdown = turndownService.turndown(blogBody);
-    if (markdown !== "" && title !== "") {
-      formData.set('title', title);
-      // check if the form is being submitted
-      // which would mean a new post is being created rather than saving a draft
-      const newPostIsBeingCreated = event.target instanceof HTMLFormElement;
-
-      // get all imageURIs in the document
-      let imageURIs = markdown.match(/\!\[\]\(data:image\/\w+;base64,[^)]*\)/g);
-      // are there images in the blog post?
-      if (imageURIs) {
-        // remove duplicates
-        imageURIs = imageURIs.reduce((acc, curVal) => {
-          if (!acc.includes(curVal)) acc.push(curVal);
-          return acc;
-        }, []);
-
-
-
-        imageURIs.forEach(imageURI => {
-          const [, fullURI, ext, uriData] = imageURI.match(/\!\[\]\((data:image\/(\w+);base64,([^)]*))\)/);
-          const id = Math.random().toString(36).substr(2, 10);
-          const newImgName = `img-${id}.${ext}`;
-
-
-          // replace the image URI everywhere it occurs in the markdown
-          let stillMatching = true;
-          while (stillMatching) {
-            if (markdown.includes(fullURI)) {
-              markdown = markdown.replace(fullURI, `/storage/{{$user->username}}/images/${newImgName}`);
-            } else {
-              stillMatching = false;
-            }
-          }
-
-          // add this info to the form data being sent to the backend
-          formData.set(newImgName, uriData);
-        });
-
-      }
-
-
-      formData.set('postVal', markdown);
-
-
-      // get tags
-      const selected = document.querySelectorAll('.tags:checked');
-      const selectedTags = Array.from(selected).map(el => el.value);
-      console.log(selectedTags);
-      formData.set('tags', selectedTags);
-
-      // send the form data
-
-      j.ajaxSetup({
-          headers: {
-              'X-CSRF-TOKEN': j('meta[name="csrf-token"]').attr('content')
-          }
-      });
-
-      j.ajax({
-            type: "POST",
-            dataType:'json',
-            url : "publish",
-            data:formData,
-            contentType: false,
-            processData: false,
-            success : function (res) {
-              console.log(JSON.stringify(res));
-
-                if (res.error == false && res.action == 'publish') {
-                  window.localStorage.setItem('publish', 'success');
-                  window.location = '/{{$user->username}}/posts';
-
-                } else if (res.error == false && res.action == 'savedToDrafts') {
-                  window.localStorage.setItem('savedToDrafts', 'success');
-                  window.location = '/{{$user->username}}/posts';
-                }
-            }
-        });
-
-    } else {
-      swal({
-        text: "Sorry,both fields are required!",
-        icon: "error",
-      });
-    }
-  }
-
-  j(document).ready(function() {
-    const published = window.localStorage.getItem('publish');
-    const savedToDrafts = window.localStorage.getItem('savedToDrafts');
-    if (published == 'success') {
-      window.localStorage.removeItem('publish');
-      swal({
-        text: "Your post was successfully created!",
-        icon: "success",
-      });
-    } else if (savedToDrafts == 'success') {
-      window.localStorage.removeItem('savedToDrafts');
-      swal({
-        text: "Your post was successfully created and saved to drafts!",
-        icon: "success",
-      });
-    }
-  });
-</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/bootstrap-tokenfield.min.js"></script>
+<script src="{{ asset('js/posts.js') }}" type="text/javascript"></script>
 
 @endsection

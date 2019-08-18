@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="{{ asset('css/main-style.css') }}" />
   <link rel="short icon" type="image/png" sizes="16x16" href="{{ asset('img/luci-logo.png') }}">
-  <title>Are you lost?</title>
+  <title>Page under construction</title>
   <style>
     body{
       text-align: center;
@@ -25,6 +25,9 @@
       display: inline-block;
       text-decoration: none;
     }
+    p {
+      font-size: 1.2rem;
+    }
     @media screen and (max-width: 425px){
       img{
         width: 250px;
@@ -34,10 +37,10 @@
 </head>
 <body>
     <main class="container">
-      <h2>Something's not right</h2>
-      <img src="{{ asset('img/404-space-ship.svg') }}" alt="space ship image">
-      <p>It seems the aliens have taken this page..</p>
-      <a href="javascript: history.go(-1)">Click this button to return home</a>
+      <h2>I see you’ve found an incomplete page </h2>
+      <img src="{{ asset('img/under-construction.svg') }}" alt="illustration of construction workers">
+      <p>The team is working round the clock to get all pages up, do come back some time.</p>
+      <a href="javascript: history.go(-1)">Click this button to return</a>
     </main>
 </body>
 </html>

@@ -78,6 +78,10 @@ class Document
 
         }
 
+        if( $tag !== "") {
+            $yamlfile['tags'] = $tag;
+        }
+
         if (!$extra) {
             $yamlfile['post_dir'] =$this->file."/contents/{$unix}";
         } else {
@@ -101,6 +105,8 @@ class Document
         }elseif($postType == "micro-blog") {
             $dir = $file .'/content/micro-blog-posts/'. $unix . ".md";
         }
+
+        
 
 
         //return $dir; die();

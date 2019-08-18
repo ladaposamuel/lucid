@@ -15,10 +15,11 @@ class SendEmailController extends Controller
         if(!isset($user_exists[0])) {
             return '===404===';
         }
+        $user_email = DB::table('contact_settings')->where('user_id',$user_exists[0]->id)->first();
 
         $validator=Validator::make($request->all(),[
             'name' => 'required',
-            'email' => 'required|email|max:255|regex:/(.*)@myemail\.com/i|unique:users',
+            'email' => 'required|email',
             'message'=>'required'
         ]);
 
@@ -32,8 +33,13 @@ class SendEmailController extends Controller
             'message'=>$request->message
         ];
 
-        Mail::to($user_exists[0]->email)->send(new SendMail($data));
+        if(!empty($user_email->email)){
+            Mail::to($user_email->email)->send(new SendMail($data));
+        }else{
+            Mail::to($user_exists[0]->email)->send(new SendMail($data));
+        }
+        
 
-        return response()->json(['success'=>'Thanks For The Feed Back!'],200);
+        return response()->json(['success'=>'Thanks For The Feed Back! '],200);
     }
 }
