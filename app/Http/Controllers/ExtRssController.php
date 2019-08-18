@@ -32,7 +32,7 @@ class ExtRssController extends Controller
           $feed = $data->extract($rss);
           // print_r($feed);
 
-     return redirect($username.'/')->with('rss', 'You have subscribed to '.$request.' channel' );
+     return back()->with('rss', 'You have subscribed to '.$request.' channel' );
 
   }
   public function addExtRss(Request $request)
@@ -46,7 +46,7 @@ class ExtRssController extends Controller
           $feed = $data->extractPub($rss);
           print_r($feed);
 
-     return redirect($username.'/microblog')->with('rss', 'You have subscribed to '.$request.' channel' );
+     return back()->with('rss', 'You have subscribed to '.$request.' channel' );
 
   }
   public function unfollow(Request $request)
@@ -59,9 +59,9 @@ class ExtRssController extends Controller
     $data = new \Lucid\Core\Subscribe($username);
           $feed = $data->unfollow($rss);
           if ($feed == 1) {
-            return redirect($username)->with('UnFollow', 'You have successfully unfollowed '.$request);
+            return back()->with('UnFollow', 'You have successfully unfollowed '.$request);
           }else {
-            return redirect($username)->with('UnFollow', 'there was an error unfollowing '.$request);
+           return back()->with('UnFollow', 'there was an error unfollowing '.$request);
 
           }
 
