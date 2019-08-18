@@ -10,7 +10,7 @@
   <meta name="username" content="{{ Auth::user()->username }}">
   @endauth
   <!-- <title>{{ config('app.name', 'Lucid') }}</title> -->
-  <title>@yield('title') - Lucid</title>
+  <title>@yield('title')</title>
   <link rel="short icon" type="image/png" sizes="16x16" href="{{ asset('img/luci-logo.png') }}">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap" rel="stylesheet" />
@@ -34,7 +34,7 @@
         <a href="/{{ $user->username}}" class="no-decoration changeHref">
           <h3 id="user-name" class="pt-2">{{ $user->name}}</h3>
         </a>
-        
+
           @if(Auth::user() && Auth::user()->username == $user->username && $user->short_bio =="")
           <p id="user-bio" class="pb-2" style="color:#a9a9a9;">
           You haven't set up a short bio about yourself, do that <a href="/{{ $user->username}}/settings" id="onSettingsPage">here</a>
@@ -44,20 +44,21 @@
           {{ $user->short_bio }}
           </p>
           @endif
-       
+
 
         <div class="divider"></div>
 
         <div class="sidebar-nav pt-2">
           <ul>
             @if(Auth::user() && Auth::user()->username == $user->username)
-            <li><a class="changeHref" href="/{{ $user->username}}/posts">Posts</a></li>
+
+            <li><a class="@if($location == "post") active-nav @endif changeHref" href="/{{ $user->username}}/posts">Posts</a></li>
           @else
-            <li><a class="changeHref" href="/{{ $user->username}}">Posts</a></li>
+            <li><a class="@if($location == "post") active-nav @endif changeHref" href="/{{ $user->username}}">Posts</a></li>
             @endif
-            <li><a class="changeHref" href="/{{ $user->username}}/thoughts">Thoughts</a></li>
-            <li><a class="changeHref" href="{{ route('under-construction') }}">Videos</a></li>
-            <li><a class="changeHref" href="/{{ $user->username}}/contact">Contact</a></li>
+            <li><a class="@if($location == "thoughts") active-nav @endif changeHref" href="/{{ $user->username}}/thoughts">Thoughts</a></li>
+            <li><a class="@if($location == "video") active-nav @endif changeHref" href="#">Videos</a></li>
+            <li><a class="@if($location == "contact") active-nav @endif changeHref" href="/{{ $user->username}}/contact">Contact</a></li>
           </ul>
         </div>
         @if(Auth::user() && Auth::user()->username == $user->username)
@@ -125,17 +126,17 @@
 
         <div class="user-stats text-center mt-3 pb-0">
           <div class="d-inline-block">
-            @if (empty($fcount))
+            @if (empty($count))
             <a href="/{{$user->username}}/following" class="pr-2 changeHref">0 <br /> <small class="text-muted">Following</small></a>
             @else
-            <a href="/{{$user->username}}/following" class="pr-2 changeHref">{{$fcount}} <br /> <small class="text-muted">Following</small></a>
+            <a href="/{{$user->username}}/following" class="pr-2 changeHref">{{$count}} <br /> <small class="text-muted">Following</small></a>
             @endif
           </div>
           <div class="d-inline-block">
-            @if (empty($count))
+            @if (empty($fcount))
             <a href="/{{$user->username}}/followers" class="changeHref">0 <br /> <small class="text-muted">Followers</small></a>
             @else
-            <a href="/{{$user->username}}/followers" class="changeHref">{{$count}} <br /> <small class="text-muted">Followers</small></a>
+            <a href="/{{$user->username}}/followers" class="changeHref">{{$fcount}} <br /> <small class="text-muted">Followers</small></a>
             @endif
           </div>
           <div class="mt-3">
@@ -202,7 +203,7 @@
     history.pushState(null, null, `/${document.getElementById("username").value+'/'+e}`)
   }
   </script>
-  
+
 </body>
 
 </html>

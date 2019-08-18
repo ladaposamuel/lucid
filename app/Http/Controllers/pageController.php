@@ -23,7 +23,7 @@ class pageController extends Controller
         }
         $user = $this->user($username);
 
-        if(Auth::user() && Auth::user()->username ==$username){
+        if(Auth::user() && Auth::user()->username == $username){
                 $user = Auth::user();
                 $username = $user->username;
 
@@ -32,42 +32,24 @@ class pageController extends Controller
                 $follower = $post->subscriber();
                 $post = $post->Feeds();
             //$post =[];
-                $count = new \Lucid\Core\Subscribe($username);
-                $fcount = $count->fcount();
-                $count = new \Lucid\Core\Subscribe($username);
-
-
-                $fcount =$count->fcount();
+                $sub = new \Lucid\Core\Subscribe($username);
+                $fcount = $sub->myfollowercount();
                 if (!empty($fcount)) {
                     $fcount = count($fcount);
-                  }
-                  else {
+                  }else {
                     $fcount = "";
                   }
-          //      dd($count->count());
-                $title = [];
-                if (!is_null($count->count())) {
+                $fcheck = $sub->followCheck($user->name);
 
-                foreach($count->count() as $key => $fuser){
-                $title['name'] = $fuser['title'];
-                //array_push($title , $title);
-              }
-
-        }
-
-                if (in_array($user->name, $title)) {
-                  $fcheck = "yes";
-                }else {
-                  $fcheck = "no";
-                }
-              //  $data  = $count->count();
-                $count = $count->count();
+                $count = $sub->count();
                 if (!empty($count)) {
-                    $count = count($count);
-                  }
-                  else {
-                    $count = "";
-                  }
+                  $count = count($count);
+                }
+                else {
+                  $count = "";
+                }
+
+
   //dd($fcheck);
                 return view('timeline', ['posts' => $post,'fcheck' => $fcheck,'user'=>$user,'fcount'=>$fcount, 'count' => $count, 'following' => $following, 'follower' => $follower]);
 
@@ -75,59 +57,40 @@ class pageController extends Controller
 
 
             $app = new \Lucid\Core\Document($username);
-            $feed =$app->fetchRss();
+            $feed =$app->Feeds();
 
-            $count = new \Lucid\Core\Subscribe($username);
-
-
-            $fcount =$count->fcount();
+            // follower and following Count
+            $sub = new \Lucid\Core\Subscribe($username);
+            $fcount =$sub->myfollowercount();
+            $count = $sub->count();
+            //dd($fcount);
             if (!empty($fcount)) {
                 $fcount = count($fcount);
-              }
-              else {
+              }else {
                 $fcount = "";
               }
-
-        //    dd($count->count());
-
-
-if(Auth::user()){
-  $check = new \Lucid\Core\Subscribe(Auth::user()->username);
-  $title = [];
-  if (!is_null($check->fcount())) {
-
-  foreach($check->fcount() as $key => $fuser){
-//  $title = $fuser['title'];
-  array_push($title , $fuser['title']);
-}
-
-            if (in_array($user->name, $title)) {
-              $fcheck = "yes";
-            }else {
-              $fcheck = "no";
-            }
-          }else {
-            $fcheck = "no";
-          }
-        //  dd($check->fcount());
-        }
-          else {
-            $fcheck = "no";
-          }
-        //  dd($fcheck);
-          //  $data  = $count->count();
-            $count = $count->count();
-            if (!empty($count)) {
+              if (!empty($count)) {
                 $count = count($count);
-              }
-              else {
+              }else {
                 $count = "";
               }
-            $follower = $app->subscription();
 
-             $userposts=$app->get('posts');
 
-             return view('home', ['posts' => $feed,'user'=>$user,'fcheck' => $fcheck,'fcount'=>$fcount, 'count' => $count,"userposts"=>$userposts]);
+              //User Follower checker
+              if(Auth::user()){
+                $check = new \Lucid\Core\Subscribe(Auth::user()->username);
+                $fcheck = $check->followCheck($user->name);
+              }
+              else {
+                $fcheck = "no";
+              }
+            //  $follower = $app->subscription();
+               //dd($follower);
+
+              $userposts=$app->get('posts');
+
+              return view('home', ['posts' => $feed,'user'=>$user,'fcheck' => $fcheck,'fcount'=>$fcount, 'count' => $count,"userposts"=>$userposts]);
+
         }
 
 
@@ -145,47 +108,32 @@ if(Auth::user()){
             return redirect('/'.$username.'/home');
         }
 
-        $count = new \Lucid\Core\Subscribe($username);
-
-
-        $fcount =$count->fcount();
+        // follower and following Count
+        $sub = new \Lucid\Core\Subscribe($username);
+        $fcount =$sub->myfollowercount();
+        $count = $sub->count();
+        //dd($fcount);
         if (!empty($fcount)) {
             $fcount = count($fcount);
-          }
-          else {
+          }else {
             $fcount = "";
           }
-          if(Auth::user()){
-            $check = new \Lucid\Core\Subscribe(Auth::user()->username);
-            $title = [];
-            if (!is_null($check->fcount())) {
-
-            foreach($check->fcount() as $key => $fuser){
-          //  $title = $fuser['title'];
-            array_push($title , $fuser['title']);
-          }
-
-                      if (in_array($user->name, $title)) {
-                        $fcheck = "yes";
-                      }else {
-                        $fcheck = "no";
-                      }
-                    }else {
-                      $fcheck = "no";
-                    }
-                  //  dd($check->fcount());
-                  }
-                    else {
-                      $fcheck = "no";
-                    }
-
-        $count = $count->count();
-        if (!empty($count)) {
+          if (!empty($count)) {
             $count = count($count);
-          }
-          else {
+          }else {
             $count = "";
           }
+
+
+          //User Follower checker
+          if(Auth::user()){
+            $check = new \Lucid\Core\Subscribe(Auth::user()->username);
+            $fcheck = $check->followCheck($user->name);
+          }
+          else {
+            $fcheck = "no";
+          }
+
         return view('single-blog-post',compact('post','user'),['fcheck' => $fcheck, 'fcount'=>$fcount, 'count' => $count ]);
     }
 
@@ -199,49 +147,32 @@ if(Auth::user()){
             $user = $this->user($username);
             $app  = new \Lucid\Core\Document($username);
             $posts=$app->get('posts');
-            $count = new \Lucid\Core\Subscribe($username);
-
-
-            $fcount =$count->fcount();
+            // follower and following Count
+            $sub = new \Lucid\Core\Subscribe($username);
+            $fcount =$sub->myfollowercount();
+            $count = $sub->count();
+            //dd($fcount);
             if (!empty($fcount)) {
                 $fcount = count($fcount);
-              }
-              else {
+              }else {
                 $fcount = "";
               }
-            //dd($count->count());
-            if(Auth::user()){
-              $check = new \Lucid\Core\Subscribe(Auth::user()->username);
-              $title = [];
-              if (!is_null($check->fcount())) {
-
-              foreach($check->fcount() as $key => $fuser){
-            //  $title = $fuser['title'];
-              array_push($title , $fuser['title']);
-            }
-
-                        if (in_array($user->name, $title)) {
-                          $fcheck = "yes";
-                        }else {
-                          $fcheck = "no";
-                        }
-                      }else {
-                        $fcheck = "no";
-                      }
-                    //  dd($check->fcount());
-                    }
-                      else {
-                        $fcheck = "no";
-                      }
-
-          //  $data  = $count->count();
-            $count = $count->count();
-            if (!empty($count)) {
+              if (!empty($count)) {
                 $count = count($count);
-              }
-              else {
+              }else {
                 $count = "";
               }
+
+
+              //User Follower checker
+              if(Auth::user()){
+                $check = new \Lucid\Core\Subscribe(Auth::user()->username);
+                $fcheck = $check->followCheck($user->name);
+              }
+              else {
+                $fcheck = "no";
+              }
+
             return view('post',compact('user','posts'), ['fcheck' => $fcheck, 'fcount'=>$fcount, 'count' => $count ]);
         }else {
             return redirect('/'.$username);
@@ -255,49 +186,33 @@ if(Auth::user()){
         }
 
         $user = $this->user($username);
-        $count = new \Lucid\Core\Subscribe($username);
-
-
-        $fcount =$count->fcount();
+        // follower and following Count
+        $sub = new \Lucid\Core\Subscribe($username);
+        $fcount =$sub->myfollowercount();
+        $count = $sub->count();
+        //dd($fcount);
         if (!empty($fcount)) {
             $fcount = count($fcount);
-          }
-          else {
+          }else {
             $fcount = "";
           }
-          if(Auth::user()){
-            $check = new \Lucid\Core\Subscribe(Auth::user()->username);
-            $title = [];
-            if (!is_null($check->fcount())) {
-
-            foreach($check->fcount() as $key => $fuser){
-          //  $title = $fuser['title'];
-            array_push($title , $fuser['title']);
-          }
-
-                      if (in_array($user->name, $title)) {
-                        $fcheck = "yes";
-                      }else {
-                        $fcheck = "no";
-                      }
-                    }else {
-                      $fcheck = "no";
-                    }
-                  //  dd($check->fcount());
-                  }
-                    else {
-                      $fcheck = "no";
-                    }
-
-        $count = $count->count();
-        if (!empty($count)) {
+          if (!empty($count)) {
             $count = count($count);
-          }
-          else {
+          }else {
             $count = "";
           }
 
-          
+
+          //User Follower checker
+          if(Auth::user()){
+            $check = new \Lucid\Core\Subscribe(Auth::user()->username);
+            $fcheck = $check->followCheck($user->name);
+          }
+          else {
+            $fcheck = "no";
+          }
+
+
 
         $contact = DB::table('contact_settings')->where('user_id',$user->id)->first();
 
@@ -316,48 +231,32 @@ if(Auth::user()){
       $user = $this->user($username);
       $post = new \Lucid\Core\Document($username);
       $post = $post->get('micro-blog-posts');
-      $count = new \Lucid\Core\Subscribe($username);
-
-
-      $fcount =$count->fcount();
+      // follower and following Count
+      $sub = new \Lucid\Core\Subscribe($username);
+      $fcount =$sub->myfollowercount();
+      $count = $sub->count();
+      //dd($fcount);
       if (!empty($fcount)) {
           $fcount = count($fcount);
-        }
-        else {
+        }else {
           $fcount = "";
         }
-      //dd($count->count());
-      if(Auth::user()){
-        $check = new \Lucid\Core\Subscribe(Auth::user()->username);
-        $title = [];
-        if (!is_null($check->fcount())) {
-
-        foreach($check->fcount() as $key => $fuser){
-      //  $title = $fuser['title'];
-        array_push($title , $fuser['title']);
-      }
-
-                  if (in_array($user->name, $title)) {
-                    $fcheck = "yes";
-                  }else {
-                    $fcheck = "no";
-                  }
-                }else {
-                  $fcheck = "no";
-                }
-              //  dd($check->fcount());
-              }
-                else {
-                  $fcheck = "no";
-                }
-    //  $data  = $count->count();
-      $count = $count->count();
-      if (!empty($count)) {
+        if (!empty($count)) {
           $count = count($count);
-        }
-        else {
+        }else {
           $count = "";
         }
+
+
+        //User Follower checker
+        if(Auth::user()){
+          $check = new \Lucid\Core\Subscribe(Auth::user()->username);
+          $fcheck = $check->followCheck($user->name);
+        }
+        else {
+          $fcheck = "no";
+        }
+
       return view('thoughts', ['fcheck' => $fcheck,'posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count]);
 
     }
@@ -372,53 +271,44 @@ if(Auth::user()){
               $following = $post->subscription();
               $follower = $post->subscriber();
               $post = $post->fetchAllRss();
-              $count = new \Lucid\Core\Subscribe($username);
-            //  dd($following);
-              $fcount = $count->fcount();
-              $count = new \Lucid\Core\Subscribe($username);
-
-
-             $fcount =$count->fcount();
+              // follower and following Count
+              $sub = new \Lucid\Core\Subscribe($username);
+              $fcount =$sub->myfollowercount();
+              $count = $sub->count();
+              //dd($fcount);
               if (!empty($fcount)) {
                   $fcount = count($fcount);
-                }
-                else {
+                }else {
                   $fcount = "";
                 }
-              //dd($count->count());
-              if(Auth::user()){
-                $check = new \Lucid\Core\Subscribe(Auth::user()->username);
-                $title = [];
-                if (!is_null($check->fcount())) {
-
-                foreach($check->fcount() as $key => $fuser){
-              //  $title = $fuser['title'];
-                array_push($title , $fuser['title']);
-              }
-
-                          if (in_array($user->name, $title)) {
-                            $fcheck = "yes";
-                          }else {
-                            $fcheck = "no";
-                          }
-                        }else {
-                          $fcheck = "no";
-                        }
-                      //  dd($check->fcount());
-                      }
-                        else {
-                          $fcheck = "no";
-                        }
-
-            //  $data  = $count->count();
-              $count = $count->count();
-              if (!empty($count)) {
+                if (!empty($count)) {
                   $count = count($count);
-                }
-                else {
+                }else {
                   $count = "";
                 }
-      return view('follow-details', ['fcheck' => $fcheck,'posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count, 'following' => $following, 'follower' => $follower]);
+
+
+                //User Follower checker
+                if(Auth::user()){
+                  $check = new \Lucid\Core\Subscribe(Auth::user()->username);
+                  $fcheck = $check->followCheck($user->name);
+                    $myfollower = $check->followerArray();
+                //    dd($myfollower);
+                }
+                else {
+                  $fcheck = "no";
+                }
+
+      return view('follow-details', [
+        'fcheck' => $fcheck,
+        'posts' => $post,
+        'user'=>$user,
+        'fcount'=>$fcount,
+        'count' => $count,
+        'following' => $following,
+        'follower' => $follower,
+        'followerArray' =>$myfollower
+      ]);
     }
 
     public function followers($username) {
@@ -431,53 +321,44 @@ if(Auth::user()){
                 $following = $post->subscription();
                 $follower = $post->subscriber();
                 $post = $post->fetchAllRss();
-                $count = new \Lucid\Core\Subscribe($username);
-                $fcount = $count->fcount();
-                $count = new \Lucid\Core\Subscribe($username);
-
-
-                $fcount =$count->fcount();
+                // follower and following Count
+                $sub = new \Lucid\Core\Subscribe($username);
+                $fcount =$sub->myfollowercount();
+                $count = $sub->count();
+                //dd($fcount);
                 if (!empty($fcount)) {
                     $fcount = count($fcount);
-                  }
-                  else {
+                  }else {
                     $fcount = "";
                   }
-                //dd($count->count());
-                if(Auth::user()){
-                  $check = new \Lucid\Core\Subscribe(Auth::user()->username);
-                  $title = [];
-                  if (!is_null($check->fcount())) {
-
-                  foreach($check->fcount() as $key => $fuser){
-                //  $title = $fuser['title'];
-                  array_push($title , $fuser['title']);
-                }
-
-                            if (in_array($user->name, $title)) {
-                              $fcheck = "yes";
-                            }else {
-                              $fcheck = "no";
-                            }
-                          }else {
-                            $fcheck = "no";
-                          }
-                        //  dd($check->fcount());
-                        }
-                          else {
-                            $fcheck = "no";
-                          }
-
-              //  $data  = $count->count();
-                $count = $count->count();
-                if (!empty($count)) {
+                  if (!empty($count)) {
                     $count = count($count);
-                  }
-                  else {
+                  }else {
                     $count = "";
                   }
 
-      return view('follow-details', ['fcheck' => $fcheck,'posts' => $post,'user'=>$user,'fcount'=>$fcount, 'count' => $count, 'following' => $following, 'follower' => $follower]);
+
+                  //User Follower checker
+                  if(Auth::user()){
+                    $check = new \Lucid\Core\Subscribe(Auth::user()->username);
+                    $fcheck = $check->followCheck($user->name);
+                    $myfollower = $check->followerArray();
+//dd($myfollower);
+                  }
+                  else {
+                    $fcheck = "no";
+                  }
+
+      return view('follow-details', [
+        'fcheck' => $fcheck,
+        'posts' => $post,
+        'user'=>$user,
+        'fcount'=>$fcount,
+        'count' => $count,
+        'following' => $following,
+        'follower' => $follower,
+        'followerArray' =>$myfollower
+      ]);
     }
 
 

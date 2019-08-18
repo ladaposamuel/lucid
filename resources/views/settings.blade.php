@@ -2,6 +2,9 @@
 @section('title')
   {{ $user->name }}
 @endsection
+@php
+$location= 'settings';
+@endphp
 @section('sidebar')
 @parent
 @endsection
@@ -27,7 +30,7 @@
 .text-danger{
   font-weight:400px !important;
   font-size:12px !important;
-  
+
 }
 </style>
 <!-- beginning of settings page -->
@@ -89,7 +92,7 @@
                 <input type="file" name="profileimage" id="profileimage" class="form-control-file" accept=".png,.jpg" style="display:none">
 
                 <label class="text-muted form-control p-2 w-100" for="profileimage" style="cursor:pointer">Choose file</label>
-                
+
                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}"/>
                 <span class="text-danger" id="imgError" style="display:none;"></span>
               </div>

@@ -2,6 +2,10 @@
 @section('title')
   {{ $user->name }}
 @endsection
+@php
+$location= 'post';
+@endphp
+
 @section('sidebar')
 @parent
 
@@ -327,7 +331,7 @@
       <a class="no-decoration text-dark" href="post/{{$post['slug']}}">{!! $post['title'] !!}</a>
     </h3>
     <p class="post-body">
-      
+
       @php
         echo  strip_tags($post['body'])
       @endphp

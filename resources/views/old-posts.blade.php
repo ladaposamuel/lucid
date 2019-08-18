@@ -1,4 +1,7 @@
 @extends('layouts.lucid')
+@php
+$location= 'old-post';
+@endphp
 @section('sidebar')
 @parent
 
