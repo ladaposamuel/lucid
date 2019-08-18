@@ -236,14 +236,13 @@ public function extract($url)
     }
   public function unfollow($del)
   {
-    $user = Auth::user();
+$fuser= DB::table('users')->where('username', $del)->get('name')->first();
 
-//$file= ext_rss::select('select * from users where user_id = :user_id and title = :title', [
-//  "user_id" => $user->id,
-  //"title" => $del]);
+$user = Auth::user();
 
-  $file= DB::table('ext_rsses')->where('user_id', $user->id)->where('title', $del)->delete();
+  $file= DB::table('ext_rsses')->where('user_id', $user->id)->where('title', $fuser->name)->delete();
 
+  //dd($file);
 return $file;
 
   }

@@ -61,7 +61,7 @@ class ExtRssController extends Controller
           if ($feed == 1) {
             return back()->with('UnFollow', 'You have successfully unfollowed '.$request);
           }else {
-            return back()->with('UnFollow', 'there was an error unfollowing '.$request);
+           return back()->with('UnFollow', 'there was an error unfollowing '.$request);
 
           }
 
