@@ -2,6 +2,9 @@
 @section('title')
   {{ $user->name }}
 @endsection
+@php
+$location= 'contact';
+@endphp
 @section('sidebar')
 @parent
 @endsection
@@ -38,7 +41,7 @@
         </div>
         <div class="form-group mt-4">
         <label for="message">Message</label>
-        
+
         <textarea name="message" id="message" rows="5" class="form-control" placeholder="Enter Message"></textarea>
         <span class="text-danger" id="msgError" style="display:none;"></span>
         <button type="submit" name="sendMail" class="btn bg-alt text-white col-sm-12 col-md-3 mt-5">Send Message</button>
@@ -78,7 +81,7 @@
     contactForm.onsubmit = document.querySelector('button[name="sendMail"]').addEventListener('click', function(event){
     event.preventDefault();
     const ContactFormData = new FormData(document.querySelector('#formFields'));
-    
+
 
       j.ajaxSetup({
             headers: {
@@ -148,7 +151,7 @@
               }
             }
         });
-    
+
 
   });
 </script>

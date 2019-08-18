@@ -3,10 +3,13 @@
   @if(Auth::user() && Auth::user()->username == $user->username)
 Thoughts / Lucid
   @else
-  
+
 {{ $user->name }} (@ {{ $user->username }}) / Lucid
   @endif
 @endsection
+@php
+$location= 'thoughts';
+@endphp
 @section('sidebar')
 @parent
 

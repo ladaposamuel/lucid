@@ -2,6 +2,9 @@
 @section('title')
 {{ $user->name }}
 @endsection
+@php
+$location= 'follow';
+@endphp
 @section('sidebar')
 @parent
 @endsection

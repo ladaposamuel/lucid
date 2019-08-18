@@ -1,6 +1,13 @@
 @extends('layouts.lucid')
 @section('title')
-  {{ $post['title'] }} - {{ $user->name }}
+@if(Auth::user() && Auth::user()->username == $user->username)
+{{ $post['title'] }}  / Lucid
+@else
+{{ $post['title'] }} / {{ $user->name }} (@ {{ $user->username }})
+@endif
+@php
+$location= 'singlePost';
+@endphp
 @endsection
 @section('sidebar')
 @parent
@@ -19,7 +26,7 @@
         <h3 class="post-title mb-1">
          {{ $post['title'] }}
         </h3>
-        
+
         <div class="blog-content">
             {!! $post['body'] !!}
         </div>

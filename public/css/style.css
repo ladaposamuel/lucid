@@ -91,6 +91,11 @@ body {
 	background: var(--main-color);
 	border-radius: 5px;
 }
+.active-nav {
+	color: #ffffff !important;
+	background: var(--main-color);
+	border-radius: 5px;
+}
 
 .follow-me {
 	padding-top: 50px;

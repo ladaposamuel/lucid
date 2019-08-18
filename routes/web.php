@@ -41,7 +41,7 @@ Route::post('login', 'LoginController@do')->name('login');
 
 Route::prefix('{username}')->group(function () {
 
-  
+
     Route::get('/contact', 'pageController@contact');
     Route::get('/post/{postTitle}','pageController@singlePostPage');
     Route::get('/','pageController@homePage');
