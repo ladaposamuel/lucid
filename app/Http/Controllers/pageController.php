@@ -335,7 +335,7 @@ class pageController extends Controller
                   }else {
                     $count = "";
                   }
-
+//dd($following);
 
                   //User Follower checker
                   if(Auth::user()){
