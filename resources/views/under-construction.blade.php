@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="{{ asset('css/main-style.css') }}" />
   <link rel="short icon" type="image/png" sizes="16x16" href="{{ asset('img/luci-logo.png') }}">
-  <title>Page under construction</title>
+  <title>Page under construction - Lucid</title>
   <style>
     body{
       text-align: center;

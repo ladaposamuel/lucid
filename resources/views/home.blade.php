@@ -1,6 +1,6 @@
 @extends('layouts.lucid')
 @section('title')
-  {{ $user->name }}
+  {{ $user->name }} - Lucid
 @endsection
 @php
 $location= 'home';

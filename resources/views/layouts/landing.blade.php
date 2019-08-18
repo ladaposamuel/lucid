@@ -17,6 +17,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="description"
     content="Welcome to the most private content sharing platform We built Lucid on the premise that ownership and privacy is about respect and that it is your right.">
   <meta name="robots" content="index, nofollow">
