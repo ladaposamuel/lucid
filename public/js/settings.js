@@ -19,8 +19,11 @@ let j = jQuery.noConflict();
     })
 
     hereLinkOnSettingsPage = document.querySelector('#onSettingsPage');
-    hereLinkOnSettingsPage.style.color="#a9a9a9";
-    hereLinkOnSettingsPage.removeAttribute('href');
+    if(hereLinkOnSettingsPage !=null){
+      hereLinkOnSettingsPage.style.color="#a9a9a9";
+      hereLinkOnSettingsPage.removeAttribute('href');
+    }
+    
 
     document.querySelector('button[name="update"]').addEventListener('click',function (event){
       event.preventDefault();
