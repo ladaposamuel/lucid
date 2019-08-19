@@ -1,7 +1,9 @@
 const j = jQuery.noConflict();
 
 let  editContactForm= document.querySelector('.editContactForm');
-  editContactForm.onsubmit = document.querySelector('button[name="editContactDetails"]').addEventListener('click',function (e){
+let  editBtn = document.querySelector('button[name="editContactDetails"]');
+if (editBtn !=null){
+  editContactForm.onsubmit = editBtn.addEventListener('click',function (e){
     e.preventDefault();
 
     const formData = new FormData(document.querySelector('#formFields'));
@@ -77,3 +79,6 @@ let  editContactForm= document.querySelector('.editContactForm');
 
     
   })
+
+}
+  
