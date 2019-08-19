@@ -43,10 +43,14 @@ let j = jQuery.noConflict();
             data:formData,
             contentType: false,
             processData: false,
+            beforeSend:function(){
+              document.querySelector('#preloader').setAttribute('class','preloader-active');
+            },
             success : function (response) {
-               //console.log(JSON.stringify(response));
-
+              //  console.log(JSON.stringify(response));
+               document.querySelector('#preloader').removeAttribute('class');
                 if (response.success) {
+                    
                     swal({
                       text: response.success,
                       icon: "success",
@@ -123,6 +127,9 @@ let j = jQuery.noConflict();
                     username.innerHTML = ''
                 }
               
+            },
+            error:function (){
+              document.querySelector('#preloader').removeAttribute('class');
             }
         });
 

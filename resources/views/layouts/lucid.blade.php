@@ -21,9 +21,53 @@
   <link href="https://cdn.quilljs.com/1.3.4/quill.snow.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/css/bootstrap-tokenfield.min.css">
+  <style>
+        .preloader-wrapper{
+            display: none;
+        }
+        .preloader-active .preloader-wrapper {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            position: fixed;
+            color:#871e99;
+            opacity:0.60;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+        }
+        .spinner {
+            width: 10vw;
+            height: 10vw;
+            border-radius: 50%;
+            border: 4px solid;
+            border-top-color: var(--main-color);
+            border-bottom-color: var(--main-color);
+            border-left-color: transparent;
+            border-right-color: transparent;
+            animation: rotate .5s infinite linear;
+            position: absolute;
+            top: 30%;
+            left: 42%;
+            transform: translateX(50%);
+            
+        }
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 </head>
 
-<body>
+<body id="preloader">
+<div class="preloader-wrapper">
+    <div class="spinner"></div>
+</div>
   <section id="main-content" class="container pt-0">
     <div class="row">
 

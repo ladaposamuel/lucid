@@ -27,8 +27,8 @@ Route::get('register', function () {
 Route::get('explore', function () {
     return view('explore');
 });
-Route::get('single-blog-post', function () {
-    return view('single-blog-post');
+Route::get('loader', function () {
+    return view('preloader');
 });
 Route::get('subscribe', function () {
     return view('subscribe');
