@@ -58,7 +58,7 @@
                 {{--<a href="#" class="nav-link mr-4">Features</a>--}}
             </li>
             <li class="nav-item">
-                <a href="/explore" class="nav-link mr-4">Explore</a>
+                <a href="{{route ("under-construction")}}" class="nav-link mr-4">Explore</a>
             </li>
             @guest
             <li class="nav-item">
