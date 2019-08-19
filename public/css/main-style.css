@@ -6,7 +6,7 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 h1,
@@ -41,7 +41,7 @@ header {
 .border-main {
     border-color: var(--primary-color) !important;
 }
-.dropdown-toggle::after  {
+.dropdown-toggle::after {
     margin-left: -5px !important;
 }
 .login-div {
@@ -49,15 +49,15 @@ header {
     width: 40%;
 }
 .post-editor {
-	height: 4em; 
-	border: none; 
-	outline: none;
+    height: 4em;
+    border: none;
+    outline: none;
 }
 .post-editor:focus {
-	outline: none;
+    outline: none;
 }
 .no-decoration {
-	text-decoration: none !important; 
+    text-decoration: none !important;
 }
 .no-decoration:hover {
     text-decoration: none !important;
@@ -73,12 +73,12 @@ header {
     overflow: hidden;
 }
 .img-thumb {
-	border-radius: 50%;
-	padding: 0 !important;
-	width: 55px;
-	height: 55px;
-	object-fit: cover;
-	display: block;
+    border-radius: 50%;
+    padding: 0 !important;
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+    display: block;
 }
 .nav-link:hover,
 .nav-link.active {
@@ -139,11 +139,11 @@ a.navbar-btn.btn.btn-primary {
     color: var(--secondary-color);
     border-bottom: 2px solid var(--secondary-color);
 }
-.page-tab button[type='submit'] {
+.page-tab button[type="submit"] {
     color: #ffffff;
     background-color: var(--secondary-color);
 }
-.page-tab button[type='submit']:hover {
+.page-tab button[type="submit"]:hover {
     color: #ffffff;
 }
 /* ends here */
@@ -162,7 +162,11 @@ a.navbar-btn.btn.btn-primary {
 
 .preview-section {
     background: rgb(255, 255, 255);
-    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 50%, rgba(145, 121, 239, 1) 50%);
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 1) 50%,
+        rgba(145, 121, 239, 1) 50%
+    );
 }
 
 .lucid-laptop {
@@ -357,7 +361,31 @@ ul.footer-links li a {
     background-color: #000000;
 }
 
+.blog-content img {
+    width: 100%;
+}
 
-.blog-content img{
-    width:100%;
+/* Styles to toggle sidebar on mobile */
+.active-sidebar {
+    display: block !important; 
+    height: 100vh !important;
+    position: absolute;
+    z-index: 1000 !important;
+    background: white !important;
+  }
+  .overlay {
+  display: none;
+  position: absolute;
+  top: 0 !important;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 998;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+}
+/* display .overlay when it has the .active class */
+.overlay.active {
+  display: block;
+  opacity: 1;
 }
