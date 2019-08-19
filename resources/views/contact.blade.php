@@ -39,8 +39,30 @@ $location= 'contact';
 </style>
 
 <div class="container">
-@guest
-<h4 class="font-weight-bold mb-4">Contact Me</h4>
+    @if(Auth::user() && Auth::user()->username == $user->username)
+
+    <form class="font-weight-bold mb-0 editContactForm" autocomplete="OFF" id="formFields" action="">
+        <div class="form-group row">
+            <div class="col-sm-12 col-md-10">
+                <label for="email" class="mb-2 mr-sm-2">Contact Email</label>
+                <input type="email" class="form-control mb-2 mr-sm-2" id="email" placeholder="Enter Email" name="email"
+                value="@if($contact) {{ $contact->email   }} @else {{ Auth::user()->email }} @endif ">
+                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                <span class="text-danger" id="emailError" style="display:none;"></span>
+            </div>
+        </div>
+        <div class="form-group row mt-4">
+          <div class="col-sm-12 col-md-10">
+          <label for="message">Display Text</label>
+        <textarea name="message" id="message" rows="5" class="form-control" placeholder="Enter Display Text">@if($contact){{ $contact->display_message }}@endif</textarea>
+        <span class="text-danger" id="msgError" style="display:none;"></span>
+        <button type="submit" name="editContactDetails" id="saveBtn" class="btn bg-alt text-white col-sm-12 col-md-3 mt-5">Save</button>
+          </div>
+        </div>
+    </form>
+
+    @else
+    <h4 class="font-weight-bold mb-4">Contact Me</h4>
     <p>
         @if($contact) {{ $contact->display_message  }} @endif
     </p>
@@ -65,30 +87,8 @@ $location= 'contact';
         <button type="submit" name="sendMail" class="btn bg-alt text-white col-sm-12 col-md-3 mt-5" id="sendEmailBtn">Send Message</button>
         </div>
     </form>
-    @endguest
-    @auth
+    @endif
 
-    <form class="font-weight-bold mb-0 editContactForm" autocomplete="OFF" id="formFields" action="">
-        <div class="form-group row">
-            <div class="col-sm-12 col-md-10">
-                <label for="email" class="mb-2 mr-sm-2">Contact Email</label>
-                <input type="email" class="form-control mb-2 mr-sm-2" id="email" placeholder="Enter Email" name="email"
-                value="@if($contact) {{ $contact->email   }} @else {{ Auth::user()->email }} @endif ">
-                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                <span class="text-danger" id="emailError" style="display:none;"></span>
-            </div>
-        </div>
-        <div class="form-group row mt-4">
-          <div class="col-sm-12 col-md-10">
-          <label for="message">Display Text</label>
-        <textarea name="message" id="message" rows="5" class="form-control" placeholder="Enter Display Text">@if($contact){{ $contact->display_message }}@endif</textarea>
-        <span class="text-danger" id="msgError" style="display:none;"></span>
-        <button type="submit" name="editContactDetails" id="saveBtn" class="btn bg-alt text-white col-sm-12 col-md-3 mt-5">Save</button>
-          </div>
-        </div>
-    </form>
-
-    @endauth
 
 </div>
 <!-- End of contact page -->

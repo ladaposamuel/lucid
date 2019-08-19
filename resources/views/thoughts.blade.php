@@ -21,6 +21,12 @@ $location= 'thoughts';
     -webkit-appearance: none;
     box-shadow: none !important;
   }
+
+  .text-danger{
+  font-weight:400px !important;
+  font-size:12px !important;
+
+}
 </style>
 @if(Auth::user() && Auth::user()->username == $user->username)
 <p>Write a Post</p>
@@ -29,6 +35,9 @@ $location= 'thoughts';
   @csrf
   <div class="form-group">
     <textarea type="text" name="body" class="form-control h-25" placeholder="Tell your story"></textarea>
+    @if($errors->has('body'))
+    <span class="text-danger">Fill out this field to publish your thoughts</span>
+    @endif
   </div>
   <div class="text-right">
     <button type="submit" class="btn bg-alt text-white">Publish</button>
