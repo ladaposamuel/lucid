@@ -202,15 +202,13 @@
       <div class="col-lg-8 pb-0">
 
         <!-- Beginning of Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light pt-2 pb-2">
-          <div class="container">
+          <div class="container-fluid p-0 m-0 d-flex justify-content-between">
             <button class="btn d-lg-none" id="sidebarToggle"><i class="icon ion-md-list" style="font-size: 1.8em"></i></button>
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle pt-0" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="dropdown">
+                <a class="nav-link dropdown-toggle pt-1" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <img src="{{ asset('img/lucid-logo.png') }}" alt="The Lucid Logo" class="img-fluid" width="40px" />
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                   @guest
                   <a class="dropdown-item" href="{{ url('/login') }}">{{ __('Login') }}</a>
                   @else
@@ -222,10 +220,8 @@
 
                   @endguest
                 </div>
-              </li>
-            </ul>
+              </div>
           </div>
-        </nav>
         <!-- End of Navbar -->
 
         <!-- Beginning of Post Content -->
