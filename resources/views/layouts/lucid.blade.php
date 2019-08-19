@@ -78,6 +78,7 @@
       @section('sidebar')
       <!-- Beginning of Sidebar -->
       <div class="col-10 col-sm-4 pb-0 mb-0 pt-2 d-none d-lg-block" id="sidebar">
+      <a class="d-lg-none" id="sidebarDismiss"><i class="icon ion-md-close-circle" style="font-size: 1.8em"></i></a>
         <a href="/{{ $user->username}}" class="changeHref"><img id="user-avatar" src="{{$user->image}}" class="img-fluid" /></a>
         <a href="/{{ $user->username}}" class="no-decoration changeHref">
           <h3 id="user-name" class="pt-2">{{ $user->name}}</h3>
@@ -203,7 +204,7 @@
 
         <!-- Beginning of Navbar -->
           <div class="container-fluid p-0 m-0 d-flex justify-content-between">
-            <button class="btn d-lg-none" id="sidebarToggle"><i class="icon ion-md-list" style="font-size: 1.8em"></i></button>
+            <a class="d-lg-none" id="sidebarToggle"><i class="icon ion-md-list" style="font-size: 1.8em"></i></a>
             <div class="dropdown">
                 <a class="nav-link dropdown-toggle pt-1" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <img src="{{ asset('img/lucid-logo.png') }}" alt="The Lucid Logo" class="img-fluid" width="40px" />
@@ -261,7 +262,7 @@
     }); */
 
     $(document).ready(function() {
-      $('.overlay').on('click', function() {
+      $('#sidebarDismiss,.overlay').on('click', function() {
         // hide sidebar
         $('#sidebar').removeClass('active-sidebar');
         // hide overlay
