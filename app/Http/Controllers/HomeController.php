@@ -117,7 +117,9 @@ class HomeController extends Controller
 
     public function savePost(Request $request)
     {
-
+      $request->validate([
+        'body'=>'required'
+      ]);
 
       $title = '';
       $body = $request->body;
