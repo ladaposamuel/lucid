@@ -22,72 +22,76 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/css/bootstrap-tokenfield.min.css">
   <style>
-        .preloader-wrapper{
-            display: none;
-        }
-        .preloader-active .preloader-wrapper {
-            display: block;
-            width: 100vw;
-            height: 100vh;
-            background: #000;
-            position: fixed;
-            color:#871e99;
-            opacity:0.60;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-        }
-        .spinner {
-            width: 10vw;
-            height: 10vw;
-            border-radius: 50%;
-            border: 4px solid;
-            border-top-color: var(--main-color);
-            border-bottom-color: var(--main-color);
-            border-left-color: transparent;
-            border-right-color: transparent;
-            animation: rotate .5s infinite linear;
-            position: absolute;
-            top: 30%;
-            left: 42%;
-            transform: translateX(50%);
-            
-        }
-        @keyframes rotate {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
+    .preloader-wrapper {
+      display: none;
+    }
+
+    .preloader-active .preloader-wrapper {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+      background: #000;
+      position: fixed;
+      color: #871e99;
+      opacity: 0.60;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+    }
+
+    .spinner {
+      width: 10vw;
+      height: 10vw;
+      border-radius: 50%;
+      border: 4px solid;
+      border-top-color: var(--main-color);
+      border-bottom-color: var(--main-color);
+      border-left-color: transparent;
+      border-right-color: transparent;
+      animation: rotate .5s infinite linear;
+      position: absolute;
+      top: 30%;
+      left: 42%;
+      transform: translateX(50%);
+
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
 </head>
 
 <body id="preloader">
-<div class="preloader-wrapper">
+  <div class="preloader-wrapper">
     <div class="spinner"></div>
-</div>
+  </div>
   <section id="main-content" class="container pt-0">
     <div class="row">
 
       @section('sidebar')
       <!-- Beginning of Sidebar -->
-      <div class="col-lg-4 pb-0 mb-0 pt-2">
+      <div class="col-10 col-sm-4 pb-0 mb-0 pt-2 d-none d-lg-block" id="sidebar">
         <a href="/{{ $user->username}}" class="changeHref"><img id="user-avatar" src="{{$user->image}}" class="img-fluid" /></a>
         <a href="/{{ $user->username}}" class="no-decoration changeHref">
           <h3 id="user-name" class="pt-2">{{ $user->name}}</h3>
         </a>
 
-          @if(Auth::user() && Auth::user()->username == $user->username && $user->short_bio =="")
-          <p id="user-bio" class="pb-2" style="color:#a9a9a9;">
+        @if(Auth::user() && Auth::user()->username == $user->username && $user->short_bio =="")
+        <p id="user-bio" class="pb-2" style="color:#a9a9a9;">
           You haven't set up a short bio about yourself, do that <a href="/{{ $user->username}}/settings" id="onSettingsPage">here</a>
-          </p>
-          @else
-          <p id="user-bio" class="pb-2">
+        </p>
+        @else
+        <p id="user-bio" class="pb-2">
           {{ $user->short_bio }}
-          </p>
-          @endif
+        </p>
+        @endif
 
 
         <div class="divider"></div>
@@ -96,13 +100,13 @@
           <ul>
             @if(Auth::user() && Auth::user()->username == $user->username)
 
-            <li><a class="@if($location == "post") active-nav @endif changeHref" href="/{{ $user->username}}/posts">Posts</a></li>
-          @else
-            <li><a class="@if($location == "post") active-nav @endif changeHref" href="/{{ $user->username}}">Posts</a></li>
+            <li><a class="@if($location == " post") active-nav @endif changeHref" href="/{{ $user->username}}/posts">Posts</a></li>
+            @else
+            <li><a class="@if($location == " post") active-nav @endif changeHref" href="/{{ $user->username}}">Posts</a></li>
             @endif
-            <li><a class="@if($location == "thoughts") active-nav @endif changeHref" href="/{{ $user->username}}/thoughts">Thoughts</a></li>
-            <li><a class="@if($location == "video") active-nav @endif changeHref" href="{{ route('under-construction') }}">Videos</a></li>
-            <li><a class="@if($location == "contact") active-nav @endif changeHref" href="/{{ $user->username}}/contact">Contact</a></li>
+            <li><a class="@if($location == " thoughts") active-nav @endif changeHref" href="/{{ $user->username}}/thoughts">Thoughts</a></li>
+            <li><a class="@if($location == " video") active-nav @endif changeHref" href="{{ route('under-construction') }}">Videos</a></li>
+            <li><a class="@if($location == " contact") active-nav @endif changeHref" href="/{{ $user->username}}/contact">Contact</a></li>
           </ul>
         </div>
         @if(Auth::user() && Auth::user()->username == $user->username)
@@ -113,28 +117,28 @@
           @if($fcheck == "yes")
           <button class="btn btn-primary" data-toggle="modal" data-target="#unfollowModal">UnFollow</button>
 
-    <div class="modal fade" id="unfollowModal" tabindex="-1" role="dialog" aria-labelledby="followModalTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
+          <div class="modal fade" id="unfollowModal" tabindex="-1" role="dialog" aria-labelledby="followModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-body">
 
-        <div>
-          <img src="{{$user->image}}" width="100" height="100" style="border-radius:100%;" class="img-fluid" />
-          <br>
-          <br>
-          <h4 class="text-main">Unfollow  {{$user->name}}</h4>
-          <p class="small"><em>Are you sure you want to Unfollow {{$user->name}} and miss out interesting post?<br /> Click the button below to unfollow</em></p>
-          <form method="POST" action="{{URL::to('/')}}/{{$user->username}}/unfollow">
-            @csrf
-            <input type="hidden" name="rss" value="{{$user->name}}">
-            <button type="submit" class="btn btn-primary">UnFollow</button>
-          </form>
-        </div>
+                  <div>
+                    <img src="{{$user->image}}" width="100" height="100" style="border-radius:100%;" class="img-fluid" />
+                    <br>
+                    <br>
+                    <h4 class="text-main">Unfollow {{$user->name}}</h4>
+                    <p class="small"><em>Are you sure you want to Unfollow {{$user->name}} and miss out interesting post?<br /> Click the button below to unfollow</em></p>
+                    <form method="POST" action="{{URL::to('/')}}/{{$user->username}}/unfollow">
+                      @csrf
+                      <input type="hidden" name="rss" value="{{$user->name}}">
+                      <button type="submit" class="btn btn-primary">UnFollow</button>
+                    </form>
+                  </div>
 
-      </div>
-    </div>
-  </div>
-</div>
+                </div>
+              </div>
+            </div>
+          </div>
           @else
 
           <button class="btn btn-primary" data-toggle="modal" data-target="#followModal">Follow Me</button>
@@ -166,7 +170,7 @@
             </div>
           </div>
           <!-- End Modal -->
-@endif
+          @endif
         </div>
 
         @endif
@@ -200,16 +204,17 @@
         <!-- Beginning of Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light pt-2 pb-2">
           <div class="container">
+            <button class="btn d-lg-none" id="sidebarToggle"><i class="icon ion-md-list" style="font-size: 1.8em"></i></button>
             <ul class="navbar-nav ml-auto">
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle pt-0" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <img src="{{ asset('img/lucid-logo.png') }}" alt="The Lucid Logo" class="img-fluid" width="40px"/>
+                  <img src="{{ asset('img/lucid-logo.png') }}" alt="The Lucid Logo" class="img-fluid" width="40px" />
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   @guest
                   <a class="dropdown-item" href="{{ url('/login') }}">{{ __('Login') }}</a>
                   @else
-                  <a  class="dropdown-item changeHref" href="/{{ Auth::user()->username}}">Home</a>
+                  <a class="dropdown-item changeHref" href="/{{ Auth::user()->username}}">Home</a>
                   <a href="/{{ $user->username}}/settings" class="dropdown-item changeHref">Settings</a>
                   <a class="dropdown-item changeHref" href="/{{ $user->username}}/logout">
                     {{ __('Logout') }}
@@ -225,7 +230,7 @@
 
         <!-- Beginning of Post Content -->
         @yield('content')
-
+        <div class="overlay"></div>
       </div>
 
   </section>
@@ -241,24 +246,51 @@
     const pageUrl = window.location.href
     if (pageUrl.includes('followers')) {
       $('#follow-tabs a[href="#followers"]').tab('show')
-    }
-    else (
+    } else(
       $('#follow-tabs a[href="#following"]').tab('show')
     )
     // $(`a[href="${anchor}"]`).tab('show')
   </script>
   <script>
-  function changeUrl(e) {
-    history.pushState(null, null, `/${document.getElementById("username").value+'/'+e}`)
-  }
+    function changeUrl(e) {
+      history.pushState(null, null, `/${document.getElementById("username").value+'/'+e}`)
+    }
   </script>
+  <script>
+    /*     $(document).ready(function() {
+      $('#sidebarCollapse').on('click', function() {
+        $('#sidebar').toggleClass('collapsible-sidebar');
+      });
 
+    }); */
+
+    $(document).ready(function() {
+      $('.overlay').on('click', function() {
+        // hide sidebar
+        $('#sidebar').removeClass('active-sidebar');
+        // hide overlay
+        $('.overlay').removeClass('active');
+      });
+
+      $('#sidebarToggle').on('click', function() {
+        // open sidebar
+        $('#sidebar').addClass('active-sidebar');
+        // fade in the overlay
+        $('.overlay').addClass('active');
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
+    });
+  </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-28315089-7"></script>
   <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-28315089-7');
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-28315089-7');
   </script>
 
 </body>
