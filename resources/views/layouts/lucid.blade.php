@@ -78,7 +78,7 @@
       @section('sidebar')
       <!-- Beginning of Sidebar -->
       <div class="col-10 col-sm-4 pb-0 mb-0 pt-2 d-none d-lg-block" id="sidebar">
-      <a class="d-lg-none" id="sidebarDismiss"><i class="icozzzzzzn ion-md-close-circle" style="font-size: 1.8em"></i></a>
+        <a class="d-lg-none" id="sidebarDismiss"><i class="icozzzzzzn ion-md-close-circle" style="font-size: 1.8em"></i></a>
         <a href="/{{ $user->username}}" class="changeHref"><img id="user-avatar" src="{{$user->image}}" class="img-fluid" /></a>
         <a href="/{{ $user->username}}" class="no-decoration changeHref">
           <h3 id="user-name" class="pt-2">{{ $user->name}}</h3>
@@ -114,68 +114,13 @@
         @else
         <!-- Follow Modal Trigger -->
         <div class="follow-me text-center pt-3">
-
           @if($fcheck == "yes")
           <button class="btn btn-primary" data-toggle="modal" data-target="#unfollowModal">UnFollow</button>
-
-          <div class="modal fade" id="unfollowModal" tabindex="-1" role="dialog" aria-labelledby="followModalTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-body">
-
-                  <div>
-                    <img src="{{$user->image}}" width="100" height="100" style="border-radius:100%;" class="img-fluid" />
-                    <br>
-                    <br>
-                    <h4 class="text-main">Unfollow {{$user->name}}</h4>
-                    <p class="small"><em>Are you sure you want to Unfollow {{$user->name}} and miss out interesting post?<br /> Click the button below to unfollow</em></p>
-                    <form method="POST" action="{{URL::to('/')}}/{{$user->username}}/unfollow">
-                      @csrf
-                      <input type="hidden" name="rss" value="{{$user->name}}">
-                      <button type="submit" class="btn btn-primary">UnFollow</button>
-                    </form>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
           @else
-
           <button class="btn btn-primary" data-toggle="modal" data-target="#followModal">Follow Me</button>
-          <!-- Modal -->
-
-          <div class="modal fade" id="followModal" tabindex="-1" role="dialog" aria-labelledby="followModalTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-body">
-                  <div>
-                    <img src="{{$user->image}}" width="100" height="100" style="border-radius:100%;" class="img-fluid" />
-                    <br>
-                    <br>
-                    <h4 class="text-main">Follow {{$user->name}}</h4>
-                    <p class="small"><em>Do you have or would love to have Lucid installed on your domain?<br /> Click the button below to follow me</em></p>
-                    <form method="POST" action="{{URL::to('/')}}/{{$user->username}}/addrss">
-                      @csrf
-                      <input type="hidden" name="rss" value="{{$user->username}}">
-                      <button type="submit" class="btn btn-primary">Follow me on Lucid</button>
-                    </form>
-                  </div>
-                  <div class="mt-5">
-                    <span class="font-weight-bold mx-2">Follow Me On</span>
-                    <a href="#" class="social-icon m-1"><i class="icon ion-logo-rss text-dark p-1"></i></a>
-                    <a href="#" class="social-icon m-1"><i class="icon ion-logo-twitter text-dark p-1"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- End Modal -->
           @endif
         </div>
-
         @endif
-
 
         <div class="user-stats text-center mt-3 pb-0">
           <div class="d-inline-block">
@@ -199,30 +144,82 @@
       </div>
       <!-- End of Sidebar -->
 
+      <!-- Unfollow Modal -->
+      <div class="modal fade text-center" id="unfollowModal" tabindex="-1" role="dialog" aria-labelledby="followModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+
+              <div>
+                <img src="{{$user->image}}" width="100" height="100" style="border-radius:100%;" class="img-fluid" />
+                <br>
+                <br>
+                <h4 class="text-main">Unfollow {{$user->name}}</h4>
+                <p class="small"><em>Are you sure you want to Unfollow {{$user->name}} and miss out interesting post?<br /> Click the button below to unfollow</em></p>
+                <form method="POST" action="{{URL::to('/')}}/{{$user->username}}/unfollow">
+                  @csrf
+                  <input type="hidden" name="rss" value="{{$user->name}}">
+                  <button type="submit" class="btn btn-primary">UnFollow</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Unfollow Modal  -->
+
+      <!-- Follow Modal -->
+      <div class="modal fade text-center" id="followModal" tabindex="-1" role="dialog" aria-labelledby="followModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div>
+                <img src="{{$user->image}}" width="100" height="100" style="border-radius:100%;" class="img-fluid" />
+                <br>
+                <br>
+                <h4 class="text-main">Follow {{$user->name}}</h4>
+                <p class="small"><em>Do you have or would love to have Lucid installed on your domain?<br /> Click the button below to follow me</em></p>
+                <form method="POST" action="{{URL::to('/')}}/{{$user->username}}/addrss">
+                  @csrf
+                  <input type="hidden" name="rss" value="{{$user->username}}">
+                  <button type="submit" class="btn btn-primary">Follow me on Lucid</button>
+                </form>
+              </div>
+              <div class="mt-5">
+                <span class="font-weight-bold mx-2">Follow Me On</span>
+                <a href="#" class="social-icon m-1"><i class="icon ion-logo-rss text-dark p-1"></i></a>
+                <a href="#" class="social-icon m-1"><i class="icon ion-logo-twitter text-dark p-1"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End FOllow  Modal -->
+
       @show
       <div class="col-lg-8 pb-0">
 
         <!-- Beginning of Navbar -->
-          <div class="container-fluid p-0 m-0 d-flex justify-content-between">
-            <a class="d-lg-none" id="sidebarToggle"><i class="icon ion-md-list" style="font-size: 1.8em"></i></a>
-            <div class="dropdown" id="lucid-dropdown">
-                <a class="nav-link dropdown-toggle pt-1" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <img src="{{ asset('img/lucid-logo.png') }}" alt="The Lucid Logo" class="img-fluid" width="40px" />
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                  @guest
-                  <a class="dropdown-item" href="{{ url('/login') }}">{{ __('Login') }}</a>
-                  @else
-                  <a class="dropdown-item changeHref" href="/{{ Auth::user()->username}}">Home</a>
-                  <a href="/{{ $user->username}}/settings" class="dropdown-item changeHref">Settings</a>
-                  <a class="dropdown-item changeHref" href="/{{ $user->username}}/logout">
-                    {{ __('Logout') }}
-                  </a>
+        <div class="container-fluid p-0 m-0 d-flex justify-content-between">
+          <a class="d-lg-none" id="sidebarToggle"><i class="icon ion-md-list" style="font-size: 1.8em"></i></a>
+          <div class="dropdown" id="lucid-dropdown">
+            <a class="nav-link dropdown-toggle pt-1" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img src="{{ asset('img/lucid-logo.png') }}" alt="The Lucid Logo" class="img-fluid" width="40px" />
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              @guest
+              <a class="dropdown-item" href="{{ url('/login') }}">{{ __('Login') }}</a>
+              @else
+              <a class="dropdown-item changeHref" href="/{{ Auth::user()->username}}">Home</a>
+              <a href="/{{ $user->username}}/settings" class="dropdown-item changeHref">Settings</a>
+              <a class="dropdown-item changeHref" href="/{{ $user->username}}/logout">
+                {{ __('Logout') }}
+              </a>
 
-                  @endguest
-                </div>
-              </div>
+              @endguest
+            </div>
           </div>
+        </div>
         <!-- End of Navbar -->
 
         <!-- Beginning of Post Content -->
@@ -254,21 +251,19 @@
     }
   </script>
   <script>
-    /*     $(document).ready(function() {
-      $('#sidebarCollapse').on('click', function() {
-        $('#sidebar').toggleClass('collapsible-sidebar');
-      });
-
-    }); */
-
     $(document).ready(function() {
-      $('#sidebarDismiss,.overlay, button').on('click', function() {
+      $('#sidebarDismiss,.overlay, [data-toggle="modal"]').on('click', function() {
         // hide sidebar
         $('#sidebar').removeClass('active-sidebar');
         // hide overlay
         $('.overlay').removeClass('active');
       });
-
+/*       $('[data-toggle="modal"]').on('click', function() {
+        // hide sidebar
+        $('#sidebar').addClass('d-none');
+        // hide overlay
+        $('.overlay').removeClass('active');
+      }); */
       $('#sidebarToggle').on('click', function() {
         // open sidebar
         $('#sidebar').addClass('active-sidebar');
