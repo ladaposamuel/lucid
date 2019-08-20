@@ -1,4 +1,4 @@
-const j = jQuery.noConflict();
+// const j = jQuery.noConflict();
 
 let  editContactForm= document.querySelector('.editContactForm');
 let  editBtn = document.querySelector('button[name="editContactDetails"]');
