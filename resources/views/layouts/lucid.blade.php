@@ -262,7 +262,7 @@
     }); */
 
     $(document).ready(function() {
-      $('#sidebarDismiss,.overlay,[data-toggle="modal"]').on('click', function() {
+      $('#sidebarDismiss,.overlay, button[data-toggle="modal"]').on('click', function() {
         // hide sidebar
         $('#sidebar').removeClass('active-sidebar');
         // hide overlay
