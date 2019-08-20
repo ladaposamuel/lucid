@@ -78,7 +78,7 @@
       @section('sidebar')
       <!-- Beginning of Sidebar -->
       <div class="col-10 col-sm-4 pb-0 mb-0 pt-2 d-none d-lg-block" id="sidebar">
-        <a class="d-lg-none" id="sidebarDismiss"><i class="icozzzzzzn ion-md-close-circle" style="font-size: 1.8em"></i></a>
+        <a class="d-lg-none" id="sidebarDismiss"><i class="icon ion-md-close-circle" style="font-size: 1.8em"></i></a>
         <a href="/{{ $user->username}}" class="changeHref"><img id="user-avatar" src="{{$user->image}}" class="img-fluid" /></a>
         <a href="/{{ $user->username}}" class="no-decoration changeHref">
           <h3 id="user-name" class="pt-2">{{ $user->name}}</h3>
