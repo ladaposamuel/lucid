@@ -368,12 +368,13 @@ ul.footer-links li a {
 /* Styles to toggle sidebar on mobile */
 .active-sidebar {
     display: block !important; 
-    height: 100vh !important;
+    min-height: 100vh !important;
+    max-height: 100vh !important;
     position: absolute;
     z-index: 1000 !important;
     background: white !important;
   }
-  .overlay {
+.overlay {
   display: none;
   position: absolute;
   top: 0 !important;
