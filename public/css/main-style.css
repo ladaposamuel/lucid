@@ -371,7 +371,7 @@ ul.footer-links li a {
     min-height: 100vh !important;
     max-height: 100vh !important;
     position: absolute;
-    z-index: 1000 !important;
+    z-index: 1000;
     background: white !important;
   }
 .overlay {
