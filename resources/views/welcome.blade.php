@@ -114,26 +114,23 @@ border:1px solid #9179ef;
 							<div class="carousel-item active text-center">
 								<img src="{{ asset('img/geek.jpg ') }}" alt="" srcset="" />
 								<h5 class="testimonal-text">
-									“Lucid has done a very good job in building my website
-									with those awesome themes. The customer support guys were
-									really helpful. My website has ranked high ever since on
-									Google.”
+									“Lucid platform is quite amazing, it has simple UI and it's very functional. I'm excited about what the future holds for Nigerian creatives.”
 								</h5>
-								<p class="username">Watson Torquil</p>
+								<p class="username">Joseph Burutu</p>
 							</div>
 							<div class="carousel-item text-center">
 								<img src="{{ asset('img/images.jpg') }}" alt="" srcset="" />
 								<h5 class="testimonal-text">
-									“I'm happy with how fast it was for me to set up my page on lucid,it took me just a sign up using my google account to do that and now i can share my stories with the world and still retained my rights to privacy.”
+									“I think what I like is the easy entry point using Google. Also the interface is simple and easy to navigate and for me that's is a thumps up.”
 								</h5>
-								<p class="username">Frederick Conrad</p>
+								<p class="username">Obideje, Chidera Godswill</p>
 							</div>
 							<div class="carousel-item text-center">
 								<img src="{{ asset('img/geek1.jpg') }}" alt="" srcset="" />
 								<h5 class="testimonal-text">
-									“Sharing my stories with the world has never been this easy,lucid made it possible for me to share my thoughts and  ideas,allowing me to make my own decisions and not putting my contents behind paywall ”
+									“Firstly, sign up was super easy as i synced my google account with the lucid platform...I totally love the UI and overall design.”
 								</h5>
-								<p class="username">Natasha Quinn</p>
+								<p class="username">Maryjane Akpagbue</p>
 							</div>
 						</div>
 						<ol class="carousel-indicators">
