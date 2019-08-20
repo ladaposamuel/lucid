@@ -200,7 +200,7 @@
       <div class="col-lg-8 pb-0">
 
         <!-- Beginning of Navbar -->
-        <div class="container-fluid p-0 m-0 d-flex justify-content-between">
+        <div class="container-fluid p-0 m-0 mb-5 d-flex justify-content-between">
           <a class="d-lg-none" id="sidebarToggle"><i class="icon ion-md-list" style="font-size: 1.8em"></i></a>
           <div class="dropdown" id="lucid-dropdown">
             <a class="nav-link dropdown-toggle pt-1" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
