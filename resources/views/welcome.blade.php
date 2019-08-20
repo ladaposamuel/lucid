@@ -121,9 +121,9 @@ border:1px solid #9179ef;
 							<div class="carousel-item text-center">
 								<img src="{{ asset('img/images.jpg') }}" alt="" srcset="" />
 								<h5 class="testimonal-text">
-									“Quite interesting and easy to navigate and use”
+									“I think what I like is the easy entry point using Google. Also the interface is simple and easy to navigate and for me that's is a thumps up.”
 								</h5>
-								<p class="username">Ademola Adebiyi</p>
+								<p class="username">Obideje, Chidera Godswill</p>
 							</div>
 							<div class="carousel-item text-center">
 								<img src="{{ asset('img/geek1.jpg') }}" alt="" srcset="" />
@@ -132,14 +132,6 @@ border:1px solid #9179ef;
 								</h5>
 								<p class="username">Maryjane Akpagbue</p>
 							</div>
-							<div class="carousel-item text-center">
-								<img src="{{ asset('img/geek1.jpg') }}" alt="" srcset="" />
-								<h5 class="testimonal-text">
-									“Quite a user friendly platform with a sleek and simple design.”
-								</h5>
-								<p class="username">Kayode Orowa</p>
-							</div>
-							
 						</div>
 						<ol class="carousel-indicators">
 							<li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
