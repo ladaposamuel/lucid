@@ -142,7 +142,7 @@
           </div>
           @else
 
-          <button class="btn btn-primary" data-toggle="modal" data-target="#followModal">Follow Me</button>
+          <button class="btn btn-primary" data-toggle="modal" data-target="#followModal" id="followModalButton">Follow Me</button>
           <!-- Modal -->
 
           <div class="modal fade" id="followModal" tabindex="-1" role="dialog" aria-labelledby="followModalTitle" aria-hidden="true">
@@ -262,7 +262,7 @@
     }); */
 
     $(document).ready(function() {
-      $('#sidebarDismiss,.overlay, button[data-toggle="modal"]').on('click', function() {
+      $('#sidebarDismiss,.overlay,#followModalButton').on('click', function() {
         // hide sidebar
         $('#sidebar').removeClass('active-sidebar');
         // hide overlay
