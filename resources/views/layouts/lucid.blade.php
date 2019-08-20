@@ -78,7 +78,7 @@
       @section('sidebar')
       <!-- Beginning of Sidebar -->
       <div class="col-10 col-sm-4 pb-0 mb-0 pt-2 d-none d-lg-block" id="sidebar">
-      <a class="d-lg-none" id="sidebarDismiss"><i class="icon ion-md-close-circle" style="font-size: 1.8em"></i></a>
+      <a class="d-lg-none" id="sidebarDismiss"><i class="icozzzzzzn ion-md-close-circle" style="font-size: 1.8em"></i></a>
         <a href="/{{ $user->username}}" class="changeHref"><img id="user-avatar" src="{{$user->image}}" class="img-fluid" /></a>
         <a href="/{{ $user->username}}" class="no-decoration changeHref">
           <h3 id="user-name" class="pt-2">{{ $user->name}}</h3>
@@ -101,13 +101,13 @@
           <ul>
             @if(Auth::user() && Auth::user()->username == $user->username)
 
-            <li><a class="@if($location == " post") active-nav @endif changeHref" href="/{{ $user->username}}/posts">Posts</a></li>
+            <li class="w-100 text-center"><a class="@if($location == " post") active-nav @endif changeHref" href="/{{ $user->username}}/posts">Posts</a></li>
             @else
-            <li><a class="@if($location == " post") active-nav @endif changeHref" href="/{{ $user->username}}">Posts</a></li>
+            <li class="w-100 text-center"><a class="@if($location == " post") active-nav @endif changeHref" href="/{{ $user->username}}">Posts</a></li>
             @endif
-            <li><a class="@if($location == " thoughts") active-nav @endif changeHref" href="/{{ $user->username}}/thoughts">Thoughts</a></li>
-            <li><a class="@if($location == " video") active-nav @endif changeHref" href="{{ route('under-construction') }}">Videos</a></li>
-            <li><a class="@if($location == " contact") active-nav @endif changeHref" href="/{{ $user->username}}/contact">Contact</a></li>
+            <li class="w-100 text-center"><a class="@if($location == " thoughts") active-nav @endif changeHref" href="/{{ $user->username}}/thoughts">Thoughts</a></li>
+            <li class="w-100 text-center"><a class="@if($location == " video") active-nav @endif changeHref" href="{{ route('under-construction') }}">Videos</a></li>
+            <li class="w-100 text-center"><a class="@if($location == " contact") active-nav @endif changeHref" href="/{{ $user->username}}/contact">Contact</a></li>
           </ul>
         </div>
         @if(Auth::user() && Auth::user()->username == $user->username)
