@@ -100,14 +100,14 @@
         <div class="sidebar-nav pt-2">
           <ul>
             @if(Auth::user() && Auth::user()->username == $user->username)
-
-            <li class="w-100 text-center"><a class="@if($location == " post") active-nav @endif changeHref" href="/{{ $user->username}}/posts">Posts</a></li>
+            <li class="w-100 text-center"><a class="@if($location ==  'timeline') active-nav @endif changeHref" href="/{{ $user->username}}">Timeline</a></li>
+            <li class="w-100 text-center"><a class="@if($location ==  'post') active-nav @endif changeHref" href="/{{ $user->username}}/posts">Posts</a></li>
             @else
-            <li class="w-100 text-center"><a class="@if($location == " post") active-nav @endif changeHref" href="/{{ $user->username}}">Posts</a></li>
+            <li class="w-100 text-center"><a class="@if($location ==  'post') active-nav @endif changeHref" href="/{{ $user->username}}">Posts</a></li>
             @endif
-            <li class="w-100 text-center"><a class="@if($location == " thoughts") active-nav @endif changeHref" href="/{{ $user->username}}/thoughts">Thoughts</a></li>
-            <li class="w-100 text-center"><a class="@if($location == " video") active-nav @endif changeHref" href="{{ route('under-construction') }}">Videos</a></li>
-            <li class="w-100 text-center"><a class="@if($location == " contact") active-nav @endif changeHref" href="/{{ $user->username}}/contact">Contact</a></li>
+            <li class="w-100 text-center"><a class="@if($location ==  'thoughts') active-nav @endif changeHref" href="/{{ $user->username}}/thoughts">Thoughts</a></li>
+            <!-- <li class="w-100 text-center"><a class="@if($location ==  'video') active-nav @endif changeHref" href="{{ route('under-construction') }}">Videos</a></li> -->
+            <li class="w-100 text-center"><a class="@if($location ==  'contact') active-nav @endif changeHref" href="/{{ $user->username}}/contact">Contact</a></li>
           </ul>
         </div>
         @if(Auth::user() && Auth::user()->username == $user->username)

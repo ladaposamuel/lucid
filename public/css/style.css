@@ -97,13 +97,7 @@ body {
     border-radius: 5px;
 }
 .active-nav {
-    color: #ffffff !important;
-    background: var(--main-color);
-    border-radius: 5px;
-}
-
-.follow-me {
-    padding-top: 50px;
+    border-bottom: solid 3px var(--main-color);
 }
 
 .follow-me button {
