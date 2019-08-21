@@ -112,21 +112,24 @@ border:1px solid #9179ef;
 					<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
 						<div class="carousel-inner">
 							<div class="carousel-item active text-center">
-								<img src="{{ asset('img/geek.jpg ') }}" alt="" srcset="" />
+								<!-- <img src="{{ asset('img/geek.jpg ') }}" alt="" srcset="" /> -->
+								<i class="icon ion-md-contact" style="font-size: 5em"></i>
 								<h5 class="testimonal-text">
 									“Lucid platform is quite amazing, it has simple UI and it's very functional. I'm excited about what the future holds for Nigerian creatives.”
 								</h5>
 								<p class="username">Joseph Burutu</p>
 							</div>
 							<div class="carousel-item text-center">
-								<img src="{{ asset('img/images.jpg') }}" alt="" srcset="" />
+								<!-- <img src="{{ asset('img/images.jpg') }}" alt="" srcset="" /> -->
+								<i class="icon ion-md-contact" style="font-size: 5em"></i>
 								<h5 class="testimonal-text">
 									“I think what I like is the easy entry point using Google. Also the interface is simple and easy to navigate and for me that's is a thumps up.”
 								</h5>
 								<p class="username">Obideje, Chidera Godswill</p>
 							</div>
 							<div class="carousel-item text-center">
-								<img src="{{ asset('img/geek1.jpg') }}" alt="" srcset="" />
+								<!-- <img src="{{ asset('img/geek1.jpg') }}" alt="" srcset="" /> -->
+								<i class="icon ion-md-contact" style="font-size: 5em"></i>
 								<h5 class="testimonal-text">
 									“Firstly, sign up was super easy as i synced my google account with the lucid platform...I totally love the UI and overall design.”
 								</h5>
