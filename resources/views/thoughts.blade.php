@@ -29,7 +29,7 @@ $location= 'thoughts';
 }
 </style>
 @if(Auth::user() && Auth::user()->username == $user->username)
-<p>Write a Post</p>
+<p>Write a thought</p>
 
 <form method="POST" action="{{url('/save-post')}}" autocomplete="off" enctype="multipart/form-data" class="mb-3">
   @csrf
@@ -46,7 +46,7 @@ $location= 'thoughts';
 @endif
 <!-- End Editor -->
 <br />
-<h5 class="font-weight-bold mb-5">Latest stories</h5>
+<h5 class="font-weight-bold mb-4">Latest stories</h5>
 <!-- Begin content -->
 
 
