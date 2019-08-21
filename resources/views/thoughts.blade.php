@@ -1,7 +1,14 @@
 @extends('layouts.lucid')
 @section('title')
-  {{ $user->name }}
+  @if(Auth::user() && Auth::user()->username == $user->username)
+   Thoughts - {{ $user->username }} - Lucid
+  @else
+  {{ $user->name }} (@ {{ $user->username }}) - Lucid
+  @endif
 @endsection
+@php
+$location= 'thoughts';
+@endphp
 @section('sidebar')
 @parent
 
@@ -14,6 +21,12 @@
     -webkit-appearance: none;
     box-shadow: none !important;
   }
+
+  .text-danger{
+  font-weight:400px !important;
+  font-size:12px !important;
+
+}
 </style>
 @if(Auth::user() && Auth::user()->username == $user->username)
 <p>Write a Post</p>
@@ -22,6 +35,9 @@
   @csrf
   <div class="form-group">
     <textarea type="text" name="body" class="form-control h-25" placeholder="Tell your story"></textarea>
+    @if($errors->has('body'))
+    <span class="text-danger">Fill out this field to publish your thoughts</span>
+    @endif
   </div>
   <div class="text-right">
     <button type="submit" class="btn bg-alt text-white">Publish</button>
@@ -36,7 +52,7 @@
 
 @foreach ($posts as $feeds)
 <div class="post-content">
-  
+
   <div class="post-content-body">
     <p class="mb-1">{{$user->name}}-<small class="text-muted">{{$feeds['date']}}</small></p>
     <p class="">

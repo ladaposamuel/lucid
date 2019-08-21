@@ -1,7 +1,14 @@
 @extends('layouts.lucid')
 @section('title')
-{{ $user->name }}
+  @if(Auth::user() && Auth::user()->username == $user->username)
+    Timeline - {{ $user->username }} - Lucid
+  @else
+   {{ $user->name }} (@ {{ $user->username }}) - Lucid
+  @endif
 @endsection
+@php
+$location = 'timeline';
+@endphp
 @section('sidebar')
 @parent
 @endsection
@@ -249,38 +256,31 @@
 
 <!-- Begin content -->
   <!-- Timeline Page -->
-  <div class="container tab-pane fade in" role="tabpanel" id="timeline">
     <div class="row mt-5">
       <div class="col-md-12">
+        <?php $last = count($posts);
+        ?>
         @foreach ($posts as $feeds)
         <div class="post-content">
-          @if (empty($feeds->site_image))
+          @if (empty($feeds['site_image']))
           <img src="{{ asset('img/logo.jpg') }}" class="img-fluid img-thumb" alt="user" />
           @else
-          <img src="{{ $feeds->site_image}}" class="img-fluid img-thumb" alt="user" />
+          <img src="{{ $feeds['site_image']}}" class="img-fluid img-thumb" alt="user" />
           @endif
           <div class="post-content-body">
-            <a href="{{$feeds->link}}" class="no-decoration">
-              <h5 class="font-weight-bold">{{$feeds->title}}</h5>
+            <a href="{{$feeds['link']}}" class="no-decoration">
+              <h5 class="font-weight-bold">{{$feeds['title']}}</h5>
             </a>
             <p class="">
-              {{$feeds->des}}
+              {{$feeds['des']}}
             </p>
-            <p class="">{{$feeds->site}} -<small class="text-muted">{{$feeds->date}} </small></p>
+            <p class="">{{$feeds['site']}} -<small class="text-muted">{{$feeds['date']}} </small></p>
           </div>
         </div>
         @endforeach
       </div>
     </div>
-  </div>
-
   <!-- End Timeline Page -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script>
-  const anchor = window.location.hash;
-  $(`a[href="${anchor}"]`).tab('show')
-</script>
+
 </html>
 @endsection

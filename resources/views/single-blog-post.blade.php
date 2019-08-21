@@ -1,6 +1,13 @@
 @extends('layouts.lucid')
 @section('title')
-  {{ $post['title'] }} - {{ $user->name }}
+@if(Auth::user() && Auth::user()->username == $user->username)
+{{ $post['title'] }} - {{ $user->username }} - Lucid
+@else
+{{ $post['title'] }} - {{ $user->name }} (@ {{ $user->username }})
+@endif
+@php
+$location= 'singlePost';
+@endphp
 @endsection
 @section('sidebar')
 @parent
@@ -19,9 +26,7 @@
         <h3 class="post-title mb-1">
          {{ $post['title'] }}
         </h3>
-        @isset($post['crawlerImage'])
-        <img src="{{URL::to('/')}}/storage/{{$post['crawlerImage']}}" alt="" class="single-post-img" style="width:100%" class="my-1">
-        @endisset
+
         <div class="blog-content">
             {!! $post['body'] !!}
         </div>

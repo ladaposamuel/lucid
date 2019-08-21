@@ -24,14 +24,19 @@ Route::get('login', function () {
 Route::get('register', function () {
     return view('auth/register');
 });
-Route::get('single-blog-post', function () {
-    return view('single-blog-post');
+Route::get('explore', function () {
+    return view('explore');
+});
+Route::get('loader', function () {
+    return view('preloader');
 });
 Route::get('subscribe', function () {
     return view('subscribe');
 });
+Route::get('under-construction', 'pageController@construction')->name('under-construction');
 Route::get('microblog','HomeController@microblog');
 Route::post('save-post','HomeController@savePost');
+Route::post('save-subscription','pageController@saveSubscriptionEmail');
 
 
 
@@ -41,7 +46,7 @@ Route::post('login', 'LoginController@do')->name('login');
 
 Route::prefix('{username}')->group(function () {
 
-  
+
     Route::get('/contact', 'pageController@contact');
     Route::get('/post/{postTitle}','pageController@singlePostPage');
     Route::get('/','pageController@homePage');
@@ -61,4 +66,5 @@ Route::prefix('{username}')->group(function () {
     Route::post('/save_settings','HomeController@saveSettings');
     Route::get('/following','pageController@following')->name("following");
     Route::get('/followers','pageController@followers')->name("followers");
+    Route::post('/update-contact-details','HomeController@updateContactDetails');
 });

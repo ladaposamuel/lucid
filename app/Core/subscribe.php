@@ -236,49 +236,99 @@ public function extract($url)
     }
   public function unfollow($del)
   {
-    $user = Auth::user();
+$fuser= DB::table('users')->where('username', $del)->get('name')->first();
 
-//$file= ext_rss::select('select * from users where user_id = :user_id and title = :title', [
-//  "user_id" => $user->id,
-  //"title" => $del]);
+$user = Auth::user();
 
-  $file= DB::table('ext_rsses')->where('user_id', $user->id)->where('title', $del)->delete();
+  $file= DB::table('ext_rsses')->where('user_id', $user->id)->where('title', $fuser->name)->delete();
 
+  //dd($file);
 return $file;
 
   }
   public function count()
   {
 
-    $user= DB::table('users')->where('username', $this->user)->get();
-
-    foreach($user as $key => $user){
-
-  $file= ext_rss::where('title', $user->name)->get();
+    $user= DB::table('users')->where('username', $this->user)->get('id')->first();
+  //  $user=json_decode($user,true);
+    $name= DB::table('ext_rsses')->where('user_id', $user->id)->get('title');
+$fuser = [];
+//dd($name);
+    foreach($name as $key => $name){
+      $user= DB::table('users')->where('name', $name->title)->get();
+      foreach($user as $key => $user){
+    //  $content['name'] = $user->name;
+    array_push($fuser, $user->name);
+    }
 }
-    $data=json_decode($file,true);
-    if(!empty($data)){
-      unset($file);
-      return $data;
+  //  $data=json_decode($file,true);
+  //  dd($fuser);
+    if(!empty($fuser)){
+      unset($user_id);
+      return $fuser;
     }
   }
-  public function fcount()
+  public function myfollowercount()
   {
   //  $user = Auth::user();
-      $user= DB::table('users')->where('username', $this->user)->get();
-      //extract();
-      foreach($user as $key => $user){
+      $user= DB::table('users')->where('username', $this->user)->first();
+      $data= ext_rss::where('title', $user->name)->get();
+      $data = json_decode($data, true);
 
-    $file= ext_rss::where('user_id', $user->id)->get();
-}
-    $data=json_decode($file,true);
+        $follower = [];
+        foreach ($data as $key => $value) {
 
-    if(!empty($data)){
-      unset($file);
-      return $data;
+          $follow = DB::table('users')->where('id', $value['user_id'])->get();
+
+           foreach($follow as $key => $follow){
+
+          $content['name'] = $follow->name;
+          $content['username'] = $follow->username;
+          $content['img'] = $follow->image;
+          $content['id'] = $follow->id;
+          $content['desc'] = $follow->short_bio;
+          array_push($follower, $content);
+
+      }
+        }
+        if(!empty($data)){
+          unset($data);
+        //  dd($follower);
+        return $follower;
+    //  return $data;
 
     }
 
 
   }
+  public function followerArray()
+  {
+    //$user= DB::table('users')->where('username', $value)->get();
+
+    $check = new Subscribe(Auth::user()->username);
+    //dd(Auth::user()->username);
+    $title = [];
+    if (!is_null($check->count())) {
+
+    foreach($check->count() as $key => $fuser){
+    //  dd($fuser);
+    array_push($title , $fuser);
+  }
+//dd($title );
+}
+return $title;
+
+  }
+  public function followCheck($value)
+  {
+$title = $this->followerArray();
+
+
+                      if (in_array($value, $title)) {
+                        $fcheck = "yes";
+                      }else {
+                        $fcheck = "no";
+                      }
+                    return $fcheck;
+    }
 }

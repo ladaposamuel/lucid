@@ -1,7 +1,10 @@
 @extends('layouts.lucid')
 @section('title')
-  {{ $user->name }}
+  {{ $user->name }} - Lucid
 @endsection
+@php
+$location= 'home';
+@endphp
 @section('sidebar')
 @parent
 
@@ -120,7 +123,7 @@
 @endforeach
 
 
-@php 
+@php
  if(count($userposts) > 30) {
 @endphp
   <div class="text-center">

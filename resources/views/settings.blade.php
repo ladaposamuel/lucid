@@ -1,7 +1,10 @@
 @extends('layouts.lucid')
 @section('title')
-  {{ $user->name }}
+  {{ $user->name }} - Lucid
 @endsection
+@php
+$location= 'settings';
+@endphp
 @section('sidebar')
 @parent
 @endsection
@@ -12,6 +15,23 @@
     -webkit-appearance: none;
     box-shadow: none !important;
   }
+.standard-color{
+  background: #871e99;
+  color:#fff;
+  border:1px solid #871e99;
+}
+
+.standard-color:hover{
+  background: #871e99 !important;
+  color:#fff;
+  border:1px solid #871e99 !important;
+}
+
+.text-danger{
+  font-weight:400px !important;
+  font-size:12px !important;
+
+}
 </style>
 <!-- beginning of settings page -->
 <div class="page-tab">
@@ -43,25 +63,26 @@
   <div class="tab-content" id="settings-tabs-content">
     <!-- profile settings tab -->
     <div class="tab-pane fade in show active" id="profile" role="tabpanel">
-      <form action="" class="mt-5" autocomplete="off" id="settingsForm">
+      <form action="" class="mt-4" autocomplete="off" id="settingsForm">
         <div class="row">
           <div class="form-group col-sm-12 col-md-6">
             <label for="name"><strong>Full Name</strong></label>
-            <span class="text-danger" id="fullname" style="display:none;"></span>
             <input class="form-control" type="text" name="name" id="name" value="{{Auth::user()->name}}" placeholder="e.g Jon Champion" />
+            <span class="text-danger" id="fullname" style="display:none;"></span>
           </div>
           <div class="form-group col-sm-12 col-md-6">
             <label for="email"><strong>Email Address</strong></label>
-            <span class="text-danger" id="emailError" style="display:none;"></span>
             <input type="email" name="email" id="email" class="form-control" value="{{Auth::user()->email}}" placeholder="example@gmail.com" />
+            <span class="text-danger" id="emailError" style="display:none;"></span>
           </div>
         </div>
         <div class="row">
-          <div class="form-group col-sm-12 col-md-6">
+          <div class="form-group col-sm-12 col-md-6 pb-0 mb-0">
             <label for="nick-name"><strong>Username</strong></label>
-            <input class="form-control" type="text" name="nickname" id="nick-name" value="{{Auth::user()->username}}" disabled/>
+            <input class="form-control" type="text" name="username" id="nick-name" value="{{Auth::user()->username}}"/>
+            <span class="text-danger" id="usernameError" style="display:none;"></span>
           </div>
-          <div class="form-group col-sm-12 col-md-6">
+          <div class="form-group col-sm-12 col-md-6 pb-0 mb-0">
             <p class="font-weight-bold">Profile Image</p>
             <div class="d-flex">
               <div class="d-inline-block">
@@ -71,20 +92,21 @@
                 <input type="file" name="profileimage" id="profileimage" class="form-control-file" accept=".png,.jpg" style="display:none">
 
                 <label class="text-muted form-control p-2 w-100" for="profileimage" style="cursor:pointer">Choose file</label>
-                <span class="text-danger" id="imgError" style="display:none;"></span>
+
                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}"/>
+                <span class="text-danger" id="imgError" style="display:none;"></span>
               </div>
             </div>
           </div>
         </div>
         <div class="row">
-          <div class="form-group col-sm-12 col-md-6">
+          <div class="form-group col-sm-12 col-md-6 mt-0 pb-0">
             <label for="bio"><strong>Short Bio</strong></label>
-            <textarea name="bio" id="bio" class="form-control" rows="5" placeholder="type here..">{{Auth::user()->short_bio}}</textarea>
+            <textarea name="bio" id="bio" class="form-control" rows="3" placeholder="type here..">{{Auth::user()->short_bio}}</textarea>
           </div>
         </div>
         <!-- submit button -->
-        <button type="submit" class="btn btn-lg col-sm-12 col-md-3 mt-5" name="update">Update Profile</button>
+        <button type="submit" class="btn col-sm-12 col-md-3 mt-3" name="update">Update Profile</button>
       </form>
     </div>
 
@@ -105,91 +127,6 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <!-- convert to markdown script ends -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script>
-  $(document).ready(function (){
-
-    ////render selected image to the profile image tag
-    $("#profileimage").on('change',function(){
-      const file = $(this)[0].files;
-
-      if (file.length == 1 ){
-
-         const reader = new FileReader();
-         const imgTag = document.getElementById('imgtag');
-         reader.onload = function(event){
-           imgTag.src=event.target.result;
-         }
-
-         reader.readAsDataURL(file[0])
-      }
-
-    })
-
-
-    document.querySelector('button[name="update"]').addEventListener('click',function (event){
-      event.preventDefault();
-      const formData = new FormData(document.querySelector('#settingsForm'));
-
-      fetch('save_settings',{
-        method: 'POST',
-        body: formData,
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      }).then(response=>response.json()).then((response)=>{
-        //console.log(JSON.stringify(response));
-
-        if (response.success) {
-            swal({
-              text: response.success,
-              icon: "success",
-            })
-
-            if(response.img_path){
-               document.querySelector('#user-avatar').src = response.img_path;
-            }
-            document.querySelector('#user-name').innerHTML = formData.get('name');
-            if(formData.get('bio') !==""){
-               document.querySelector('#user-bio').innerHTML = formData.get('bio');
-            }else {
-              document.querySelector('#user-bio').innerHTML = 'Set up a bio about yourself, let other lucid users know you.';
-            }
-           
-        }
-
-        const name = document.querySelector('#fullname');
-        const email = document.querySelector('#emailError');
-        const img = document.querySelector('#imgError');
-        if (response.name){
-            name.style.display="block"
-            name.innerHTML = response.name
-        }else {
-            name.style.display="none"
-            name.innerHTML = ''
-        }
-
-        if (response.email){
-            email.style.display="block"
-            email.innerHTML = response.email
-        }else {
-            email.style.display="none"
-            email.innerHTML = ''
-        }
-
-        if (response.profileimage){
-            img.style.display="block"
-            img.innerHTML = response.profileimage
-        }else {
-            img.style.display="none"
-            img.innerHTML = ''
-        }
-        
-      }).catch((err) => {
-        alert(`Failed with the following message: ${err.message}`);
-      });
-
-    })
-
-  })
-</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="{{ asset('js/settings.js') }}"></script>
 @endsection

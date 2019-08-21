@@ -1,7 +1,10 @@
 @extends('layouts.lucid')
 @section('title')
-{{ $user->name }}
+{{ $user->name }} - Lucid
 @endsection
+@php
+$location= 'follow';
+@endphp
 @section('sidebar')
 @parent
 @endsection
@@ -266,23 +269,97 @@
 <div class="tab-content">
   <!-- Following Page -->
   <div class="tab-pane show active" role="tabpanel" id="following">
-    <h5 class="my-3 font-weight-bold">{{ $user->username}} follows</h5>
+    @if (Auth::user() && Auth::user()->username == $user->username)
+    <h5 class="my-3 font-weight-bold">You're following</h5>
+    @else
+
+    <h5 class="my-3 font-weight-bold">{{ $user->name}} is following</h5>
+    @endif
+
+    @if(empty($following))
+
+      <p class="mb-2">{{ $user->name}} is following no User</p>
+
+    @else
     @foreach ($following as $follow)
     <div class="post-content border p-3 my-2">
       <img src="{{$follow['img']}}" class="img-fluid img-thumb" alt="user" />
       <div class="post-content-body">
         <p class="m-0 font-weight-bold"><a href="{{URL::to('/')}}/{{$follow['username']}}/">{{$follow['name']}}</a></p>
         <p class="mb-2">{{$follow['desc']}}</p>
-        <a href="#" class="no-decoration text-secondary font-weight-bold">Following</a>
+
+@php
+      if(in_array($follow['name'],$followerArray)){ @endphp
+        <a data-toggle="modal" data-target="#unfollowModal{{$follow['id']}}" href="#" class="no-decoration text-secondary font-weight-bold">Unfollow</a>
+        <div class="follow-me text-center pt-3">
+
+        <div class="modal fade" id="unfollowModal{{$follow['id']}}" tabindex="-1" role="dialog" aria-labelledby="followModalTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+
+            <div>
+              <img src="{{$follow['img']}}" width="100" height="100" style="border-radius:100%;" class="img-fluid" />
+              <br>
+              <br>
+              <h4 class="text-main">Unfollow  {{$follow['name']}}</h4>
+              <p class="small"><em>Are you sure you want to Unfollow {{$follow['name']}} and miss out interesting post?<br /> Click the button below to unfollow</em></p>
+              <form method="POST" action="{{URL::to('/')}}/{{ $user->username}}/unfollow">
+                @csrf
+                <input type="hidden" name="rss" value="{{$follow['username']}}">
+                <button type="submit" class="btn btn-primary">UnFollow</button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+      @php  }else if(Auth::user() && Auth::user()->username == $follow['username']) { @endphp
+<p>You</p>
+    @php  }else { @endphp
+      <a href="#" data-toggle="modal" data-target="#followModal{{$follow['id']}}" class="no-decoration text-secondary font-weight-bold">Follow</a>
+      <div class="follow-me text-center pt-3">
+
+      <div class="modal fade" id="followModal{{$follow['id']}}" tabindex="-1" role="dialog" aria-labelledby="followModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div>
+                <img src="{{$follow['img']}}" width="100" height="100" style="border-radius:100%;" class="img-fluid" />
+                <br>
+                <br>
+                <h4 class="text-main">Follow {{$follow['name']}}</h4>
+                <p class="small"><em>Do you have or would love to have Lucid installed on your domain?<br /> Click the button below to follow me</em></p>
+                <form method="POST" action="{{URL::to('/')}}/{{ $user->username}}/addrss">
+                  @csrf
+                  <input type="hidden" name="rss" value="{{$follow['username']}}">
+                  <button type="submit" class="btn btn-primary">Follow me on Lucid</button>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  @php  } @endphp
       </div>
     </div>
     @endforeach
+    @endif
   </div>
   <!-- End following Page -->
 
   <!-- Followers Page -->
   <div class="tab-pane" role="tabpanel" id="followers">
-    <h5 class="my-3 font-weight-bold">{{ $user->username}} is followed by</h5>
+      @if (Auth::user() && Auth::user()->username == $user->username)
+    <h5 class="my-3 font-weight-bold">Your followers</h5>
+    @else
+    <h5 class="my-3 font-weight-bold">Follower of {{ $user->name}}</h5>
+    @endif
+
     @foreach ($follower as $follower)
     <div class="post-content border p-3 my-2">
       <img src="{{$follower['img']}}" class="img-fluid img-thumb" alt="user" />
@@ -291,16 +368,65 @@
           <p class="m-0 font-weight-bold">{{$follower['name']}}</p>
         </a>
         <p class="mb-2">{{$follower['desc']}}</p>
-        @if ($user->username == $follower['username'])
-        <a href="#" class="no-decoration text-secondary font-weight-bold">Following</a>
-        @else
-        <form method="POST" action="{{URL::to('/')}}/{{$user->username}}/addrss">
-          @csrf
-          <input type="hidden" name="rss" value="{{$follower['username']}}">
-          <button type="submit" class="btn no-decoration text-secondary font-weight-bold">Follow</button>
-        </form>
 
-        @endif
+
+        @php
+              if(in_array($follower['name'],$followerArray)){ @endphp
+                <a data-toggle="modal" data-target="#unfollowModalf{{$follower['id']}}" href="#" class="no-decoration text-secondary font-weight-bold">Unfollow</a>
+                <div class="follow-me text-center pt-3">
+
+                <div class="modal fade" id="unfollowModalf{{$follower['id']}}" tabindex="-1" role="dialog" aria-labelledby="followModalTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-body">
+
+                    <div>
+                      <img src="{{$follower['img']}}" width="100" height="100" style="border-radius:100%;" class="img-fluid" />
+                      <br>
+                      <br>
+                      <h4 class="text-main">Unfollow  {{$follower['name']}}</h4>
+                      <p class="small"><em>Are you sure you want to Unfollow {{$follower['name']}} and miss out interesting post?<br /> Click the button below to unfollow</em></p>
+                      <form method="POST" action="{{URL::to('/')}}/{{ $user->username}}/unfollow">
+                        @csrf
+                        <input type="hidden" name="rss" value="{{$follower['username']}}">
+                        <button type="submit" class="btn btn-primary">UnFollow</button>
+                      </form>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              </div>
+              </div>
+                @php  }else if(Auth::user() && Auth::user()->username == $follower['username']) { @endphp
+<p>You</p>
+              @php  }else { @endphp
+                <a href="#" data-toggle="modal" data-target="#followModalf{{$follower['id']}}" class="no-decoration text-secondary font-weight-bold">Follow</a>
+                <div class="follow-me text-center pt-3">
+
+                <div class="modal fade" id="followModalf{{$follower['id']}}" tabindex="-1" role="dialog" aria-labelledby="followModalTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <div>
+                          <img src="{{$follower['img']}}" width="100" height="100" style="border-radius:100%;" class="img-fluid" />
+                          <br>
+                          <br>
+                          <h4 class="text-main">Follow {{$follower['name']}}</h4>
+                          <p class="small"><em>Do you have or would love to have Lucid installed on your domain?<br /> Click the button below to follow me</em></p>
+                          <form method="POST" action="{{URL::to('/')}}/{{ $user->username}}/addrss">
+                            @csrf
+                            <input type="hidden" name="rss" value="{{$follower['username']}}">
+                            <button type="submit" class="btn btn-primary">Follow me on Lucid</button>
+                          </form>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        @php  } @endphp
       </div>
     </div>
     @endforeach
@@ -312,23 +438,6 @@
 <input type="hidden" value="{{ $user->username }}" id="username">
 
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script>
-  const pageUrl = window.location.href
-  if (pageUrl.includes('followers')) {
-    $('#follow-tabs a[href="#followers"]').tab('show')
-  }
-  else (
-    $('#follow-tabs a[href="#following"]').tab('show')
-  )
-  // $(`a[href="${anchor}"]`).tab('show')
-</script> 
-<script>
-function changeUrl(e) {
-  history.pushState(null, null, `/${document.getElementById("username").value+'/'+e}`)
-}
-</script>
-</html>
+
+
 @endsection
