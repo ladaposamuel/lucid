@@ -200,8 +200,9 @@
       <div class="col-lg-8 pb-0">
 
         <!-- Beginning of Navbar -->
-        <div class="container-fluid p-0 m-0 mb-5 d-flex justify-content-between">
+        <div class="container-fluid p-0 m-0 mb-5 d-flex justify-content-between justify-content-lg-end">
           <a class="d-lg-none" id="sidebarToggle"><i class="icon ion-md-list" style="font-size: 1.8em"></i></a>
+          <a href="{{ route('under-construction') }}" class="mr-5 pr-4 notification text-main" data-target="#deleteModal"><i class="icon ion-md-notifications" style="font-size: 1.8em"></i></a>
           <div class="dropdown" id="lucid-dropdown">
             <a class="nav-link dropdown-toggle pt-1" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <img src="{{ asset('img/lucid-logo.png') }}" alt="The Lucid Logo" class="img-fluid" width="40px" />
