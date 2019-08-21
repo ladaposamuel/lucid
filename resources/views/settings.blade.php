@@ -1,6 +1,6 @@
 @extends('layouts.lucid')
 @section('title')
-  {{ $user->name }} - Lucid
+{{ $user->name }} - Lucid
 @endsection
 @php
 $location= 'settings';
@@ -15,23 +15,24 @@ $location= 'settings';
     -webkit-appearance: none;
     box-shadow: none !important;
   }
-.standard-color{
-  background: #871e99;
-  color:#fff;
-  border:1px solid #871e99;
-}
 
-.standard-color:hover{
-  background: #871e99 !important;
-  color:#fff;
-  border:1px solid #871e99 !important;
-}
+  .standard-color {
+    background: #871e99;
+    color: #fff;
+    border: 1px solid #871e99;
+  }
 
-.text-danger{
-  font-weight:400px !important;
-  font-size:12px !important;
+  .standard-color:hover {
+    background: #871e99 !important;
+    color: #fff;
+    border: 1px solid #871e99 !important;
+  }
 
-}
+  .text-danger {
+    font-weight: 400px !important;
+    font-size: 12px !important;
+
+  }
 </style>
 <!-- beginning of settings page -->
 <div class="page-tab">
@@ -79,21 +80,21 @@ $location= 'settings';
         <div class="row">
           <div class="form-group col-sm-12 col-md-6 pb-0 mb-0">
             <label for="nick-name"><strong>Username</strong></label>
-            <input class="form-control" type="text" name="username" id="nick-name" value="{{Auth::user()->username}}"/>
+            <input class="form-control" type="text" name="username" id="nick-name" value="{{Auth::user()->username}}" />
             <span class="text-danger" id="usernameError" style="display:none;"></span>
           </div>
           <div class="form-group col-sm-12 col-md-6 pb-0 mb-0">
             <p class="font-weight-bold">Profile Image</p>
             <div class="d-flex">
               <div class="d-inline-block">
-                <img src="{{Auth::user()->image}}" class="img-thumb" alt="user" id="imgtag"/>
+                <img src="{{Auth::user()->image}}" class="img-thumb" alt="user" id="imgtag" />
               </div>
               <div class="d-inline-block ml-3 py-2">
                 <input type="file" name="profileimage" id="profileimage" class="form-control-file" accept=".png,.jpg" style="display:none">
 
                 <label class="text-muted form-control p-2 w-100" for="profileimage" style="cursor:pointer">Choose file</label>
 
-                <input type="hidden" name="user_id" value="{{Auth::user()->id}}"/>
+                <input type="hidden" name="user_id" value="{{Auth::user()->id}}" />
                 <span class="text-danger" id="imgError" style="display:none;"></span>
               </div>
             </div>
@@ -116,13 +117,18 @@ $location= 'settings';
     </div>
     <!-- links tab -->
     <div class="tab-pane fade" id="links" role="tabpanel">
-      <h3 class="mt-5">Links page coming soon...</h3>
-    </div>
-    <!-- security tab -->
-    <div class="tab-pane fade" id="security" role="tabpanel">
-      <h3 class="mt-5">Security page coming soon...</h3>
-    </div>
+      <div class="mt-3">
+        <button class="btn border d-block my-4 w-50 text-light" style="background-color: #1da1f2;"><i class="icon ion-logo-twitter"></i> Connect to Twitter</button>
+        <button class="btn border d-block my-4 w-50 text-white" style="background-color: #3b5998;"><i class="icon ion-logo-facebook"></i> Connect to Facebook</button>
+        <button class="btn border d-block my-4 w-50 text-white" style="background-color: #c13584;"><i class="icon ion-logo-instagram"></i> Connect to Instagram</button>
+        <button class="btn border d-block my-4 w-50 text-white" style="background-color: #0077b5;"><i class="icon ion-logo-linkedin"></i> Connect to LinkedIn</button>
+      </div>
   </div>
+  <!-- security tab -->
+  <div class="tab-pane fade" id="security" role="tabpanel">
+    <h3 class="mt-5">Security page coming soon...</h3>
+  </div>
+</div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <!-- convert to markdown script ends -->
