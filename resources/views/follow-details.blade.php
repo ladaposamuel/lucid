@@ -290,7 +290,7 @@ $location= 'follow';
 
 @php
       if(in_array($follow['name'],$followerArray)){ @endphp
-        <a data-toggle="modal" data-target="#unfollowModal{{$follow['id']}}" href="#" class="no-decoration text-secondary font-weight-bold">Unfollow</a>
+        <a data-toggle="modal" data-target="#unfollowModal{{$follow['id']}}" href="#" class="no-decoration text-danger font-weight-bold">Unfollow</a>
         <div class="follow-me text-center pt-3">
 
         <div class="modal fade" id="unfollowModal{{$follow['id']}}" tabindex="-1" role="dialog" aria-labelledby="followModalTitle" aria-hidden="true">
@@ -372,7 +372,7 @@ $location= 'follow';
 
         @php
               if(in_array($follower['name'],$followerArray)){ @endphp
-                <a data-toggle="modal" data-target="#unfollowModalf{{$follower['id']}}" href="#" class="no-decoration text-secondary font-weight-bold">Unfollow</a>
+                <a data-toggle="modal" data-target="#unfollowModalf{{$follower['id']}}" href="#" class="no-decoration text-danger font-weight-bold">Unfollow</a>
                 <div class="follow-me text-center pt-3">
 
                 <div class="modal fade" id="unfollowModalf{{$follower['id']}}" tabindex="-1" role="dialog" aria-labelledby="followModalTitle" aria-hidden="true">
