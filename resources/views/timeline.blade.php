@@ -274,7 +274,7 @@ $location = 'timeline';
             <p class="">
               {{$feeds['des']}}
             </p>
-            <p class="">{{$feeds['site']}} -<small class="text-muted">{{$feeds['date']}} </small></p>
+            <a href="{{$feeds['site']}}" class="">{{$feeds['site']}} -<small class="text-muted">{{$feeds['date']}} </small></a>
           </div>
         </div>
         @endforeach
