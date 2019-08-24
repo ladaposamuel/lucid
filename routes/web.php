@@ -11,60 +11,91 @@
 |
 */
 
+/**
+ * Public Routes
+ */
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/home', function () {
-    return view('welcome');
-});
-Route::get('login', function () {
-    return view('auth/login');
-});
-Route::get('register', function () {
-    return view('auth/register');
-});
-Route::get('explore', function () {
-    return view('explore');
+   return view('welcome');
 });
 Route::get('loader', function () {
-    return view('preloader');
+   return view('preloader');
 });
-Route::get('subscribe', function () {
-    return view('subscribe');
+Route::get('explore', function () {
+   return view('explore');
 });
-Route::get('under-construction', 'pageController@construction')->name('under-construction');
-Route::get('microblog','HomeController@microblog');
-Route::post('save-post','HomeController@savePost');
-Route::post('save-subscription','pageController@saveSubscriptionEmail');
+Route::get('under-construction', 'HomeController@construction')->name('under-construction');
+
+Route::get('explore', function () {
+   return view('explore');
+});
 
 
+/**
+ * Auth Routes
+ *
+ */
+Route::get('login', function () {
+   return view('auth/login');
+});
+Route::get('register', function () {
+   return view('auth/register');
+});
 
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 Route::post('login', 'LoginController@do')->name('login');
 
+
+/**
+ * Protected Routes
+ */
+Route::get('subscribe', function () {
+   return view('subscribe');
+});
+
+
+Route::post('save-post', 'Users\PostsController@savePost');
+Route::post('save-subscription', 'Users\SubscriptionController@saveSubscriptionEmail');
+
+
 Route::prefix('{username}')->group(function () {
 
+   //auth
+   Route::get('/logout', "Auth\LoginController@logout");
 
-    Route::get('/contact', 'pageController@contact');
-    Route::get('/post/{postTitle}','pageController@singlePostPage');
-    Route::get('/','pageController@homePage');
-    Route::get('/home','pageController@homePage');
-    Route::get('/thoughts','pageController@thoughts');
-    Route::post('/save-post','HomeController@savePost');
-    Route::get('/logout', "Auth\LoginController@logout");
-    Route::get('/posts','pageController@posts');
 
-    Route::get('/subscribe','HomeController@subscribe');
-    Route::post('/addrss','ExtRssController@addRss');
-    Route::post('/unfollow','ExtRssController@unfollow');
-    Route::post('/extrss','ExtRssController@addExtRss');
-    Route::post('/publish','HomeController@publish');
-    Route::post('/send-mail','SendEmailController@sendEmail');
-    Route::get('/settings', 'HomeController@settings');
-    Route::post('/save_settings','HomeController@saveSettings');
-    Route::get('/following','pageController@following')->name("following");
-    Route::get('/followers','pageController@followers')->name("followers");
-    Route::post('/update-contact-details','HomeController@updateContactDetails');
+   //general
+   Route::get('/', 'pageController@index');
+   Route::get('/home', 'pageController@index');
+
+   Route::get('/contact', 'pageController@contact');
+   Route::post('/unfollow', 'ExtRssController@unfollow');
+   Route::get('/subscribe', 'HomeController@subscribe');
+   Route::get('/following', 'pageController@following')->name('following');
+   Route::get('/followers', 'pageController@followers')->name('followers');
+
+
+   //meta
+   Route::post('/send-mail', 'Users\MailController@sendEmail');
+   Route::post('/addrss', 'ExtRssController@addRss');
+   Route::post('/extrss', 'ExtRssController@addExtRss');
+
+
+
+   //posts
+   Route::get('/post/{postTitle}', 'Users\PostsController@singlePostPage');
+   Route::get('/posts', 'Users\PostsController@posts');
+   Route::post('/publish', 'Users\PostsController@publish');
+
+
+   //thoughts
+   Route::get('/thoughts', 'pageController@thoughts');
+
+
+   //settings
+
+   Route::post('/update-contact-details', 'Users\SettingsController@updateContactDetails');
+   Route::post('/save_settings', 'Users\SettingsController@saveSettings');
+   Route::get('/settings', 'Users\SettingsController@settings');
+
 });
